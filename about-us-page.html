@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Colonial Hills Bible Chapel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Lato:wght@300;400;700&display=swap');
+
+        :root {
+            --deep-navy: #1a2332;
+            --warm-gold: #c9a961;
+            --soft-white: #fefefe;
+            --light-gray: #f8f7f5;
+            --medium-gray: #e5e3df;
+            --charcoal: #333333;
+            --accent-burgundy: #7d2e2e;
+            --shadow-light: 0 2px 15px rgba(0,0,0,0.08);
+            --shadow-medium: 0 5px 25px rgba(0,0,0,0.12);
+            --shadow-heavy: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--soft-white);
+            color: var(--charcoal);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Crimson Text', serif;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        /* Header Styles - Same as index */
+        .header-top {
+            background: var(--deep-navy);
+            color: var(--soft-white);
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .header-top-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-contact {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .header-contact span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .header-contact i {
+            color: var(--warm-gold);
+        }
+
+        .main-header {
+            background: var(--soft-white);
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .main-header.scrolled {
+            box-shadow: var(--shadow-medium);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--deep-navy);
+        }
+
+        .church-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--warm-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--soft-white);
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .logo-text p {
+            font-size: 0.85rem;
+            color: var(--warm-gold);
+            margin: 0;
+            font-style: italic;
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: var(--deep-navy);
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+            padding: 0.5rem 0;
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--warm-gold);
+            transition: width 0.3s ease;
+        }
+
+        .main-nav a:hover {
+            color: var(--warm-gold);
+        }
+
+        .main-nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Page Hero Section */
+        .page-hero {
+            position: relative;
+            height: 400px;
+            background: linear-gradient(rgba(26, 35, 50, 0.85), rgba(26, 35, 50, 0.85)),
+                        url('images/about-us/top.JPEG');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--soft-white);
+        }
+
+        .page-hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .page-hero-content p {
+            font-size: 1.3rem;
+            color: var(--warm-gold);
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* History Section */
+        .history-section {
+            padding: 5rem 0;
+            background: var(--soft-white);
+        }
+
+        .section-title {
+            font-size: 3rem;
+            color: var(--deep-navy);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--warm-gold);
+        }
+
+        .history-content {
+            background: var(--light-gray);
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow-light);
+            position: relative;
+        }
+
+        .history-content::before {
+            content: '\f1da';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            font-size: 3rem;
+            color: var(--warm-gold);
+            opacity: 0.1;
+        }
+
+        .history-content h3 {
+            font-size: 2rem;
+            color: var(--accent-burgundy);
+            margin-bottom: 2rem;
+        }
+
+        .history-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .history-highlight {
+            background: var(--soft-white);
+            border-left: 4px solid var(--warm-gold);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        /* Gatherings Section */
+        .gatherings-section {
+            padding: 5rem 0;
+            background: var(--light-gray);
+        }
+
+        .gatherings-simple {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gathering-day-group {
+            background: var(--soft-white);
+            border-radius: 15px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow-light);
+            transition: all 0.3s ease;
+        }
+
+        .gathering-day-group:hover {
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-5px);
+        }
+
+        .day-header {
+            font-size: 2rem;
+            color: var(--deep-navy);
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 4px solid var(--warm-gold);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .day-header i {
+            color: var(--warm-gold);
+            font-size: 1.5rem;
+        }
+
+        .service-item {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 2.5rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 2px solid var(--medium-gray);
+            transition: all 0.3s ease;
+        }
+
+        .service-item:hover {
+            background: var(--light-gray);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: -1.5rem -1.5rem 1rem -1.5rem;
+        }
+
+        .service-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .service-time {
+            flex-shrink: 0;
+            width: 180px;
+            font-weight: 700;
+            color: var(--accent-burgundy);
+            font-size: 1rem;
+        }
+
+        .service-info h4 {
+            font-size: 1.4rem;
+            color: var(--deep-navy);
+            margin-bottom: 1rem;
+        }
+
+        .service-info p {
+            color: var(--charcoal);
+            line-height: 1.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-info .note {
+            background: var(--light-gray);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+            font-style: italic;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .service-info .note i {
+            color: var(--warm-gold);
+            margin-top: 0.2rem;
+        }
+
+        .gathering-image-simple {
+            max-width: 1200px;
+            margin: 4rem auto 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .gathering-image-simple img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Beliefs Section */
+        .beliefs-section {
+            padding: 5rem 0;
+            background: var(--soft-white);
+        }
+
+        .beliefs-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-size: 1.2rem;
+            color: var(--charcoal);
+        }
+
+        .beliefs-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .belief-item {
+            background: var(--soft-white);
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            position: relative;
+            border-left: 4px solid var(--warm-gold);
+            box-shadow: var(--shadow-light);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .belief-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--warm-gold), var(--accent-burgundy));
+        }
+
+        .belief-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+            border-left-width: 6px;
+        }
+
+        .belief-text {
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+            font-size: 1.05rem;
+            color: var(--charcoal);
+        }
+
+        .belief-verses {
+            background: var(--light-gray);
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px;
+            color: var(--accent-burgundy);
+            font-style: italic;
+            font-weight: 600;
+            border-left: 3px solid var(--accent-burgundy);
+            font-size: 0.95rem;
+        }
+
+        /* Footer - Same as index */
+        .footer {
+            background: var(--deep-navy);
+            color: var(--soft-white);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            color: var(--warm-gold);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-column p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            padding: 0.5rem 0;
+        }
+
+        .footer-column ul li a {
+            color: var(--soft-white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--warm-gold);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-item i {
+            color: var(--warm-gold);
+            width: 20px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--deep-navy);
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--deep-navy);
+            z-index: 2000;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .mobile-nav.active {
+            display: block;
+        }
+
+        .mobile-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .mobile-nav-close {
+            background: none;
+            border: none;
+            color: var(--soft-white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+        }
+
+        .mobile-nav ul li {
+            margin-bottom: 1rem;
+        }
+
+        .mobile-nav ul li a {
+            color: var(--soft-white);
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 1rem 0;
+            display: block;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav ul li a:hover {
+            color: var(--warm-gold);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Desktop Enhancements */
+        @media (min-width: 1200px) {
+            .gatherings-simple {
+                max-width: 1400px;
+            }
+            
+            .gathering-day-group {
+                padding: 4rem;
+                margin-bottom: 4rem;
+            }
+            
+            .day-header {
+                font-size: 2.5rem;
+                margin-bottom: 3rem;
+            }
+            
+            .service-item {
+                gap: 4rem;
+                margin-bottom: 3rem;
+                padding-bottom: 3rem;
+            }
+            
+            .service-time {
+                width: 200px;
+                font-size: 1.1rem;
+            }
+            
+            .service-info h4 {
+                font-size: 1.6rem;
+            }
+            
+            .service-info p {
+                font-size: 1.1rem;
+                line-height: 1.9;
+            }
+            
+            .gathering-image-simple {
+                max-width: 1400px;
+                margin: 5rem auto 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-nav {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .header-top {
+                display: none;
+            }
+
+            .page-hero {
+                height: 300px;
+            }
+
+            .page-hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .page-hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .history-content {
+                padding: 2rem;
+            }
+
+            .history-content h3 {
+                font-size: 1.5rem;
+            }
+
+            .gathering-day-group {
+                padding: 2rem;
+            }
+
+            .service-item {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .service-time {
+                width: auto;
+            }
+
+            .beliefs-grid {
+                gap: 1rem;
+            }
+
+            .belief-item {
+                padding: 1.2rem 1.5rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .history-section,
+            .gatherings-section,
+            .beliefs-section {
+                padding: 3rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .page-hero {
+                height: 250px;
+            }
+
+            .page-hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .page-hero-content p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 2rem;
+            }
+
+            .history-content {
+                padding: 1.5rem;
+            }
+
+            .history-content h3 {
+                font-size: 1.3rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .history-content p {
+                font-size: 0.95rem;
+                margin-bottom: 1rem;
+            }
+
+            .gathering-day-group {
+                padding: 1.5rem;
+            }
+
+            .day-header {
+                font-size: 1.5rem;
+            }
+
+            .service-time {
+                font-size: 1rem;
+            }
+
+            .service-info h4 {
+                font-size: 1.2rem;
+            }
+
+            .service-info p {
+                font-size: 0.95rem;
+            }
+
+            .belief-item {
+                padding: 1rem 1.2rem;
+            }
+
+            .belief-text {
+                font-size: 0.95rem;
+            }
+
+            .belief-verses {
+                font-size: 0.9rem;
+            }
+
+            .history-section,
+            .gatherings-section,
+            .beliefs-section {
+                padding: 2rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Top Bar -->
+    <div class="header-top">
+        <div class="header-top-content">
+            <div class="header-contact">
+                <span><i class="fas fa-phone"></i> <a href="tel:+1-281-931-1120" style="color: inherit; text-decoration: none;">+1-281-931-1120</a></span>
+                <span><i class="fas fa-envelope"></i> <a href="mailto:info@colonialhills-biblechapel.com" style="color: inherit; text-decoration: none;">info@colonialhills-biblechapel.com</a></span>
+            </div>
+            <div class="header-social">
+                <span><i class="fas fa-map-marker-alt"></i> <a href="#services" style="color: inherit; text-decoration: none;">Visit us this Sunday at 9:30 AM</a></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="nav-container">
+            <a href="index.html" class="logo-section">
+                <div class="church-icon">
+                    <i class="fas fa-church"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Colonial Hills Bible Chapel</h1>
+                    <p>Gathering in His Name Since 1975</p>
+                </div>
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about-us-page.html">About Us</a></li>
+                    <li><a href="gospel-page.html">Gospel</a></li>
+                    <li><a href="ministries-page.html">Ministries</a></li>
+                    <li><a href="helpful-links-page.html">Helpful Links</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+        <div class="mobile-nav-header">
+            <div class="logo-text">
+                <h1 style="color: var(--soft-white);">Colonial Hills Bible Chapel</h1>
+            </div>
+            <button class="mobile-nav-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about-us-page.html">About Us</a></li>
+                <li><a href="gospel-page.html">Gospel</a></li>
+                <li><a href="ministries-page.html">Ministries</a></li>
+                <li><a href="helpful-links-page.html">Helpful Links</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <h1>About Us</h1>
+            <p>Our History, Gatherings & Beliefs</p>
+        </div>
+    </section>
+
+    <!-- History Section -->
+    <section class="history-section">
+        <div class="container">
+            <h2 class="section-title">Our History</h2>
+            <div class="history-content">
+                <h3>A Brief History of Colonial Hills Bible Chapel</h3>
+                
+                <p>By 1965, the Assembly at Melrose Bible Chapel had increased in families in fellowship and it became apparent that additional space was needed. The oversight began considering relocating to a new site. In 1966, Brother Sydney Green, chairman of the Security Foundation, a division of the Bible Tract and Missionary Society, called the believers at Melrose Bible Chapel to offer to donate to them a tract of land on Henry Road. Brothers Earl Richter and Frank Martin drove out and viewed the property located in North Houston off FM 525.</p>
+
+                <p>In 1968, Sydney Green repeated the offer a tract of land out of a five-acre tract owned by the Security Foundation. Again, Earl Richter and Frank Martin drove out to the property and saw many new homes being built near Henry Road. Having the potential of reaching families for the Lord Jesus Christ, the offer was discussed in the Assembly and the Elders decided to have to accept the offer.</p>
+
+                
+                    <p>The Trustees of Melrose Bible Chapel at that time were brothers Luby J. Walker, Walter S. Nelson, Frank P. Martin, Richard D. Selby, and Joe Dimarco. In July of 1968, the believers of Melrose Bible Chapel began meeting in Colonial Hills Elementary School next to the property on Henry Road.</p>
+                
+
+                <p>Mr. O. W. Hammond of Pasadena, Texas, was contracted to draw up the plans, clear the land, and build the building. The new chapel was opened in March of 1969.</p>
+
+                <p>After the new chapel was completed, it was decided by the Elders to change the name of the Assembly to Colonial Hills Bible Chapel in order to identify with the area of the Colonial Hills Subdivision. The dedication of Colonial Hills was held In March of 1969.</p>
+
+                <p>The oversight currently consists of Frank Martin, Paul Moffit, Mathew Thomas, John Mathew, Robert Terrill, and John Varghese.</p>
+
+                <p>The believers at Colonial Hills have been involved in many activities to reach the lost: Vacation Bible School, Sunday School, serial weekly meetings during the week, nursing home meetings, Star of Hope Farm, Star of Hope Oldham Ranch, flea markets, camp work, missionary commendations, and they initiated the annual Houston Area Bible Conferences in 1991.</p>
+
+                <p>An early outreach for the believers at Colonial Hills began while still meeting at Melrose. The Star of Hope Mission in Houston began a rehabilitation farm located on Rankin Road in 1958.</p>
+
+                <p>Workers commended from our chapel include Maria Darling, Keith & Callie Munsterman, Raymond & Jennifer Johnson, Johnson & Valsa John.</p>
+
+                <p>In 1975, a group of believers from India began meeting at various homes and in 1976, the Colonial Hills oversight was gracious enough to provide them a room to meet and worship the Lord. Then in 1985, they purchased a portable school building and began their meeting in it. From that Assembly, other believers have now formed new Assemblies in the Houston area. By 1995, many of the believers from the India Assembly began meeting with the Assembly of Colonial Hills.</p>
+
+                <p>Colonial Hills Bible Chapel has been much like a school; students come, learn, and are promoted (Christians moving to new areas) and some graduate (saints who are called into the Lord's presence).</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gatherings Section -->
+    <section class="gatherings-section">
+        <div class="container">
+            <h2 class="section-title">Our Gatherings</h2>
+            
+            <div class="gatherings-simple">
+                <!-- Sunday Services -->
+                <div class="gathering-day-group">
+                    <h3 class="day-header"><i class="fas fa-cross"></i> Sunday - Lord's Day</h3>
+                    
+                    <div class="service-item">
+                        <div class="service-time">9:30 AM - 10:30 AM</div>
+                        <div class="service-info">
+                            <h4>Worship & Remembrance Meeting</h4>
+                            <p>Following the teaching of the Lord and the example of the Apostles, we meet weekly to remember the Lord Jesus and His death for us. This meeting is for worship and congregational singing. Without pre-arrangement, the meeting is open for men in the local assembly fellowship to stand and lead the congregation in praise and worship of Christ for his person and work at the cross.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-time">10:30 AM - 11:00 AM</div>
+                        <div class="service-info">
+                            <h4>Refreshments</h4>
+                            <p>We have a good time of fellowshipping with each other directly after the Lord's Supper, with snacks and coffee.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-time">11:00 AM - 12:00 PM</div>
+                        <div class="service-info">
+                            <h4>Family Bible Hour</h4>
+                            <p>The first 20 minutes is for congregational singing. Following, a speaker will take the pulpit and present a variety of doctrinal and practical truths, designed to teach and encourage Biblical principles and values.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-time">11:00 AM - 12:00 PM</div>
+                        <div class="service-info">
+                            <h4>Sunday School (Childrens Meeting)</h4>
+                            <p>Sunday School is taught during the Family Bible Hour. The young are the focus of this program. After a time of group singing, the children are taught a broad range of stories and principles from the Bible using flannel-graph and object lessons. Every other Sunday, the lesson is reviewed and the children do crafts pertaining to the lesson taught from the previous week.</p>
+                            <p class="note"><i class="fas fa-info-circle"></i> Our teachers have all come into a personal relationship with the Lord Jesus Christ when they accepted Him as their own personal Saviour.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wednesday Service -->
+                <div class="gathering-day-group">
+                    <h3 class="day-header"><i class="fas fa-bible"></i> Wednesday</h3>
+                    
+                    <div class="service-item">
+                        <div class="service-time">7:00 PM - 8:00 PM</div>
+                        <div class="service-info">
+                            <h4>Prayer and Bible Study</h4>
+                            <p>This meeting is divided into two equal sections; the first for prayer and the latter for systematic Bible study. The Bible study is opened, with a qualified speaker who is assigned a topic or chapter for the exhortation of the assembly with biblical principles and values from the word of God.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gathering-image-simple">
+                <img src="images/about-us/bottom.JPEG" alt="Chapel Gathering">
+            </div>
+        </div>
+    </section>
+
+    <!-- Beliefs Section -->
+    <section class="beliefs-section">
+        <div class="container">
+            <h2 class="section-title">What We Believe</h2>
+            
+            <div class="beliefs-intro">
+                <p>Our faith is founded on the eternal truths of God's Word. Here are the core beliefs that guide our worship and fellowship:</p>
+            </div>
+
+            <div class="beliefs-grid">
+                <div class="belief-item">
+                    <p class="belief-text">We believe that the Bible teaches among other things: Its own divine authority, and that it is verbally inspired.</p>
+                    <p class="belief-verses">II Timothy 3:16, II Peter 1:21</p>
+                </div>
+
+                <div class="belief-item">
+                    <p class="belief-text">We believe one God eternally exists in three equally divine Persons: the Father, the Son, and the Holy Spirit.</p>
+                    <p class="belief-verses">Matthew 28:19, II Corinthians 13:14</p>
+                </div>
+
+                <div class="belief-item">
+                    <p class="belief-text">We believe Jesus Christ is the Only Begotten and eternal Son of God miraculously born of the virgin Mary, and conceived by the Holy Spirit, and that Jesus Christ is the only one whose life was absolutely sinless.</p>
+                    <p class="belief-verses">John 1:1, Matthew 1:18-23, I John 3:5</p>
+                </div>
+
+                <div class="belief-item">
+                    <p class="belief-text">We believe men and women are universally and utterly sinful by nature and practice, and that it is impossible for them to be saved by their own good works or religious observances.</p>
+                    <p class="belief-verses">Psalm 58:3-4, Ephesians 2:8-9, Titus 3:5, Romans 4:5</p>
+                </div>
+
+                <div class="belief-item">
+                    <p class="belief-text">We believe that on the cross of Calvary, Jesus Christ wholly and eternally paid the penalty for sin, and was raised from the dead, according to the Scriptures, and that any person who in faith rests upon the finished work of Christ immediately enters into its benefit to the present and eternal salvation of his/her soul.</p>
+                    <p class="belief-verses">I Corinthians 15:1-4, Romans 5:6,8, John 5:24, Hebrews 5:9, John 10:28-30</p>
+                </div>
+
+                <div class="belief-item">
+                    <p class="belief-text">We believe Jesus Christ is coming again for His own, and will raise those who have died believing in Him, and will change the living believers, taking them to be forever with Himself.</p>
+                    <p class="belief-verses">I Thessalonians 4:14-17, Philippians 3:20-21</p>
+                </div>
+
+                <div class="belief-item">
+                    <p class="belief-text">We believe Jesus Christ will be the judge of those who reject Him as their Lord and Savior, and that their portion will be eternal punishment.</p>
+                    <p class="belief-verses">Acts 17:31, John 5:22,25, Revelation 20:11-15</p>
+                </div>
+
+                <div class="belief-item">
+                    <p class="belief-text">We believe the indwelling Holy Spirit is the One who enables the believer to live a holy life, and that He guides the church in worship and energizes believers for works of service.</p>
+                    <p class="belief-verses">Galatians 5:16, John 4:24, I Corinthians 12: 4,7,11</p>
+                </div>
+
+                <div class="belief-item">
+                    <p class="belief-text">We believe the Bible teaches two ordinances for the church, the baptism of believers in water by immersion, and the Lord's Supper for believers, which is remembered each Lord's Day.</p>
+                    <p class="belief-verses">Matthew 28:19, Acts 8:35-38, Acts 20:7, Matthew 26:26-28, I Corinthians 11:23-26</p>
+                </div>
+
+                <div class="belief-item">
+                    <p class="belief-text">We believe the church is pastored by a plurality of men the Bible refers to as elders. We also believe in the priesthood of all believers.</p>
+                    <p class="belief-verses">Titus 1:5, James 5:14, Acts 20:17, I Peter 2:9, Revelation 1:6</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Colonial Hills Bible Chapel</h3>
+                    <p>A group of local Christians gathering solely in the name of the Lord Jesus Christ, holding fast to New Testament principles of worship and fellowship.</p>
+                    <p style="color: var(--warm-gold); font-style: italic; margin-top: 1rem;">
+                        "The Gift of God is Eternal Life Through Jesus Christ Our Lord"
+                    </p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="about-us-page.html">About Us</a></li>
+                        <li><a href="gospel-page.html">The Gospel</a></li>
+                        <li><a href="index.html#services">Service Times</a></li>
+                        <li><a href="index.html#events">Upcoming Events</a></li>
+                        <li><a href="ministries-page.html">Ministries</a></li>
+                        <li><a href="helpful-links-page.html">Helpful Links</a></li>
+                        <li><a href="#">Statement of Faith</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Service Times</h3>
+                    <ul>
+                        <li>Sunday Worship: 9:30 AM</li>
+                        <li>Family Bible Hour: 11:00 AM</li>
+                        <li>Wednesday Bible Study: 7:00 PM</li>
+                        <li>Saturday Prayer Meeting: 9:00 AM</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Information</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span><a href="https://maps.google.com/?q=14643+Henry+Rd,+Houston,+TX+77060" target="_blank" style="color: inherit; text-decoration: none;">14643 Henry Rd<br>Houston, TX 77060</a></span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span><a href="tel:+1-281-931-1120" style="color: inherit; text-decoration: none;">+1-281-931-1120</a></span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span><a href="mailto:info@colonialhills-biblechapel.com" style="color: inherit; text-decoration: none;">info@colonialhills-biblechapel.com</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Colonial Hills Bible Chapel. All rights reserved. | Website designed with love for His glory.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.main-header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerHeight = document.querySelector('.main-header').offsetHeight;
+                    const targetPosition = target.offsetTop - headerHeight - 20;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.gathering-day-group, .belief-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const mobileNavClose = document.querySelector('.mobile-nav-close');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        mobileNavClose.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close mobile nav when clicking on a link
+        document.querySelectorAll('.mobile-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+    </script>
+</body>
+</html>

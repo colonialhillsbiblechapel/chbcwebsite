@@ -1,0 +1,1923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colonial Hills Bible Chapel - Welcome</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Lato:wght@300;400;700&display=swap');
+
+        :root {
+            --deep-navy: #1a2332;
+            --warm-gold: #c9a961;
+            --soft-white: #fefefe;
+            --light-gray: #f8f7f5;
+            --medium-gray: #e5e3df;
+            --charcoal: #333333;
+            --accent-burgundy: #7d2e2e;
+            --shadow-light: 0 2px 15px rgba(0,0,0,0.08);
+            --shadow-medium: 0 5px 25px rgba(0,0,0,0.12);
+            --shadow-heavy: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--soft-white);
+            color: var(--charcoal);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Crimson Text', serif;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        /* Header Styles */
+        .header-top {
+            background: var(--deep-navy);
+            color: var(--soft-white);
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .header-top-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-contact {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .header-contact span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .header-contact i {
+            color: var(--warm-gold);
+        }
+
+        .main-header {
+            background: var(--soft-white);
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .main-header.scrolled {
+            box-shadow: var(--shadow-medium);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--deep-navy);
+        }
+
+        .church-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--warm-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--soft-white);
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .logo-text p {
+            font-size: 0.85rem;
+            color: var(--warm-gold);
+            margin: 0;
+            font-style: italic;
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: var(--deep-navy);
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+            padding: 0.5rem 0;
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--warm-gold);
+            transition: width 0.3s ease;
+        }
+
+        .main-nav a:hover {
+            color: var(--warm-gold);
+        }
+
+        .main-nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--soft-white);
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 35, 50, 0.75);
+            z-index: 2;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 3;
+        }
+
+        .hero-subtitle {
+            color: var(--warm-gold);
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .hero-verse {
+            font-size: 1.4rem;
+            font-style: italic;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            animation: fadeIn 1s ease-out 0.4s both;
+        }
+
+        .hero-reference {
+            color: var(--warm-gold);
+            font-size: 1.1rem;
+            font-weight: 600;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        /* Live Announcement Bar */
+        .announcement-bar {
+            background: var(--accent-burgundy);
+            color: var(--soft-white);
+            padding: 1rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .announcement-container {
+            display: flex;
+            align-items: center;
+            animation: scrollAnnouncement 30s linear infinite;
+        }
+
+        .announcement-item {
+            display: flex;
+            align-items: center;
+            padding: 0 3rem;
+            white-space: nowrap;
+        }
+
+        .announcement-icon {
+            background: var(--warm-gold);
+            color: var(--accent-burgundy);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            padding: 5rem 0;
+            background: var(--light-gray);
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .welcome-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .welcome-content h2 {
+            font-size: 3rem;
+            color: var(--deep-navy);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .welcome-content h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--warm-gold);
+        }
+
+        .welcome-content p {
+            font-size: 1.1rem;
+            color: var(--charcoal);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .welcome-image {
+            position: relative;
+            height: 500px;
+            background: var(--deep-navy);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .welcome-image::before {
+            content: '\f02d';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 8rem;
+            color: var(--warm-gold);
+            opacity: 0.1;
+        }
+
+        .welcome-video-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .welcome-video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+        }
+
+        /* Service Times Section */
+        .services-section {
+            padding: 5rem 0;
+            background: var(--soft-white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            color: var(--deep-navy);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--charcoal);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--soft-white);
+            border: 1px solid var(--medium-gray);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--warm-gold);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-heavy);
+            border-color: transparent;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--light-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.2rem;
+            font-size: 1.8rem;
+            color: var(--warm-gold);
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            background: var(--warm-gold);
+            color: var(--soft-white);
+        }
+
+        .service-day {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--deep-navy);
+            margin-bottom: 0.8rem;
+        }
+
+        .service-times {
+            list-style: none;
+        }
+
+        .service-times li {
+            padding: 0.4rem 0;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+
+        .service-times li:last-child {
+            border-bottom: none;
+        }
+
+        .service-time {
+            font-weight: 600;
+            color: var(--warm-gold);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .service-name {
+            color: var(--charcoal);
+            font-size: 0.95rem;
+        }
+
+        /* Events Section */
+        .events-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--light-gray) 0%, var(--medium-gray) 100%);
+        }
+
+        .events-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .events-header h2 {
+            font-size: 3rem;
+            color: var(--deep-navy);
+        }
+
+        .btn-primary {
+            background: var(--warm-gold);
+            color: var(--soft-white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(201, 169, 97, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-burgundy);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(125, 46, 46, 0.3);
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .event-card {
+            background: var(--soft-white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            transition: all 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .event-date-badge {
+            background: var(--accent-burgundy);
+            color: var(--soft-white);
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .event-month {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .event-day {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .event-content {
+            padding: 2rem;
+        }
+
+        .event-title {
+            font-size: 1.5rem;
+            color: var(--deep-navy);
+            margin-bottom: 1rem;
+        }
+
+        .event-time {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--warm-gold);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .event-description {
+            color: var(--charcoal);
+            line-height: 1.7;
+        }
+
+        /* Ministry Focus Section */
+        .ministry-section {
+            padding: 5rem 0;
+            background: var(--soft-white);
+        }
+
+        .ministry-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .ministry-card {
+            text-align: center;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .ministry-icon-wrapper {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1.5rem;
+            position: relative;
+        }
+
+        .ministry-icon-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--light-gray);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            transition: all 0.5s ease;
+        }
+
+        .ministry-card:hover .ministry-icon-bg {
+            border-radius: 50%;
+            background: var(--warm-gold);
+            transform: rotate(180deg);
+        }
+
+        .ministry-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: var(--warm-gold);
+            transition: all 0.3s ease;
+        }
+
+        .ministry-card:hover .ministry-icon {
+            color: var(--soft-white);
+        }
+
+        .ministry-title {
+            font-size: 1.5rem;
+            color: var(--deep-navy);
+            margin-bottom: 1rem;
+        }
+
+        .ministry-description {
+            color: var(--charcoal);
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--deep-navy);
+            color: var(--soft-white);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            color: var(--warm-gold);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-column p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            padding: 0.5rem 0;
+        }
+
+        .footer-column ul li a {
+            color: var(--soft-white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--warm-gold);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-item i {
+            color: var(--warm-gold);
+            width: 20px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scrollAnnouncement {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .ministry-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .welcome-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .hero-section {
+                height: 500px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-nav {
+                display: none;
+            }
+
+            .header-top {
+                display: none;
+            }
+
+            .nav-container {
+                padding: 0.8rem 1rem;
+            }
+
+            .logo-text h1 {
+                font-size: 1.1rem;
+            }
+
+            .logo-text p {
+                font-size: 0.7rem;
+            }
+
+            .church-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+            
+            .hero-section {
+                height: 320px;
+            }
+
+            .hero-slide {
+                background-position: center center;
+                background-size: cover;
+            }
+
+            .hero-content {
+                padding: 0 1rem;
+            }
+            
+            .hero-title {
+                font-size: 1.8rem;
+                margin-bottom: 1rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.9rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .hero-verse {
+                font-size: 1rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .hero-reference {
+                font-size: 0.9rem;
+            }
+            
+            .section-header {
+                margin-bottom: 2.5rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .section-header p {
+                font-size: 1rem;
+            }
+
+            .welcome-content h2 {
+                font-size: 1.8rem;
+                margin-bottom: 1rem;
+            }
+
+            .welcome-content p {
+                font-size: 1rem;
+                margin-bottom: 1.2rem;
+            }
+
+            .welcome-image {
+                height: 250px;
+            }
+            
+            .events-header {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+                margin-bottom: 2rem;
+            }
+
+            .events-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .events-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                justify-content: center;
+                max-width: 100%;
+            }
+
+            .event-card {
+                margin-bottom: 0;
+            }
+
+            .event-content {
+                padding: 1.5rem;
+            }
+
+            .event-title {
+                font-size: 1.3rem;
+            }
+            
+            .ministry-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                margin-top: 2.5rem;
+            }
+
+            .ministry-card {
+                padding: 1.5rem;
+            }
+
+            .ministry-icon-wrapper {
+                width: 80px;
+                height: 80px;
+                margin-bottom: 1rem;
+            }
+
+            .ministry-icon {
+                font-size: 2.2rem;
+            }
+
+            .ministry-title {
+                font-size: 1.3rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .footer-column {
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                padding-bottom: 1.5rem;
+            }
+
+            .footer-column:last-child {
+                border-bottom: none;
+                padding-bottom: 0;
+            }
+
+            .footer-column h3 {
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+                color: var(--warm-gold);
+            }
+
+            .footer-column ul {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .footer-column ul li {
+                flex: 0 0 auto;
+            }
+
+            .contact-info {
+                align-items: center;
+                gap: 1.2rem;
+            }
+
+            .contact-item {
+                justify-content: center;
+                text-align: center;
+                padding: 0.8rem;
+                background: rgba(255,255,255,0.05);
+                border-radius: 8px;
+                flex-direction: column;
+            }
+
+            .contact-item i {
+                margin-bottom: 0.4rem;
+                margin-right: 0;
+                font-size: 1.2rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .welcome-section,
+            .services-section,
+            .events-section,
+            .ministry-section {
+                padding: 2.5rem 0;
+            }
+
+            .footer {
+                padding: 1.5rem 0 0.8rem;
+            }
+
+            .service-card {
+                padding: 1.5rem;
+            }
+
+            .service-day {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0.6rem 0.8rem;
+            }
+
+            .logo-text h1 {
+                font-size: 1rem;
+            }
+
+            .logo-text p {
+                font-size: 0.65rem;
+            }
+
+            .church-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+            }
+
+            .hero-section {
+                height: 280px;
+            }
+
+            .hero-slide {
+                background-position: center center;
+                background-size: cover;
+            }
+
+            .hero-content {
+                padding: 0 0.8rem;
+            }
+
+            .hero-title {
+                font-size: 1.5rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.8rem;
+                margin-bottom: 0.6rem;
+            }
+
+            .hero-verse {
+                font-size: 0.9rem;
+                margin-bottom: 0.6rem;
+                line-height: 1.5;
+            }
+
+            .hero-reference {
+                font-size: 0.8rem;
+            }
+
+            .section-header {
+                margin-bottom: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.5rem;
+                margin-bottom: 0.6rem;
+            }
+
+            .section-header p {
+                font-size: 0.9rem;
+            }
+
+            .welcome-content h2 {
+                font-size: 1.5rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .welcome-content p {
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+                line-height: 1.6;
+            }
+
+            .welcome-image {
+                height: 200px;
+            }
+
+            .service-card {
+                padding: 1.2rem;
+            }
+
+            .service-day {
+                font-size: 1rem;
+                margin-bottom: 0.6rem;
+            }
+
+            .service-time {
+                font-size: 0.9rem;
+            }
+
+            .service-name {
+                font-size: 0.85rem;
+            }
+
+            .events-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .events-grid {
+                gap: 1.2rem;
+                justify-content: center;
+                max-width: 100%;
+            }
+
+            .event-card {
+                margin-bottom: 0;
+            }
+
+            .event-content {
+                padding: 1.2rem;
+            }
+
+            .event-title {
+                font-size: 1.1rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .event-description {
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+
+            .ministry-grid {
+                gap: 1.2rem;
+                margin-top: 2rem;
+            }
+
+            .ministry-card {
+                padding: 1.2rem;
+            }
+
+            .ministry-icon-wrapper {
+                width: 70px;
+                height: 70px;
+                margin-bottom: 0.8rem;
+            }
+
+            .ministry-icon {
+                font-size: 2rem;
+            }
+
+            .ministry-title {
+                font-size: 1.1rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .ministry-description {
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+
+            .footer {
+                padding: 1.2rem 0 0.6rem;
+            }
+
+            .footer-grid {
+                display: block;
+                text-align: center;
+            }
+
+            .footer-column {
+                margin-bottom: 1rem;
+            }
+
+            .footer-column:first-child {
+                display: none;
+            }
+
+            .footer-column h3 {
+                font-size: 0.9rem;
+                margin-bottom: 0.5rem;
+                color: var(--warm-gold);
+            }
+
+            .footer-column p {
+                font-size: 0.8rem;
+                line-height: 1.4;
+            }
+
+            .footer-column ul {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.8rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .footer-column ul li {
+                font-size: 0.8rem;
+            }
+
+            .contact-info {
+                display: block;
+                text-align: center;
+            }
+
+            .contact-item {
+                font-size: 0.75rem;
+                display: inline-block;
+                margin: 0 0.5rem 0.4rem 0;
+                padding: 0.2rem 0.4rem;
+                background: rgba(255,255,255,0.05);
+                border-radius: 4px;
+            }
+
+            .contact-item i {
+                font-size: 0.7rem;
+                margin-right: 0.3rem;
+            }
+
+            .contact-item a {
+                font-size: 0.75rem;
+            }
+
+            .footer-bottom {
+                margin-top: 0.8rem;
+                padding-top: 0.8rem;
+                font-size: 0.7rem;
+                line-height: 1.3;
+            }
+
+            .welcome-section,
+            .services-section,
+            .events-section,
+            .ministry-section {
+                padding: 2rem 0;
+            }
+
+            .container {
+                padding: 0 0.5rem;
+            }
+
+            .btn-primary {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Extra small mobile devices */
+        @media (max-width: 360px) {
+            .hero-section {
+                height: 250px;
+            }
+
+            .hero-title {
+                font-size: 1.3rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.75rem;
+                letter-spacing: 2px;
+            }
+
+            .hero-verse {
+                font-size: 0.85rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.3rem;
+            }
+
+            .welcome-content h2 {
+                font-size: 1.3rem;
+            }
+
+            .service-card {
+                padding: 1rem;
+            }
+
+            .event-content {
+                padding: 1rem;
+            }
+
+            .ministry-card {
+                padding: 1rem;
+            }
+
+            .ministry-icon-wrapper {
+                width: 60px;
+                height: 60px;
+            }
+
+            .ministry-icon {
+                font-size: 1.8rem;
+            }
+
+            .container {
+                padding: 0 0.4rem;
+            }
+
+            .welcome-section,
+            .services-section,
+            .events-section,
+            .ministry-section {
+                padding: 1.5rem 0;
+            }
+
+            .announcement-item {
+                padding: 0 2rem;
+            }
+
+            .announcement-icon {
+                width: 25px;
+                height: 25px;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Extra footer styles for 360px */
+        @media (max-width: 360px) {
+            .footer {
+                padding: 1rem 0 0.5rem !important;
+            }
+
+            .footer-column {
+                margin-bottom: 0.8rem !important;
+            }
+
+            .footer-column h3 {
+                font-size: 0.85rem !important;
+                margin-bottom: 0.4rem !important;
+            }
+
+            .footer-column ul {
+                gap: 0.6rem !important;
+            }
+
+            .footer-column ul li {
+                font-size: 0.75rem !important;
+            }
+
+            .contact-item {
+                font-size: 0.65rem !important;
+                margin: 0 0.3rem 0.3rem 0 !important;
+                padding: 0.15rem 0.3rem !important;
+            }
+
+            .contact-item i {
+                font-size: 0.65rem !important;
+                margin-right: 0.2rem !important;
+            }
+
+            .contact-item a {
+                font-size: 0.65rem !important;
+            }
+
+            .footer-bottom {
+                margin-top: 0.6rem !important;
+                padding-top: 0.6rem !important;
+                font-size: 0.65rem !important;
+            }
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--deep-navy);
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--deep-navy);
+            z-index: 2000;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .mobile-nav.active {
+            display: block;
+        }
+
+        .mobile-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .mobile-nav-close {
+            background: none;
+            border: none;
+            color: var(--soft-white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+        }
+
+        .mobile-nav ul li {
+            margin-bottom: 1rem;
+        }
+
+        .mobile-nav ul li a {
+            color: var(--soft-white);
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 1rem 0;
+            display: block;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav ul li a:hover {
+            color: var(--warm-gold);
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Top Bar -->
+    <div class="header-top">
+        <div class="header-top-content">
+            <div class="header-contact">
+                <span><i class="fas fa-phone"></i> <a href="tel:+1-281-931-1120" style="color: inherit; text-decoration: none;">+1 281 931 1120</a></span>
+                <span><i class="fas fa-envelope"></i> <a href="mailto:info@colonialhills-biblechapel.com" style="color: inherit; text-decoration: none;">info@colonialhills-biblechapel.com</a></span>
+            </div>
+            <div class="header-social">
+                <span><i class="fas fa-map-marker-alt"></i> <a href="#services" style="color: inherit; text-decoration: none;">Visit us this Sunday at 9:30 AM</a></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="nav-container">
+            <a href="#" class="logo-section">
+                <div class="church-icon">
+                    <i class="fas fa-church"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Colonial Hills Bible Chapel</h1>
+                    <p>Gathering in His Name Since 1975</p>
+                </div>
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="about-us-page.html">About Us</a></li>
+                    <li><a href="gospel-page.html">Gospel</a></li>
+                    <li><a href="ministries-page.html">Ministries</a></li>
+                    <li><a href="helpful-links-page.html">Helpful Links</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+        <div class="mobile-nav-header">
+            <div class="logo-text">
+                <h1 style="color: var(--soft-white);">Colonial Hills Bible Chapel</h1>
+            </div>
+            <button class="mobile-nav-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="about-us-page.html">About Us</a></li>
+                <li><a href="gospel-page.html">Gospel</a></li>
+                <li><a href="ministries-page.html">Ministries</a></li>
+                <li><a href="helpful-links-page.html">Helpful Links</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <!-- Background Image Slider -->
+        <div class="hero-slider">
+            <div class="hero-slide active" style="background-image: url('images/index/hero-1.JPEG');"></div>
+            <div class="hero-slide" style="background-image: url('images/index/hero-2.JPEG');"></div>
+            <div class="hero-slide" style="background-image: url('images/index/hero-3.JPEG');"></div>
+            <div class="hero-slide" style="background-image: url('images/index/hero-4.JPEG');"></div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-subtitle">Welcome to</p>
+            <h1 class="hero-title">Colonial Hills Bible Chapel</h1>
+            <p class="hero-verse">"For God so loved the world that He gave His only begotten Son, that whoever believes in Him should not perish but have everlasting life."</p>
+            <p class="hero-reference">John 3:16</p>
+        </div>
+    </section>
+
+    <!-- Live Announcement Bar -->
+    <div class="announcement-bar">
+        <div class="announcement-container">
+            <div class="announcement-item">
+                <div class="announcement-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <span>Men's Breakfast & Prayer Meeting / Women's Bible Study - July 12th at 9:00 AM</span>
+            </div>
+            <div class="announcement-item">
+                <div class="announcement-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <span>Workday at Morgan House - July 19th from 8:00 AM to 2:00 PM</span>
+            </div>
+            <div class="announcement-item">
+                <div class="announcement-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <span>Hot Luncheon - July 27th at Noon - Come for fellowship and a delicious meal!</span>
+            </div>
+            <div class="announcement-item">
+                <div class="announcement-icon">
+                    <i class="fas fa-praying-hands"></i>
+                </div>
+                <span>Join us every Sunday for worship at 9:30 AM and Family Bible Hour at 11:00 AM</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Welcome Section -->
+    <section class="welcome-section" id="about">
+        <div class="container">
+            <div class="welcome-grid">
+                <div class="welcome-content">
+                    <h2>We Are Glad You Are Here</h2>
+                    <p>Welcome to Colonial Hills Bible Chapel! We are glad that you decided to visit our website today and hope that you will find some helpful information here.</p>
+                    <p>Colonial Hills Bible Chapel is a group of local Christians who gather solely in the name of the Lord Jesus Christ. Our meetings hold fast to the New Testament principles of gatherings as shown in the Scripture.</p>
+                    <p>At Colonial Hills Bible Chapel, we are glad that the Lord Jesus said, "Let the little children come to me." As parents, we want to bring our children to church, so that they can learn the most famous verse in the Bible. We are interested in putting our roots down deep in the love of Jesus Christ, and living fruitful lives of character and service.</p>
+                    <p>Engineers, students, bankers, nurses, doctors, housewives, Information Technology people - we're all here wanting to follow the Lord Jesus. We hope that you will return often, and that you will visit us in person!</p>
+                </div>
+                <div class="welcome-image">
+                    <div class="welcome-video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/J-lXFELzsIA" 
+                            title="Colonial Hills Bible Chapel Welcome Video"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Times Section -->
+    <section class="services-section" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Regular Meetings</h2>
+                <p>Join us for worship, fellowship, and growing together in God's Word</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <h3 class="service-day">SUNDAY - LORD'S DAY</h3>
+                    <ul class="service-times">
+                        <li>
+                            <span class="service-time">9:30 AM - 10:30 AM</span>
+                            <span class="service-name">Breaking of Bread</span>
+                        </li>
+                        <li>
+                            <span class="service-time">10:30 AM - 11:00 AM</span>
+                            <span class="service-name">Fellowship Time</span>
+                        </li>
+                        <li>
+                            <span class="service-time">11:00 AM - 12:00 PM</span>
+                            <span class="service-name">Family Bible Hour</span>
+                        </li>
+                        <li>
+                            <span class="service-time">11:00 AM - 12:00 PM</span>
+                            <span class="service-name">Sunday School Time</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-bible"></i>
+                    </div>
+                    <h3 class="service-day">WEDNESDAY</h3>
+                    <ul class="service-times">
+                        <li>
+                            <span class="service-time">7:00 PM - 8:00 PM</span>
+                            <span class="service-name">Prayer Meeting & Bible Study</span>
+                            <span class="service-name" style="font-style: italic; font-size: 0.9rem;">(Available via Cisco WebEx)</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-praying-hands"></i>
+                    </div>
+                    <h3 class="service-day">SATURDAY</h3>
+                    <ul class="service-times">
+                        <li>
+                            <span class="service-time">9:00 AM</span>
+                            <span class="service-name">Men's Prayer Meeting</span>
+                        </li>
+                    </ul>
+                    <h4 style="color: var(--warm-gold); margin-top: 1.2rem; margin-bottom: 0.8rem; font-size: 1.1rem;">Second Saturday</h4>
+                    <ul class="service-times">
+                        <li>
+                            <span class="service-time">9:00 AM</span>
+                            <span class="service-name">Men's Breakfast and Prayer Meeting</span>
+                        </li>
+                        <li>
+                            <span class="service-time">9:00 AM</span>
+                            <span class="service-name">Women's Bible Study</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section class="events-section" id="events">
+        <div class="container">
+            <div class="events-header">
+                <h2>Special Events & Announcements</h2>
+            </div>
+            <div class="events-grid">
+                <!-- July 12 – Men's Breakfast & Prayer Meeting / Women's Bible Study -->
+                <div class="event-card">
+                    <div class="event-date-badge">
+                        <div class="event-month">JUL</div>
+                        <div class="event-day">12</div>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Men's Breakfast & Prayer Meeting<br>Women's Bible Study</h3>
+                        <div class="event-time">
+                            <i class="fas fa-clock"></i>
+                            <span>9:00 AM</span>
+                        </div>
+                        <p class="event-description">
+                            Join us Saturday, July 12th at 9:00 AM for our Men's Breakfast and Prayer Meeting alongside the Women's Bible Study (available via WebEx).
+                        </p>
+                    </div>
+                </div>
+
+                <!-- July 19 – Workday at Morgan House -->
+                <div class="event-card">
+                    <div class="event-date-badge">
+                        <div class="event-month">JUL</div>
+                        <div class="event-day">19</div>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Workday at Morgan House</h3>
+                        <div class="event-time">
+                            <i class="fas fa-clock"></i>
+                            <span>8:00 AM – 2:00 PM</span>
+                        </div>
+                        <p class="event-description">
+                            Roll up your sleeves on Saturday, July 19th from 8:00 AM to 2:00 PM as we spruce up and maintain the Morgan House grounds.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- July 27 – Hot Luncheon -->
+                <div class="event-card">
+                    <div class="event-date-badge">
+                        <div class="event-month">JUL</div>
+                        <div class="event-day">27</div>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Hot Luncheon</h3>
+                        <div class="event-time">
+                            <i class="fas fa-clock"></i>
+                            <span>Noon</span>
+                        </div>
+                        <p class="event-description">
+                            Come together for fellowship and a delicious hot meal on Sunday, July 27th at noon.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ministry Focus Section -->
+    <section class="ministry-section" id="ministries">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Ministry Focus</h2>
+                <p>Discover how we live out our faith together as a community</p>
+                <div style="margin-top: 2rem;">
+                    <a href="ministries-page.html" class="btn-primary">
+                        View All Ministries <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ministry-grid">
+                <div class="ministry-card">
+                    <div class="ministry-icon-wrapper">
+                        <div class="ministry-icon-bg"></div>
+                        <i class="fas fa-hands-praying ministry-icon"></i>
+                    </div>
+                    <h3 class="ministry-title">We Worship</h3>
+                    <p class="ministry-description">Each Sunday morning we gather together and remember the death and resurrection of Christ by partaking of the bread and wine. We celebrate His great love, and count the enormous benefits we have received.</p>
+                </div>
+                <div class="ministry-card">
+                    <div class="ministry-icon-wrapper">
+                        <div class="ministry-icon-bg"></div>
+                        <i class="fas fa-dove ministry-icon"></i>
+                    </div>
+                    <h3 class="ministry-title">We Pray</h3>
+                    <p class="ministry-description">We need Jesus's help in forgiving one another. To integrate Christian worldviews in our children's lives, we need Jesus's help. So we pray corporately that God will build His church.</p>
+                </div>
+                <div class="ministry-card">
+                    <div class="ministry-icon-wrapper">
+                        <div class="ministry-icon-bg"></div>
+                        <i class="fas fa-book-open ministry-icon"></i>
+                    </div>
+                    <h3 class="ministry-title">We Study the Bible</h3>
+                    <p class="ministry-description">The Bible is God's instructional manual for life. Each Sunday we listen to a Bible lesson, and think through its implications for our individual lives.</p>
+                </div>
+                <div class="ministry-card">
+                    <div class="ministry-icon-wrapper">
+                        <div class="ministry-icon-bg"></div>
+                        <i class="fas fa-handshake ministry-icon"></i>
+                    </div>
+                    <h3 class="ministry-title">We Enjoy Fellowship</h3>
+                    <p class="ministry-description">At church we call this connection "fellowship." We are brothers and sisters, related to one another as followers of Christ. We like to have meals together for fellowship.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Colonial Hills Bible Chapel</h3>
+                    <p>A group of local Christians gathering solely in the name of the Lord Jesus Christ, holding fast to New Testament principles of worship and fellowship.</p>
+                    <p style="color: var(--warm-gold); font-style: italic; margin-top: 1rem;">
+                        "The Gift of God is Eternal Life Through Jesus Christ Our Lord"
+                    </p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="about-us-page.html">About Us</a></li>
+                        <li><a href="gospel-page.html">The Gospel</a></li>
+                        <li><a href="#events">Upcoming Events</a></li>
+                        <li><a href="ministries-page.html">Ministries</a></li>
+                        <li><a href="helpful-links-page.html">Helpful Links</a></li>
+                        <li><a href="#">Statement of Faith</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Service Times</h3>
+                    <ul>
+                        <li>Sunday Worship: 9:30 AM</li>
+                        <li>Family Bible Hour: 11:00 AM</li>
+                        <li>Wednesday Bible Study: 7:00 PM</li>
+                        <li>Saturday Prayer Meeting: 9:00 AM</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Information</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span><a href="https://maps.google.com/?q=14643+Henry+Rd,+Houston,+TX+77060" target="_blank" style="color: inherit; text-decoration: none;">14643 Henry Rd<br>Houston, TX 77060</a></span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span><a href="tel:+1-281-931-1120" style="color: inherit; text-decoration: none;">+1 281 931 1120</a></span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span><a href="mailto:info@colonialhills-biblechapel.com" style="color: inherit; text-decoration: none;">info@colonialhills-biblechapel.com</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Colonial Hills Bible Chapel. All rights reserved. | Website designed with love for His glory.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Background Image Slider
+        const slides = document.querySelectorAll('.hero-slide');
+        let currentSlide = 0;
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        // Change slide every 5 seconds
+        setInterval(nextSlide, 5000);
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.main-header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerHeight = document.querySelector('.main-header').offsetHeight;
+                    const targetPosition = target.offsetTop - headerHeight - 20;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.service-card, .event-card, .ministry-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+
+        // Announcement bar pause on hover
+        const announcementBar = document.querySelector('.announcement-container');
+        announcementBar.addEventListener('mouseenter', () => {
+            announcementBar.style.animationPlayState = 'paused';
+        });
+        announcementBar.addEventListener('mouseleave', () => {
+            announcementBar.style.animationPlayState = 'running';
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const mobileNavClose = document.querySelector('.mobile-nav-close');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        mobileNavClose.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close mobile nav when clicking on a link
+        document.querySelectorAll('.mobile-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+    </script>
+</body>
+</html>

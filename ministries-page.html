@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ministries - Colonial Hills Bible Chapel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Lato:wght@300;400;700&display=swap');
+
+        :root {
+            --deep-navy: #1a2332;
+            --warm-gold: #c9a961;
+            --soft-white: #fefefe;
+            --light-gray: #f8f7f5;
+            --medium-gray: #e5e3df;
+            --charcoal: #333333;
+            --accent-burgundy: #7d2e2e;
+            --shadow-light: 0 2px 15px rgba(0,0,0,0.08);
+            --shadow-medium: 0 5px 25px rgba(0,0,0,0.12);
+            --shadow-heavy: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--soft-white);
+            color: var(--charcoal);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Crimson Text', serif;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        /* Header Styles - Same as other pages */
+        .header-top {
+            background: var(--deep-navy);
+            color: var(--soft-white);
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .header-top-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-contact {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .header-contact span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .header-contact i {
+            color: var(--warm-gold);
+        }
+
+        .main-header {
+            background: var(--soft-white);
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .main-header.scrolled {
+            box-shadow: var(--shadow-medium);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--deep-navy);
+        }
+
+        .church-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--warm-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--soft-white);
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .logo-text p {
+            font-size: 0.85rem;
+            color: var(--warm-gold);
+            margin: 0;
+            font-style: italic;
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: var(--deep-navy);
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+            padding: 0.5rem 0;
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--warm-gold);
+            transition: width 0.3s ease;
+        }
+
+        .main-nav a:hover {
+            color: var(--warm-gold);
+        }
+
+        .main-nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Page Hero Section */
+        .page-hero {
+            position: relative;
+            height: 400px;
+            background: linear-gradient(rgba(26, 35, 50, 0.85), rgba(26, 35, 50, 0.85)),
+                        url('images/ministries-page/hero-2.JPEG');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--soft-white);
+        }
+
+        .page-hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .page-hero-content p {
+            font-size: 1.3rem;
+            color: var(--warm-gold);
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Ministries Section */
+        .ministries-section {
+            padding: 5rem 0;
+            background: var(--light-gray);
+        }
+
+        .section-title {
+            font-size: 3rem;
+            color: var(--deep-navy);
+            text-align: center;
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--warm-gold);
+        }
+
+        .section-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-size: 1.2rem;
+            color: var(--charcoal);
+            line-height: 1.8;
+            text-align: justify;
+            text-align-last: center;
+        }
+
+        /* Ministry Cards */
+        .ministries-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .ministry-card {
+            background: var(--soft-white);
+            border-radius: 10px;
+            padding: 3rem;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow-light);
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .ministry-photo {
+            width: 300px;
+            height: 360px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .ministry-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .ministry-info {
+            padding-top: 0.5rem;
+        }
+
+        .ministry-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 2px solid var(--warm-gold);
+        }
+
+        .ministry-name {
+            font-size: 2rem;
+            color: var(--deep-navy);
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .ministry-role {
+            font-size: 1.1rem;
+            color: var(--accent-burgundy);
+            font-style: italic;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .ministry-description {
+            color: var(--charcoal);
+            line-height: 1.8;
+            text-align: justify;
+            font-size: 1.05rem;
+        }
+
+        .ministry-description p {
+            margin-bottom: 1.2rem;
+            text-indent: 1.5rem;
+        }
+
+        .ministry-description p:last-child {
+            margin-bottom: 0;
+        }
+
+        .ministry-description p:first-child {
+            text-indent: 0;
+        }
+
+        .ministry-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            padding: 0.8rem 1.8rem;
+            background: var(--warm-gold);
+            color: var(--soft-white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(201, 169, 97, 0.3);
+        }
+
+        .ministry-link:hover {
+            background: var(--accent-burgundy);
+            transform: translateY(-2px);
+        }
+
+        .ministry-link i {
+            font-size: 0.9rem;
+        }
+
+        /* Special note for local ministries */
+        .local-ministry-note {
+            background: var(--warm-gold);
+            color: var(--soft-white);
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Footer - Same as other pages */
+        .footer {
+            background: var(--deep-navy);
+            color: var(--soft-white);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            color: var(--warm-gold);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-column p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            padding: 0.5rem 0;
+        }
+
+        .footer-column ul li a {
+            color: var(--soft-white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--warm-gold);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-item i {
+            color: var(--warm-gold);
+            width: 20px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--deep-navy);
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--deep-navy);
+            z-index: 2000;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .mobile-nav.active {
+            display: block;
+        }
+
+        .mobile-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .mobile-nav-close {
+            background: none;
+            border: none;
+            color: var(--soft-white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+        }
+
+        .mobile-nav ul li {
+            margin-bottom: 1rem;
+        }
+
+        .mobile-nav ul li a {
+            color: var(--soft-white);
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 1rem 0;
+            display: block;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav ul li a:hover {
+            color: var(--warm-gold);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-nav {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .header-top {
+                display: none;
+            }
+
+            .page-hero {
+                height: 300px;
+            }
+
+            .page-hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .page-hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .ministry-card {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+                text-align: center;
+            }
+
+            .ministry-photo {
+                margin: 0 auto;
+                width: 200px;
+                height: 250px;
+            }
+
+            .ministry-info {
+                text-align: left;
+            }
+
+            .ministry-name {
+                font-size: 1.5rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ministries-section {
+                padding: 3rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .page-hero {
+                height: 250px;
+            }
+
+            .page-hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .page-hero-content p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 2rem;
+            }
+
+            .section-intro {
+                font-size: 1rem;
+                text-align: left;
+                text-align-last: left;
+            }
+
+            .ministry-card {
+                padding: 1.5rem;
+            }
+
+            .ministry-photo {
+                width: 180px;
+                height: 220px;
+            }
+
+            .ministry-name {
+                font-size: 1.3rem;
+            }
+
+            .ministry-role {
+                font-size: 1rem;
+            }
+
+            .ministry-description {
+                font-size: 0.95rem;
+                text-align: left;
+            }
+
+            .ministry-description p {
+                text-indent: 0;
+            }
+
+            .ministry-link {
+                font-size: 0.9rem;
+                padding: 0.4rem 1.2rem;
+            }
+
+            .ministries-section {
+                padding: 2rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Top Bar -->
+    <div class="header-top">
+        <div class="header-top-content">
+            <div class="header-contact">
+                <span><i class="fas fa-phone"></i> <a href="tel:+1-281-931-1120" style="color: inherit; text-decoration: none;">+1-281-931-1120</a></span>
+                <span><i class="fas fa-envelope"></i> <a href="mailto:info@colonialhills-biblechapel.com" style="color: inherit; text-decoration: none;">info@colonialhills-biblechapel.com</a></span>
+            </div>
+            <div class="header-social">
+                <span><i class="fas fa-map-marker-alt"></i> <a href="index.html#services" style="color: inherit; text-decoration: none;">Visit us this Sunday at 9:30 AM</a></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="nav-container">
+            <a href="index.html" class="logo-section">
+                <div class="church-icon">
+                    <i class="fas fa-church"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Colonial Hills Bible Chapel</h1>
+                    <p>Gathering in His Name Since 1975</p>
+                </div>
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about-us-page.html">About Us</a></li>
+                    <li><a href="gospel-page.html">Gospel</a></li>
+                    <li><a href="ministries-page.html">Ministries</a></li>
+                    <li><a href="helpful-links-page.html">Helpful Links</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+        <div class="mobile-nav-header">
+            <div class="logo-text">
+                <h1 style="color: var(--soft-white);">Colonial Hills Bible Chapel</h1>
+            </div>
+            <button class="mobile-nav-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about-us-page.html">About Us</a></li>
+                <li><a href="gospel-page.html">Gospel</a></li>
+                <li><a href="ministries-page.html">Ministries</a></li>
+                <li><a href="helpful-links-page.html">Helpful Links</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <h1>Ministries</h1>
+            <p>Serving the Lord in Various Fields</p>
+        </div>
+    </section>
+
+    <!-- Ministries Section -->
+    <section class="ministries-section">
+        <div class="container">
+            <h2 class="section-title">Our Missionaries & Ministers</h2>
+            <p class="section-intro">Colonial Hills Bible Chapel supports and commends workers to various fields of ministry, both locally and internationally. These faithful servants are spreading the Gospel and building up believers in the faith.</p>
+
+            <div class="ministries-container">
+                <!-- Raymond & Jennifer Johnson -->
+                <div class="ministry-card">
+                    <div class="ministry-photo">
+                        <img src="images/ministries-page/raymond-jennifer-johnson.jpg" alt="Raymond & Jennifer Johnson">
+                    </div>
+                    <div class="ministry-info">
+                        <div class="ministry-header">
+                            <h3 class="ministry-name">Raymond & Jennifer Johnson</h3>
+                            <p class="ministry-role">Missionaries with Ireland Outreach International</p>
+                        </div>
+                        <div class="ministry-description">
+                            <p>Raymond was saved at the age of 14 while at a young men's camp. Raymond said, "From the time I was saved, I had a desire to serve the Lord through reaching the lost. In 2014, my wife and I heard the Lord's call to serve Him full time. After five years in prayer with the Elders at Colonial Hills Bible Chapel, we were commended to the Lord's work full time to serve with Ireland Outreach International on September 9, 2018."</p>
+                            
+                            <p>He has been married to his wife, Jennifer, for sixteen years and has four children. Jennifer Johnson, was born and raised in Texas, where she met her husband, Raymond, while they worked over the summers at a music conservatory. She enjoys homeschooling their four children.</p>
+                            
+                            <p>Jennifer was saved at a young age, but said "I never truly knew the right way to live for Christ until I was an adult; at which time I was baptized after we transitioned to the Brethren Assemblies. After attending an Ireland Outreach retreat, my heart went out to the work being done in Africa, like the fresh water projects, but especially the children and the school".</p>
+                            
+                            <a href="https://www.irelandoutreach.org/meet-the-team" target="_blank" class="ministry-link">
+                                Visit Ireland Outreach International <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Keith & Callie Munsterman -->
+                <div class="ministry-card">
+                    <div class="ministry-photo">
+                        <img src="images/ministries-page/keith-callie-munsterman.jpg" alt="Keith & Callie Munsterman">
+                    </div>
+                    <div class="ministry-info">
+                        <div class="ministry-header">
+                            <h3 class="ministry-name">Keith & Callie Munsterman</h3>
+                            <p class="ministry-role">Full-time Ministry at Sandy Creek Bible Camp</p>
+                        </div>
+                        <div class="ministry-description">
+                            <p>Keith and Callie Munsterman were called by the Lord to serve full time at Sandy Creek Bible Camp in 2018. They were commended to the Lords work by the elders at Colonial Hills Bible Chapel.</p>
+                            
+                            <p>God continues to use Christian camping to bring the Gospel of our Lord Jesus Christ to children and adults, saved and unsaved, as a part of His ministry of reconciliation. Keith & Callie are serving with their 4 children, Hazel, Olivia, Elliot, and Nora.</p>
+                            
+                            <p>As times have changed and the ministry has grown over the years, they are blessed to see the Lord's faithfulness.</p>
+                            
+                            <a href="https://www.sandycreek.org/" target="_blank" class="ministry-link">
+                                Visit Sandy Creek Bible Camp <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Johnson & Valsa John -->
+                <div class="ministry-card">
+                    <div class="ministry-photo">
+                        <img src="images/ministries-page/johnson-valsa-john.jpg" alt="Johnson & Valsa John">
+                    </div>
+                    <div class="ministry-info">
+                        <div class="ministry-header">
+                            <h3 class="ministry-name">Johnson & Valsa John</h3>
+                            <p class="ministry-role">Full-time Ministry - Teaching & Pastoral Care</p>
+                        </div>
+                        <div class="ministry-description">
+                            <span class="local-ministry-note">Local Ministry</span>
+                            <p>Johnson & Valsa John have been serving the Lord full time since 1993. Right after getting married in Toronto, Canada in 1979, they settled in the Philadelphia area and started to work and raise their two children.</p>
+                            
+                            <p>In 1990, after resigning his job at a Hospital, Johnson attended Biblical Seminary in Hatfield, PA with a desire to learn the Word of God systematically, and graduated in 1993 with an M.Div. in Pastoral Ministry & Counseling. The same year he started to serve as an elder at the Philadelphia Brethren Assembly and the assembly commended them to full time ministry.</p>
+                            
+                            <p>Johnson served there until 2010 and then at Grace Gospel Chapel in Plumsteadville, PA until June 2021, along with his wife Valsa. During that time he served as an Evangelist and Minister of the Word in various places and local assemblies. They were actively encouraging & discipling the youth at Philadelphia Brethren Assembly as well as the youth of Tristate (PA, NY & NJ). As a full time elder at the Grace Chapel, Johnson was active in pastoral care including counseling, overseeing various administrative tasks, and organizing various support ministries.</p>
+                            
+                            <p>They both were vital part of the prison ministry and other outreach ministries of the Grace Chapel. In 2021, Johnson & Valsa moved to Houston to be near their son & family. They started fellowshipping at Colonial Hills Bible Chapel and were commended by the elders to the proclamation of the gospel, ministry of the word & the edification of the saints.</p>
+                            
+                            <p>Now they are both committed to serve the Lord as the Lord leads and opens the door. Johnson currently is active in teaching & preaching the word of God at the chapel and is available to minister the Word of God in the area assemblies and other places as needed. Valsa is also active in teaching the Word for a women's online bible study group. They are both active in counseling young couples, who are preparing to get married and also in other situations as needed. Johnson & Valsa have two married children with four grandchildren.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Maria Darling -->
+                <div class="ministry-card">
+                    <div class="ministry-photo">
+                        <img src="images/ministries-page/maria-darling.jpg" alt="Maria Darling">
+                    </div>
+                    <div class="ministry-info">
+                        <div class="ministry-header">
+                            <h3 class="ministry-name">Maria Darling</h3>
+                            <p class="ministry-role">Hispanic Ministry & Radio Ministry</p>
+                        </div>
+                        <div class="ministry-description">
+                            <span class="local-ministry-note">Local Ministry</span>
+                            <p>Sister Maria Darling is gifted with sharing the love of Christ amidst the Hispanic community in a local flea market and holds Bible studies in the neighborhood.</p>
+                            
+                            <p>She has a passion to mentor children to help them grow in faith. Sister Maria also has a radio ministry to reach to share the hope of Lord Jesus Christ.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dr. John Mathew -->
+                <div class="ministry-card">
+                    <div class="ministry-photo">
+                        <img src="images/ministries-page/dr-john-mathew.jpg" alt="Dr. John Mathew">
+                    </div>
+                    <div class="ministry-info">
+                        <div class="ministry-header">
+                            <h3 class="ministry-name">Dr. John Mathew</h3>
+                            <p class="ministry-role">(a.k.a. Dr. Sunny Ezhumattoor) - Author & Teacher</p>
+                        </div>
+                        <div class="ministry-description">
+                            <p>Dr. Sunny Ezhumattoor also known as Dr. John Mathew has been a conservative critique on controversial topics for many decades.</p>
+                            
+                            <p>He is the author of many books on social and family issues. His literary works display the profound knowledge and erudition he gained in economics, sociology, political science, philosophy, scientific, humanism, and jurisprudence.</p>
+                            
+                            <p>Dr. Sunny uses his mighty talent in writing as a tool for correction and predicting irrational and inexcusable practices among Christians as well as society in general. To date, he has written about 57 books answering some of the difficult topics with clarity.</p>
+                            
+                            <a href="http://narrowpathministries.net" target="_blank" class="ministry-link">
+                                Visit Narrow Path Ministries <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Colonial Hills Bible Chapel</h3>
+                    <p>A group of local Christians gathering solely in the name of the Lord Jesus Christ, holding fast to New Testament principles of worship and fellowship.</p>
+                    <p style="color: var(--warm-gold); font-style: italic; margin-top: 1rem;">
+                        "The Gift of God is Eternal Life Through Jesus Christ Our Lord"
+                    </p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="about-us-page.html">About Us</a></li>
+                        <li><a href="gospel-page.html">The Gospel</a></li>
+                        <li><a href="index.html#services">Service Times</a></li>
+                        <li><a href="index.html#events">Upcoming Events</a></li>
+                        <li><a href="ministries-page.html">Ministries</a></li>
+                        <li><a href="helpful-links-page.html">Helpful Links</a></li>
+                        <li><a href="#">Statement of Faith</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Service Times</h3>
+                    <ul>
+                        <li>Sunday Worship: 9:30 AM</li>
+                        <li>Family Bible Hour: 11:00 AM</li>
+                        <li>Wednesday Bible Study: 7:00 PM</li>
+                        <li>Saturday Prayer Meeting: 9:00 AM</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Information</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span><a href="https://maps.google.com/?q=14643+Henry+Rd,+Houston,+TX+77060" target="_blank" style="color: inherit; text-decoration: none;">14643 Henry Rd<br>Houston, TX 77060</a></span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span><a href="tel:+1-281-931-1120" style="color: inherit; text-decoration: none;">+1-281-931-1120</a></span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span><a href="mailto:info@colonialhills-biblechapel.com" style="color: inherit; text-decoration: none;">info@colonialhills-biblechapel.com</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Colonial Hills Bible Chapel. All rights reserved. | Website designed with love for His glory.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.main-header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerHeight = document.querySelector('.main-header').offsetHeight;
+                    const targetPosition = target.offsetTop - headerHeight - 20;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.ministry-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const mobileNavClose = document.querySelector('.mobile-nav-close');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        mobileNavClose.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close mobile nav when clicking on a link
+        document.querySelectorAll('.mobile-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+    </script>
+</body>
+</html>
