@@ -1013,6 +1013,21 @@
             .service-day {
                 font-size: 1.1rem;
             }
+
+            /* Faster announcement bar animation for mobile */
+            .announcement-container {
+                animation: scrollAnnouncement 15s linear infinite;
+            }
+
+            .announcement-item {
+                padding: 0 2rem;
+            }
+
+            .announcement-icon {
+                width: 25px;
+                height: 25px;
+                font-size: 0.8rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1254,6 +1269,21 @@
                 padding: 0.8rem 1.5rem;
                 font-size: 0.9rem;
             }
+
+            /* Even faster announcement bar animation for small mobile */
+            .announcement-container {
+                animation: scrollAnnouncement 10s linear infinite;
+            }
+
+            .announcement-item {
+                padding: 0 1.5rem;
+            }
+
+            .announcement-icon {
+                width: 22px;
+                height: 22px;
+                font-size: 0.7rem;
+            }
         }
 
         /* Extra small mobile devices */
@@ -1323,6 +1353,11 @@
                 width: 25px;
                 height: 25px;
                 font-size: 0.8rem;
+            }
+
+            /* Fastest announcement bar animation for extra small mobile */
+            .announcement-container {
+                animation: scrollAnnouncement 8s linear infinite;
             }
         }
 
