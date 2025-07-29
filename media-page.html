@@ -1,0 +1,2260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media - Colonial Hills Bible Chapel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Lato:wght@300;400;700&display=swap');
+
+        :root {
+            --deep-navy: #1a2332;
+            --warm-gold: #c9a961;
+            --soft-white: #fefefe;
+            --light-gray: #f8f7f5;
+            --medium-gray: #e5e3df;
+            --charcoal: #333333;
+            --accent-burgundy: #7d2e2e;
+            --shadow-light: 0 2px 15px rgba(0,0,0,0.08);
+            --shadow-medium: 0 5px 25px rgba(0,0,0,0.12);
+            --shadow-heavy: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--soft-white);
+            color: var(--charcoal);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Crimson Text', serif;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        /* Header Styles - Same as other pages */
+        .header-top {
+            background: var(--deep-navy);
+            color: var(--soft-white);
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .header-top-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-contact {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .header-contact span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .header-contact i {
+            color: var(--warm-gold);
+        }
+
+        .main-header {
+            background: var(--soft-white);
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .main-header.scrolled {
+            box-shadow: var(--shadow-medium);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--deep-navy);
+        }
+
+        .church-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--warm-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--soft-white);
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .logo-text p {
+            font-size: 0.85rem;
+            color: var(--warm-gold);
+            margin: 0;
+            font-style: italic;
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: var(--deep-navy);
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+            padding: 0.5rem 0;
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--warm-gold);
+            transition: width 0.3s ease;
+        }
+
+        .main-nav a:hover {
+            color: var(--warm-gold);
+        }
+
+        .main-nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Page Hero Section */
+        .page-hero {
+            position: relative;
+            height: 300px;
+            background: linear-gradient(rgba(26, 35, 50, 0.85), rgba(26, 35, 50, 0.85)),
+                        url('images/media/bible-study-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--soft-white);
+        }
+
+        .page-hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .page-hero-content p {
+            font-size: 1.3rem;
+            color: var(--warm-gold);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Media Section */
+        .media-section {
+            padding: 5rem 0;
+            background: var(--light-gray);
+            min-height: 600px;
+        }
+
+        /* Filter Bar */
+        .filter-bar {
+            background: var(--soft-white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow-light);
+            margin-bottom: 3rem;
+        }
+
+        .filter-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.8rem 3rem 0.8rem 1rem;
+            border: 2px solid var(--medium-gray);
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--warm-gold);
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--charcoal);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.6rem 1.5rem;
+            border: 2px solid var(--medium-gray);
+            background: var(--soft-white);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: var(--charcoal);
+        }
+
+        .filter-btn:hover {
+            border-color: var(--warm-gold);
+            color: var(--warm-gold);
+        }
+
+        .filter-btn.active {
+            background: var(--warm-gold);
+            border-color: var(--warm-gold);
+            color: var(--soft-white);
+        }
+
+        .sort-dropdown {
+            position: relative;
+        }
+
+        .sort-dropdown select {
+            padding: 0.6rem 2rem 0.6rem 1rem;
+            border: 2px solid var(--medium-gray);
+            border-radius: 50px;
+            background: var(--soft-white);
+            cursor: pointer;
+            font-size: 1rem;
+            appearance: none;
+        }
+
+        .sort-dropdown::after {
+            content: '\f107';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        /* Video Grid */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .video-card {
+            background: var(--soft-white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .video-card.hidden {
+            display: none;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            overflow: hidden;
+            background: var(--charcoal);
+        }
+
+        .video-thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-duration {
+            position: absolute;
+            bottom: 0.5rem;
+            right: 0.5rem;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.9rem;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(201, 169, 97, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-card:hover .play-overlay {
+            opacity: 1;
+        }
+
+        .play-overlay i {
+            color: white;
+            font-size: 1.5rem;
+            margin-left: 3px;
+        }
+
+        .video-info {
+            padding: 1.5rem;
+        }
+
+        .video-category {
+            display: inline-block;
+            background: var(--warm-gold);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-title {
+            font-size: 1.3rem;
+            color: var(--deep-navy);
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .video-meta {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--charcoal);
+        }
+
+        .video-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .video-meta i {
+            color: var(--warm-gold);
+        }
+
+        /* Video Player Modal */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .video-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            max-width: 1200px;
+            width: 100%;
+            background: var(--soft-white);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: var(--deep-navy);
+            color: white;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-details {
+            padding: 2rem;
+        }
+
+        .video-details h2 {
+            font-size: 2rem;
+            color: var(--deep-navy);
+            margin-bottom: 1rem;
+        }
+
+        .video-details .meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .video-description {
+            line-height: 1.8;
+            color: var(--charcoal);
+        }
+
+        /* Load More Button */
+        .load-more {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .load-more-btn {
+            background: var(--warm-gold);
+            color: white;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(201, 169, 97, 0.3);
+        }
+
+        .load-more-btn:hover {
+            background: var(--accent-burgundy);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(125, 46, 46, 0.3);
+        }
+
+        /* No Results Message */
+        .no-results {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: var(--soft-white);
+            border-radius: 10px;
+            box-shadow: var(--shadow-light);
+        }
+
+        .no-results i {
+            font-size: 4rem;
+            color: var(--medium-gray);
+            margin-bottom: 1rem;
+        }
+
+        .no-results h3 {
+            font-size: 1.5rem;
+            color: var(--deep-navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .no-results p {
+            color: var(--charcoal);
+        }
+
+        /* Footer - Same as other pages */
+        .footer {
+            background: var(--deep-navy);
+            color: var(--soft-white);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            color: var(--warm-gold);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-column p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            padding: 0.5rem 0;
+        }
+
+        .footer-column ul li a {
+            color: var(--soft-white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--warm-gold);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-item i {
+            color: var(--warm-gold);
+            width: 20px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--deep-navy);
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--deep-navy);
+            z-index: 2000;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .mobile-nav.active {
+            display: block;
+        }
+
+        .mobile-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .mobile-nav-close {
+            background: none;
+            border: none;
+            color: var(--soft-white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+        }
+
+        .mobile-nav ul li {
+            margin-bottom: 1rem;
+        }
+
+        .mobile-nav ul li a {
+            color: var(--soft-white);
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 1rem 0;
+            display: block;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav ul li a:hover {
+            color: var(--warm-gold);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-nav {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .header-top {
+                display: none;
+            }
+
+            .page-hero {
+                height: 250px;
+            }
+
+            .page-hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .page-hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .filter-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-box {
+                min-width: 100%;
+            }
+
+            .filter-buttons {
+                justify-content: center;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                margin: 1rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .media-section {
+                padding: 3rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .page-hero {
+                height: 200px;
+            }
+
+            .page-hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .page-hero-content p {
+                font-size: 1rem;
+            }
+
+            .filter-bar {
+                padding: 1.5rem;
+            }
+
+            .filter-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .video-info {
+                padding: 1rem;
+            }
+
+            .video-title {
+                font-size: 1.1rem;
+            }
+
+            .video-meta {
+                font-size: 0.85rem;
+            }
+
+            .media-section {
+                padding: 2rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Top Bar -->
+    <div class="header-top">
+        <div class="header-top-content">
+            <div class="header-contact">
+                <span><i class="fas fa-phone"></i> <a href="tel:+1-281-931-1120" style="color: inherit; text-decoration: none;">+1-281-931-1120</a></span>
+                <span><i class="fas fa-envelope"></i> <a href="mailto:info@colonialhills-biblechapel.com" style="color: inherit; text-decoration: none;">info@colonialhills-biblechapel.com</a></span>
+            </div>
+            <div class="header-social">
+                <span><i class="fas fa-map-marker-alt"></i> <a href="/#services" style="color: inherit; text-decoration: none;">Visit us this Sunday at 9:30 AM</a></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="nav-container">
+            <a href="/" class="logo-section">
+                <div class="church-icon">
+                    <i class="fas fa-church"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Colonial Hills Bible Chapel</h1>
+                    <p>Gathering in His Name Since 1975</p>
+                </div>
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about-us-page.html">About Us</a></li>
+                    <li><a href="gospel-page.html">Gospel</a></li>
+                    <li><a href="ministries-page.html">Ministries</a></li>
+                    <li><a href="media-page.html">Media</a></li>
+                    <li><a href="helpful-links-page.html">Helpful Links</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+        <div class="mobile-nav-header">
+            <div class="logo-text">
+                <h1 style="color: var(--soft-white);">Colonial Hills Bible Chapel</h1>
+            </div>
+            <button class="mobile-nav-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about-us-page.html">About Us</a></li>
+                <li><a href="gospel-page.html">Gospel</a></li>
+                <li><a href="ministries-page.html">Ministries</a></li>
+                <li><a href="media-page.html">Media</a></li>
+                <li><a href="helpful-links-page.html">Helpful Links</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <h1>Media Library</h1>
+            <p>Messages, Teachings & Doctrinal Q&A</p>
+        </div>
+    </section>
+
+    <!-- Media Section -->
+    <section class="media-section">
+        <div class="container">
+            <!-- Filter Bar -->
+            <div class="filter-bar">
+                <div class="filter-controls">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Search by title, speaker, or topic...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-category="all">All Videos</button>
+                        <button class="filter-btn" data-category="sunday">Sunday Messages</button>
+                        <button class="filter-btn" data-category="conference">Conference</button>
+                        <button class="filter-btn" data-category="qa">Q&A</button>
+                        <button class="filter-btn" data-category="special">Special Topics</button>
+                    </div>
+                    <div class="sort-dropdown">
+                        <select id="sortSelect">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                            <option value="title">Title (A-Z)</option>
+                            <option value="speaker">Speaker</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Grid -->
+            <div class="video-grid" id="videoGrid">
+
+                <!-- Q&A Video -->
+                <div class="video-card" data-category="qa" data-video-id="fZZXVNt1gk0">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/fZZXVNt1gk0/hqdefault.jpg" alt="Give Me an Answer">
+                        <div class="video-duration">28:45</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Q&A</span>
+                        <h3 class="video-title">Give Me an Answer - All Religions Do Not Say the Same Thing</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Chapel Elder</span>
+                            <span><i class="fas fa-calendar"></i> Dec 8, 2024</span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- Light from the Word Playlist - Episodes 1-10 in Order -->
+                <div class="video-card" data-category="special" data-video-id="hQQyb1Yfp9Y">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/hQQyb1Yfp9Y/hqdefault.jpg" alt="COVID-19">
+                        <div class="video-duration">45:00</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 1: COVID-19</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 5 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="936qh3q4UCc">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/936qh3q4UCc/hqdefault.jpg" alt="Crypto Currency and Blockchain">
+                        <div class="video-duration">42:30</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 2: Crypto Currency and Blockchain</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 5 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="cHx5_HWTLPg">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/cHx5_HWTLPg/hqdefault.jpg" alt="Psalm 91 and God's Sovereignty">
+                        <div class="video-duration">48:15</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 3: Psalm 91 and God's Sovereignty in our Lives</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 5 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="NTjrPJfBEWo">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/NTjrPJfBEWo/hqdefault.jpg" alt="The Bema Seat Judgment">
+                        <div class="video-duration">44:20</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 4: The Bema Seat Judgment and Matthew 24:34</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 5 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="-Gv4oXg8VTA">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/-Gv4oXg8VTA/hqdefault.jpg" alt="The Rapture, Tribulation and Millennium">
+                        <div class="video-duration">46:30</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 5: The Rapture, Tribulation and Millennium, Is the USA in the Bible?</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 5 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="3DRHAoDNUZ4">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/3DRHAoDNUZ4/hqdefault.jpg" alt="Parable of the Ten Virgins">
+                        <div class="video-duration">43:45</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 6: Parable of the Ten Virgins and the Sheep and Goat Judgment</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 5 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="AAYmW9IwxZE">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/AAYmW9IwxZE/hqdefault.jpg" alt="The Two Witnesses">
+                        <div class="video-duration">47:10</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 7: The Two Witnesses, One World Government and Millennial Government, Matt. 27:51</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 5 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="QjMTljrOUcU">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/QjMTljrOUcU/hqdefault.jpg" alt="Occupants of the Millennium">
+                        <div class="video-duration">45:55</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 8: Occupants of the Millennium, The Kingdom of God and the Kingdom of Heaven</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 5 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="tP1yvmDHaCU">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/tP1yvmDHaCU/hqdefault.jpg" alt="The Kingdom is in You">
+                        <div class="video-duration">44:25</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 9: The Kingdom is in You and Two Types of Glorifications in Heaven</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 5 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="bFU6g3uvjqs">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/bFU6g3uvjqs/hqdefault.jpg" alt="Holy Spirit">
+                        <div class="video-duration">46:40</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 10: Holy Spirit (Joel 2:28), Do we eat in Heaven, The size of The New Jerusalem</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 5 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="JXpaDN31VQg">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/JXpaDN31VQg/hqdefault.jpg" alt="The Location of Pentecost and Joel 2">
+                        <div class="video-duration">44:30</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 11: The Location of Pentecost and Joel 2</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 5 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="y0-RWIHjzyw">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/y0-RWIHjzyw/hqdefault.jpg" alt="The White Throne Judgment and Hitler vs Gandhi">
+                        <div class="video-duration">47:15</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 12: The White Throne Judgment and Hitler vs Gandhi</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 5 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="no-tTDEDETk">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/no-tTDEDETk/hqdefault.jpg" alt="The Bema Judgment Seat of Christ">
+                        <div class="video-duration">45:20</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 13: The Bema (Judgment) Seat of Christ</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 5 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="Gl6TvrFA9NQ">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/Gl6TvrFA9NQ/hqdefault.jpg" alt="Hades, the Lake of Fire and Gog and Magog">
+                        <div class="video-duration">48:45</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 14: Hades, the Lake of Fire and Gog and Magog</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 5 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="Pb4uRieWiMM">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/Pb4uRieWiMM/hqdefault.jpg" alt="Psalm 83 and Gog and Magog">
+                        <div class="video-duration">46:10</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 15: Psalm 83 and Gog and Magog</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 5 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="bckZt0sj0Gs">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/bckZt0sj0Gs/hqdefault.jpg" alt="Army from the East and the Mystery Babylon">
+                        <div class="video-duration">44:55</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 16: Army from the East and the Mystery Babylon</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 5 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="VAzIY9ipf2M">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/VAzIY9ipf2M/hqdefault.jpg" alt="The Mystery Babylon">
+                        <div class="video-duration">43:30</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 17: The Mystery Babylon</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="88IbLFiVys0">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/88IbLFiVys0/hqdefault.jpg" alt="Lucifer Trust, Statue of Liberty and the Antichrist">
+                        <div class="video-duration">47:25</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 18: Lucifer Trust, Statue of Liberty and the Antichrist</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="8ghxZnZUIOM">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/8ghxZnZUIOM/hqdefault.jpg" alt="The Antichrist and the New Heaven and New Earth">
+                        <div class="video-duration">45:40</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 19: The Antichrist and the New Heaven and New Earth</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="AGN897G7TJc">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/AGN897G7TJc/hqdefault.jpg" alt="Dispensationalism Pt. 1">
+                        <div class="video-duration">46:15</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 20: Dispensationalism Pt. 1</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="LVcbSUnXBOI">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/LVcbSUnXBOI/hqdefault.jpg" alt="Dispensationalism in America Pt. 2">
+                        <div class="video-duration">44:20</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 21: Dispensationalism in America Pt. 2</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="iLiPgPQuZbo">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/iLiPgPQuZbo/hqdefault.jpg" alt="1 Pet. 3:19-20 Spirits in Prison (Second Chance)">
+                        <div class="video-duration">48:10</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 22: 1 Pet. 3:19-20 Spirits in Prison (Second Chance)</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="VeiaJ2vs03g">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/VeiaJ2vs03g/hqdefault.jpg" alt="The Nephilim Gen. 6 and Understanding Parables">
+                        <div class="video-duration">46:35</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 23: The Nephilim Gen. 6 and Understanding Parables</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="Rc-JryBuXkM">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/Rc-JryBuXkM/hqdefault.jpg" alt="Necromancy (1 Sam. 28:1-25) and the Parable of the Sower (Soils)">
+                        <div class="video-duration">45:50</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 24: Necromancy (1 Sam. 28:1-25) and the Parable of the Sower (Soils)</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="3lvaCL9Lqoc">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/3lvaCL9Lqoc/hqdefault.jpg" alt="Melchizedek and the Parable of the Soils">
+                        <div class="video-duration">47:30</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 25: Melchizedek and the Parable of the Soils</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="SIxCX6ThVgg">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/SIxCX6ThVgg/hqdefault.jpg" alt="Guardian Angels and Angel Hierarchy">
+                        <div class="video-duration">44:45</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 26: Guardian Angels and Angel Hierarchy</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="8xb3kDDYUbA">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/8xb3kDDYUbA/hqdefault.jpg" alt="What is a Tithe and The Growing Seed Mark 4:26-29">
+                        <div class="video-duration">46:20</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 27: What is a Tithe and The Growing Seed Mark 4:26-29</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="dy3dGWjIQHk">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/dy3dGWjIQHk/hqdefault.jpg" alt="The Prosperity Gospel and Kerala Christian Influence">
+                        <div class="video-duration">45:15</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 28: The Prosperity Gospel and Kerala Christian Influence</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="xMixUxqaRms">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/xMixUxqaRms/hqdefault.jpg" alt="The Prosperity Gospel and American Protestant Christianity">
+                        <div class="video-duration">47:40</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 29: The Prosperity Gospel and American Protestant Christianity</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="v6k0gqD1t78">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/v6k0gqD1t78/hqdefault.jpg" alt="The Christian and Politics">
+                        <div class="video-duration">48:25</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 30: The Christian and Politics</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="4McTYmdq2h0">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/4McTYmdq2h0/hqdefault.jpg" alt="Biblical and Social Justice">
+                        <div class="video-duration">46:15</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 31: Biblical and Social Justice</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="3jI2F0Ku5NY">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/3jI2F0Ku5NY/hqdefault.jpg" alt="Ultra Dispensation">
+                        <div class="video-duration">44:35</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 32: Ultra Dispensation</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="w84vXWgEb40">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/w84vXWgEb40/hqdefault.jpg" alt="The Origin of Nations and Dispensationalism">
+                        <div class="video-duration">47:20</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 33: The Origin of Nations and Dispensationalism</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="hfSOl1apCHY">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/hfSOl1apCHY/hqdefault.jpg" alt="The Origin of Races and Slavery; Progressive Dispensationalism">
+                        <div class="video-duration">48:40</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 34: The Origin of Races and Slavery; Progressive Dispensationalism</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="jfhAnLptbUI">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/jfhAnLptbUI/hqdefault.jpg" alt="Salvation during the Tribulation and the Heavenly Language">
+                        <div class="video-duration">45:50</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 35: Salvation during the Tribulation and the Heavenly Language</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="dojK_6vMGlg">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/dojK_6vMGlg/hqdefault.jpg" alt="The New Covenant">
+                        <div class="video-duration">46:30</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 36: The New Covenant</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="xv5atT1nbzA">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/xv5atT1nbzA/hqdefault.jpg" alt="Are Christians under the Law of Moses?">
+                        <div class="video-duration">47:45</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 37: Are Christians under the Law of Moses?</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="VrySl8jTAeA">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/VrySl8jTAeA/hqdefault.jpg" alt="The Ten Commandments and the Law of Grace">
+                        <div class="video-duration">44:55</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 38: The Ten Commandments and the Law of Grace</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="dq9b6mEsEOc">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/dq9b6mEsEOc/hqdefault.jpg" alt="Does the Sermon on the Mount Apply to Us Today?">
+                        <div class="video-duration">46:10</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 39: Does the Sermon on the Mount Apply to Us Today?</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="jAEbjHHgHgs">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/jAEbjHHgHgs/hqdefault.jpg" alt="Sermon on the Mount: Serving God and Money, Kingdom Living">
+                        <div class="video-duration">48:15</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 40: Sermon on the Mount: Serving God and Money, Kingdom Living</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="UXiHjmjuJwc">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/UXiHjmjuJwc/hqdefault.jpg" alt="Sermon on the Mount: The Eye of a Needle, Kingdom Living">
+                        <div class="video-duration">47:30</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 41: Sermon on the Mount: The Eye of a Needle, Kingdom Living</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="F0Je8HZZfSY">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/F0Je8HZZfSY/hqdefault.jpg" alt="Can Faith Move Mountains?, Kingdom Living and KJV Controversy">
+                        <div class="video-duration">46:45</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 42: Can Faith Move Mountains?, Kingdom Living and KJV Controversy</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="S_oZ3JaRGwE">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/S_oZ3JaRGwE/hqdefault.jpg" alt="Q&A Time: Millennium, Sin Against the Holy Spirit & The Final Resurrection">
+                        <div class="video-duration">48:20</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 43: Q&A Time: Millennium, Sin Against the Holy Spirit & The Final Resurrection</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="0Z1hmjnGXyk">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/0Z1hmjnGXyk/hqdefault.jpg" alt="Critical Race Theory and Cancel Culture, Kingdom Now">
+                        <div class="video-duration">45:55</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 44: Critical Race Theory and Cancel Culture, Kingdom Now</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="C86Qzmv2Sq8">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/C86Qzmv2Sq8/hqdefault.jpg" alt="Millennial Occupants and Children, CRT and Generational Curse">
+                        <div class="video-duration">47:40</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 45: Millennial Occupants and Children, CRT and Generational Curse</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="469nFP-ytic">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/469nFP-ytic/hqdefault.jpg" alt="Generational Curse and The Commercial / Religious Babylon">
+                        <div class="video-duration">46:25</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 46: Generational Curse and The Commercial / Religious Babylon</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="9EqhCVlfZ44">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/9EqhCVlfZ44/hqdefault.jpg" alt="Christians Snake Handling and is Transubstantiation Found in Scripture?">
+                        <div class="video-duration">44:50</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 47: Christians Snake Handling and is Transubstantiation Found in Scripture?</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="wBxPUJSvYtA">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/wBxPUJSvYtA/hqdefault.jpg" alt="Did Adam Have Two Wives, Miracles, Sacraments and Purgatory">
+                        <div class="video-duration">48:10</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 48: Did Adam Have Two Wives, Miracles, Sacraments and Purgatory</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="pdvkylc3JZw">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/pdvkylc3JZw/hqdefault.jpg" alt="The Canonicity of Scripture and the Roman Catholic Mass">
+                        <div class="video-duration">47:15</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 49: The Canonicity of Scripture and the Roman Catholic Mass</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="9xi-wewxqk4">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/9xi-wewxqk4/hqdefault.jpg" alt="The Apocryphal Writings and The True Catholic (Universal) Church">
+                        <div class="video-duration">46:35</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 50: The Apocryphal Writings and The True Catholic (Universal) Church</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="QdH84tYWGss">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/QdH84tYWGss/hqdefault.jpg" alt="Priesthood of Believers and Ordination and Laying on of Hands">
+                        <div class="video-duration">45:20</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 51: Priesthood of Believers and Ordination and Laying on of Hands</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="G1C1B_Lgf90">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/G1C1B_Lgf90/hqdefault.jpg" alt="Priesthood of Believers Pt. 2, Is Peter the Rock? & Is Creation Mythology">
+                        <div class="video-duration">47:55</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 52: Priesthood of Believers Pt. 2, Is Peter the Rock? & Is Creation Mythology</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="U8-Z8_6BsHI">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/U8-Z8_6BsHI/hqdefault.jpg" alt="Genealogy and Evolution">
+                        <div class="video-duration">44:30</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 53: Genealogy and Evolution</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="DxgL6DYOLuE">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/DxgL6DYOLuE/hqdefault.jpg" alt="Complementarianism and Egalitarianism (The Role of Women in the Church)">
+                        <div class="video-duration">46:40</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 54: Complementarianism and Egalitarianism (The Role of Women in the Church)</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="ix4smTS3kgY">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/ix4smTS3kgY/hqdefault.jpg" alt="Complementarianism and Egalitarianism Part II">
+                        <div class="video-duration">45:25</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 55: Complementarianism and Egalitarianism Part II</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="4fxUB4FV7cY">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/4fxUB4FV7cY/hqdefault.jpg" alt="LGBTQ: A Biblical Perspective">
+                        <div class="video-duration">47:10</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 56: LGBTQ: A Biblical Perspective</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-category="special" data-video-id="25cjogMAu5I">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/25cjogMAu5I/hqdefault.jpg" alt="LGBTQ: A Biblical Perspective Part Two">
+                        <div class="video-duration">48:35</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Light from the Word</span>
+                        <h3 class="video-title">Episode 57: LGBTQ: A Biblical Perspective Part Two</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Guest Speaker</span>
+                            <span><i class="fas fa-calendar"></i> 4 years ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Load More Button -->
+            <div class="load-more">
+                <button class="load-more-btn" id="loadMoreBtn">Load More Videos</button>
+            </div>
+
+            <!-- No Results Message (hidden by default) -->
+            <div class="no-results" id="noResults" style="display: none;">
+                <i class="fas fa-video-slash"></i>
+                <h3>No Videos Found</h3>
+                <p>Try adjusting your filters or search terms</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Modal -->
+    <div class="video-modal" id="videoModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Video Title</h3>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="video-container">
+                <iframe id="videoPlayer" src="" allowfullscreen></iframe>
+            </div>
+            <div class="video-details">
+                <h2 id="videoTitle">Video Title</h2>
+                <div class="meta" id="videoMeta">
+                    <span><i class="fas fa-user"></i> <span id="videoSpeaker">Speaker Name</span></span>
+                    <span><i class="fas fa-calendar"></i> <span id="videoDate">Date</span></span>
+                    <span><i class="fas fa-folder"></i> <span id="videoCategory">Category</span></span>
+                </div>
+                <div class="video-description" id="videoDescription">
+                    <p>Video description will appear here...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Colonial Hills Bible Chapel</h3>
+                    <p>A group of local Christians gathering solely in the name of the Lord Jesus Christ, holding fast to New Testament principles of worship and fellowship.</p>
+                    <p style="color: var(--warm-gold); font-style: italic; margin-top: 1rem;">
+                        "The Gift of God is Eternal Life Through Jesus Christ Our Lord"
+                    </p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="/about_us/">About Us</a></li>
+                        <li><a href="/#services">Service Times</a></li>
+                        <li><a href="/#events">Upcoming Events</a></li>
+                        <li><a href="/ministries/">Ministries</a></li>
+                        <li><a href="/gospel/">The Gospel</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Service Times</h3>
+                    <ul>
+                        <li>Sunday Worship: 9:30 AM</li>
+                        <li>Family Bible Hour: 11:00 AM</li>
+                        <li>Wednesday Bible Study: 7:00 PM</li>
+                        <li>Saturday Prayer Meeting: 9:00 AM</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Information</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span><a href="https://maps.google.com/?q=14643+Henry+Rd,+Houston,+TX+77060" target="_blank" style="color: inherit; text-decoration: none;">14643 Henry Rd<br>Houston, TX 77060</a></span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span><a href="tel:+1-281-931-1120" style="color: inherit; text-decoration: none;">+1-281-931-1120</a></span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span><a href="mailto:info@colonialhills-biblechapel.com" style="color: inherit; text-decoration: none;">info@colonialhills-biblechapel.com</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Colonial Hills Bible Chapel. All rights reserved. | Website designed with love for His glory.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Video data structure - Replace VIDEO_ID with actual YouTube video IDs
+        const videos = [
+            {
+                id: 'VIDEO_ID_1',
+                title: 'Making Disciples',
+                speaker: 'Ali Farhadi',
+                date: 'Dec 15, 2024',
+                category: 'conference',
+                duration: '45:32',
+                description: 'An in-depth teaching on the biblical mandate to make disciples of all nations.'
+            },
+            // Add more videos here as you upload them to YouTube
+        ];
+
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const videoCards = document.querySelectorAll('.video-card');
+        const searchInput = document.getElementById('searchInput');
+        const sortSelect = document.getElementById('sortSelect');
+        const noResults = document.getElementById('noResults');
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                filterButtons.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                resetVideoDisplay();
+            });
+        });
+
+        searchInput.addEventListener('input', function() {
+            resetVideoDisplay();
+        });
+        
+        sortSelect.addEventListener('change', sortVideos);
+
+        function sortVideos() {
+            const sortBy = sortSelect.value;
+            const grid = document.getElementById('videoGrid');
+            const cards = Array.from(videoCards);
+
+            cards.sort((a, b) => {
+                switch(sortBy) {
+                    case 'newest':
+                        // Sort by date (newest first) - episodes in reverse order
+                        const episodeA = parseInt(a.querySelector('.video-title').textContent.match(/Episode (\d+)/)?.[1] || 0);
+                        const episodeB = parseInt(b.querySelector('.video-title').textContent.match(/Episode (\d+)/)?.[1] || 0);
+                        return episodeB - episodeA;
+                    case 'oldest':
+                        // Sort by date (oldest first) - episodes in order
+                        const episodeA2 = parseInt(a.querySelector('.video-title').textContent.match(/Episode (\d+)/)?.[1] || 0);
+                        const episodeB2 = parseInt(b.querySelector('.video-title').textContent.match(/Episode (\d+)/)?.[1] || 0);
+                        return episodeA2 - episodeB2;
+                    case 'title':
+                        const titleA = a.querySelector('.video-title').textContent;
+                        const titleB = b.querySelector('.video-title').textContent;
+                        return titleA.localeCompare(titleB);
+                    case 'speaker':
+                        const speakerA = a.querySelector('.video-meta span:first-child').textContent;
+                        const speakerB = b.querySelector('.video-meta span:first-child').textContent;
+                        return speakerA.localeCompare(speakerB);
+                    default:
+                        return 0;
+                }
+            });
+
+            cards.forEach(card => grid.appendChild(card));
+            resetVideoDisplay();
+        }
+
+        // Video Modal
+        const modal = document.getElementById('videoModal');
+        const modalClose = document.getElementById('modalClose');
+        const videoPlayer = document.getElementById('videoPlayer');
+
+        videoCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const videoId = this.dataset.videoId;
+                const title = this.querySelector('.video-title').textContent;
+                const speaker = this.querySelector('.video-meta span:first-child').textContent;
+                const date = this.querySelector('.video-meta span:last-child').textContent;
+                const category = this.querySelector('.video-category').textContent;
+
+                // Set modal content
+                document.getElementById('modalTitle').textContent = title;
+                document.getElementById('videoTitle').textContent = title;
+                document.getElementById('videoSpeaker').textContent = speaker.replace(/^[^\s]+\s/, '');
+                document.getElementById('videoDate').textContent = date.replace(/^[^\s]+\s/, '');
+                document.getElementById('videoCategory').textContent = category;
+                
+                // Set video URL
+                videoPlayer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+                
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        modalClose.addEventListener('click', function() {
+            modal.classList.remove('active');
+            videoPlayer.src = '';
+            document.body.style.overflow = 'auto';
+        });
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                videoPlayer.src = '';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Load More functionality
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        let videosPerLoad = 9;
+        let currentlyShown = 0;
+
+        // Initialize - show first 9 videos
+        function initializeVideoDisplay() {
+            const allVideos = Array.from(videoCards);
+            
+            // Hide all videos initially
+            allVideos.forEach(card => card.classList.add('hidden'));
+            
+            // Show first batch based on current filter
+            showNextBatch();
+        }
+
+        function showNextBatch() {
+            const activeFilter = document.querySelector('.filter-btn.active').dataset.category;
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            const filteredVideos = Array.from(videoCards).filter(card => {
+                const category = card.dataset.category;
+                const title = card.querySelector('.video-title').textContent.toLowerCase();
+                const speaker = card.querySelector('.video-meta span:first-child').textContent.toLowerCase();
+                
+                const matchesFilter = activeFilter === 'all' || category === activeFilter;
+                const matchesSearch = title.includes(searchTerm) || speaker.includes(searchTerm);
+                
+                return matchesFilter && matchesSearch;
+            });
+
+            // Show next batch of videos
+            const startIndex = currentlyShown;
+            const endIndex = Math.min(startIndex + videosPerLoad, filteredVideos.length);
+            
+            for (let i = startIndex; i < endIndex; i++) {
+                filteredVideos[i].classList.remove('hidden');
+            }
+            
+            currentlyShown = endIndex;
+            
+            // Hide load more button if all videos are shown
+            if (currentlyShown >= filteredVideos.length) {
+                loadMoreBtn.style.display = 'none';
+            } else {
+                loadMoreBtn.style.display = 'block';
+            }
+            
+            // Show no results if no videos match
+            noResults.style.display = filteredVideos.length === 0 ? 'block' : 'none';
+        }
+
+        function resetVideoDisplay() {
+            // Hide all videos and reset counter
+            videoCards.forEach(card => card.classList.add('hidden'));
+            currentlyShown = 0;
+            showNextBatch();
+        }
+
+        loadMoreBtn.addEventListener('click', function() {
+            showNextBatch();
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.main-header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const mobileNavClose = document.querySelector('.mobile-nav-close');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        mobileNavClose.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close mobile nav when clicking on a link
+        document.querySelectorAll('.mobile-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Initialize the video display system
+        initializeVideoDisplay();
+    </script>
+</body>
+</html>
