@@ -540,11 +540,38 @@
 
         .events-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 2rem;
             justify-content: center;
             max-width: 1200px;
             margin: 0 auto;
+        }
+
+        /* Center the last item when it's alone on a row */
+        .events-grid .event-card:last-child:nth-child(5n) {
+            grid-column: 2 / 4;
+            justify-self: center;
+            max-width: 350px;
+        }
+
+        /* Responsive adjustments for different screen sizes */
+        @media (max-width: 1200px) {
+            .events-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .events-grid .event-card:last-child:nth-child(5n) {
+                grid-column: 2 / 3;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .events-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .events-grid .event-card:last-child:nth-child(5n) {
+                grid-column: 1 / 3;
+                justify-self: center;
+            }
         }
 
         .event-card {
@@ -1574,19 +1601,25 @@
                 <div class="announcement-icon">
                     <i class="fas fa-utensils"></i>
                 </div>
-                <span>Men's Breakfast & Prayer Meeting / Women's Bible Study - July 12th at 9:00 AM</span>
+                <span>Men's Breakfast & Prayer Meeting + Women's Bible Study - August 9th at 9:00 AM</span>
             </div>
             <div class="announcement-item">
                 <div class="announcement-icon">
                     <i class="fas fa-tools"></i>
                 </div>
-                <span>Workday at Morgan House - July 19th from 8:00 AM to 2:00 PM</span>
+                <span>Workday at Morgan House - August 16th from 8:00 AM to 2:00 PM</span>
             </div>
             <div class="announcement-item">
                 <div class="announcement-icon">
                     <i class="fas fa-users"></i>
                 </div>
-                <span>Hot Luncheon - July 27th at Noon - Come for fellowship and a delicious meal!</span>
+                <span>Hot Luncheon - August 31st at Noon - Come for fellowship and a delicious meal!</span>
+            </div>
+            <div class="announcement-item">
+                <div class="announcement-icon">
+                    <i class="fas fa-church"></i>
+                </div>
+                <span>105th Annual Houston Bible Conference - October 3-5, 2025 - Speakers: Rex Trogdon, Mark Swaim</span>
             </div>
             <div class="announcement-item">
                 <div class="announcement-icon">
@@ -1702,29 +1735,29 @@
                 <h2>Special Events & Announcements</h2>
             </div>
             <div class="events-grid">
-                <!-- July 12 – Men's Breakfast & Prayer Meeting / Women's Bible Study -->
+                <!-- August 9 – Men's Breakfast & Prayer Meeting + Women's Bible Study -->
                 <div class="event-card">
                     <div class="event-date-badge">
-                        <div class="event-month">JUL</div>
-                        <div class="event-day">12</div>
+                        <div class="event-month">AUG</div>
+                        <div class="event-day">9</div>
                     </div>
                     <div class="event-content">
-                        <h3 class="event-title">Men's Breakfast & Prayer Meeting<br>Women's Bible Study</h3>
+                        <h3 class="event-title">Men's Breakfast & Prayer Meeting<br>+ Women's Bible Study</h3>
                         <div class="event-time">
                             <i class="fas fa-clock"></i>
                             <span>9:00 AM</span>
                         </div>
                         <p class="event-description">
-                            Join us Saturday, July 12th at 9:00 AM for our Men's Breakfast and Prayer Meeting alongside the Women's Bible Study (available via WebEx).
+                            In-person gathering for men's breakfast and prayer meeting, plus virtual Bible Study for women (WebEx).
                         </p>
                     </div>
                 </div>
 
-                <!-- July 19 – Workday at Morgan House -->
+                <!-- August 16 – Workday at Morgan House -->
                 <div class="event-card">
                     <div class="event-date-badge">
-                        <div class="event-month">JUL</div>
-                        <div class="event-day">19</div>
+                        <div class="event-month">AUG</div>
+                        <div class="event-day">16</div>
                     </div>
                     <div class="event-content">
                         <h3 class="event-title">Workday at Morgan House</h3>
@@ -1733,25 +1766,43 @@
                             <span>8:00 AM – 2:00 PM</span>
                         </div>
                         <p class="event-description">
-                            Roll up your sleeves on Saturday, July 19th from 8:00 AM to 2:00 PM as we spruce up and maintain the Morgan House grounds.
+                            Roll up your sleeves on Saturday, August 16th from 8:00 AM to 2:00 PM for facility maintenance and cleanup.
                         </p>
                     </div>
                 </div>
 
-                <!-- July 27 – Hot Luncheon -->
+                <!-- August 31 – Hot Luncheon -->
                 <div class="event-card">
                     <div class="event-date-badge">
-                        <div class="event-month">JUL</div>
-                        <div class="event-day">27</div>
+                        <div class="event-month">AUG</div>
+                        <div class="event-day">31</div>
                     </div>
                     <div class="event-content">
                         <h3 class="event-title">Hot Luncheon</h3>
                         <div class="event-time">
                             <i class="fas fa-clock"></i>
-                            <span>Noon</span>
+                            <span>12:00 Noon</span>
                         </div>
                         <p class="event-description">
-                            Come together for fellowship and a delicious hot meal on Sunday, July 27th at noon.
+                            Fellowship lunch after morning services on Saturday, August 31st at noon.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- October 3-5 – 105th Annual Houston Bible Conference -->
+                <div class="event-card">
+                    <div class="event-date-badge">
+                        <div class="event-month">OCT</div>
+                        <div class="event-day">3-5</div>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">105th Annual Houston Bible Conference</h3>
+                        <div class="event-time">
+                            <i class="fas fa-clock"></i>
+                            <span>October 3–5, 2025</span>
+                        </div>
+                        <p class="event-description">
+                            Join us for the 105th Annual Houston Bible Conference at Colonial Hills Bible Chapel. Featured speakers: Rex Trogdon and Mark Swaim.
                         </p>
                     </div>
                 </div>
