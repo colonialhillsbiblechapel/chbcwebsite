@@ -6,7 +6,7 @@
     <title>Colonial Hills Bible Chapel - Welcome</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Lato:wght@300;400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Lato:wght@300;400;700&family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 
         :root {
             --deep-navy: #1a2332;
@@ -39,6 +39,384 @@
             font-family: 'Crimson Text', serif;
             font-weight: 600;
             line-height: 1.3;
+        }
+
+        /* Conference Modal Styles */
+        .conference-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .conference-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .conference-modal {
+            background: white;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 12px;
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .conference-modal-overlay.active .conference-modal {
+            transform: scale(1);
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid var(--deep-navy);
+            color: var(--deep-navy);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            font-size: 20px;
+        }
+
+        .modal-close-btn:hover {
+            background: var(--deep-navy);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .conference-header {
+            background: linear-gradient(135deg, var(--deep-navy) 0%, #2c3e50 100%);
+            color: white;
+            padding: 60px 40px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .conference-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(201, 169, 97, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            animation: floatPattern 20s linear infinite;
+        }
+
+        @keyframes floatPattern {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(30px, 30px); }
+        }
+
+        .conference-badge {
+            display: inline-block;
+            background: var(--warm-gold);
+            color: var(--deep-navy);
+            padding: 8px 24px;
+            font-family: 'Cinzel', serif;
+            font-size: 12px;
+            letter-spacing: 3px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            animation: shimmer 2s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .conference-title {
+            font-family: 'Cinzel', serif;
+            font-size: 42px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .conference-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            color: var(--warm-gold);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .conference-tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+            letter-spacing: 3px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .conference-body {
+            padding: 40px;
+        }
+
+        .conference-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .conference-dates-box {
+            background: linear-gradient(135deg, #f9f7f4 0%, #ede8e0 100%);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid var(--medium-gray);
+        }
+
+        .dates-icon {
+            font-size: 40px;
+            color: var(--warm-gold);
+            margin-bottom: 15px;
+        }
+
+        .dates-title {
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: var(--accent-burgundy);
+            margin-bottom: 10px;
+        }
+
+        .dates-content {
+            font-family: 'EB Garamond', serif;
+            font-size: 28px;
+            color: var(--deep-navy);
+            font-weight: 600;
+        }
+
+        .conference-location {
+            font-size: 18px;
+            color: var(--charcoal);
+            margin-top: 8px;
+        }
+
+        .conference-speakers {
+            background: var(--deep-navy);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .speakers-title {
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: var(--warm-gold);
+            margin-bottom: 20px;
+        }
+
+        .speaker-item {
+            margin-bottom: 15px;
+        }
+
+        .speaker-name {
+            font-family: 'EB Garamond', serif;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .speaker-location {
+            font-size: 14px;
+            color: var(--warm-gold);
+            font-style: italic;
+        }
+
+        .conference-schedule-preview {
+            background: white;
+            border: 2px solid var(--medium-gray);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .schedule-title {
+            font-family: 'Cinzel', serif;
+            font-size: 18px;
+            color: var(--deep-navy);
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .schedule-highlights {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .highlight-day {
+            padding: 15px;
+            background: var(--light-gray);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .highlight-day:hover {
+            background: var(--warm-gold);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(201, 169, 97, 0.3);
+        }
+
+        .highlight-date {
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .highlight-time {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .conference-cta {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--medium-gray);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .cta-btn {
+            padding: 12px 30px;
+            font-family: 'Crimson Text', serif;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-btn-primary {
+            background: var(--warm-gold);
+            color: white;
+            box-shadow: 0 4px 15px rgba(201, 169, 97, 0.3);
+        }
+
+        .cta-btn-primary:hover {
+            background: var(--accent-burgundy);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(125, 46, 46, 0.3);
+        }
+
+        .cta-btn-secondary {
+            background: transparent;
+            color: var(--deep-navy);
+            border: 2px solid var(--deep-navy);
+        }
+
+        .cta-btn-secondary:hover {
+            background: var(--deep-navy);
+            color: white;
+        }
+
+        .dont-show-again {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--charcoal);
+            cursor: pointer;
+        }
+
+        .dont-show-again input {
+            cursor: pointer;
+        }
+
+        /* Mobile responsiveness for modal */
+        @media (max-width: 768px) {
+            .conference-modal {
+                max-height: 100vh;
+                border-radius: 0;
+            }
+
+            .modal-close-btn {
+                top: 10px;
+                right: 10px;
+            }
+
+            .conference-header {
+                padding: 50px 20px 30px;
+            }
+
+            .conference-title {
+                font-size: 28px;
+            }
+
+            .conference-subtitle {
+                font-size: 18px;
+            }
+
+            .conference-body {
+                padding: 20px;
+            }
+
+            .conference-info-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .schedule-highlights {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .cta-btn {
+                width: 100%;
+            }
         }
 
         /* Header Styles */
@@ -1410,6 +1788,626 @@
             }
         }
 
+        /* Conference Schedule Section Styles */
+        .conference-schedule-section {
+            padding: 5rem 0;
+            background: linear-gradient(180deg, #ffffff 0%, #f9f7f4 50%, #ffffff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .conference-schedule-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--warm-gold) 0%, var(--accent-burgundy) 50%, var(--warm-gold) 100%);
+            animation: shimmerBar 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmerBar {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .conference-main-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .conference-badge-large {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--warm-gold) 0%, #b8924f 100%);
+            color: white;
+            padding: 10px 30px;
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            letter-spacing: 4px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(201, 169, 97, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .conference-badge-large::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%); }
+            100% { transform: translateX(100%) translateY(100%); }
+        }
+
+        .conference-main-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            color: var(--deep-navy);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .conference-dates-large {
+            font-size: 1.5rem;
+            color: var(--accent-burgundy);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .conference-dates-large i {
+            color: var(--warm-gold);
+        }
+
+        .conference-venue-info {
+            font-size: 1.1rem;
+            color: var(--charcoal);
+        }
+
+        /* Speakers Section */
+        .speakers-section {
+            margin-bottom: 4rem;
+        }
+
+        .speakers-section-title {
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--deep-navy);
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .speakers-section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--warm-gold);
+        }
+
+        .speakers-cards {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .speaker-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            min-width: 250px;
+        }
+
+        .speaker-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-color: var(--warm-gold);
+        }
+
+        .speaker-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--warm-gold), var(--accent-burgundy));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .speaker-card-name {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--deep-navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .speaker-card-location {
+            color: var(--warm-gold);
+            font-style: italic;
+        }
+
+        /* Detailed Schedule */
+        .detailed-schedule {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .day-schedule-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .day-schedule-card:hover {
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+        }
+
+        .day-header-detailed {
+            background: linear-gradient(135deg, var(--deep-navy) 0%, #2c3e50 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .day-name-large {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            letter-spacing: 3px;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .day-date-text {
+            font-size: 1rem;
+            color: var(--warm-gold);
+        }
+
+        .day-icon {
+            font-size: 2rem;
+            color: var(--warm-gold);
+        }
+
+        .schedule-content {
+            padding: 2rem;
+        }
+
+        .schedule-section-divider {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: var(--accent-burgundy);
+            text-align: center;
+            margin: 1.5rem 0;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .schedule-section-divider::before,
+        .schedule-section-divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 1px;
+            background: var(--medium-gray);
+        }
+
+        .schedule-section-divider::before {
+            left: 0;
+        }
+
+        .schedule-section-divider::after {
+            right: 0;
+        }
+
+        .schedule-item {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .schedule-item:hover {
+            background: var(--light-gray);
+            border-left-color: var(--warm-gold);
+            transform: translateX(5px);
+        }
+
+        .schedule-item.featured {
+            background: linear-gradient(90deg, rgba(201, 169, 97, 0.1) 0%, transparent 100%);
+            border-left-color: var(--warm-gold);
+        }
+
+        .schedule-item.meal {
+            background: linear-gradient(90deg, rgba(125, 46, 46, 0.1) 0%, transparent 100%);
+            border-left-color: var(--accent-burgundy);
+        }
+
+        .schedule-item.special {
+            background: linear-gradient(90deg, rgba(26, 35, 50, 0.1) 0%, transparent 100%);
+            border-left-color: var(--deep-navy);
+        }
+
+        .time-badge {
+            background: var(--deep-navy);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            white-space: nowrap;
+            align-self: flex-start;
+            min-width: 140px;
+            text-align: center;
+        }
+
+        .schedule-details h5 {
+            font-size: 1.1rem;
+            color: var(--deep-navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .schedule-details p {
+            color: var(--charcoal);
+            margin: 0;
+        }
+
+        .schedule-details strong {
+            color: var(--warm-gold);
+        }
+
+        .schedule-note {
+            font-size: 0.9rem;
+            font-style: italic;
+            color: var(--accent-burgundy);
+            margin-top: 0.5rem;
+        }
+
+        /* Location Split for Sunday */
+        .location-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .location-block {
+            padding: 1.5rem;
+            background: var(--light-gray);
+            border-radius: 8px;
+            border: 1px solid var(--medium-gray);
+        }
+
+        .location-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--accent-burgundy);
+            margin-bottom: 1rem;
+            text-align: center;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--warm-gold);
+        }
+
+        /* Conference Info Cards */
+        .conference-info-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .info-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .info-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--warm-gold), var(--accent-burgundy));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .info-card h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--deep-navy);
+            margin-bottom: 1rem;
+        }
+
+        .info-card p {
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+
+        /* Bible Verse */
+        .conference-verse {
+            text-align: center;
+            padding: 3rem;
+            background: linear-gradient(135deg, var(--light-gray), white);
+            border-radius: 10px;
+            margin-top: 3rem;
+        }
+
+        .verse-text {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--deep-navy);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .verse-ref {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: var(--warm-gold);
+            letter-spacing: 2px;
+        }
+
+        /* Conference Schedule Responsive Design */
+        @media (max-width: 1024px) {
+            .conference-main-title {
+                font-size: 2.5rem;
+            }
+
+            .location-split {
+                grid-template-columns: 1fr;
+            }
+
+            .conference-info-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .conference-schedule-section {
+                padding: 3rem 0;
+            }
+
+            .conference-main-title {
+                font-size: 2rem;
+            }
+
+            .conference-dates-large {
+                font-size: 1.2rem;
+            }
+
+            .speakers-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .speaker-card {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .day-header-detailed {
+                padding: 1rem 1.5rem;
+            }
+
+            .day-name-large {
+                font-size: 1.2rem;
+            }
+
+            .schedule-content {
+                padding: 1.5rem;
+            }
+
+            .schedule-item {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .time-badge {
+                align-self: stretch;
+            }
+
+            .conference-info-cards {
+                gap: 1.5rem;
+            }
+
+            .verse-text {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .conference-main-header {
+                margin-bottom: 2rem;
+            }
+
+            .conference-badge-large {
+                font-size: 12px;
+                padding: 8px 20px;
+                letter-spacing: 2px;
+            }
+
+            .conference-main-title {
+                font-size: 1.5rem;
+                letter-spacing: 1px;
+            }
+
+            .conference-dates-large {
+                font-size: 1rem;
+            }
+
+            .conference-venue-info {
+                font-size: 0.9rem;
+            }
+
+            .speakers-section-title {
+                font-size: 1.5rem;
+            }
+
+            .speaker-card {
+                padding: 1.5rem;
+            }
+
+            .speaker-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+            }
+
+            .speaker-card-name {
+                font-size: 1.2rem;
+            }
+
+            .day-header-detailed {
+                padding: 1rem;
+            }
+
+            .day-name-large {
+                font-size: 1rem;
+                letter-spacing: 2px;
+            }
+
+            .day-date-text {
+                font-size: 0.9rem;
+            }
+
+            .day-icon {
+                font-size: 1.5rem;
+            }
+
+            .schedule-content {
+                padding: 1rem;
+            }
+
+            .schedule-section-divider {
+                font-size: 1rem;
+                margin: 1rem 0;
+            }
+
+            .schedule-item {
+                padding: 0.8rem;
+            }
+
+            .time-badge {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+                min-width: auto;
+            }
+
+            .schedule-details h5 {
+                font-size: 1rem;
+            }
+
+            .schedule-details p {
+                font-size: 0.9rem;
+            }
+
+            .location-title {
+                font-size: 1rem;
+            }
+
+            .location-block {
+                padding: 1rem;
+            }
+
+            .info-card {
+                padding: 1.5rem;
+            }
+
+            .info-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+
+            .info-card h4 {
+                font-size: 1.1rem;
+            }
+
+            .info-card p {
+                font-size: 0.9rem;
+            }
+
+            .conference-verse {
+                padding: 2rem 1.5rem;
+            }
+
+            .verse-text {
+                font-size: 1rem;
+            }
+
+            .verse-ref {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .conference-main-title {
+                font-size: 1.3rem;
+            }
+
+            .conference-badge-large {
+                font-size: 10px;
+                letter-spacing: 1px;
+            }
+
+            .speakers-section-title {
+                font-size: 1.3rem;
+            }
+
+            .schedule-details h5 {
+                font-size: 0.95rem;
+            }
+
+            .schedule-details p {
+                font-size: 0.85rem;
+            }
+        }
+
         /* Mobile Menu Button */
         .mobile-menu-btn {
             display: none;
@@ -1486,6 +2484,76 @@
     </style>
 </head>
 <body>
+    <!-- Conference Modal Popup -->
+    <div class="conference-modal-overlay" id="conferenceModal">
+        <div class="conference-modal">
+            <button class="modal-close-btn" onclick="closeConferenceModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="conference-header">
+                <div class="conference-badge">105TH ANNUAL</div>
+                <h1 class="conference-title">HOUSTON BIBLE CONFERENCE</h1>
+                <p class="conference-subtitle">Colonial Hills Bible Chapel</p>
+                <p class="conference-tagline">FELLOWSHIP · TEACHING · WORSHIP</p>
+            </div>
+            
+            <div class="conference-body">
+                <div class="conference-info-grid">
+                    <div class="conference-dates-box">
+                        <div class="dates-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3 class="dates-title">CONFERENCE DATES</h3>
+                        <div class="dates-content">October 3-5, 2025</div>
+                        <div class="conference-location">Houston, Texas</div>
+                    </div>
+                    
+                    <div class="conference-speakers">
+                        <h3 class="speakers-title">FEATURED SPEAKERS</h3>
+                        <div class="speaker-item">
+                            <div class="speaker-name">Mark Swaim</div>
+                            <div class="speaker-location">Lancaster, Pennsylvania</div>
+                        </div>
+                        <div class="speaker-item">
+                            <div class="speaker-name">Rex Trogdon</div>
+                            <div class="speaker-location">Charlotte, North Carolina</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="conference-schedule-preview">
+                    <h3 class="schedule-title">CONFERENCE SCHEDULE</h3>
+                    <div class="schedule-highlights">
+                        <div class="highlight-day">
+                            <div class="highlight-date">FRIDAY</div>
+                            <div class="highlight-time">October 3<br>7:00 PM Start</div>
+                        </div>
+                        <div class="highlight-day">
+                            <div class="highlight-date">SATURDAY</div>
+                            <div class="highlight-time">October 4<br>10:00 AM - 8:00 PM</div>
+                        </div>
+                        <div class="highlight-day">
+                            <div class="highlight-date">SUNDAY</div>
+                            <div class="highlight-time">October 5<br>9:30 AM - 3:30 PM</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="conference-cta">
+                    <div class="cta-buttons">
+                        <a href="#conference-schedule" class="cta-btn cta-btn-primary" onclick="closeConferenceModal()">View Full Schedule</a>
+                        <button class="cta-btn cta-btn-secondary" onclick="closeConferenceModal()">Visit Later</button>
+                    </div>
+                    <label class="dont-show-again">
+                        <input type="checkbox" id="dontShowAgain">
+                        Don't show this again today
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Header Top Bar -->
     <div class="header-top">
         <div class="header-top-content">
@@ -1779,6 +2847,284 @@
         </div>
     </section>
 
+    <!-- Conference Schedule Section -->
+    <section class="conference-schedule-section" id="conference-schedule">
+        <div class="container">
+            <!-- Conference Header -->
+            <div class="conference-main-header">
+                <div class="conference-badge-large">105TH ANNUAL</div>
+                <h2 class="conference-main-title">Houston Bible Conference</h2>
+                <div class="conference-dates-large">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>October 3-5, 2025</span>
+                </div>
+                <div class="conference-venue-info">
+                    <p>Colonial Hills Bible Chapel • 14643 Henry Road, Houston, TX 77060</p>
+                </div>
+            </div>
+
+            <!-- Featured Speakers -->
+            <div class="speakers-section">
+                <h3 class="speakers-section-title">Featured Speakers</h3>
+                <div class="speakers-cards">
+                    <div class="speaker-card">
+                        <div class="speaker-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h4 class="speaker-card-name">Mark Swaim</h4>
+                        <p class="speaker-card-location">Lancaster, Pennsylvania</p>
+                    </div>
+                    <div class="speaker-card">
+                        <div class="speaker-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h4 class="speaker-card-name">Rex Trogdon</h4>
+                        <p class="speaker-card-location">Charlotte, North Carolina</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Schedule -->
+            <div class="detailed-schedule">
+                <!-- Friday Schedule -->
+                <div class="day-schedule-card">
+                    <div class="day-header-detailed">
+                        <div class="day-date">
+                            <span class="day-name-large">FRIDAY</span>
+                            <span class="day-date-text">October 3, 2025</span>
+                        </div>
+                        <div class="day-icon">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                    </div>
+                    <div class="schedule-content">
+                        <div class="schedule-item">
+                            <div class="time-badge">7:00 - 7:15 PM</div>
+                            <div class="schedule-details">
+                                <h5>Opening & Worship</h5>
+                                <p>Singing & Announcements</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="time-badge">7:15 - 7:30 PM</div>
+                            <div class="schedule-details">
+                                <h5>Corporate Prayer</h5>
+                                <p>Coming together in prayer</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item featured">
+                            <div class="time-badge">7:30 - 8:15 PM</div>
+                            <div class="schedule-details">
+                                <h5>Ministry Session</h5>
+                                <p><strong>Speaker:</strong> Rex Trogdon</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="time-badge">8:15 PM</div>
+                            <div class="schedule-details">
+                                <h5>Fellowship Time</h5>
+                                <p>Refreshments & Fellowship</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Saturday Schedule -->
+                <div class="day-schedule-card">
+                    <div class="day-header-detailed">
+                        <div class="day-date">
+                            <span class="day-name-large">SATURDAY</span>
+                            <span class="day-date-text">October 4, 2025</span>
+                        </div>
+                        <div class="day-icon">
+                            <i class="fas fa-sun"></i>
+                        </div>
+                    </div>
+                    <div class="schedule-content">
+                        <div class="schedule-section-divider">Morning Sessions</div>
+                        <div class="schedule-item">
+                            <div class="time-badge">10:00 - 10:30 AM</div>
+                            <div class="schedule-details">
+                                <h5>Morning Worship</h5>
+                                <p>Singing & Prayer</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item featured">
+                            <div class="time-badge">10:30 - 11:15 AM</div>
+                            <div class="schedule-details">
+                                <h5>First Ministry Session</h5>
+                                <p><strong>Speaker:</strong> Mark Swaim</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item featured">
+                            <div class="time-badge">11:15 AM - 12:00 PM</div>
+                            <div class="schedule-details">
+                                <h5>Second Ministry Session</h5>
+                                <p><strong>Speaker:</strong> Rex Trogdon</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item meal">
+                            <div class="time-badge">12:15 PM</div>
+                            <div class="schedule-details">
+                                <h5><i class="fas fa-utensils"></i> Lunch Break</h5>
+                                <p>Fellowship meal provided</p>
+                            </div>
+                        </div>
+
+                        <div class="schedule-section-divider">Afternoon Sessions</div>
+                        <div class="schedule-item">
+                            <div class="time-badge">2:00 - 2:15 PM</div>
+                            <div class="schedule-details">
+                                <h5>Afternoon Worship</h5>
+                                <p>Singing & Prayer</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item featured">
+                            <div class="time-badge">2:15 - 3:00 PM</div>
+                            <div class="schedule-details">
+                                <h5>Third Ministry Session</h5>
+                                <p><strong>Speaker:</strong> Mark Swaim</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item featured">
+                            <div class="time-badge">3:00 - 3:45 PM</div>
+                            <div class="schedule-details">
+                                <h5>Fourth Ministry Session</h5>
+                                <p><strong>Speaker:</strong> Rex Trogdon</p>
+                            </div>
+                        </div>
+
+                        <div class="schedule-section-divider">Evening Program</div>
+                        <div class="schedule-item special">
+                            <div class="time-badge">5:00 - 8:00 PM</div>
+                            <div class="schedule-details">
+                                <h5><i class="fas fa-users"></i> Young People's Meeting</h5>
+                                <p><strong>Speaker:</strong> Mark Swaim</p>
+                                <p class="schedule-note">Special session for youth and young adults</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sunday Schedule -->
+                <div class="day-schedule-card">
+                    <div class="day-header-detailed">
+                        <div class="day-date">
+                            <span class="day-name-large">SUNDAY</span>
+                            <span class="day-date-text">October 5, 2025</span>
+                        </div>
+                        <div class="day-icon">
+                            <i class="fas fa-cross"></i>
+                        </div>
+                    </div>
+                    <div class="schedule-content">
+                        <div class="schedule-section-divider">Morning Services - Two Locations</div>
+
+                        <div class="location-split">
+                            <div class="location-block">
+                                <h5 class="location-title">Colonial Hills Bible Chapel</h5>
+                                <div class="schedule-item">
+                                    <div class="time-badge">9:30 - 10:30 AM</div>
+                                    <div class="schedule-details">
+                                        <h5>Breaking of Bread</h5>
+                                        <p>Communion service</p>
+                                    </div>
+                                </div>
+                                <div class="schedule-item featured">
+                                    <div class="time-badge">11:00 AM - 12:00 PM</div>
+                                    <div class="schedule-details">
+                                        <h5>Sunday School & Ministry</h5>
+                                        <p><strong>Speaker:</strong> Mark Swaim</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="location-block">
+                                <h5 class="location-title">Ebenezer Brethren Assembly</h5>
+                                <div class="schedule-item">
+                                    <div class="time-badge">9:30 - 10:30 AM</div>
+                                    <div class="schedule-details">
+                                        <h5>Breaking of Bread</h5>
+                                        <p>Communion service</p>
+                                    </div>
+                                </div>
+                                <div class="schedule-item featured">
+                                    <div class="time-badge">11:00 AM - 12:00 PM</div>
+                                    <div class="schedule-details">
+                                        <h5>Sunday School & Ministry</h5>
+                                        <p><strong>Speaker:</strong> Rex Trogdon</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item meal">
+                            <div class="time-badge">12:15 PM</div>
+                            <div class="schedule-details">
+                                <h5><i class="fas fa-utensils"></i> Fellowship Lunch</h5>
+                                <p>Served at Colonial Hills Bible Chapel</p>
+                            </div>
+                        </div>
+
+                        <div class="schedule-section-divider">Afternoon Sessions at Colonial Hills</div>
+                        <div class="schedule-item">
+                            <div class="time-badge">1:45 - 2:00 PM</div>
+                            <div class="schedule-details">
+                                <h5>Afternoon Worship</h5>
+                                <p>Singing & Prayer</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item featured">
+                            <div class="time-badge">2:00 - 2:45 PM</div>
+                            <div class="schedule-details">
+                                <h5>Closing Ministry Session 1</h5>
+                                <p><strong>Speaker:</strong> Rex Trogdon</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item featured">
+                            <div class="time-badge">2:45 - 3:30 PM</div>
+                            <div class="schedule-details">
+                                <h5>Closing Ministry Session 2</h5>
+                                <p><strong>Speaker:</strong> Mark Swaim</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Important Information -->
+            <div class="conference-info-cards">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-baby"></i>
+                    </div>
+                    <h4>Childcare</h4>
+                    <p>Nursery and classrooms available for parents with young children during all sessions.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-parking"></i>
+                    </div>
+                    <h4>Parking</h4>
+                    <p>Free parking available on site. Overflow parking available at adjacent lot.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <h4>Information</h4>
+                    <p>For more details, contact:<br>Mathew Thomas: 281-682-4309<br>Paul Moffitt: 281-373-3919</p>
+                </div>
+            </div>
+
+            <!-- Bible Verse -->
+            <div class="conference-verse">
+                <p class="verse-text">"And they continued steadfastly in the apostles' doctrine and fellowship, and in breaking of bread, and in prayers."</p>
+                <p class="verse-ref">— Acts 2:42</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Ministry Focus Section -->
     <section class="ministry-section" id="ministries">
         <div class="container">
@@ -1883,6 +3229,42 @@
     </footer>
 
     <script>
+        // Conference Modal Management
+        function showConferenceModal() {
+            const modal = document.getElementById('conferenceModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeConferenceModal() {
+            const modal = document.getElementById('conferenceModal');
+            const dontShowAgain = document.getElementById('dontShowAgain');
+            
+            if (dontShowAgain && dontShowAgain.checked) {
+                // Store in sessionStorage to not show again today
+                sessionStorage.setItem('conferenceModalHidden', 'true');
+            }
+            
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Check if modal should be shown on page load
+        window.addEventListener('load', function() {
+            const modalHidden = sessionStorage.getItem('conferenceModalHidden');
+            if (!modalHidden) {
+                // Show modal after a short delay for better UX
+                setTimeout(showConferenceModal, 1500);
+            }
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('conferenceModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeConferenceModal();
+            }
+        });
+
         // Background Image Slider
         const slides = document.querySelectorAll('.hero-slide');
         let currentSlide = 0;
