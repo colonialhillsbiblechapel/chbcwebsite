@@ -1,0 +1,2631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statement of Doctrines & Practices - Colonial Hills Bible Chapel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;700;900&display=swap');
+
+        :root {
+            --deep-navy: #1a2332;
+            --warm-gold: #c9a961;
+            --soft-white: #fefefe;
+            --light-gray: #f8f7f5;
+            --medium-gray: #e5e3df;
+            --charcoal: #333333;
+            --accent-burgundy: #7d2e2e;
+            --purple-accent: #6B46C1;
+            --shadow-light: 0 2px 15px rgba(0,0,0,0.08);
+            --shadow-medium: 0 5px 25px rgba(0,0,0,0.12);
+            --shadow-heavy: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(to bottom, var(--soft-white), #faf9f7);
+            color: var(--charcoal);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--warm-gold), #e8c574);
+            z-index: 10000;
+            transition: width 0.1s;
+            box-shadow: 0 2px 10px rgba(201, 169, 97, 0.4);
+        }
+
+        /* Header Styles */
+        .header-top {
+            background: var(--deep-navy);
+            color: var(--soft-white);
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .header-top-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-contact {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .header-contact span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .header-contact i {
+            color: var(--warm-gold);
+        }
+
+        .main-header {
+            background: var(--soft-white);
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .main-header.scrolled {
+            box-shadow: var(--shadow-medium);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--deep-navy);
+        }
+
+        .church-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--warm-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--soft-white);
+        }
+
+        .logo-text h1 {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .logo-text p {
+            font-size: 0.85rem;
+            color: var(--warm-gold);
+            margin: 0;
+            font-style: italic;
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: var(--deep-navy);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s ease;
+            padding: 0.5rem 0;
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--warm-gold);
+            transition: width 0.3s ease;
+        }
+
+        .main-nav a:hover {
+            color: var(--warm-gold);
+        }
+
+        .main-nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--deep-navy) 0%, #2a3342 100%);
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 60%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(201, 169, 97, 0.1) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: var(--soft-white);
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            line-height: 1.2;
+            word-wrap: break-word;
+            hyphens: auto;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--warm-gold);
+            font-style: italic;
+            margin-bottom: 2rem;
+            font-family: 'Crimson Text', serif;
+        }
+
+        .hero-verse {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem 2rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            max-width: 700px;
+            margin: 2rem auto 0;
+            border: 1px solid rgba(201, 169, 97, 0.3);
+        }
+
+        .hero-verse p {
+            color: var(--soft-white);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin: 0;
+            font-style: italic;
+        }
+
+        .hero-verse .verse-ref {
+            color: var(--warm-gold);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-top: 0.8rem;
+            display: block;
+            text-align: right;
+        }
+
+        /* Introduction Section */
+        .intro-section {
+            position: relative;
+            margin-top: -2rem;
+        }
+
+        .intro-wrap {
+            max-width: 1400px;
+            margin: -3rem auto 2rem;
+            padding: 0 2rem;
+        }
+
+        .intro-surface {
+            position: relative;
+            background: radial-gradient(1200px 300px at 20% -10%, rgba(201,169,97,0.12), transparent),
+                        linear-gradient(180deg, var(--soft-white), #ffffff);
+            border: 1px solid var(--medium-gray);
+            border-radius: 18px;
+            box-shadow: var(--shadow-medium);
+            overflow: hidden;
+        }
+
+        .intro-surface::before {
+            content: '';
+            position: absolute;
+            right: -80px;
+            top: -80px;
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, rgba(201,169,97,0.25) 0%, rgba(201,169,97,0.05) 55%, transparent 60%);
+            filter: blur(1px);
+        }
+
+        .intro-header {
+            background: linear-gradient(135deg, rgba(201,169,97,0.18), rgba(201,169,97,0.08));
+            padding: 1.1rem 1.5rem 1rem;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+
+        .intro-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--deep-navy);
+            letter-spacing: 0.3px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .intro-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--warm-gold), #e8c574);
+            border-radius: 2px;
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 2fr 1.1fr;
+            gap: 1.5rem;
+            padding: 1.75rem;
+        }
+
+        .intro-card {
+            background: linear-gradient(135deg, #f8f7f5, #fefefe);
+            border: 1px solid var(--medium-gray);
+            border-radius: 14px;
+            padding: 1.25rem 1.4rem;
+            box-shadow: var(--shadow-light);
+        }
+
+        .intro-text p {
+            font-size: 1.08rem;
+            color: #3a3a3a;
+            margin-bottom: 1rem;
+        }
+
+        .intro-quote {
+            background: rgba(201,169,97,0.08);
+            border-left: 4px solid var(--warm-gold);
+            padding: 1rem 1.2rem;
+            border-radius: 8px;
+            font-style: italic;
+            color: #2f2f2f;
+        }
+
+        .intro-topics h3 {
+            font-family: 'Crimson Text', serif;
+            color: var(--deep-navy);
+            margin-bottom: 0.25rem;
+            font-size: 1.25rem;
+            letter-spacing: 0.2px;
+        }
+
+        .intro-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0.5rem 0.6rem;
+            margin-top: 0.4rem;
+        }
+
+        .intro-list li {
+            background: #ffffff;
+            border: 1px solid var(--medium-gray);
+            border-radius: 999px;
+            padding: 0.45rem 0.65rem 0.45rem 0.45rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: var(--shadow-light);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .intro-num {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--warm-gold), #e8c574);
+            color: var(--soft-white);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+            box-shadow: 0 1px 4px rgba(201,169,97,0.35);
+        }
+
+        @media (max-width: 1024px) {
+            .intro-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 1.25rem;
+            }
+        }
+
+        /* Main Content Container */
+        .content-wrapper {
+            display: flex;
+            max-width: 1400px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+            gap: 3rem;
+            position: relative;
+        }
+
+        /* Floating Index */
+        .floating-index {
+            position: sticky;
+            top: 100px;
+            width: 240px;
+            height: fit-content;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+            background: var(--soft-white);
+            border-radius: 15px;
+            box-shadow: var(--shadow-medium);
+            padding: 1.2rem 1rem;
+            border: 1px solid var(--medium-gray);
+        }
+
+        .index-header {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.1rem;
+            color: var(--deep-navy);
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 2px solid var(--warm-gold);
+        }
+
+        .index-list {
+            list-style: none;
+        }
+
+        .index-item {
+            margin-bottom: 0.3rem;
+        }
+
+        .index-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--charcoal);
+            padding: 0.4rem 0.7rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 0.85rem;
+        }
+
+        .index-link:hover {
+            background: linear-gradient(135deg, rgba(201, 169, 97, 0.1), rgba(201, 169, 97, 0.05));
+            color: var(--deep-navy);
+            transform: translateX(5px);
+        }
+
+        .index-link.active {
+            background: linear-gradient(135deg, var(--warm-gold), #e8c574);
+            color: var(--soft-white);
+            font-weight: 600;
+            box-shadow: 0 3px 10px rgba(201, 169, 97, 0.3);
+        }
+
+        .index-number {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background: var(--light-gray);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 20px;
+            font-size: 0.7rem;
+            margin-right: 0.6rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .index-link.active .index-number {
+            background: var(--soft-white);
+            color: var(--warm-gold);
+        }
+
+        /* Custom scrollbar for floating index */
+        .floating-index::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .floating-index::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .floating-index::-webkit-scrollbar-thumb {
+            background: var(--warm-gold);
+            border-radius: 4px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            background: var(--soft-white);
+            border-radius: 15px;
+            box-shadow: var(--shadow-light);
+            padding: 3rem;
+            min-height: 100vh;
+        }
+
+        /* Shared container to match other pages */
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Content Sections */
+        .doctrine-section {
+            margin-bottom: 4rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid var(--medium-gray);
+            scroll-margin-top: 120px;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-number {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--warm-gold), #e8c574);
+            color: var(--soft-white);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--deep-navy);
+            margin-bottom: 2rem;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 40px;
+            background: var(--warm-gold);
+            border-radius: 2px;
+        }
+
+        .section-intro {
+            background: linear-gradient(135deg, #f8f7f5, #fefefe);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--warm-gold);
+        }
+
+        .section-intro p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #555;
+            margin: 0;
+        }
+
+        /* Rich Content Styling */
+        .rich-content {
+            display: grid;
+            gap: 1.25rem;
+        }
+
+        .prose p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: #3a3a3a;
+            margin-bottom: 1rem;
+            text-align: justify;
+            text-justify: inter-word;
+            hyphens: auto;
+        }
+
+        .subsection-title {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.4rem;
+            color: var(--deep-navy);
+            margin: 0.5rem 0 0.5rem;
+            padding-left: 12px;
+            position: relative;
+        }
+
+        .subsection-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 22px;
+            background: var(--warm-gold);
+            border-radius: 2px;
+        }
+
+        .note-card {
+            background: linear-gradient(135deg, #ffffff, #fbfbfb);
+            border: 1px solid var(--medium-gray);
+            border-radius: 12px;
+            padding: 1.1rem 1.25rem;
+            box-shadow: var(--shadow-light);
+        }
+
+        .overline {
+            text-transform: uppercase;
+            letter-spacing: 1.6px;
+            color: #6b7280;
+            font-weight: 700;
+            font-size: 0.75rem;
+        }
+
+        .content-placeholder {
+            padding: 3rem;
+            background: linear-gradient(135deg, rgba(201, 169, 97, 0.05), rgba(201, 169, 97, 0.02));
+            border-radius: 10px;
+            text-align: center;
+            border: 2px dashed var(--warm-gold);
+        }
+
+        .content-placeholder i {
+            font-size: 3rem;
+            color: var(--warm-gold);
+            margin-bottom: 1rem;
+        }
+
+        .content-placeholder p {
+            color: #888;
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--warm-gold), #e8c574);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--soft-white);
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-medium);
+            z-index: 999;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--deep-navy);
+            color: var(--soft-white);
+            padding: 3rem 0 1rem;
+            margin-top: 5rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-column h3 {
+            color: var(--warm-gold);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-column p {
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            padding: 0.3rem 0;
+        }
+
+        .footer-column ul li a {
+            color: var(--soft-white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--warm-gold);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-item i {
+            color: var(--warm-gold);
+            width: 20px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 0.8rem;
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--deep-navy);
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--deep-navy);
+            z-index: 2000;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .mobile-nav.active {
+            display: block;
+        }
+
+        .mobile-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .mobile-nav-close {
+            background: none;
+            border: none;
+            color: var(--soft-white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+        }
+
+        .mobile-nav ul li {
+            margin-bottom: 1rem;
+        }
+
+        .mobile-nav ul li a {
+            color: var(--soft-white);
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 1rem 0;
+            display: block;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav ul li a:hover {
+            color: var(--warm-gold);
+        }
+
+        /* Tablet & Mobile Responsive Styles */
+        @media (max-width: 1200px) {
+            .nav-container {
+                padding: 1.2rem 1.5rem;
+            }
+
+            .main-nav ul {
+                gap: 1.5rem;
+            }
+
+            .main-nav a {
+                font-size: 0.9rem;
+            }
+
+            .content-wrapper {
+                gap: 2rem;
+            }
+
+            .floating-index {
+                width: 220px;
+                padding: 1rem 0.8rem;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .floating-index {
+                display: none;
+            }
+
+            .content-wrapper {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .main-content {
+                padding: 2rem;
+            }
+
+            .hero-section {
+                height: 350px;
+            }
+
+            .hero-title {
+                font-size: 2.8rem;
+                line-height: 1.15;
+                padding: 0 1rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero-verse {
+                display: none;
+            }
+
+            .intro-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 1.5rem;
+            }
+
+            .intro-header {
+                padding: 0.9rem 1.2rem 0.8rem;
+            }
+
+            .intro-title {
+                font-size: 1.4rem;
+            }
+
+            .intro-list {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            }
+
+            .doctrine-section {
+                padding: 2.5rem 0;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .subsection-title {
+                font-size: 1.4rem;
+            }
+
+            /* Footer responsive - match other pages */
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-top {
+                display: none;
+            }
+
+            .main-nav {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-container {
+                padding: 0.8rem 1rem;
+            }
+
+            .logo-text h1 {
+                font-size: 1.1rem;
+            }
+
+            .logo-text p {
+                font-size: 0.7rem;
+            }
+
+            .church-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+
+            .hero-section {
+                height: 300px;
+            }
+
+            .hero-title {
+                font-size: 1.65rem;
+                line-height: 1.3;
+                padding: 0 1rem;
+                max-width: 100%;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+
+            .hero-verse {
+                display: none;
+            }
+
+            .intro-wrap {
+                padding: 0 1rem;
+                margin: -2rem auto 1.5rem;
+            }
+
+            .intro-surface {
+                border-radius: 12px;
+            }
+
+            .intro-grid {
+                padding: 1.2rem;
+            }
+
+            .intro-header {
+                padding: 0.8rem 1rem 0.7rem;
+            }
+
+            .intro-title {
+                font-size: 1.2rem;
+            }
+
+            .intro-card {
+                padding: 1rem 1.1rem;
+                border-radius: 10px;
+            }
+
+            .intro-text p {
+                font-size: 0.95rem;
+            }
+
+            .intro-quote {
+                padding: 0.8rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .intro-list {
+                grid-template-columns: 1fr;
+                gap: 0.3rem;
+            }
+
+            .intro-list li {
+                padding: 0.4rem 0.6rem 0.4rem 0.5rem;
+                font-size: 0.9rem;
+            }
+
+            .intro-num {
+                width: 22px;
+                height: 22px;
+                font-size: 0.75rem;
+            }
+
+            .main-content {
+                padding: 1.5rem 1rem;
+                border-radius: 12px;
+            }
+
+            .doctrine-section {
+                padding: 2rem 0;
+            }
+
+            .section-number {
+                font-size: 0.75rem;
+                padding: 0.25rem 0.7rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .subsection-title {
+                font-size: 1.2rem;
+                margin-top: 1.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .prose {
+                font-size: 0.95rem;
+            }
+
+            .prose p {
+                margin-bottom: 1rem;
+            }
+
+            .note-card {
+                padding: 1.2rem;
+                border-radius: 10px;
+            }
+
+            .rich-content {
+                gap: 1rem;
+            }
+
+            /* Footer responsive - match other pages */
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .footer-column {
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                padding-bottom: 1.5rem;
+            }
+
+            .footer-column:last-child {
+                border-bottom: none;
+                padding-bottom: 0;
+            }
+
+            .footer-column h3 {
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+                color: var(--warm-gold);
+            }
+
+            .footer-column ul {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .footer-column ul li {
+                flex: 0 0 auto;
+            }
+
+            .contact-info {
+                align-items: center;
+                gap: 1.2rem;
+            }
+
+            .contact-item {
+                justify-content: center;
+                text-align: center;
+                padding: 0.8rem;
+                background: rgba(255,255,255,0.05);
+                border-radius: 8px;
+                flex-direction: column;
+            }
+
+            .contact-item i {
+                margin-bottom: 0.4rem;
+                margin-right: 0;
+                font-size: 1.2rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .footer {
+                padding: 1.5rem 0 0.8rem;
+            }
+
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--light-gray);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--warm-gold);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #b39756;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 0.8rem;
+            }
+
+            .nav-container {
+                padding: 0.6rem 0.8rem;
+            }
+
+            .logo-text h1 {
+                font-size: 1rem;
+            }
+
+            .logo-text p {
+                font-size: 0.65rem;
+            }
+
+            .church-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+            }
+
+            .hero-section {
+                height: 250px;
+            }
+
+            .hero-title {
+                font-size: 1.5rem;
+                line-height: 1.25;
+                padding: 0 0.8rem;
+                max-width: 100%;
+                word-break: break-word;
+            }
+
+            .hero-subtitle {
+                font-size: 0.9rem;
+                padding: 0 1rem;
+            }
+
+            .hero-verse {
+                display: none;
+            }
+
+            .intro-wrap {
+                padding: 0 0.8rem;
+                margin: -1.5rem auto 1rem;
+            }
+
+            .intro-grid {
+                padding: 1rem;
+                gap: 0.8rem;
+            }
+
+            .intro-header {
+                padding: 0.7rem 0.9rem 0.6rem;
+            }
+
+            .intro-title {
+                font-size: 1.1rem;
+            }
+
+            .intro-card {
+                padding: 0.9rem;
+            }
+
+            .intro-text p {
+                font-size: 0.88rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .intro-quote {
+                padding: 0.7rem 0.9rem;
+                font-size: 0.85rem;
+            }
+
+            .intro-topics h3 {
+                font-size: 1.05rem;
+                margin-bottom: 0.4rem;
+            }
+
+            .intro-list li {
+                padding: 0.35rem 0.55rem 0.35rem 0.45rem;
+                font-size: 0.85rem;
+            }
+
+            .intro-num {
+                width: 20px;
+                height: 20px;
+                font-size: 0.7rem;
+            }
+
+            .main-content {
+                padding: 1.2rem 0.8rem;
+                border-radius: 10px;
+            }
+
+            .doctrine-section {
+                padding: 1.8rem 0;
+            }
+
+            .section-number {
+                font-size: 0.7rem;
+                padding: 0.2rem 0.6rem;
+                margin-bottom: 0.6rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+                margin-bottom: 1.2rem;
+            }
+
+            .subsection-title {
+                font-size: 1.1rem;
+                margin-top: 1.2rem;
+                margin-bottom: 0.8rem;
+                padding-left: 0.5rem;
+                border-left: 3px solid var(--warm-gold);
+            }
+
+            .prose {
+                font-size: 0.9rem;
+                line-height: 1.65;
+            }
+
+            .prose p {
+                margin-bottom: 0.9rem;
+            }
+
+            .note-card {
+                padding: 1rem;
+                border-radius: 8px;
+            }
+
+            .rich-content {
+                gap: 0.9rem;
+            }
+
+            /* Footer - match small devices */
+            .footer {
+                padding: 1.2rem 0 0.6rem;
+            }
+
+            .footer-grid {
+                display: block;
+                text-align: center;
+            }
+
+            .footer-column {
+                margin-bottom: 1rem;
+            }
+
+            .footer-column:first-child {
+                display: none;
+            }
+
+            .footer-column h3 {
+                font-size: 0.9rem;
+                margin-bottom: 0.5rem;
+                color: var(--warm-gold);
+            }
+
+            .footer-column p {
+                font-size: 0.8rem;
+                line-height: 1.4;
+            }
+
+            .footer-column ul {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.8rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .footer-column ul li {
+                font-size: 0.8rem;
+            }
+
+            .contact-info {
+                display: block;
+                text-align: center;
+            }
+
+            .contact-item {
+                font-size: 0.75rem;
+                display: inline-block;
+                margin: 0 0.5rem 0.4rem 0;
+                padding: 0.2rem 0.4rem;
+                background: rgba(255,255,255,0.05);
+                border-radius: 4px;
+            }
+
+            .contact-item i {
+                font-size: 0.7rem;
+                margin-right: 0.3rem;
+            }
+
+            .contact-item a {
+                font-size: 0.75rem;
+            }
+
+            .footer-bottom {
+                margin-top: 0.8rem;
+                padding-top: 0.8rem;
+                font-size: 0.7rem;
+                line-height: 1.3;
+            }
+
+            .back-to-top {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+                bottom: 1rem;
+                right: 1rem;
+            }
+        }
+
+        /* Extra small screens - 360px */
+        @media (max-width: 360px) {
+            /* Header sizing same as 480px - no need to override */
+
+            .hero-section {
+                height: 220px !important;
+            }
+
+            .hero-title {
+                font-size: 1.3rem !important;
+                line-height: 1.3 !important;
+                padding: 0 0.6rem !important;
+                word-break: break-word !important;
+            }
+
+            .hero-subtitle {
+                font-size: 0.8rem !important;
+                padding: 0 0.6rem !important;
+            }
+
+            .hero-verse {
+                display: none !important;
+            }
+
+            .intro-wrap {
+                padding: 0 0.6rem !important;
+            }
+
+            .intro-grid {
+                padding: 0.8rem !important;
+            }
+
+            .intro-title {
+                font-size: 1rem !important;
+            }
+
+            .intro-text p {
+                font-size: 0.82rem !important;
+            }
+
+            .intro-quote {
+                font-size: 0.8rem !important;
+            }
+
+            .intro-list li {
+                font-size: 0.8rem !important;
+            }
+
+            .main-content {
+                padding: 1rem 0.6rem !important;
+            }
+
+            .section-title {
+                font-size: 1.4rem !important;
+            }
+
+            .subsection-title {
+                font-size: 1rem !important;
+            }
+
+            .prose {
+                font-size: 0.85rem !important;
+            }
+
+            .note-card {
+                padding: 0.8rem !important;
+            }
+
+            .footer {
+                padding: 1rem 0 0.5rem !important;
+            }
+
+            .footer-column {
+                margin-bottom: 0.8rem !important;
+            }
+
+            .footer-column h3 {
+                font-size: 0.85rem !important;
+                margin-bottom: 0.4rem !important;
+            }
+
+            .footer-column ul {
+                gap: 0.6rem !important;
+            }
+
+            .footer-column ul li {
+                font-size: 0.75rem !important;
+            }
+
+            .contact-item {
+                font-size: 0.65rem !important;
+                margin: 0 0.3rem 0.3rem 0 !important;
+                padding: 0.15rem 0.3rem !important;
+            }
+
+            .contact-item i {
+                font-size: 0.65rem !important;
+                margin-right: 0.2rem !important;
+            }
+
+            .contact-item a {
+                font-size: 0.65rem !important;
+            }
+
+            .footer-bottom {
+                margin-top: 0.6rem !important;
+                padding-top: 0.6rem !important;
+                font-size: 0.65rem !important;
+            }
+
+            .back-to-top {
+                width: 36px !important;
+                height: 36px !important;
+                font-size: 0.9rem !important;
+            }
+        }
+
+        /* Landscape mode optimization for mobile devices */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .hero-section {
+                height: 200px;
+            }
+
+            .hero-title {
+                font-size: 1.6rem;
+                line-height: 1.2;
+                padding: 0 0.8rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.85rem;
+                padding: 0 0.8rem;
+            }
+
+            .intro-wrap {
+                margin: -1rem auto 1rem;
+            }
+
+            .main-content {
+                padding: 1rem;
+            }
+
+            .doctrine-section {
+                padding: 1.5rem 0;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .back-to-top {
+                bottom: 0.5rem;
+                right: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Header Top Bar -->
+    <div class="header-top">
+        <div class="header-top-content">
+            <div class="header-contact">
+                <span><i class="fas fa-phone"></i> <a href="tel:+1-281-931-1120" style="color: inherit; text-decoration: none;">+1-281-931-1120</a></span>
+                <span><i class="fas fa-envelope"></i> <a href="mailto:info@colonialhills-biblechapel.com" style="color: inherit; text-decoration: none;">info@colonialhills-biblechapel.com</a></span>
+            </div>
+            <div class="header-social">
+                <span><i class="fas fa-map-marker-alt"></i> <a href="index.html#services" style="color: inherit; text-decoration: none;">Visit us this Sunday at 9:30 AM</a></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header" id="mainHeader">
+        <div class="nav-container">
+            <a href="index.html" class="logo-section">
+                <div class="church-icon">
+                    <i class="fas fa-church"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Colonial Hills Bible Chapel</h1>
+                    <p>Gathering in His Name Since 1975</p>
+                </div>
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about-us-page.html">About Us</a></li>
+                    <li><a href="gospel-page.html">Gospel</a></li>
+                    <li><a href="doctrines-practices-page.html">Doctrines & Practices</a></li>
+                    <li><a href="ministries-page.html">Ministries</a></li>
+                    <li><a href="media-page.html">Media</a></li>
+                    <li><a href="helpful-links-page.html">Helpful Links</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+        <div class="mobile-nav-header">
+            <div class="logo-text">
+                <h1 style="color: var(--soft-white);">Colonial Hills Bible Chapel</h1>
+            </div>
+            <button class="mobile-nav-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about-us-page.html">About Us</a></li>
+                <li><a href="gospel-page.html">Gospel</a></li>
+                <li><a href="doctrines-practices-page.html">Doctrines & Practices</a></li>
+                <li><a href="ministries-page.html">Ministries</a></li>
+                <li><a href="media-page.html">Media</a></li>
+                <li><a href="helpful-links-page.html">Helpful Links</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Statement of Doctrines & Practices</h1>
+            <p class="hero-subtitle">Our Foundation of Faith</p>
+            <div class="hero-verse">
+                <p>"And they continued steadfastly in the apostles' doctrine and fellowship, in the breaking of bread, and in prayers."</p>
+                <span class="verse-ref">Acts 2:42</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section id="introduction" class="intro-section">
+        <div class="intro-wrap">
+            <div class="intro-surface">
+                <div class="intro-header">
+                    <h2 class="intro-title">Declaration of Faith</h2>
+                </div>
+                <div class="intro-grid">
+                    <div class="intro-card intro-text">
+                        <p>We at Colonial Hills Bible Chapel declare our common understanding of the Christian faith. Our goal is that we might be known for what we believe and that we might proclaim what we hold to be true, as it is written:</p>
+                        <div class="intro-quote">
+                            “Since we have the same spirit of faith, according to what is written, ‘I believed and therefore I spoke,’ we also believe, therefore speak” (2 Corinthians 4:13).
+                        </div>
+                        <p>This declaration addresses sixteen topics. It gives special emphasis to the New Testament principles of the church and to important issues of our day. Under each topic, it presents both doctrines and applications. As to the doctrines it affirms, we are in full agreement. As to the applications and supporting principles it offers, we are in strong agreement. Some in fellowship may hold personal beliefs that differ somewhat on these secondary issues. Stated here is the position of the elders and the church as a whole.</p>
+                    </div>
+                    <div class="intro-card intro-topics">
+                        <h3>Topics Covered</h3>
+                        <ul class="intro-list">
+                            <li><span class="intro-num">1</span> Scripture</li>
+                            <li><span class="intro-num">2</span> God</li>
+                            <li><span class="intro-num">3</span> Creation</li>
+                            <li><span class="intro-num">4</span> Salvation</li>
+                            <li><span class="intro-num">5</span> Sanctification</li>
+                            <li><span class="intro-num">6</span> Family</li>
+                            <li><span class="intro-num">7</span> Church</li>
+                            <li><span class="intro-num">8</span> Elders</li>
+                            <li><span class="intro-num">9</span> Deacons</li>
+                            <li><span class="intro-num">10</span> Gifts and Calling</li>
+                            <li><span class="intro-num">11</span> Teaching</li>
+                            <li><span class="intro-num">12</span> Fellowship</li>
+                            <li><span class="intro-num">13</span> Breaking of Bread</li>
+                            <li><span class="intro-num">14</span> Prayer</li>
+                            <li><span class="intro-num">15</span> Evangelism</li>
+                            <li><span class="intro-num">16</span> Future Events</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="content-wrapper">
+        <!-- Floating Index -->
+        <aside class="floating-index">
+            <h2 class="index-header">Topics</h2>
+            <ul class="index-list">
+                <li class="index-item">
+                    <a href="#scripture" class="index-link">
+                        <span class="index-number">1</span>
+                        Scripture
+                    </a>
+                </li>
+                <li class="index-item">
+                    <a href="#god" class="index-link">
+                        <span class="index-number">2</span>
+                        God
+                    </a>
+                </li>
+                <li class="index-item">
+                    <a href="#creation" class="index-link">
+                        <span class="index-number">3</span>
+                        Creation
+                    </a>
+                </li>
+                <li class="index-item">
+                    <a href="#salvation" class="index-link">
+                        <span class="index-number">4</span>
+                        Salvation
+                    </a>
+                </li>
+                <li class="index-item">
+                    <a href="#sanctification" class="index-link">
+                        <span class="index-number">5</span>
+                        Sanctification
+                    </a>
+                </li>
+                <li class="index-item">
+                    <a href="#family" class="index-link">
+                        <span class="index-number">6</span>
+                        Family
+                    </a>
+                </li>
+                <li class="index-item">
+                    <a href="#church" class="index-link">
+                        <span class="index-number">7</span>
+                        Church
+                    </a>
+                </li>
+                <li class="index-item">
+                    <a href="#elders" class="index-link">
+                        <span class="index-number">8</span>
+                        Elders
+                    </a>
+                </li>
+                <li class="index-item">
+                    <a href="#deacons" class="index-link">
+                        <span class="index-number">9</span>
+                        Deacons
+                    </a>
+                </li>
+                <li class="index-item">
+                    <a href="#gifts" class="index-link">
+                        <span class="index-number">10</span>
+                        Gifts and Calling
+                    </a>
+                </li>
+                <li class="index-item">
+                    <a href="#teaching" class="index-link">
+                        <span class="index-number">11</span>
+                        Teaching
+                    </a>
+                </li>
+                <li class="index-item">
+                    <a href="#fellowship" class="index-link">
+                        <span class="index-number">12</span>
+                        Fellowship
+                    </a>
+                </li>
+                <li class="index-item">
+                    <a href="#breaking-bread" class="index-link">
+                        <span class="index-number">13</span>
+                        Breaking of Bread
+                    </a>
+                </li>
+                <li class="index-item">
+                    <a href="#prayer" class="index-link">
+                        <span class="index-number">14</span>
+                        Prayer
+                    </a>
+                </li>
+                <li class="index-item">
+                    <a href="#evangelism" class="index-link">
+                        <span class="index-number">15</span>
+                        Evangelism
+                    </a>
+                </li>
+                <li class="index-item">
+                    <a href="#future-events" class="index-link">
+                        <span class="index-number">16</span>
+                        Future Events
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Scripture Section -->
+            <section id="scripture" class="doctrine-section">
+                <span class="section-number">SECTION 01</span>
+                <h2 class="section-title">Scripture</h2>
+                
+                <div class="rich-content">
+                    <div class="prose">
+                        <p>We believe that the Holy Spirit moved prophets and apostles to write the sacred Scriptures (2 Peter 1:20–21). He did this employing the distinctive styles of each individual. These writings are God-breathed, the very Word of God (2 Timothy 3:15–17; John 10:35). As such they are unfailingly accurate. They are without error in all that they state and teach as fact, including God’s work in creation, events of world history, and prophetic matters of the future (Matthew 5:18–19).</p>
+                        <p>We believe that God has given us the whole of Scripture, down to the very words. This plenary and verbal inspiration applies, strictly speaking, only to the original manuscripts. As God has faithfully overseen the writing of the Scriptures, so He has safeguarded their preservation and recognition in the 39 books of the Old Testament and 27 books of the New Testament.</p>
+                        <p>We believe that the Scriptures speak with divine authority. We submit to all that they command and embrace them as God’s trustworthy guide for our lives. They are the sole norm of the Christian faith. Their central message is the self-revelation of God and the person and saving work of His Son, the Lord Jesus Christ (John 1:18; Luke 24:25–27).</p>
+                        <p>We offer the following applications and supporting principles:</p>
+                    </div>
+
+                    <h3 class="subsection-title">Authority of Scripture</h3>
+                    <div class="note-card prose">
+                        <p>Like the early Bereans, we are responsible to examine the Scriptures directly to determine that which is true (Acts 17:11). Though some creeds may well express truth revealed in Scripture, we do not regard any creed to be a normative standard or perfect and comprehensive statement of the Christian faith. Such exists only in Scripture. Nor do we treat the teaching or writings of any man as the final word on a subject. We should not establish by any means authoritative traditions in violation of Scripture (Proverbs 30:6; Mark 7:1–13; Revelation 22:18).</p>
+                    </div>
+
+                    <h3 class="subsection-title">Interpretation</h3>
+                    <div class="note-card prose">
+                        <p>Our goal in Bible study should be to understand the intended meaning of the divine Author. We are to understand the text in its normal, usual, and customary manner, taking into account the grammatical structure of the passage and the literary devices used by the writers. We must interpret the passage within its literary and historical context. We should understand a text within the specific context of the book in which it is found and within the general context of Scripture as a whole. We should use Scripture to interpret Scripture. We should allow that which is plain to guide us with regard to that which is difficult to understand. We should not</p>
+                        <p>give undue emphasis to any one portion of Scripture or any specific doctrine, placing all truth under it. Rather, we should understand each doctrine in balance with the rest. We must allow the Scripture to speak to us, being careful not to twist them to conform to our own thinking or popular opinion (2 Timothy 4:3). The Scriptures mean what they say. “Living and powerful and sharper than any two-edged sword” (Hebrews 4:12), they are relevant in all times.</p>
+                        <p>Since there are various versions of Bible available, we at Colonial Hills prefer to use King James Version, New King James Version, New International Version and New American Standard Bible, for teaching, preaching and Bible studies.</p>
+                    </div>
+
+                    <h3 class="subsection-title">Israel and the Church</h3>
+                    <div class="note-card prose">
+                        <p>Though salvation has been by faith in all times, when interpreting Scripture we should recognize that God has placed man in various conditions and tested him in various ways. Each period begins with a revelation of man’s responsibility and ends with a review or judgment by God. We sometimes call these stages in the history of God’s dealings with humankind as dispensations. In the Garden of Eden we see the first. This changed with the Fall. Other changes occurred later, most notably with the giving of the Law to Israel through Moses and the later establishment of the church through Christ.</p>
+                        <p>Scripture marks this change, teaching “The law was given through Moses; grace and truth were realized through Jesus Christ” (John 1:17). As Christians, we “are not under law, but under grace” (Romans 6:14). This change is also expressed by the way we divide our Bibles into the Old Testament and the New Testament.</p>
+                        <p>We must not confuse God’s plan for Israel with that of the church. The covenant of law given at Mount Sinai was between God and the Jewish people. Based upon a demanding legal code, it promised blessings for the obedient and curses for the rebellious (Leviticus 26). It is a covenant between God and the people of Israel (Exodus 24:1–8; 34:1–28). It does not pertain to the Gentile nations (Ephesians 2:11–12). God’s promises to the church, in contrast, are based upon grace freely bestowed in Christ Jesus. The church consists of people who have entered into a spiritual relationship with God through Jesus Christ (Ephesians 1:3–14). It promises eternal life to all who believe (John 3:16).</p>
+                        <p>When studying Scripture, we must keep in mind that the primary interpretation of a passage applies to the people and time to which it was written. Scripture not meant directly for the church, however, can often have valuable secondary applications for us when understood in the light of the New Testament.</p>
+                    </div>
+
+                    <h3 class="subsection-title">Typology</h3>
+                    <div class="note-card prose">
+                        <p>The typological portions of Scripture are rich in meaning and helpful in illustrating truth. We caution against, however, fanciful extensions of them. We should not spiritualize or allegorize the text of Scripture at the expense of its objective meaning. Neither should we use typology and other forms of figurative language to establish doctrine. We should use them only to illustrate that which is plain in Scripture.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- God Section -->
+            <section id="god" class="doctrine-section">
+                <span class="section-number">SECTION 02</span>
+                <h2 class="section-title">God</h2>
+                <div class="rich-content">
+                    <div class="prose">
+                        <p>We believe God is the sole, eternal, self-existent being. “I AM WHO I AM” (Exodus 3:14), the Lord told Moses. “God is spirit” (John 4:24). He has personality, possessing mind, will, and emotions (Exodus 3:14). God is love (1 John 4:8). He is good and faithful in all things (Psalm 119:68; Lamentations 3:22–23). He is compassionate and gracious, slow to anger, and abounding in lovingkindness and truth (Exodus 34:6). Without sin, He dwells in perfect holiness and justice (Isaiah 6:3; Jeremiah 9:24). He has all knowledge, all power, and is present everywhere (Isaiah 40:28; Psalm 90:2; Jeremiah 23:24; 32:17; Psalm 147:5). He is infinite in all His attributes. Sovereign over all things, He rules the universe (1 Chronicles 29:11). He is God our Saviour, Who alone is wise, to Him be glory and majesty, dominion and power both now and forever (Jude 1:25).</p>
+
+                        <p>We believe there is one God. “Hear, O Israel! The Lord our God, the Lord is one!” (Deuteronomy 6:4). He eternally exists in three persons: Father, Son, and Holy Spirit. The Father is God (John 20:17). The Son is God (Titus 2:13). The Spirit is God (Acts 5:3–4). These three persons are co-equal, inseparable, yet distinct. We see the Father speak from heaven, the Spirit descending as a dove, and Jesus upon the Son in the baptism of Christ (Matthew 3:16–17). We also see the three persons distinguished in Christ’s instructions to His disciples to baptize “in the name of the Father and of the Son and of the Holy Spirit” (Matthew 28:19). Yet, there is one God (1 Timothy 2:5).</p>
+
+                        <p>We offer the following applications and supporting principles:</p>
+                    </div>
+
+                    <h3 class="subsection-title">Knowing God</h3>
+                    <div class="note-card prose">
+                        <p>Our ultimate purpose in the study and teaching of Scripture should be a true knowledge of God and an experience of His presence. He requires us to take careful note of what God reveals about Himself in His Word. He reveals His attributes, His various works and circumstances, what He has done for us, how He requires us to live, and His plan of salvation.</p>
+                    </div>
+
+                    <h3 class="subsection-title">Jesus Christ</h3>
+                    <div class="note-card prose">
+                        <p>Jesus Christ who is God (John 1:1–3), the Second Person of the Trinity (Matthew 28:19), co-equal (John 10:30) and co-eternal (Micah 5:2) with the Father and the Holy Spirit, is the eternally existing Son of God. At His incarnation He was conceived of the Holy Spirit and born of the virgin Mary (Matthew 1:18–25). He is both the Son of God (Romans 1:3–4) and the Son of Man (John 5:27). He is fully God (Colossians 2:9) and perfectly man (1 Timothy 2:5). He was tempted in every way as a man yet was perfectly sinless (Hebrews 4:15). He knew no sin (2 Corinthians 5:21), did no sin (1 Peter 2:22) and in Him no sin was found (1 John 3:5). He died on the cross as the perfect, once for all sacrifice for sins (Hebrews 10:10–12). He gave Himself a ransom for all (1 Timothy 2:6), reconciled the world to God (2 Corinthians 5:19). All who repent and believe in Him are justified (Romans 5:9), forgiven (Hebrews 9:22), and redeemed on the grounds of His shed blood (1 Peter 1:18–19). He died, was buried, and rose bodily from the dead on the third day (1 Corinthians 15:3–8; John 20:27). He ascended bodily into heaven with the expressed promise of coming again (Acts 1:6–11; John 14:3). He was exalted by the Father (Philippians 2:9) and now intercedes as our High Priest (Romans 8:34; Hebrews 4:14–16) and advocate (1 John 2:1).</p>
+                    </div>
+
+                    <h3 class="subsection-title">The Holy Spirit</h3>
+                    <div class="note-card prose">
+                        <p>The Holy Spirit is God (Romans 8:9), the Third Person of the Trinity (Matthew 28:19), co-equal (Matthew 10:20; Galatians 4:6) and co-eternal (Hebrews 9:14) with the Father and the Son. He works, not to bring glory to Himself, but to glorify the Lord Jesus Christ (John 16:14). He is the divine Agent in creation (Genesis 1:2), inspiration (2 Peter 1:21), revelation (1 Corinthians 2:10), and regeneration (John 3:5). He convicts the world concerning sin, righteousness and judgment (John 16:7–11). Upon repentance and faith (John 1:12) in Christ, the Holy Spirit immediately and completely regenerates (Titus 3:5), baptizes (1 Corinthians 12:13), indwells (1 Corinthians 3:16), seals (Ephesians 1:13), and positionally sanctifies (2 Thessalonians 2:13) the believer. He then continues to assure (Romans 8:16), gift (1 Corinthians 12:7), guide (Romans 8:14), teach (John 16:12–15), help (John 14:16–17), fill (Ephesians 5:18), intercede (Romans 8:26–27), and experientially sanctify (1 Thessalonians 4:3–8; 2 Corinthians 3:18) all believers.</p>
+                    </div>
+
+                    <h3 class="subsection-title">The Holy Spirit</h3>
+                    <div class="note-card prose">
+                        <p>The Holy Spirit is God (Romans 8:9), the Third Person of the Trinity (Matthew 28:19), co-equal (Matthew 10:20; Galatians 4:6) and co-eternal (Hebrews 9:14) with the Father and the Son. He works, not to bring glory to Himself, but to glorify the Lord Jesus Christ (John 16:14). He is the divine Agent in creation (Genesis 1:2), inspiration (2 Peter 1:21), revelation (1 Corinthians 2:10) and regeneration (John 3:5). He convicts the world concerning sin, righteousness and judgment (John 16:7–11). Upon repentance and faith (John 1:12) in Christ, the Holy Spirit immediately and completely regenerates (Titus 3:5), baptizes (1 Corinthians 12:13), indwells (1 Corinthians 3:16), seals (Ephesians 1:13) and positionally sanctifies (2 Thessalonians 2:13) the believer. He then continues to assure (Romans 8:16), gift (1 Corinthians 12:7), guide (Romans 8:14), teach (John 16:12–15), help (John 14:16–17), fill (Ephesians 5:18), intercede (Romans 8:26–27) and experientially sanctify (1 Thessalonians 4:3–8; 2 Corinthians 3:18) all believers.</p>
+                    </div>
+
+                    <h3 class="subsection-title">Theological Speculation</h3>
+                    <div class="note-card prose">
+                        <p>We must take great care when teaching on the person of God not to go beyond what is revealed in the Scripture (1 Corinthians 4:6; 2 John 1:9). Theological speculation seeking to explain the triune nature of God, the time when the child Jesus became conscious of His divine identity, the potential of Jesus having succumbed to Satan’s testing, and similar matters can only lead to controversy, division, and error. We should not tolerate teaching in the church that questions the biblical attributes of God, His goodness and wisdom, or the full and equal deity of the persons of the Godhead.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Creation Section -->
+            <section id="creation" class="doctrine-section">
+                <span class="section-number">SECTION 03</span>
+                <h2 class="section-title">Creation</h2>
+                <div class="rich-content">
+                    <div class="prose">
+                        <p>We affirm the following doctrines:</p>
+
+                        <p>We believe that God is the creator of the universe. The opening words of the Bible state, “In the beginning God created the heavens and the earth” (Genesis 1:1). In a separate act of creation, “the Lord God formed man of dust from the ground, and breathed into his nostrils the breath of life; and man became a living being” (Genesis 2:7). From Adam God fashioned a woman (Genesis 2:21–22). Adam called her Eve, for she became the mother of all future generations (Genesis 3:20). In this manner, “God created man in His own image, in the image of God He created him; male and female He created them” (Genesis 1:27). God blessed Adam and Eve and gave them dominion over the earth (Genesis 1:28–30).</p>
+
+                        <p>We believe that mankind is distinct from all other creatures. More than just a physical being, God has given man an eternal spirit and soul, endowing him with a mind, will, and emotions (1 Thessalonians 5:23; Hebrews 4:12). As such we are moral beings with a spiritual awareness of God and a conscience that we might know right from wrong (Romans 1:19; 2:14–16). God has also revealed Himself to us through the universe that He has created (Romans 1:20). “The heavens declare the glory of God; and the firmament shows His handiwork” (Psalm 19:1). God has revealed Himself most perfectly to us in His Son and preserved that revelation in His written Word (John 1:18; Hebrews 1:1–3). God has revealed Himself to us that we might know Him as God and be morally responsible to Him as our Creator.</p>
+
+                        <p>We believe that before God created man, He created holy angels to serve and worship Him (Colossians 1:16; Job 38:6–7; Mark 8:38; Hebrews 1:6–14). They have personality, possessing mind, will, and emotions. They are ministering spirits that God sends forth as His messengers, sometimes appearing in glorious forms and sometimes as men (Matthew 28:2–3; John 20:12).</p>
+                    </div>
+
+                    <h3 class="subsection-title">Evolution</h3>
+                    <div class="note-card prose">
+                        <p>Evolutionary theory stating that inanimate chemical substances became living organisms through undirected random chance, and after much time evolved into humankind contradicts the Bible and cannot be reconciled with it. We are supported in our position by the increasing number within the scientific community who are questioning the theory of the evolution of the species.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Salvation Section -->
+            <section id="salvation" class="doctrine-section">
+                <span class="section-number">SECTION 04</span>
+                <h2 class="section-title">Salvation</h2>
+                <div class="rich-content">
+                    <div class="prose">
+                        <p>We affirm the following doctrines:</p>
+
+                        <p>We believe that Satan, possibly the highest of God’s created angels, rebelled against God’s authority. Scripture also refers to him as Beelzebub, Belial, and the devil. Many angels followed him in this sin. Scripture refers to these as demons (Luke 11:15). The judgment of God awaits them along with Satan (Genesis 3:15; John 12:31; 16:11; Revelation 20:10).</p>
+
+                        <p>We believe that in the garden of Eden, God tested Adam, telling him, “Of every tree of the garden you may eat freely; but of the tree of the knowledge of good and evil you shall not eat, for in the day that you eat from it you shall surely die” (Genesis 2:16–17). Satan tempted Eve to eat of the forbidden tree, and “she took from its fruit and ate; and she gave also to her husband with her, and he ate” (Genesis 3:6). Through Adam’s willful choice to disobey God, sin entered the world and spread to all mankind (Genesis 3:1–7; Romans 5:12). With sin came condemnation and death (Romans 5:12–21). In this way, humankind became corrupt and “by nature children of wrath” (Ephesians 2:3).</p>
+
+                        <p>We believe that in mercy and love God has taken the initiative to reach out to us (John 3:16; John 16:8–11). He has done this by sending His Son, the Lord Jesus Christ, to save us from sin and its consequences (John 3:16; Luke 19:10). He was born of a virgin, whose name was Mary, who came to be with child by the power of the Holy Spirit (Luke 1:35). He is true God and true man, though without personal sin (Luke 1:35; John 1:1–14; 1 Timothy 2:5; 2 Corinthians 5:21).</p>
+
+                        <p>We believe that Jesus died for our sins on the cross, taking the penalty that was justly ours (Mark 10:45; 1 Peter 2:24; 3:18). Jesus rose on the third day never to die again (Romans 6:9; 1 Corinthians 15:1–8). We believe His work of salvation is finished, and that the righteous demands of God are fully satisfied (Romans 3:24–25; 1 Peter 1:18–19; 2:24; John 19:30; Hebrews 10:18).</p>
+
+                        <p>We believe that Christ died for all mankind (John 3:16). “He Himself is the propitiation for our sins; and not for ours only, but also for those of the whole world” (1 John 2:2). God “desires all men to be saved and to come to the knowledge of the truth” (1 Timothy 2:4). He is “not willing for any to perish but for all to come to repentance” (2 Peter 3:9).</p>
+
+                        <p>We believe that God offers salvation to all. He saves those who repent and place their faith in Christ alone for salvation (Mark 1:15; Luke 24:47; Acts 20:21; John 1:12–13; 1 Peter 1:9). This salvation is a free gift from God received through faith and apart from human merit (Romans 6:23; 10:9–10; Ephesians 2:8–10; Galatians 2:21; 3:10). God put our sins to Jesus’ account that God’s righteousness might be put to our account (2 Corinthians 5:21). This imputation of the righteousness of God to the credit of the believer is by the declaration of God. It is what the Bible calls justification. “God is the one who justifies” (Romans 8:33). He justifies the ungodly sinner who believes in Jesus (Romans 4:5). The imputed righteousness of God is available “through faith in Jesus Christ to all and on all who believe. For there is no difference; for all have sinned and fall short of the glory of God, being justified freely by His grace through the redemption that is in Christ Jesus, whom God set forth as a propitiation by His blood through faith” (Romans 3:22–25).</p>
+
+                        <p>We believe that without God’s help, no man by his own initiative would seek God (Romans 3:10–18). God, however, urges men to repent, sending forth the Holy Spirit to “convict the world concerning sin, and righteousness, and judgment” (John 16:8).</p>
+
+                        <p>We believe that God in His sovereignty has given man a will, and that though God desires all men to repent and be saved, most are not willing (Genesis 1:26; John 3:19; 7:17; Luke 7:30; Revelation 22:17). Jesus told the Jews who were opposing Him, “You are not willing to come to Me, that you may have life” (John 5:40).</p>
+
+                        <p>We believe that those who receive God’s offer of salvation through faith at that moment become “born again” (1 Peter 1:23), regenerated (Titus 3:5), new creatures (2 Corinthians 5:17), children of God (John 1:12), “redeemed” (1 Peter 1:18), “forgiven” (1 John 2:12) and called “saints” (1 Corinthians 1:2). Henceforth, God sees them “in Christ” (Ephesians 1:1–14; 1 John 5:20). Sealed with the Holy Spirit, they are eternally secure in Christ, kept by God for heaven (Ephesians 1:13–14; John 10:28; Romans 8:29–30; 1 Peter 1:3–5; Jude 1:24–25). They can also have personal assurance of their salvation (1 John 5:13). They are then considered as “Christians” (Acts 11:26).</p>
+
+                        <p>We believe that God predetermined this glorious plan of salvation (Acts 2:23; 4:28; 1 Corinthians 2:7). He also predestined those who would be saved to certain blessings. These include being conformed to the image of His Son (Romans 8:29–30), being adopted as sons (Ephesians 1:5) and obtaining an inheritance in heaven with Christ (Ephesians 1:11).</p>
+
+                        <p>We believe that God chose the church in Christ “before the foundation of the world, that we should be holy and blameless before Him” (Ephesians 1:4). The saints are “God’s elect” (Romans 8:33), against whom no one can raise a charge. Nothing can separate them from the love of Christ (Romans 8:35–39).</p>
+
+                        <p>We believe that the outward evidence of new birth is obedience to Christ and the fruit of the Holy Spirit (John 14:21; Galatians 5:16–26; 1 John 3:4–10; James 2:14–26). One of the first responsibilities of obedience for the new believer is to publicly confess Christ in baptism (Matthew 28:19; Acts 16:31–33).</p>
+                    </div>
+
+                    <h3 class="subsection-title">Repentance</h3>
+                    <div class="note-card prose">
+                        <p>Repentance is an inward response to the convicting ministry of the Holy Spirit (John 16:8–11). It is a change of mind about God, sin, and self. The sinner begins to fear God (Proverbs 1:7; Isaiah 55:7; Acts 10:35). He acknowledges God’s rightful authority over his life and his guilt before God because of sin. Scripture promises: “He who conceals his transgressions will not prosper, But he who confesses and forsakes them will find compassion” (Proverbs 28:13).</p>
+                    </div>
+
+                    <h3 class="subsection-title">Faith</h3>
+                    <div class="note-card prose">
+                        <p>Saving faith is trusting Jesus, and Him alone, as Savior. It is more than simply agreeing with certain facts about Jesus. It is a sinner placing his full faith in Christ as the one who died in his place, taking his punishment. The Scriptures are the basis of faith. Jesus is the object of faith. What one must believe about Him is the gospel: “that Christ died for our sins in accordance with the scriptures, that He was buried, that He was raised on the third day” (1 Corinthians 15:3–4).</p>
+                    </div>
+
+                    <h3 class="subsection-title">Assurance of Salvation</h3>
+                    <div class="note-card prose">
+                        <p>A Christian can have personal assurance of his salvation as he understands and rests in the finished work of Christ, accepts the biblical promises of salvation, and experiences the confirming evidences of salvation in his life. These evidences include freedom from the tyranny of sin, a new sensitivity to sin, a desire to please God, the ability to understand God’s Word, and the inward assurance of the Holy Spirit that he is a child of God (Romans 6:1–23; 8:15–17; 1 John 2:27).</p>
+                    </div>
+
+                    <h3 class="subsection-title">Baptism</h3>
+                    <div class="note-card prose">
+                        <p>Baptism in water is a public confession of faith in Christ. It is, therefore, only for those who have made a personal choice to trust Christ for salvation. Baptism symbolizes the washing of regeneration and the possession of a clear conscience before God (Titus 3:5; 1 Peter 3:21). Additionally, we can see in the act of baptism our identification with Christ in His death, burial, and resurrection to the newness of life (Romans 6:1–11). Baptism portrays this as the person is lowered into the water and then raised again. Baptism is not a means of salvation, but a confession of salvation already received through faith in Christ.</p>
+                        <p>We baptize by immersion. We believe this is best in keeping with the meaning of the Greek word “to baptize,” the example of the New Testament, and the intended symbolism of the act. When baptizing new believers, we use the words given to us by Christ, baptizing the person “in the name of the Father and the Son and the Holy Spirit” (Matthew 28:19).</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sanctification Section -->
+            <section id="sanctification" class="doctrine-section">
+                <span class="section-number">SECTION 05</span>
+                <h2 class="section-title">Sanctification</h2>
+                <div class="rich-content">
+                    <div class="prose">
+                        <p>We affirm the following doctrines:</p>
+
+                        <p>We believe that the moral standing of the Christian is perfect before God. In Christ he is “holy and blameless” (Ephesians 1:4). Justified by God, he possesses the imputed righteousness of God. For these reasons, Scripture rightly refers to believers as saints (1 Corinthians 1:2). We refer to this as positional sanctification.</p>
+
+                        <p>We believe that the moral state of a Christian’s personal life here on earth is often less than perfect and at times may be sinful (1 John 1:8–9). Though the tyranny of sin over his life has been broken, the struggle with sin continues as long as he is in a mortal body of flesh (Romans 6:17–18; 7:18–25). God is at work in his life, however, changing him by stages and bringing his conduct into conformity with the image of Christ (Romans 8:1–30; 2 Corinthians 3:18). We call this process practical or progressive sanctification.</p>
+
+                        <p>We believe that the Holy Spirit assists the Christian through washing with the Word of God in growing in practical sanctification. The Spirit enables him to put “to death the deeds of the body” (Romans 8:13). He leads him (Romans 8:14). He assures him that he is a son of God (Romans 8:15–16). He helps him to pray and intercedes for him (Romans 8:26–27).</p>
+
+                        <p>We believe that God will make the moral state of the believer perfect when he is finally freed from his mortal body and is with Christ (1 Corinthians 15:50–54). “We know that, when He is revealed, we shall be like Him, for we shall see Him as He is” (1 John 3:2). Some refer to this as perfect or final sanctification.</p>
+                    </div>
+
+                    <h3 class="subsection-title">Personal Holiness</h3>
+                    <div class="note-card prose">
+                        <p>Personal sanctification begins at the moment of salvation. It progresses as the believer comes to understand his position in Christ and the Lord’s work on his behalf. It is perfected when Christ returns for His church or the believer goes to be with Christ. Only then will his struggle with sin and temptation end.</p>
+                        <p>Scripture describes how a Christian can live a godly life in (Romans 6:1–23). It explains that the believer is united with Christ in His death, burial, and resurrection. He is freed from sin and raised to newness of life. This being so, the believer should consider himself “to be dead to sin, but alive to God in Christ Jesus” (Romans 6:11). He should no longer yield himself to sin but to God. With the apostle Paul, he can now say, “I have been crucified with Christ; and it is no longer I who live, but Christ lives in me; and the life which I now live in the flesh I live by faith in the Son of God, who loved me, and gave Himself for me” (Galatians 2:20).</p>
+                        <p>Holy conduct is more than simply not doing what is prohibited by the Bible. We are to do that which is pleasing to the Lord, that which brings Him glory (1 Corinthians 10:31; 2 Corinthians 5:9). We should consider each act in light of our life purpose (1 Corinthians 10:23; Hebrews 12:1–2). We should seek to be an example to others (Romans 14:13; 1 Thessalonians 5:22). We should always remember that we are “children of the promise” (Romans 9:8), “children of light” (Ephesians 5:8), and “children of God” (Philippians 2:15). We should aspire to walk as Christ walked (1 John 2:6).</p>
+                        <p>We grow in practical sanctification by various means. These include Bible study, memorization of Scripture, participation at the Lord’s Supper, prayer and fellowship with other believers.</p>
+                    </div>
+
+                    <h3 class="subsection-title">Personal Time with God</h3>
+                    <div class="note-card prose">
+                        <p>One of the most effective means of growing in personal holiness is the discipline of a daily time alone with God. It is good to begin this time with personal examination and the confession of any sin the Spirit brings to mind. Next comes meditation on God’s Word. Here it is best to work through a book of the Bible, considering a few verses each day. As we do so, God speaks to us through His living Word, teaching, reproving, correcting, and training us (Hebrews 4:12; 2 Timothy 3:16). Then we should spend time in prayer to God, seeking His wisdom and guidance for our lives and interceding for the needs of others. Time should also be given to praise and worship, honoring God for who He is and what He has done. Time alone with God at the start of each day is especially helpful. David writes, “My voice You shall hear in the morning, O Lord; In the morning I will direct it to you, and I will look up” (Psalm 5:3). It was also the example of the Lord Jesus. We read in Mark’s gospel, “Now in the morning, having risen a long while before daylight, He went out and departed to a solitary place; and there He prayed” (Mark 1:35).</p>
+                        <p>A family devotional time is also important. Husbands should pray with their wives. Parents should pray with their children. We should read and discuss the Scriptures as families.</p>
+                    </div>
+
+                    <h3 class="subsection-title">Conscience</h3>
+                    <div class="note-card prose">
+                        <p>God has given each of us a conscience to help us know right from wrong (1 Samuel 24:5; Romans 2:14–16; 13:5). We must be sensitive to it, seeking “to maintain always a blameless conscience both before God and before men” (Acts 24:16). This means being subject to the civil authorities of our country, obeying its laws and paying our taxes (Romans 13:1–8; 1 Peter 3:13–17). It means being honest in our business dealings and being faithful employers and employees (Proverbs 16:11; Ephesians 6:5–9). It also means being careful not to unnecessarily offend people of other faiths or cultures (1 Corinthians 10:24–33).</p>
+                    </div>
+
+                    <h3 class="subsection-title">Medical Aid</h3>
+                    <div class="note-card prose">
+                        <p>When faced with illness, we should first look to God for help. The life of faith, however, does not prohibit us from then receiving help from medical professionals. Most serious physical illnesses and some mental and behavioral problems have a physical source. Christians should make use of such help when necessary, thanking God for providing it. They should be cautious, however, when turning to secular therapists and psychologists to remedy moral and spiritual problems. The victorious Christian life is found in a proper knowledge of who we are in Christ and a life of faith and obedience to God. We cannot expect secular counselors to understand or support these spiritual truths.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Family Section -->
+            <section id="family" class="doctrine-section">
+                <span class="section-number">SECTION 06</span>
+                <h2 class="section-title">Family</h2>
+                <div class="rich-content">
+                    <div class="prose">
+                        <p>We believe that God instituted marriage and the family and has given us His design for them</p>
+                        <p>in the Scriptures. In the opening chapters of the Bible, we read, “And the Lord God said, ‘It is not good that a man should be alone; I will make him a helper comparable to him’ ” (Genesis 2:18). And so, God made Eve from Adam and he received her as his wife. Scripture comments, “Therefore a man shall leave his father and mother and be joined to his wife, and they shall become one flesh” (Genesis 2:24). God then blessed Adam and Eve; and told them, “Be fruitful and multiply, fill the earth and subdue it. . . ” (Genesis 1:28).</p>
+
+                        <p>We believe that Christian marriage is a picture of Christ’s relationship with His church (Ephesians 5:22–33). As the church is to be subject to Christ, so a wife is to be subject to her own husband (Ephesians 5:22–24; 1 Peter 3:1–6). As Christ loved the church and gave Himself for it, so husbands should sacrificially love their wives (Ephesians 5:25–28). A husband should nourish and cherish his wife, just as Christ also does the church (Ephesians 5:28). He should give her honor as a fellow heir of the grace of life (1 Peter 3:7).</p>
+
+                        <p>We believe that a Christian should only marry another Christian (1 Corinthians 7:39; 2 Corinthians 6:14–18).</p>
+
+                        <p>We believe that God designed sexual union as an expression of love to be enjoyed between a husband and wife (Song of Solomon 4:1–5:1). It is also the means to complete God’s command to be fruitful (Genesis 1:28). Christians should flee all forms of sexual activity outside the bonds of marriage (Romans 1:24– 27; Hebrews 13:4). Sexual immorality is a sin against the body, which for a Christian is a temple of the Holy Spirit (1 Corinthians 6:9–20; 1 Thessalonians 4:3).</p>
+
+                        <p>We believe that the unborn child has a God-given soul from the moment of conception and should be protected as a precious gift from the Creator (Psalm 139:13–18).</p>
+
+                        <p>We believe that the Christian whom God has called to remain unmarried is freed from certain concerns and more readily able to live with undistracted devotion to the Lord (1 Corinthians 7:7–9, 25–35).</p>
+
+                        <p>We offer the following applications and supporting principles:</p>
+                    </div>
+
+                    <h3 class="subsection-title">Child Raising</h3>
+                    <div class="note-card prose">
+                        <p>Parents are responsible to raise their children in the knowledge of the Lord (Proverbs 22:6). They should be diligent in teaching them God’s Word (Deuteronomy 6:6–7). Scripture instructs parents to discipline their children when necessary. This is to be done with self-control, never in uncontrolled anger or in an injurious manner (Proverbs 19:18; 29:15; Galatians 5:22–23; James 1:19–20). Scripture cautions fathers about being overly demanding and thus provoking their children to anger or causing them to lose heart (Colossians 3:21). Rather, they are to nurture and instruct them (Ephesians 6:4).</p>
+                    </div>
+
+                    <h3 class="subsection-title">Schooling</h3>
+                    <div class="note-card prose">
+                        <p>In many countries today, Christian parents have a variety of options for the education of their children. These include schooling at home, Christian or secular private institutions, public schools, and private tutoring. Each of these can make a beneficial contribution in the education of children. Parents should regularly consider the needs of their children as individuals, the educational opportunities available, and the status of their family as a whole in deciding which option is best.</p>
+                    </div>
+
+                    <h3 class="subsection-title">Family Priorities</h3>
+                    <div class="note-card prose">
+                        <p>Keeping all our responsibilities as Christians in their proper balance can often be difficult. Though our families should have a special place in our hearts, we can unwittingly make them our top priority. Christ, however, must be at the center of our hearts with all our responsibilities arrayed around Him (Mark 12:30; Luke 14:26; 1 Peter 3:15). Only then can we be found faithful in all that God has given us to do. Only then can parents model lives of devotion to Christ before their children.</p>
+                    </div>
+
+                    <h3 class="subsection-title">Birth Control</h3>
+                    <div class="note-card prose">
+                        <p>Christians differ as to whether married couples should practice birth control. Some see contraceptives as a provision from God to enable couples to manage the size of their family responsibly. Others believe couples should leave the matter to God, saying that children are a gift from the Lord and that He has told us to be fruitful. Most agree that when the health of the woman is at stake, birth control should be used as a necessary remedy for a known malady. A Christian, of course, should never consider abortion as an option for controlling family size.</p>
+                        <p>Though the use of contraceptives should be addressed in the teaching of the church, the decision is best left as a personal one for each couple to decide. Couples should be careful, however, to make their decision for biblical reasons, not worldly ones. They should also be aware that some forms of birth control do not always stop conception, but prevent the fertilized egg from successfully implanting or remaining implanted in the womb.</p>
+                    </div>
+
+                    <h3 class="subsection-title">Divorce and Remarriage</h3>
+                    <div class="note-card prose">
+                        <p>God instituted marriage as a lifelong union. Many marriages fail, however, because of sin. When they do, Christians seeking to please God should be careful to follow biblical principles and the counsel of their elders. Christians who are unhappy in their marriage should remain together and work on their relationship. They should make every effort at reconciling their differences, forgiving one another as Christ has forgiven us (Ephesians 4:32; 1 Corinthians 7:11). One should not divorce the other (1 Corinthians 7:10–11). “For the Lord God of Israel says that He hates divorce” (Malachi 2:16). Should they choose to separate, they must live in that condition or be reconciled; they are not free to divorce and remarry (1 Corinthians 7:10–11). God views marriage as a lifelong covenant before Him that must be honored (Malachi 2:14). In death, however, the bond is severed. The surviving spouse is free to remarry, but only to another Christian (1 Corinthians 7:29).</p>
+                        <p>Some Pharisees asked Jesus, “Is it lawful for a man to divorce his wife for any cause at all?” (Matthew 19:3). He responded by reminding the questioners of the significance of marriage, saying, “They are no longer two, but one flesh. What therefore God has joined together, let no man separate” (Matthew 19:6). When they pressed Him further, Jesus added, “I say to you, whoever divorces his wife, except for sexual immorality, and marries another commits adultery” (Matthew 19:9). Here Jesus makes an exception for the case in which one spouse has committed sexual immorality. The other person may divorce. This is not required, but only permitted. Every attempt should be made at repentance, forgiveness, and reconciliation. When these efforts fail, divorce may be warranted. Since divorce is the dissolution of marriage, the innocent person is no longer bound and may remarry in the will of the Lord.</p>
+                        <p>Scripture also gives guidance for when one spouse is a Christian and the other is not (1 Corinthians 7:12–16). If the unbeliever is willing to continue in the marriage, the believer should not consider divorce. Yet if the unbeliever leaves the believer, “the brother or the sister is not under bondage in such cases, but God has called us to peace” (1 Corinthians 7:15). The Christian would be free to remarry as the Lord leads, but only to another Christian.</p>
+                        <p>The effects of divorce are severe and long lasting. It is only the step of last resort when it is clear that sexual immorality or desertion by an unbeliever has completely destroyed the union. Those whose marriages have failed should not despair. God is a master at rebuilding broken lives. The church of God likewise should be a place where all can find love, hope, and practical assistance. The elders are available to counsel and guide on the basis of the Word of God in any matter that concerns the life of God’s people at Colonial Hills.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Church Section -->
+            <section id="church" class="doctrine-section">
+                <span class="section-number">SECTION 07</span>
+                <h2 class="section-title">Church</h2>
+                <div class="rich-content">
+                    <div class="prose">
+                        <p>We affirm the following doctrines:</p>
+
+                        <p>We believe that God reveals the church in the New Testament. Paul writes in his letter to the Ephesians: “When you read you may understand my knowledge in the mystery of Christ which in other ages was not made known to the sons of men as it has now been revealed by the Spirit to His holy apostles and prophets” (Ephesians 3:4–5). Scripture refers to the church as “the mystery of Christ” (Ephesians 3:4). He unveiled it. He is the source of its life. He is its focus. Jesus said, “I will build my church” (Matthew 16:18). This is the first occurrence of the word “church” in the New Testament. A short time later, on the Jewish feast of Pentecost, His disciples were baptized with the Holy Spirit and the church was born (Acts 2:2–4).</p>
+
+                        <p>We believe that the church is composed of all those “who have been sanctified in Christ Jesus, called to be saints with all who in every place call on the name of Jesus Christ our Lord” (1 Corinthians 1:2). They are “people of God” (1 Peter 2:10). The Bible calls them “saints” (Philemon 5), “believers” (1 Corinthians 14:22), and “Christians” (Acts 11:26). It describes them as “saved” (Ephesians 2:8), “redeemed” (1 Peter 1:18), “forgiven” (1 John 2:12), “at peace with God” (Romans 5:1), and “holy and without blame before Him” (Ephesians 1:4). These have entered into a family relationship with God through Jesus Christ. The apostle John writes, “as many as received Him to them He gave the right to become children of God” (John 1:12). They have the privilege of addressing God as “Abba, Father” (Romans 8:15). This relationship is permanent. Should one of His children go astray, the Father disciplines him in love (Hebrews 12:6). He does not cast him out. God promises: “I will never leave you nor forsake you” (Hebrews 13:5). Elsewhere the Bible describes the intimate relationship between Christ and His church as that of a groom to his bride (Ephesians 5:25–33; 2 Corinthians 11:2). Speaking of marriage, the Bible says: “Christ loved the church and gave Himself up for her” (Ephesians 5:25). Scripture also uses the human body as a picture of the church. Christ is “the head of the body, the church” (Colossians 1:18). The redeemed are “the members of the body” (1 Corinthians 12:12).</p>
+
+                        <p>We believe that we are responsible to follow the teaching of the New Testament with regard to the church. God blessed Israel for completing the construction of the tabernacle “just as the Lord had commanded” (Exodus 39:43). In a similar manner, the Lord will bless us, if we follow His design for the church as outlined in the New Testament. Paul writes, “According to the grace of God which was given to me, as a wise master builder, I laid a foundation, and another is building upon it. But let each man be careful how he builds upon it. For no man can lay a foundation other than the one which is laid, which is Jesus Christ” (1 Corinthians 3:10–11).</p>
+                    </div>
+
+                    <h3 class="subsection-title">Reception</h3>
+                    <div class="note-card prose">
+                        <p>The local church should welcome in the love of Christ true Christians who visit their meetings. We are to “receive one another, just as Christ also received us to the glory of God” (Romans 15:7). As members of Christ’s body, the universal church, we are a family. We should not make distinctions based upon gender, race, language, tribe, nationality, or social status (Galatians 3:28; Colossians 3:11; James 2:1–9).</p>
+                        <p>We know a true believer first through his sound doctrine. A true believer will confess Jesus as Lord and Savior and have a clear understanding of Christ’s saving work on the cross (1 Corinthians 15:1–4; Galatians 1:8–9; Romans 10:9–10). He should have confessed Christ in baptism, or, if a new believer, be willing to do so. He should also hold to the foundational doctrines of the Christian faith, particularly with regard to the Person of God and the way of salvation. We should not expect a new believer to be able to clearly explain every doctrine of the faith, but he should know the basic truths of the Christian faith and be teachable and ready to learn. The Lord said, “My sheep hear My voice, and I know them, and they follow Me” (John 10:27).</p>
+                        <p>We know a true believer also by his holy walk. As a new creature in Christ, the fruit of repentance should be manifest (Matthew 3:8; Acts 26:20; James 2:14–26). There should be the practice of righteous living, not sin, and a new sensitivity to sinful conduct and attitudes (1 John 1:8–10; 2:4; 3:3–10). He should have a love for God and other believers, rather than a love for the world (John 8:42; 13:35; 14:21; 1 John 2:15; 3:14; 5:1).</p>
+                        <p>Should a Christian express interest in becoming part of the local body and making it his church home, the elders should inform him of the doctrinal position of the church and the responsibilities of church fellowship.</p>
+                        <p>Elders should not receive into fellowship a person who is under discipline from another church for biblical reasons (1 Corinthians 5:9–13). God respects the judgment of a local church with regard to discipline, and so should we (Matthew 18:15–20). To establish a person’s standing with his previous church, the elders might ask the person transferring for a letter of introduction from his previous church or contact them directly (2 Corinthians 3:1; Romans 16:1–2). Such a letter can also be helpful when Christians are just visiting another church. It should briefly introduce the person and state the status of his fellowship in his home church.</p>
+                    </div>
+
+                    <h3 class="subsection-title">Responsibilities of Fellowship in the Local Church</h3>
+                    <div class="note-card prose">
+                        <p>Christians within a local church must commit themselves to love, care, and pray for one another. As “Christ also loved the church and gave Himself up for her” (Ephesians 5:25), so they must love His church and sacrificially serve it. They should be faithful to the meetings of the church, coming together for teaching, fellowship, the breaking of bread, and prayer (Luke 22:17–20; Acts 2:42), “not forsaking our own assembling together, as is the habit of some” (Hebrews 10:25). They should use their spiritual gifts to build up one another (Romans 12:4–8; 1 Corinthians 12:4–27; Ephesians 4:12). They should give of their financial resources in a regular, proportional, systematic way, to provide for the ministry of the church (1 Corinthians 16:1–2).</p>
+                        <p>To be a truly New Testament church pleasing to the Lord, the saints must be correct both in their doctrine and their spiritual condition. They must be a living testimony of the truth, having lives empowered by the Holy Spirit. Even if they were to get everything right doctrinally, without love they would be nothing (1 Corinthians 13:1–2). They must always be aware that their conduct reflects upon Christ and His church. They are a “letter of Christ” (2 Corinthians 3:3), “known and read by all men” (2 Corinthians 3:2). For this reason, they must “maintain always a blameless conscience both before God and before men” (Acts 24:16). They must recognize their responsibility to resolve conflicts through biblical methods (Matthew 5:23–24; Matthew 18:15–20). They should be in submission to the elders of the church (Acts 20:17,28–31; Titus 1:7–9; Hebrews 13:17). They must accept the fact that they are accountable to the church and that unrepented sin may bring church discipline (Matthew 18:15–17; 1 Corinthians 5; 6:1–8).</p>
+                    </div>
+
+                    <h3 class="subsection-title">A Gathering of Believers</h3>
+                    <div class="note-card prose">
+                        <p>The meetings of the church are primarily gatherings of believers. For this reason, they should have the worship of God and the building up of the saints as their focus. Christians should be sensitive to the needs of visitors and make them feel welcome. Unless the purpose of the meeting is evangelistic, however, the church cannot be distracted from its responsibilities to remember Christ and edify His people.</p>
+                        <p>A healthy church is a growing church. We read in the New Testament that “the Lord was adding to their number day by day those who were being saved” (Acts 2:47). We should not measure a church, however, simply by how many people it attracts at its services. More important is the spiritual condition of its members. When it comes to church size, bigger is not always better. The principles of the New Testament church appear to work best within a certain range. When because of great size the elders can no longer effectively shepherd the flock or apply the principles of the New Testament, the church has become too large. Rather than working toward ever-increasing numbers of people and programs, the elders should prayerfully consider dividing the flock to form more local churches.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Elders Section -->
+            <section id="elders" class="doctrine-section">
+                <span class="section-number">SECTION 08</span>
+                <h2 class="section-title">Elders</h2>
+                <div class="rich-content">
+                    <div class="prose">
+                        <p>We affirm the following doctrines:</p>
+
+                        <p>We believe that the New Testament church was marked by simplicity. The disciples preached the gospel. Some believed and were baptized (Acts 2:41). The apostles gathered these new believers into assemblies of God’s people and formed local churches. These early Christians “were continually devoting themselves to the apostles’ teaching and to fellowship, to the breaking of bread and to prayer” (Acts 2:42). Each local church, overseen by elders (Acts 14:23; Philippians 1:1), was accountable directly to Christ.</p>
+
+                        <p>We believe that it is Christ’s rightful place to rule the worldwide church directly. “He is also head of the body, the church,” (Colossians 1:18), the “Chief Shepherd” (1 Peter 5:4), and “high priest” (Hebrews 8:1). In all things, he is to be “pre-eminent” (Colossians 1:18).</p>
+
+                        <p>We believe that Christ has ordained elders, also known as bishops, to oversee the local church (Acts 14:23; Acts 20:17,28; Titus 1:5,7). The Greek word translated “elders” means older men, indicating the spiritual maturity required for the position. The qualifications for the position are found in (Titus 1:5–9) and (1 Timothy 3:1–7). “Bishops” is the translation of a Greek word meaning overseers. This word has their function in view. In the New Testament church we find a plurality of elders, several men overseeing the church together. They supervise the people and ministries of the church. We can see the nature of their calling in Paul’s exhortation to the elders of the church of Ephesus: “take heed to yourself and to all the flock, among which the Holy Spirit has made you overseers, to shepherd the church of God which He purchased with His own blood” (Acts 20:28). From this verse we also see that it is the Holy Spirit who makes an overseer. Christians are to follow the elders of the church. “Obey those who rule over you and be submissive, for they watch over your souls, as those who must give account. Let them do so with joy and not with grief, for that would be unprofitable for you” (Hebrews 13:17).</p>
+
+                        <p>We offer the following applications and supporting principles:</p>
+                    </div>
+
+                    <h3 class="subsection-title">Recognition of Elders</h3>
+                    <div class="note-card prose">
+                        <p>Since the saints are responsible to submit to their elders, formal recognition of the men whom God has called to serve as the elders is necessary. It becomes evident that the Holy Spirit has called a man when he is doing the work of an overseer and meeting the biblical qualifications of an elder. He may be formally recognized as an elder by various means. In a new church, those who planted the church can appoint the initial elders. We see an example of this in the ministry of Paul and Barnabas (Acts 14:23). In already established churches, the existing elders can recognize additional elders.</p>
+                        <p>In churches without recognized elders, a committee of mature men could form to discern the matter and solicit input from the congregation. Alternately, a church could ask the assistance of the elders of another church or a respected teacher to assist them in the process of recognition. Paul, for example, instructed Titus to assist the churches in Crete by appointing elders in every city (Titus 1:5).</p>
+                    </div>
+
+                    <h3 class="subsection-title">Work of the Elders</h3>
+                    <div class="note-card prose">
+                        <p>The Lord Jesus is the Chief Shepherd, who cares for His church from His heavenly throne (1 Peter 5:4). Elders serve under Christ and are accountable to Him (Colossians 1:18; Hebrews 13:17). They must take a spiritual approach to ministry, serving in true reliance upon Christ. This requires that they be men of faith and prayer. In all things they must seek Christ’s wisdom and guidance.</p>
+                        <p>The work of the elders is “to shepherd the church of God” (Acts 20:28). This means personally guarding and caring for the flock. They must pray for the saints. They must visit them. They must be ready to encourage, exhort, admonish, and comfort. They must be willing to have their lives disrupted by the needs of the saints. Should problems arise within the church such as grumbling or false teaching, it is the elders who are responsible to take the necessary actions to correct the problem (Titus 1:9–11; 3:10). For this reason, elders must be diligent students of the Bible, though academic degrees are not required.</p>
+                        <p>At the same time, elders are to be servant-leaders, never lording their position over the saints, but serving as an example to them (1 Peter 5:1–4). They should avoid establishing rules and regulations for every circumstance of life. Rather, in the gracious spirit of the New Testament, they should teach the saints biblical principles and exhort them to walk in the power of the Holy Spirit (Galatians 4:1–11; Colossians 2:20–23). The goal should not be outward conformity, but inward reality founded upon personal convictions. Paul instructed Timothy, “the purpose of the commandment is love from a pure heart and from a good conscience and from sincere faith” (1 Timothy 1:5). Elders must always remember that the Lord Jesus is the Chief Shepherd and the saints are His sheep. They should not take upon themselves titles that would obscure the unique and personal relationship of the flock to Christ (Matthew 23:8–12).</p>
+                        <p>Elders must also remain open to new and fresh ways of expressing the timeless principles of the New Testament. They should not tie themselves to practices that have become outdated and ineffective, lest the saints, particularly the younger generations, wrongly conclude that the principles of the New Testament church also are outdated and traditional, rather than biblical.</p>
+                        <p>The New Testament always refers to a group of men overseeing the local church, never to a single man. To benefit from this plurality, however, elders must seek guidance from the Holy Spirit and work as a team. They should oversee the flock together. Combining their insights, experience, and spiritual gifts, they bring balance, mutual accountability, and wisdom to the oversight. For this to be effective, however, they must listen to one another, accept counsel, and even correction if necessary. They should make their decisions in unity, acting only when there is a consensus. No individual should dominate, seeking to be first among the elders (3 John 1:9). Should one of the elders fail morally, he should confess it to his fellow elders, not waiting for the matter to be discovered by others. He should then submit to their counsel.</p>
+                        <p>Each elder must support the doctrinal position of the church, Though on some secondary issues an elder may personally understand some matters differently, he should not publicly express positions contrary to that of the elders as a whole. If in the course of time an elder is no longer able to support the doctrinal position of the church, he should step down from the eldership rather than cause division.</p>
+                    </div>
+
+                    <h3 class="subsection-title">Age of Elders</h3>
+                    <div class="note-card prose">
+                        <p>The church should not recognize a man as an elder who is a “new convert” (1 Timothy 3:6). Neither should it recognize a man they have known for only a short time (1 Timothy 5:22). The church should not, however, be unreasonably slow in recognizing a man’s calling. At the end of his first missionary journey, Paul appointed elders over all the churches he had planted (Acts 14:23).</p>
+                        <p>One need not be elderly to be an elder. The term signifies the man’s spiritual maturity, not his physical age. At the age of 30, Levites entered the full service of the Lord (Numbers 4:47). It appears that the Lord’s apostles were also young men, probably in their twenties when He called them. The apostle Paul was likely in his thirties when called. The Lord Jesus had completed His earthly ministry by the age of 33.</p>
+                        <p>The calling to serve as an elder is not necessarily a lifetime appointment. The work of an overseer requires good physical and mental vitality. Elders must manage busy schedules and face difficult issues with grace and poise. They must be available to shepherd the sheep. This demanding work becomes more difficult with advancing age. Though a man may continue to meet the character qualities of an elder, in his waning years he may not be able to do the work of an overseer. In such cases, he should voluntarily step down. This is best done well before the effects of aging are apparent. Recognizing that a man is not always the best judge of his own abilities, older elders should look to their fellow elders for guidance in this matter. Former elders should remain active in the ministry of the church, using their gifts and experience to encourage the body.</p>
+                        <p>Scripture says nothing specific about the retirement age of an elder. We should keep in mind, however, that according to the Bible a normal lifespan is “seventy years, or if due to strength, eighty years” (Psalm 90:10). We should honor men who have served well as elders and then gracefully stepped down, being replaced by spiritual sons whom they have trained to carry on the work.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Deacons Section -->
+            <section id="deacons" class="doctrine-section">
+                <span class="section-number">SECTION 09</span>
+                <h2 class="section-title">Deacons</h2>
+                <div class="rich-content">
+                    <div class="prose">
+                        <p>We affirm the following doctrines:</p>
+
+                        <p>We believe that God appoints some Christians to serve as recognized servants of the church, called deacons. They are not a second tier of leaders, exercising authority of their own, but spiritual Christians called by God to help free the elders from certain duties so that the elders might have adequate time for prayer and the ministry of the Word (Acts 6:1-7). Scripture lists the qualifications of a deacon in (1 Timothy 3:8-13). Deacons serve in various ministries, such as distributing food to the needy of the church (Acts 6:1-6).</p>
+
+                        <p>We offer the following applications and supporting principles:</p>
+                    </div>
+
+                    <h3 class="subsection-title">Work of Deacons</h3>
+                    <div class="note-card prose">
+                        <p>Deacons are formally recognized servants of the church. They are to be spiritual Christians, such as Stephen and Philip, not simply skilled accountants or practical workers. They must serve with God’s strength, wisdom, and grace. Those who “have served well as deacons obtain for themselves a high standing and great confidence in the faith that is in Christ Jesus” (1 Timothy 3:13). The saints should recognize their status as those ministering in the church and willingly serve alongside them.</p>
+                        <p>Deacons, however, are not a governing board. They serve the church in submission to the elders. They are to follow the direction of the elders with regard to the use of funds.</p>
+                    </div>
+
+                    <h3 class="subsection-title">Finances</h3>
+                    <div class="note-card prose">
+                        <p>Deacons usually manage the church’s finances. In doing so they should adopt the same accounting practices and standards used by professional accountants in their area, being careful to avoid false accusations or actual loss of church funds. They should report regularly to the elders and the saints as to the financial status of the church.</p>
+                        <p>Often churches find it best to take the offering following the Lord’s Supper when mostly believers are present, rather than at more public meetings where visitors might misunderstand our motives. Elders and deacons should guard against the church becoming a place of constant fund raising and the solicitation of funds. Rather they should teach the saints their biblical responsibility to give to the work of the Lord through the church. The Old Testament required a Jew living under the Law to give ten percent of his income to the Lord; this is commonly called tithing. The command to tithe is not in keeping with the covenant of grace. Under the New</p>
+                        <p>Covenant we are told of a Savior who has given His all for us. God then waits to see what we will give in response.</p>
+                    </div>
+
+                    <h3 class="subsection-title">The Church Facility</h3>
+                    <div class="note-card prose">
+                        <p>Deacons usually care for the building where the church meets. It should reflect well upon the faith and commitment to the Lord of the Christians who assemble there. The building should be clean and in good repair. It should provide for the needs of the elderly and disabled.</p>
+                        <p>Though some mistakenly think of the church as a building with cross and steeple, the church of the New Testament has no walls. It is the people of God, the body of Christ. Christians don’t go to church; they are the church. The place in which they meet—whether a home, rented quarters, or a building specifically designed for that purpose—is of secondary importance. It is far less important than the spiritual condition of the people who meet there. Christians should, therefore, be content with what God provides and not spend great sums of the Lord’s money or commit themselves to large debts so as to build impressive structures.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gifts and Calling Section -->
+            <section id="gifts" class="doctrine-section">
+                <span class="section-number">SECTION 10</span>
+                <h2 class="section-title">Gifts and Calling</h2>
+                <div class="rich-content">
+                    <div class="prose">
+                        <p>We affirm the following doctrines:</p>
+
+                        <p>We believe that the Lord Jesus promised His disciples to send the Holy Spirit to permanently indwell them. “And I will pray the Father, and He will give you another Helper, that He may abide with you forever; the Spirit of truth, whom the world cannot receive, because it neither sees Him nor knows Him; but you know Him for He dwells with you, and will be in you” (John 14:16,17). They would be “baptized with the Holy Spirit” (Acts 1:5), receiving power to be His witnesses (Acts 1:8). This is the blessing of every true born again Christian, occurring at the moment of salvation (Romans 8:9). “For by one Spirit we were all baptized into one body, whether Jews or Greeks, whether slaves or free, and we were all made to drink of one Spirit” (1 Corinthians 12:13). This baptism makes us members of Christ’s body the church. Each Christian is also sealed in Christ “with the Holy Spirit of promise, who is given as a pledge of our inheritance, with a view to the redemption of God’s own possession, to the praise of His glory” (Ephesians 1:13–14).</p>
+
+                        <p>We believe that though the Holy Spirit indwells each Christian, they experience the fullness of the Spirit in various degrees in accordance with their faith and obedience. Scripture instructs, “Be filled with the Spirit, speaking to one another in psalms and hymns and spiritual songs, singing and making melody with your heart to the Lord; always giving thanks for all things in the name of our Lord Jesus Christ to God, even the Father; and be subject to one another in the fear of Christ” (Ephesians 5:18–21).</p>
+
+                        <p>We believe that the Holy Spirit has given spiritual gifts or abilities to each Christian for the common good (1 Corinthians 12:7). We are to use these gifts to God’s glory in serving and building one another up and preparing others for Christian ministry (Ephesians 4:11–13; 1 Corinthians 14:12; 1 Peter 4:10).</p>
+                    </div>
+
+                    <h3 class="subsection-title">The Christian’s Calling</h3>
+                    <div class="note-card prose">
+                        <p>As Christians we are to live lives of devotion to Christ. Paul writes “For the love of Christ compels us, because we judge thus: that if One died for all, then all died; and He died for all, that those who live should live no longer for themselves, but for Him who died for them and rose again” (2 Corinthians 5:14,15). We are to yield our lives to God. Paul writes, “I beseech you therefore, brethren, by the mercies of God, that you present your bodies a living sacrifice, holy, acceptable to God, which is your reasonable service. And do not be conformed to this world, but be transformed by the renewing of your mind, that you may prove what is that good and acceptable and perfect will of God” (Romans 12:1,2).</p>
+                        <p>All Christians share a common calling to love and good works. This begins within the church. Jesus said, “By this all will know that you are My disciples, if you have love for one another” (John 13:35). With God as our Father, we should love one another as our family, treating older men and women as fathers and mothers, younger men and women as brothers and sisters (1 Timothy 5:1). Gifted and empowered by the Holy Spirit, we have a supernatural ability to show love in practical ways. The gifts of mercy, helps, serving, giving, administration, and exhortation are especially important in ministering to Christians in need. The widow and the orphan have a special place in the heart of God and should therefore be in ours (Isaiah 1:17; James 1:27; 1 Timothy 5:3–16). Practical Christian love should also overflow into our communities. Jesus taught, “You shall love your neighbor as yourself” (Matthew 22:39). Paul wrote, “while we have opportunity, let us do good to all men” (Galatians 6:10). We are especially to be concerned about the needs of the poor, the downtrodden, the oppressed, and the stranger (Luke 4:18; Leviticus 19:34; Hebrews 13:2).</p>
+                        <p>As Christians, we have a high calling: “to serve the living God” (Hebrews 9:14). We should not confuse our vocation with our occupation. Though every job, no matter how menial, when done to the glory of God is noble, our calling goes beyond working to provide for the need of ourselves and our families. Each of us has a personal calling. We are God’s workmanship, “created in Christ Jesus for good works, which God prepared beforehand, that we should walk in them” (Ephesians 2:10).</p>
+                        <p>God reveals His perfect will for our lives as we seek His guidance through prayer, the study of Scripture, godly counsel, the inward leading of the Spirit, and the circumstances of life. We must seek God’s will for our lives in faith, trusting Him to lead us (Proverbs 3:5,6). Jesus promised His disciples: “He who follows Me shall not walk in the darkness, but have the light of life” (John 8:12). God’s Word promises, “If any of you lacks wisdom, let him ask of God, who gives to all liberally and without reproach, and it will be given to him” (James 1:5).</p>
+                    </div>
+
+                    <h3 class="subsection-title">Spiritual Gifts</h3>
+                    <div class="note-card prose">
+                        <p>God’s will for a Christian’s life is also related to his or her spiritual gift. Scripture exhorts, “As each one has received a gift, minister it to one another, as good stewards of the manifold grace of God” (1 Peter 4:10). Paul lists some of the spiritual gifts in his letter to the Romans as the gifts of prophecy, service, teaching, exhortation, giving, leading, and mercy (Romans 12:6–8). Additional gifts are listed elsewhere, including the word of wisdom, the word of knowledge, faith, healing, miracles, the distinguishing of spirits, tongues, and the interpretation of tongues (1 Corinthians 12:8–10,12:28; Ephesians 4:11; 1 Peter 4:11).</p>
+                        <p>The church is to be a place where Christians accept their responsibility to edify the church by using their spiritual gift (Ephesians 4:13). With Christ’s enablement “the whole body, joined and knit together by what every joint supplies, according to the effective working by which every part does its share, causes growth of the body for the edifying of itself in love” (Ephesians 4:16). In this way, we grow up “to the measure of the stature of the fullness of Christ” (Ephesians 4:13).</p>
+                    </div>
+
+                    <h3 class="subsection-title">Differences in the Calling of Men and Women</h3>
+                    <div class="note-card prose">
+                        <p>The spiritual standing of Christian men and women in Christ is identical. “For you are all sons of God through faith in Christ Jesus. For as many of you as were baptized into Christ have put on Christ. There is neither Jew nor Greek, there is neither slave nor free, there is neither male nor female; for you are all one in Christ Jesus” (Galatians 3:26–28). Christian men and women also share a common calling in many respects. All are to live to the glory of God as disciples of Christ (1 Corinthians 10:31). All are priests unto God (1 Peter 2:4–10). All are gifted by the Holy Spirit and called to use their gifts for the edification of the church (1 Corinthians 12:7). This includes various forms of evangelistic and pastoral ministries.</p>
+                        <p>Scripture distinguishes the calling of men and women in two areas. These differences have their basis in God’s purpose in creation. For this reason they are timeless, applying to us today even as when they were written.</p>
+                        <p>The first area is with regard to the home. Husbands are to serve as the spiritual heads of their households. They are to love, nourish, and cherish their wives (Ephesians 5:23–33). Together with their wives, they are responsible to raise their children in a knowledge of the Lord (Deuteronomy 6:6,7; Proverbs 1:7–9; 2 Timothy 3:14,15). Christian wives are to be a help and companion to their husbands, being submissive to them (Genesis 2:20–25; Malachi 2:14; 1 Peter 3:1). The Scriptures do not teach that all women are subject to all men, but that each wife should be subject to her own husband (Ephesians 5:22; 1 Peter 3:1–5). This does not imply inferiority just as Christ’s subjection to His Father does not imply inferiority (1 Corinthians 11:3).</p>
+                        <p>The second area in which Scripture distinguishes the calling of men and women is with respect to ministry. God calls some Christian men to serve as the overseers and the authoritative teachers of the church (1 Timothy 2:12; 3:1–7). In the ministry of the church, a woman is not to “exercise authority over a man” (1 Timothy 2:12). Only the men of the church are to speak out in the public meetings of the church so as to direct the congregation (1 Corinthians 14:34,35). Christian women are to receive instruction quietly, rather than striving against the teacher (1 Timothy 2:11–15; 1 Corinthians 14:34,35). Mature Christian women have a calling to minister to other women: “Older women likewise that they may be reverent in behavior, not slanderers, not given to much wine, teachers of good things, that they may admonish the young women to love their husbands, to love their children, to be discreet, chaste, homemakers, good, obedient to their own husbands, that the word of God may not be blasphemed,” (Titus 2:3–5).</p>
+                    </div>
+
+                    <h3 class="subsection-title">Head Covering</h3>
+                    <div class="note-card prose">
+                        <p>God’s order of authority for the Christian is stated in Scripture as: “Christ is the head of every man, and the man is the head of a woman, and God is the head of Christ” (1 Corinthians 11:3). It also states that while both men and women were created in the image of God, man is the “glory of God, but the woman is the glory of man” (1 Corinthians 11:7). To convey their acceptance of this order, Christian men are to uncover their heads while praying or prophesying and women are to cover theirs (1 Corinthians 11:3,4). Praying and prophesying with his head uncovered, a man testifies to his responsibility to live to God’s glory (1 Corinthians 11:7). Praying and prophesying with head covered, a woman testifies to her acceptance of God’s order of headship in the church. She also does this as a witness to “the angels” (1 Corinthians 11:10).</p>
+                        <p>We should be patient with those who may not readily understand or accept this teaching, rather than insisting on compliance. If not practiced from personal conviction, head covering is not only a meaningless expression of submission but potentially a hypocritical one.</p>
+                    </div>
+
+                    <h3 class="subsection-title">Personal Spiritual Experience</h3>
+                    <div class="note-card prose">
+                        <p>We should use the Bible to interpret personal spiritual experiences, rather than using experience to interpret the Bible or validate a practice or doctrine. Failure to do this can lead to mysticism, aberrant behavior, and serious doctrinal error. Scripture exhorts us to “test all things; hold fast what is good” (1 Thessalonians 5:21). We are “in real knowledge and all discernment, . . . [to] approve the things that are excellent” (Philippians 1:9,10). We can be confident that the Holy Spirit will never act contrary to that which He has inspired in the written Scriptures. The “sword of the Spirit . . . is the word of God” (Ephesians 6:17).</p>
+                    </div>
+
+                    <h3 class="subsection-title">Gift of Tongues</h3>
+                    <div class="note-card prose">
+                        <p>The New Testament presents the gift of tongues as the ability to speak God’s message in a foreign language without prior instruction (Acts 2:1–21). Though Scripture states, “Do not forbid to speak in tongues” (1 Corinthians 14:39), it sets specific limits on the use of this gift in the church. Only two or three should speak (1 Corinthians 14:27). They should do so one person at a time and only if there is an interpreter present (1 Corinthians 14:27,28). As with all the gifts, tongues are for the common good, not self- edification (1 Corinthians 12:7). Although this gift existed in the Apostolic times we have not seen convincing evidence that God is using this gift today. Though some in other churches claim to speak in tongues, typically they do so in an unintelligible manner, all at once, and without interpretation. Such fails to meet the biblical description and standards for the gift. Much of this appears to be of human origin, a non-miraculous practice, which linguists call free vocalization.</p>
+                    </div>
+
+                    <h3 class="subsection-title">Baptism of the Holy Spirit</h3>
+                    <div class="note-card prose">
+                        <p>Every believer receives the baptism of the Holy Spirit at the moment of salvation. “By one Spirit we were all baptized into one body, . . . and have all been made to drink into one Spirit” (1 Corinthians 12:13). Scripture does not teach that the baptism of the Holy Spirit is a “second blessing,” as some claim, or that Christians must petition the Lord and wait on Him in order to receive this baptism. The Holy Spirit distributes the gifts “to each one individually as He wills” (1 Corinthians 12:11).</p>
+                    </div>
+
+                    <h3 class="subsection-title">Miracles and Healing</h3>
+                    <div class="note-card prose">
+                        <p>As in biblical times, God still works in miraculous ways, including healings. Among the greatest of these is the rebirth that comes through faith in our Lord Jesus. We should not expect supernatural manifestations such as physical healings, however, to be commonplace. In biblical times, God used signs and wonders and various miracles sparingly, usually during particular periods in history to validate prophetic utterance or new revelation (Hebrews 2:2–4). Much of what is heralded today as miraculous, fails to meet the high standards found in Scripture. When this is combined with the misuse of spiritual gifts, showmanship, and the constant solicitation of funds, we should question whether it is indeed miraculous at all (2 Peter 2:12–19; 1 Timothy 6:3–5; Titus 1:11).</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Teaching Section -->
+            <section id="teaching" class="doctrine-section">
+                <span class="section-number">SECTION 11</span>
+                <h2 class="section-title">Teaching</h2>
+                <div class="rich-content">
+                    <div class="prose">
+                        <p>We affirm the following doctrines:</p>
+
+                        <p>We believe that, like the early church, we should be continually devoting ourselves “to the apostles’ doctrine and fellowship, in the breaking of bread and in prayers” (Acts 2:42).</p>
+
+                        <p>We believe that being devoted to the apostles’ teaching means faithfully reading and studying the Scriptures. Paul exhorted Timothy, “Be diligent to present yourself approved to God as a workman who does not need to be ashamed, handling accurately the word of truth” (2 Timothy 2:15).</p>
+
+                        <p>We believe that the Holy Spirit is the teacher of the church (John 16:14; Ephesians 6:17; 1 John 2:27). As we walk in the Spirit, He guides each of us toward the true meaning of Scripture. The Holy Spirit also works through those He has gifted as teachers (1 Corinthians 12:28; Ephesians 4:11). Their teaching, however, is imperfect and must be judged by Scripture (1 Corinthians 14:29; 1 Thessalonians 5:21).</p>
+                    </div>
+
+                    <h3 class="subsection-title">Church-Based Teaching</h3>
+                    <div class="note-card prose">
+                        <p>The local church is to be a place of teaching, training, service, and spiritual growth. This process is outlined in (Ephesians 4:11–16), which states that Christ has given the church some to be apostles, some prophets, some evangelists, and some pastors and teachers, “for the equipping of the saints for the work of ministry, for the edifying of the body of Christ” (Ephesians 4:11–12). Each Christian is to use his or her spiritual gift to build up others in their faith. The goal is that we would all come to “the unity of the faith, and of the knowledge of the Son of God, to a perfect man, to the measure of the stature of the fullness of Christ” (Ephesians 4:13).</p>
+                        <p>Christian training should be centered in the church and under the oversight of the elders. It should focus on character development, personal holiness, practical application, training for service, and a comprehensive study of the Scriptures. It is significant that the biblical requirements for Christian leadership stress personal character qualities (1 Timothy 3:1–7). Teaching and training should begin with the children. Sunday school classes and summer camps have also proven effective means of nurturing children. The training of adults may take the form of courses, seminars, internships, one-on-one discipleship, retreats, and short-term missionary exposure.</p>
+                    </div>
+
+                    <h3 class="subsection-title">Bible institutions and other teaching ministries</h3>
+                    <div class="note-card prose">
+                        <p>Bible institutions and other teaching ministries can assist the church by bringing together gifted teachers, intensive learning opportunities, and classes on topics requiring special expertise. Christians, however, should be careful not to make ministries outside the church their primary source of teaching. God has placed us under the authority of elders to shepherd and protect us. Christians who receive their teaching elsewhere do not benefit from the pastoral teaching ministry of their elders and sometimes develop divergent views.</p>
+                    </div>
+
+                    <h3 class="subsection-title">Teachers</h3>
+                    <div class="note-card prose">
+                        <p>To some degree, God has called every Christian to teach. All of us are to teach godliness by our example (Philippians 3:17; 1 Peter 1:16). We are also to use God’s word to encourage and admonish one another (Colossians 3:16; Romans 15:14). We are to use our spiritual gift to build one another up (1 Corinthians 12:7).</p>
+                        <p>In a more formal sense, authoritative teaching—public, declarative interpretation and exposition of Scripture—should be conducted by those men recognized by the elders as qualified to teach (James 3:1; 1 Corinthians 12:28–29; 1 Timothy 2:12–14). The elders, recognizing the calling of these men, should give them opportunity. Elders should also take advantage of the ministry of itinerant preachers whom God has called to serve the churches as teachers and evangelists (1 Corinthians 16:10–16; Ephesians 4:11–12; 3 John 1:5–8).</p>
+                        <p>The public teaching of the Word in the church should not be the ministry of all men equally. We must distinguish the priesthood of all believers from the gift of teaching. Though all are priests unto God, not all are called to teach (1 Corinthians 12:29). Neither should the public teaching of the Word be the ministry of one man, except if by necessity for a time. The elders should take great care before authorizing a man to teach, knowing that there will be false teachers who will rise up from within the church (Acts 20:28–31; 2 Peter 2:1; 1 Timothy 5:22).</p>
+                        <p>Teachers should explain and apply the text, teaching directly from the Scriptures (2 Timothy 3:14–17; 4:1–4). Teaching should emphasize the doctrines of God’s Word so that the saints might be solidly grounded in truth (Ephesians 4:11–16; 1 Timothy 3:15). Teachers should not use the pulpit for promoting secular philosophy, psychology, social theory, or governmental politics (Matthew 22:21; Colossians 2:6–8).</p>
+                        <p>Gifted and mature Christians, both men and women, must invest their lives in the next generation, passing on what God has entrusted to them.</p>
+                    </div>
+
+                    <h3 class="subsection-title">Cautions Against Impropriety</h3>
+                    <div class="note-card prose">
+                        <p>Christians involved in personal ministry must be careful to guard against sexual temptation and false accusation. Those counseling or visiting someone of the opposite gender should always do so in the company of another person. Men should disciple men; women should disciple women. Elders should utilize the help of the mature women of the church to minister to the other women on matters of the family, home, and personal holiness (Titus 2:3–5).</p>
+                        <p>Churches should exercise extra caution in selecting people to work in ministries to children. Elders should know the workers well and be familiar with their background and reputation. To guard against sexual impropriety and false accusation, two workers should be in the company of the children at all times. Workers should report behavioral problems needing correction to the child’s parents, rather than addressing it themselves. They should immediately report serious problems to the elders and to the civil authorities, if warranted.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Fellowship Section -->
+            <section id="fellowship" class="doctrine-section">
+                <span class="section-number">SECTION 12</span>
+                <h2 class="section-title">Fellowship</h2>
+                <div class="rich-content">
+                    <div class="prose">
+                        <p>We affirm the following doctrines:</p>
+
+                        <p>We believe that as Christians we should be continually devoting ourselves "to fellowship" (Acts 2:42). This fellowship is based on our common relationship "with the Father, and with His Son Jesus Christ" (1 John 1:3). It involves a sharing of our lives in Christ with one another. This manifests itself in many ways, such as enjoying time together in worship, prayer, and Bible study, welcoming one another into our homes, and sharing our resources with those in need (Acts 2:44-46; Romans 15:26; 1 Corinthians 13:1-13; 1 Thessalonians 2:8).</p>
+
+                        <p>We believe that our fellowship as Christians extends to all true believers. Together we are the "church of God" (Galatians 1:13), "the body of Christ" (Ephesians 4:12). We refer to the church as a whole as the universal church. The universal church is one: "There is one body and one Spirit, just as you were called in one hope of your calling; one Lord, one faith, one baptism" (Ephesians 4:4,5).</p>
+
+                        <p>We believe that Christian fellowship should also be expressed between churches. In Scripture we find reference to the church in various locations: "the church in Jerusalem" (Acts 8:1), "the church at Antioch" (Acts 13:1), "the church of God which is at Corinth" (1 Corinthians 1:2). Scripture refers to them collectively as "the churches of Christ" (Romans 16:16). We refer to the churches in various locations as local churches.</p>
+
+                        <p>We believe that Christians gathering together as a local church should be one, making every effort to maintain their unity (1 Corinthians 1:10, Philippians 1:1).</p>
+                    </div>
+
+                    <h3 class="subsection-title">Fellowship in the Universal Church</h3>
+                    <div class="note-card prose">
+                        <p>Though the Scriptures teach that each local church is autonomous, reporting directly to the Lord, they also teach that churches are interconnected in Christ. Christians should pray for one another and show loving concern (2 Corinthians 11:28). They should be an example and encouragement to one another (1 Thessalonians 1:7; 2:14; 2 Thessalonians 1:4). They should be willing to support those churches which are in need (Galatians 2:10; 2 Corinthians 8:1). They should cooperate whenever possible in reaching their common goals.</p>
+                        <p>In all that we do, we should be careful not to form sectarian, elitist, or critical attitudes toward other Christians who practice their faith differently than we do (Romans 14:1; 2 Timothy 2:14). We recognize that God is at work in many Christian groups today, using them for His glory. We should express the unity of the universal church by acknowledging as brothers and sisters in the Lord all who truly know Him, regardless of their church affiliation. We should be open and gracious toward them in Christian love. It is our blessing to rejoice in every triumph of the gospel (Mark 9:39,40; Philippians 1:18).</p>
+                        <p>This is not to say that we are to accept all who claim to be Christian regardless of their doctrine or conduct. Some have so tainted their testimony with such aberrant practices and sinful conduct that fellowship is no longer possible (Romans 16:17-19; 1 Thessalonians 5:22; 2 Thessalonians 3:6-15; 1 Timothy 6:3-5). Some churches no longer preach the gospel and have departed from the faith. This falling away or apostasy is predicted in Scripture (1 Timothy 4:1; 2 Timothy 3:1-9; Thessalonians 2:1-3). Some have "another Jesus . . . a different spirit . . . or a different gospel" (2 Corinthians 11:4). Others hold to a false gospel of salvation through faith plus good works, the same heresy condemned by the book of Galatians. Our God is a jealous God (Exodus 20:5; 34:14; Deuteronomy 5:9). We cannot participate in prayer or worship with false Christians or with people of other religions (Exodus 20:3-6; 2 Corinthians 6:14-18; 1 John 5:21; Revelation 18:4,5).</p>
+                    </div>
+
+                    <h3 class="subsection-title">Unity in the Local Church among Believers</h3>
+                    <div class="note-card prose">
+                        <p>Unity within the local church cannot be achieved without love. It is "the bond of perfection" (Colossians 3:14). Love brings brothers and sisters in Christ together. "Above all," the Spirit reminds us, "have fervent love for one another, for love will cover a multitude of sins" (1 Peter 4:8).</p>
+                        <p>Unity is only possible among humble people. Pride and division go hand-in-hand (Proverbs 13:10). Significantly, the same passages that tells us to be "like minded, having the same love, being of one accord, of one mind" (Philippians 2:2), also tell us: "let nothing be done through selfish ambition or conceit, but in lowliness of mind let each esteem others better than himself. Let each of you look out not only for his own interests, but also for the interests of others." (Philippians 2:3,4). The Lord Jesus is the perfect example (Philippians 2:5-11).</p>
+                        <p>For a local church to remain united, those in fellowship must be careful in their speech. The Bible tells us, "Do not speak evil of one another, brethren" (James 4:11). Spreading a bad report, grumbling, or gossiping can only cause disunity in the body. Scripture warns that "the tongue is a little member and boasts great things. Behold, how great a forest a little fire kindles!" (James 3:5). The tongue can divide a church, destroying the work of God. This is a very serious sin that God will not tolerate (1 Corinthians 3:17). They should also remember that the Lord considers grumbling against His delegated shepherds to be grumbling against Himself (Exodus 16:8). A careless or mean-spirited word can also damage a person’s reputation. A good rule of thumb is to not speak to others about an offense or a complaint, unless the person you are talking to is directly part of the problem or part of the solution. This normally means speaking to the person who offended, not others.</p>
+                        <p>Likewise, we must be careful regarding that to which we listen. We should remind a person spreading his complaints through the church that he is responsible to go and speak privately and directly to the person with whom he has the problem. He should not be speaking to others in the church about the matter. In this way the person is encouraged to resolve the matter in a biblical manner and the problem is not spread further. Scripture says, "where there is no wood the fire goes out; and where there is no talebearer the strife ceases." (Proverbs 26:20). Similarly, if the person has a complaint about how things are being done in the church, ask him to speak directly to the person in charge of the ministry in question or to speak to the elders of the church. In this way the appropriate person can address the problem without creating disunity in the church.</p>
+                    </div>
+
+                    <h3 class="subsection-title">Unity in the Local Church between the Saints and the Elders</h3>
+                    <div class="note-card prose">
+                        <p>For the flock to be united, the elders must be men of conviction who know where they stand on important issues and are able to communicate their position to the flock. Elders must hold "fast the faithful word as he has been taught, that he may be able, by sound doctrine, both to exhort and convict those who contradict." (Titus 1:9).</p>
+                        <p>There may be times when some in the church do not understand or agree with a decision of the elders. At these times, they should trust their elders and pray for them. Often there are confidential matters involved that have affected the elders’ decision which they cannot share publicly. The congregation should take comfort in the fact that it is the elders, not they, who must give an account to the Lord for the flock (Hebrews. 13:17).</p>
+                        <p>Christians who differ with their elders should refrain from trying to persuade others in the church of their own opinions or beliefs. This can only cause division (Romans 16:17; 2 Timothy 2:23-26; Titus 3:9-11). They should feel welcome to discuss the matter privately with their elders. They should be willing to study the Scriptures with their elders to resolve such differences. This will take time, commitment, and prayer. If in the end they are still unable to find agreement, it would be hoped that they could remain in fellowship in the assembly, holding their views privately. As to the fundamentals of the faith, there should be unity. As to matters of application and beliefs of secondary importance, there should be liberty. In all things there should be love, living our faith with balance, moderation, and mutual respect.</p>
+                        <p>If for some reason a person who has different views is unable to remain in happy fellowship, he should find another church where he will be content. He should leave the church quietly and peacefully, not taking others with him, communicating with his elders, and hopefully receiving their blessing.</p>
+                        <p>Maintaining unity in the local church is essential if the work of God is to go forward. When churches divide, the results are tragic and long lasting. When Christians overcome their problems, God is glorified, and the saints grow in character and in their relationships. Even churches fragmented by pride, offenses, and controversies can be reunited with God’s help. The church of Corinth was in such a state, nevertheless Paul wrote to them, "I plead with you brethren, by the name of our Lord Jesus Christ, that you all speak the same thing, and that there be no divisions among you, but that you be perfectly joined together in the same mind and in the same judgment" (1 Corinthians 1:10). Restoration to unity requires repentance. Once achieved, we must be "endeavoring to keep the unity of the Spirit in the bond of peace" (Ephesians 4:3).</p>
+                    </div>
+
+                    <h3 class="subsection-title">Conflict Resolution</h3>
+                    <div class="note-card prose">
+                        <p>Often broken relationships between individuals are the cause of division in the church. Even small offenses, if not covered by love or resolved in a biblical manner, can accumulate and drive people apart. Resolving an offense can be difficult, but is a necessary part of maintaining unity and love among Christians. Jesus outlined a four-step process for resolving offenses.</p>
+                        <p>The first step is to talk to the person privately. Jesus taught, "If your brother sins against you, go and tell him his fault between you and him alone. If he hears you, you have gained your brother" (Matthew 18:15). Beginning with prayer, the person should explain the nature of the offense to the offending party, stating it clearly and fairly. He should use the Scriptures, explaining how the person’s actions were contrary to God’s Word. He should avoid inflammatory words, overstating the matter, or dredging up long past events. He should express his desire to see the matter resolved and the relationship maintained. He should keep the matter private. Telling others about his offense would spread disunity and make resolution more difficult.</p>
+                        <p>If the person refuses to listen to him, the second step is to take one or two persons along with him and go and confront the person again. The Lord said, "But if he will not hear, take with you one or two more, that by the mouth of two or three witnesses every word may be established." (Matthew 18:16). Those accompanying him should be prepared to exhort the person who sinned to repent and to verify what is said.</p>
+                        <p>Should this step also fail, the third step is to bring the matter before the church. "And if he refuses to hear them, tell it to the church." (Matthew 18:17). The person should inform the elders of the matter and give them time to deal with it. Should their personal efforts on behalf of the church also fail, they may decide to take the fourth and final step; that is, bringing the matter before the whole church for public discipline. "But if he refuses even to hear the church, let him be to you like a heathen and a tax collector." (Matthew 18:17).</p>
+                    </div>
+
+                    <h3 class="subsection-title">Church Discipline</h3>
+                    <div class="note-card prose">
+                        <p>Though church discipline is regrettable it is necessary both for the good of the sinning person and for maintaining the holiness of the church (Hebrews 12:5-11). Sometimes God disciplines straying Christians directly. (1 Corinthians 11:29-32). Other times He gives the responsibility to the elders. This requires leaders who are firm, decisive, and impartial, as well as gentle, loving, and humble (James 2:1; 1 Timothy 5:21; Ephesians 4:15; Galatians 6:1). Unchecked sin can spread like leaven (1 Corinthians 5:6).</p>
+                        <p>Elders should determine the facts carefully before forming an opinion (Proverbs 18:13). They should obtain the testimony of two or three witnesses (Matthew 18:16). They should not judge the matter without speaking directly to the person and others who may be involved (Proverbs 18:12; John 7:24; 7:51). Many problems resolve themselves when elders take these steps.</p>
+                        <p>As to the form of discipline, there are several options. Elders who are attentive Shepherds will sometimes observe a person just beginning to stray. Here they should use preventative measures, such as a private appeal, a reminder, or a gentle warning (1 Timothy 4:6; 5:1; Colossians 1:28; 3:16). At other times, a private rebuke is warranted. In the case of a serious sin that is public, a rebuke before the congregation after the Lord’s Supper may be necessary (Titus 1:13; 1 Timothy 5:20; Galatians 2:11-14). In the most serious cases of un-repented sin, excommunication may be necessary.</p>
+                        <p>Elders should be careful to select the appropriate response and not overreact. Repentance, reconciliation, and restoration to full fellowship are always the goals in church discipline (2 Corinthians 2:6-11). Whatever the case, the elders should faithfully and carefully follow the steps outlined in Matthew 18:15-17. </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Breaking of Bread Section -->
+            <section id="breaking-bread" class="doctrine-section">
+                <span class="section-number">SECTION 13</span>
+                <h2 class="section-title">Breaking of Bread</h2>
+                <div class="rich-content">
+                    <div class="prose">
+                        <p>We believe that we should be steadfastly devoting ourselves “to the breaking of bread” (Acts 2:42). This means regularly remembering Christ as He has requested with bread and wine. Scripture records: “And He took bread, gave thanks and broke it, and gave it to them, saying, ‘This is My body which is given for you; do this in remembrance of Me.’ Likewise He also took the cup after supper, saying, ‘This cup is the new covenant in My blood, which is shed for you’ ” (Luke 22:19–20).</p>
+
+                        <p>We believe the Lord used bread and wine as symbols to help us to call to mind His person and work. The bread reminds us of Christ’s body broken for us on the cross. The wine reminds us of His blood poured out for our sins (Matthew 26:28). We are to proclaim the Lord’s death in this manner “until He comes” (1 Corinthians 11:26). The Scriptures call this memorial feast “the Lord’s Supper” (1 Corinthians 11:20) or “the breaking of bread” (Acts 2:42). In partaking of the bread and wine, a person is expressing personal faith in Christ as Savior (1 Corinthians 10:16).</p>
+
+                        <p>We partake of the one loaf together as an expression of our unity in Christ. “For we, though many, are one bread and one body; for we all partake of that one bread” (1 Corinthians 10:17).</p>
+                    </div>
+
+                    <h3 class="subsection-title">Remembering the Lord</h3>
+                    <div class="note-card prose">
+                        <p>Instituted by the Lord Himself, we consider the Lord’s Supper to be the primary meeting of the church. Our goal is to remember Him and what He has done for us (Luke 22:19; 1 Corinthians 11:26). A time to exalt our risen Savior, the experience can also be bittersweet, as we rejoice in the benefits of our salvation and call to mind the price it cost Him.</p>
+                        <p>As the early Christians did, we normally meet on “the first day of the week” (Acts 20:7), the day of His resurrection, the “Lord’s Day” (Revelation 1:10). We seek to remember Him weekly. The Scriptures teach that our worship should be Spirit led (John 4:23; Romans 8:26; Ephesians 2:18). For this reason, rather than following a preplanned liturgy, we should seek to make room for a degree of spontaneity. It is best to allow the Holy Spirit to preside over the meeting, rather than one of the elders. Care should be taken not to quench the Spirit through rigidity, formalism, and tradition (1 Thessalonians 5:19).</p>
+                        <p>The Scriptures instructs us that the meetings of the church are to “be done decently and in an order,” (1 Corinthians 14:40). Therefore, though we desire that our worship be spontaneous, there is also an order to our observance of the Lord’s Supper. The breaking of bread, as many of us observe it, typically lasts about one hour. All are asked to arrive early, quietly take their seat, and spend the time until the meeting begins considering the Lord and His saving work. At the appropriate time, one of the brothers will open the meeting with a prayer, hymn, or insight from the Word. The other brothers are then free to do the same. As the Spirit directs, a theme of worship generally becomes apparent. All publicly participating should be sensitive to the Spirit’s leading and be brief so as to allow opportunity for others (1 Corinthians 14:29–33). After a time, one of the brothers gives thanks for the bread. Breaking it, we then pass it among the believers to partake. In like manner, someone will give thanks for the wine and it will be distributed. The meeting normally concludes with the taking of an offering to be used for the work of the Lord conducted through the assembly and the missionaries that it supports.</p>
+                        <p>Others observe the Lord’s Supper using different formats. The important thing is that we remember Christ as He requested under the guidance of the Spirit.</p>
+                        <p>Some local churches have found it helpful to use individual cups rather than a single cup, grape juice instead of wine, or bread that is readily available rather than unleavened bread as is used at the Jewish Passover.</p>
+                    </div>
+
+                    <h3 class="subsection-title">Participation at the Lord’s Supper</h3>
+                    <div class="note-card prose">
+                        <p>We welcome to the Lord’s Table those who know the Lord Jesus as their personal Saviour and are walking in fellowship with Him (1 Corinthians 10:17; 2 Corinthians 6:14–18; see also Reception). We counsel the person who has doubts about his relationship with the Lord or his spiritual condition to refrain from participation until the matter is resolved (1 Corinthians 11:27–29; Matthew 5:23,24). Unbelievers seeking God are welcome to attend and observe, but are asked not to partake of the bread and wine (1 Corinthians 14:16–25). Some have come to faith in this way.</p>
+                        <p>As priests unto God, every believer, audibly or silently as is appropriate, should actively participate at the breaking of bread. Together we are to “proclaim the praises of Him who has called you out of darkness into His marvelous light” (1 Peter 2:9). We are to “offer the sacrifice of praise to God, that is, the fruit of our lips, giving thanks to His name” (Hebrews 13:15).</p>
+                        <p>Before remembering the Lord, each Christian is responsible to examine himself (1 Corinthians 11:26–34). If there is sin in his life, he should confess and forsake it (Proverbs 28:13; 1 John 1:9). If a brother has an offense against him, he should first go and be reconciled to that brother (Matthew 5:23,24). If there is division in a church, the Christians should resolve it before witnessing to their unity by partaking of the one loaf (1 Corinthians 10:17). At the same time, Christians who have a clear conscience before God or who have taken the necessary corrective steps to deal with past sins should partake of the Lord’s Supper (1 Corinthians 11:28; Romans 5:1,2).</p>
+                        <p>Every true Christian shares in Christ the same exalted position before God and is part of a holy and royal priesthood (Galatians 3:26–28; 1 Peter 2:5,9). The Lord Jesus has made us “priests to His God and Father” (Revelation 1:6). As such we each have direct access through the Son in the Spirit to the Father (Ephesians 2:18). Though in the Old Testament the Jew had a priestly tribe, we find no clerical class or distinction made between clergy and laity in the New Testament church. For this reason, we should not use titles, religious garb, or seating arrangements to distinguish some believers from the rest (Matthew 23:5–12; James 2:1–3).</p>
+                        <p>The meetings of the early church were open to the participation of various members, sharing according to their gift and calling (1 Corinthians 14:26). The Scriptures, however, limit the role of publicly addressing the assembly to the men (1 Corinthians 14:34–36; 1 Timothy 2:8–15). The reason for this is God’s purpose in creation for man and woman. God created Adam first, then Eve from Adam to be his spouse and helpmate (Genesis 2:18–25; 1 Corinthians 11:8,9). God created both man and woman in His image (Genesis 1:27). Man, however, is the glory of God, while “woman is the glory of man” (1 Corinthians 11:7). As a further testimony of their acceptance of God’s creative order, Scripture instructs Christian men to uncover their heads and Christian women to cover their heads while praying or prophesying (1 Corinthians 11:2–16).</p>
+                    </div>
+
+                    <h3 class="subsection-title">Music</h3>
+                    <div class="note-card prose">
+                        <p>Music is an important part of Christian worship. Singing without instrumental accompaniment (acapella) has a unique beauty and place in lifting our hearts up to the Lord. A variety of instruments properly used can also enhance Christian worship (Psalm 150:1–6; 1 Chronicles 15:16; 25:6). Christians should appreciate their rich heritage in the great hymns of the faith passed down from previous generations. They should also welcome quality Christian music composed by their current generation. Scripture instructs, “Sing to the Lord a new song” (Psalm 96:1). Christian songs should have the glory of God as their goal, not the entertainment of the congregation. Its theme and focus should be similar to that of the many sacred songs or psalms recorded in Scripture. Lyrics should be biblically sound. Given their poetical and emotive nature, however, we cannot measure lyrics by the same standard of precision that we would require of a doctrinal statement.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Prayer Section -->
+            <section id="prayer" class="doctrine-section">
+                <span class="section-number">SECTION 14</span>
+                <h2 class="section-title">Prayer</h2>
+                <div class="rich-content">
+                    <div class="prose">
+                        <p>We believe that we should be continually devoting ourselves "to prayer" (Acts 2:42). We are to lift our voices to the Lord in praise, worship, thanksgiving, confession, intercession, and supplication for our needs and the needs of others (Acts 2:42; Romans 12:12; Colossians 4:2). We should pray together as a church (Acts 1:14; 4:31). We should pray as individuals. "The effective, fervent prayer of a righteous man avails much" (James 5:16).</p>
+                    </div>
+
+                    <h3 class="subsection-title">Conditions and Promises of Prayer</h3>
+                    <div class="note-card prose">
+                        <p>Sinful conduct can hinder our prayers. "The eyes of the Lord are on the righteous, and His ears are open to their cry. The face of the Lord is against those who do evil" (Psalm 34:15,16). Before praying, we must confess and forsake any known sin. The Lord promised Israel, "If My people who are called by My name humble themselves and pray, and seek My face, and turn from their wicked ways, then I will hear from heaven, and will forgive their sin, and heal their land" (2 Chronicles 7:14).</p>
+
+                        <p>We must pray with proper motives (James 4:3). We must pray according to God's will. "And this is the confidence which we have in Him, that if we ask anything according to His will, He hears us. And if we know that He hears us, whatever we ask, we know that we have the petitions that we have asked of Him" (1 John 5:14,15). We must pray believing that God hears and answers prayers. "All things are possible to him who believes" (Mark 9:23).</p>
+
+                        <p>The Lord has told us to make our requests known to God (James 4:2). "Ask, and it will be given to you; seek, and you shall find; knock, and it will be opened to you. For everyone who asks receives, and he who seeks finds, and to him who knocks it will be opened" (Matthew 7:7,8). At the same time, we must yield to God's will, knowing that sometimes His will is not our own. The Lord Jesus is our perfect example in this, who prayed in the Garden, "Father, if it is your will, take this cup from Me; nevertheless not My will, but Yours, be done" (Luke 22:42).</p>
+
+                        <p>When God delays an answer to prayer, we are to be persistent (Luke 11:5–8). We are to "Pray without ceasing" (1 Thessalonians 5:17). We are to pray at all times and not lose heart (Luke 18:1–8).</p>
+
+                        <p>Our normal manner of prayer should be through Christ in the Spirit to the Father (Romans 8:26,27; Ephesians 2:18). The Lord taught His disciples to pray, "Our Father in heaven, Hallowed be Your name. Your kingdom come. Your will be done on earth as it is in heaven. Give us day by day our daily bread. And forgive us our sins, For we also forgive everyone who is indebted to us. And do not lead us into temptation, But deliver us from the evil one" (Luke 11:2–4). We also find prayer directly to Jesus in Scripture (Acts 7:59).</p>
+
+                        <p>We are to pray in the name of the Lord Jesus. He promised, "Whatever you ask in My name, that will I do, that the Father may be glorified in the Son" (John 14:13).</p>
+
+                        <p>We must also pray in faith (James 1:6–8). "And whatever things you ask in prayer, believing, you will receive" (Matthew 21:22). Since we have a great high priest, we can "come boldly to the throne of grace, that we may obtain mercy and find grace to help in time of need." (Hebrews 4:16). He is the one who has promised, "If you abide in Me, and My words abide in you, you will ask what you desire, and it shall be done for you" (John 15:7). And again: "Most assuredly, I say to you, whatever you ask the Father in My name He will give you. Until now you have asked nothing in My name. Ask, and you will receive, that your joy may be full" (John 16:23–24).</p>
+                    </div>
+
+                    <h3 class="subsection-title">Corporate Prayer</h3>
+                    <div class="note-card prose">
+                        <p>The early church "continued with one accord in prayer and supplication" (Acts 1:14). The results were apparent. On one occasion, "when they had prayed, the place where they were assembled together was shaken; and they were all filled with the Holy Spirit, and they spoke the word of God with boldness" (Acts 4:31).</p>
+
+                        <p>So too today, the church should gather for prayer. The Lord has promised, "Again I say to you, that if two of you agree on earth concerning anything that they ask, it will be done for them by My Father in heaven. For where two or three are gathered together in My name, I am there in the midst of them" (Matthew 18:19,20). Scripture instructs that the men are to lead the saints in prayer. Paul writes, "I desire therefore that the men pray everywhere, lifting up holy hands, without wrath and doubting." (1 Timothy 2:8).</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Evangelism Section -->
+            <section id="evangelism" class="doctrine-section">
+                <span class="section-number">SECTION 15</span>
+                <h2 class="section-title">Evangelism</h2>
+                <div class="rich-content">
+                    <div class="prose">
+                        <p>We affirm the following doctrines:</p>
+
+                        <p>We believe that Christianity is an evangelistic faith. The Lord Jesus has commanded us, "Go therefore and make disciples of all the nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit, teaching them to observe all things that I have commanded you; and lo, I am with you always, even to the end of the age" (Matthew 28:19,20).</p>
+
+                        <p>We must proclaim the gospel to all people. Salvation is only through faith which is in Christ Jesus (Acts 4:12). Jesus said, "I am the way, the truth, and the life. No one comes to the Father except through Me" (John 14:6).</p>
+
+                        <p>We offer the following applications and supporting principles:</p>
+                    </div>
+
+                    <h3 class="subsection-title">Methods of Evangelism</h3>
+                    <div class="note-card prose">
+                        <p>The gospel "is the power of God to salvation for everyone who believes" (Romans 1:16). We can proclaim it through a variety of means. These include the public proclamation of the gospel, literature distribution, gospel meetings, home Bible studies, correspondence courses, camps, Sunday school classes, vacation Bible clubs, prison ministries, home visitation, and the use of the media. We should adapt our methods to meet the needs of the people of our day, evaluating the effectiveness of each form of evangelism.</p>
+
+                        <p>Many people come to Christ through a friend or family member. We should, therefore, not neglect friendship evangelism while pursuing more formal means. Christians should invest in relationships with non-Christians, sharing common interests, enjoying gatherings with them on special occasions, and showing them the love of Christ. They should make use of annual events that bring people together for wholesome purposes, even if these events are not on the same spiritual level of the activities of our church, being careful not to communicate a judgmental attitude. Paul wrote to the Christians living in Corinth: "I have become all things to all men, that I might by all means save some" (1 Corinthians 9:22). "Give no offense either to the Jews or to the Greeks or to the church of God; just as I also please all men in all things, not seeking my own profit, but the profit of the many, that they may be saved" (1 Corinthians 10:32,33).</p>
+
+                        <p>We should avoid over-activity in Christian programs and socializing only with other Christians. God has called us to live separate from the evil of the world, not isolated from the people of the world (1 Corinthians 5:9-11).</p>
+                    </div>
+
+                    <h3 class="subsection-title">Commendation</h3>
+                    <div class="note-card prose">
+                        <p>The local church is at the centre of God's missionary work. We see this in the missionary work of Barnabas and Paul recorded in the book of Acts. The Holy Spirit sent them out from the church in Antioch (Acts 13:2,3). Where they preached the gospel, they planted churches and appointed elders (Acts 13:4-14:25). They then returned "to Antioch, from which they had been commended" (Acts 14:26). There they reported to the church what God had done through them (Acts 14:27).</p>
+
+                        <p>In a similar manner, we believe that the church today should formally recognize the Holy Spirit's call upon individuals that He is setting apart for missionary service. We call this commendation. Often the elders lay hands on the outgoing missionaries and pray for them. This public identification expresses the relationship of the missionaries to the church as an extension of it and the missionaries' accountability to the church. It is also a commitment on the part of the church to support the outgoing missionaries with prayer, practical assistance, and financial support as the Lord provides. The elders should give the missionaries a letter of commendation that states their support for their calling. This letter can be useful to the missionaries in introducing them to assemblies of Christians they meet along their way.</p>
+
+                        <p>God may also call some Christians to serve in their home churches as commended workers. Before Paul went out as a missionary, he was recognized as being among the prophets and teachers of the church of Antioch (Acts 13:1). After his first missionary journey, he served a long time in the assembly in Antioch, teaching and preaching the word of the Lord (Acts 14:27; 15:35). As those sent to foreign fields home workers should give much of their time to "the equipping of the saints for the work of ministry" (Ephesians 4:12). Rather than taking sole responsibility for the public ministry of the Word, they should make every effort to train others and give them opportunity to gain experience. In this way the church does not become dependent upon one man.</p>
+                    </div>
+
+                    <h3 class="subsection-title">United Effort</h3>
+                    <div class="note-card prose">
+                        <p>Christians of all nationalities and ethnicities should work together in their common goal of reaching the world for Christ. This must be an international effort in which we give liberally of our time and resources. We must also be diligent to support those whom God has called to serve as missionaries. Often these servants of the Lord must go out at great personal sacrifice, leaving their families and home country for the sake of the gospel. Scripture tells us "to send them on their way in a manner worthy of God, because they went forth for His name's sake taking nothing from the Gentiles. We therefore ought to receive such, that we may become fellow workers for the truth" (3 John 1:6-8). Churches should especially support those who look to the Lord for their provision and faithfully serve in accordance with the principles of the New Testament. This may include in supporting mission agencies and service organizations that are assisting their commended missionaries. These provide invaluable assistance, particularly to those called to difficult fields of service requiring special training and support.</p>
+                    </div>
+
+                    <h3 class="subsection-title">Missionary Objectives</h3>
+                    <div class="note-card prose">
+                        <p>Missionaries should answer the call of God in faith, looking to Him for their financial support. They should have as their goal to make disciples through the preaching of the gospel and to establish independent local churches. Paul states this two-fold purpose in his letter to the Ephesians. Referring to the mystery of the church, Paul described his ministry as "to preach among the Gentiles the unsearchable riches of Christ, and to make all see what is the fellowship of the mystery, which from the beginning of the ages has been hidden in God who created all things through Jesus Christ." (Ephesians 3:8-9). Missionaries should establish churches based upon the principles of the New Testament. The churches should be self-governing—overseen by local men appointed as elders of the church (Acts 14:26). They should be self-financing—dependent upon God, not foreign funds (2 Corinthians 8:1-15). They should be self-propagating—trained to continue the expansion of the gospel through the ministry of the local Christians (1 Thessalonians 1:6-10).</p>
+                    </div>
+
+                    <h3 class="subsection-title">Missionary Prayer</h3>
+                    <div class="note-card prose">
+                        <p>We must be committed to intercede in prayer for the people of the world and for the missionaries who are serving in ministry to them. The great missionary apostle wrote, "Brethren, pray for us" (1 Thessalonians 5:25). We must also pray for more workers. Jesus taught, "The harvest truly is great, but the laborers are few; therefore pray the Lord of the harvest to send out laborers into His harvest" (Luke 10:2).</p>
+                    </div>
+
+                    <h3 class="subsection-title">Making Disciples</h3>
+                    <div class="note-card prose">
+                        <p>Evangelism includes more than simply preaching the gospel. We are called to "make disciples of all the nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit, teaching them to observe all that I have commanded you" (Matthew 28:19,20). This requires that we follow up new believers, helping them to become grounded in the Christian faith. A good starting point is a review of the gospel to make sure the person understands what it means to be saved. The Christian worker should explain the biblical basis for assurance of salvation. He should tell the new convert of the importance of confessing Christ publicly in baptism. He should also help the new Christian to understand the biblical means of sanctification, including obedience, prayer, and spending time with God each day, meditating on the Word. Finally, he should help the person become part of an assembly that practices New Testament principles so that he may be cared for and continue to grow in Christ.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Future Events Section -->
+            <section id="future-events" class="doctrine-section">
+                <span class="section-number">SECTION 16</span>
+                <h2 class="section-title">Future Events</h2>
+                <div class="rich-content">
+                    <div class="prose">
+                        <p>We believe that Jesus is coming again for His church. He told His disciples, "In My Father's house are many mansions; if it were not so, I would have told you. I go to prepare a place for you. And if I go and prepare a place for you, I will come again, and receive you to Myself; that where I am, there you may be also" (John 14:2,3). At His coming, Christ will resurrect those Christians who have died. "Then we who are alive and remain shall be caught up together with them in the clouds to meet the Lord in the air. And thus we shall always be with the Lord" (1 Thessalonians 4:17). We refer to this as the rapture.</p>
+
+                        <p>We believe that the Lord Jesus will review the service of Christians at the judgment seat of Christ (Romans 14:10; 1 Corinthians 3:8-15; 2 Corinthians 5:10). As the bride of Christ, they will enjoy the marriage supper of the Lamb with Him (John 17:24; Ephesians 5:25-32; Revelation 19:5-9).</p>
+
+                        <p>We believe that a time of unprecedented tribulation will occur on earth. It will be marked by religious apostasy, worldwide cataclysmic judgments, the persecution of Israel, the salvation of multitudes, and the rise and worldwide dominion of the Antichrist (Matthew 24:4-28; 2 Thessalonians 2:3-8; Revelation 5-18). This period will end with the battle of Armageddon, the glorious return of Christ to the earth, and the defeat of the Antichrist and the enemies of God (Matthew 24:29-31; Revelation 19:1-21). We refer to this period as the tribulation.</p>
+
+                        <p>We believe that following the tribulation, Christ will reign on earth for a thousand years. His kingdom will be one of peace, prosperity, and justice (Isaiah 2:1-4; 4:2-6; 32:1-20; 35:1-10; Revelation 20:1-6).</p>
+
+                        <p>We believe that at the end of the thousand-year reign of Christ, God will judge Satan and his demons (Revelation 20:7-10). Then at the judgment of the great white throne, Christ will judge the unbelieving dead (Revelation 20:11-15). Their deeds will be reviewed. If their name is not written in the Book of Life, they will be thrown into the lake of fire (Revelation 20:15). There they will suffer conscious everlasting punishment away from the presence of God (Matthew 25:46; Luke 16:19-31).</p>
+
+                        <p>We believe that God will create a new heaven and new earth, for the present heaven and earth will pass away (Revelation 21:1). There all believers will dwell with Christ for eternity, beholding His glory (John 17:24).</p>
+
+                        <p>We offer the following applications and supporting principles:</p>
+                    </div>
+
+                    <h3 class="subsection-title">Order of Events</h3>
+                    <div class="note-card prose">
+                        <p>The rapture, Christ's coming for His church, could occur at any time (Hebrews 10:37). Following it, we understand there to be a seven-year period of tribulation on earth divided into two approximately equal periods (1 Thessalonians 4:13–5:11; Daniel 7:25; 9:24-27; 12:7; Revelation 11:2,3; 12:14; 13:5). This period will reach its climax in the battles of Armageddon and the glorious return of Christ. The Lord will then enter into judgment with the nations and establish His earthly kingdom, ruling for a thousand years. Though we may perceive some early signs of His coming, we cannot determine its exact timing and should not attempt to set dates for it (Matthew 24:36).</p>
+                    </div>
+
+                    <h3 class="subsection-title">Anticipation</h3>
+                    <div class="note-card prose">
+                        <p>Though the biblical texts concerning the prophecies of the last days are sometimes difficult, their study has an important sanctifying effect upon our lives and the promise of God's blessing (Titus 2:11-15). "Blessed is he who reads and those who hear the words of this prophecy, and keep those things which are written in it; for the time is near" (Revelation 1:3).</p>
+
+                        <p>We should be "looking for the blessed hope and the glorious appearing of our great God and Savior Jesus Christ" (Titus 2:13). The Bible closes with the testimony of Jesus, proclaiming, "Surely I am coming quickly" (Revelation 22:20). Every Christian should be ready to reply, "Amen. Even so come, Lord Jesus" (Revelation 22:20).</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Colonial Hills Bible Chapel</h3>
+                    <p>A group of local Christians gathering solely in the name of the Lord Jesus Christ, holding fast to New Testament principles of worship and fellowship.</p>
+                    <p style="color: var(--warm-gold); font-style: italic; margin-top: 1rem;">
+                        "The Gift of God is Eternal Life Through Jesus Christ Our Lord"
+                    </p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="about-us-page.html">About Us</a></li>
+                        <li><a href="gospel-page.html">The Gospel</a></li>
+                        <li><a href="doctrines-practices-page.html">Doctrines</a></li>
+                        <li><a href="index.html#events">Upcoming Events</a></li>
+                        <li><a href="ministries-page.html">Ministries</a></li>
+                        <li><a href="helpful-links-page.html">Helpful Links</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Service Times</h3>
+                    <ul>
+                        <li>Sunday Worship: 9:30 AM</li>
+                        <li>Family Bible Hour: 11:00 AM</li>
+                        <li>Wednesday Bible Study: 7:00 PM</li>
+                        <li>Saturday Prayer Meeting: 9:00 AM</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Information</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span><a href="https://maps.google.com/?q=14643+Henry+Rd,+Houston,+TX+77060" target="_blank" style="color: inherit; text-decoration: none;">14643 Henry Rd<br>Houston, TX 77060</a></span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span><a href="tel:+1-281-931-1120" style="color: inherit; text-decoration: none;">+1 281 931 1120</a></span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span><a href="mailto:info@colonialhills-biblechapel.com" style="color: inherit; text-decoration: none;">info@colonialhills-biblechapel.com</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Colonial Hills Bible Chapel. All rights reserved. | Website designed with love for His glory.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercentage = (scrollTop / scrollHeight) * 100;
+            document.getElementById('scrollProgress').style.width = scrollPercentage + '%';
+
+            // Header scroll effect
+            const header = document.getElementById('mainHeader');
+            if (scrollTop > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+
+            // Back to Top button
+            const backToTop = document.getElementById('backToTop');
+            if (scrollTop > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        // Back to Top functionality
+        document.getElementById('backToTop').addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Active index highlighting
+        const sections = document.querySelectorAll('.doctrine-section');
+        const indexLinks = document.querySelectorAll('.index-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    indexLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Smooth scrolling for index links
+        indexLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animation on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.doctrine-section');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementBottom = element.getBoundingClientRect().bottom;
+                
+                if (elementTop < window.innerHeight && elementBottom > 0) {
+                    element.style.opacity = '1';
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll();
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const mobileNavClose = document.querySelector('.mobile-nav-close');
+        
+        if (mobileMenuBtn && mobileNav && mobileNavClose) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileNav.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+            mobileNavClose.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            document.querySelectorAll('.mobile-nav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileNav.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+        }
+    </script>
+</body>
+</html>
