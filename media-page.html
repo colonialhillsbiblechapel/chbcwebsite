@@ -1082,6 +1082,46 @@
             <!-- Video Grid -->
             <div class="video-grid" id="videoGrid">
 
+                <!-- Latest Video by Bro C M Jacob - Doctrine of Discipleship-4 - Nov 23 2025 -->
+                <div class="video-card" data-category="sunday special" data-video-id="MBDEZjF-Bi0">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/MBDEZjF-Bi0/hqdefault.jpg" alt="Doctrine of Discipleship-4 Bro C M Jacob">
+                        <div class="video-duration">Live</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Sunday</span>
+                        <h3 class="video-title">Doctrine of Discipleship-4</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Bro C M Jacob</span>
+                            <span><i class="fas fa-calendar"></i> Nov 23, 2025</span>
+                        </div>
+                        <div class="video-description">Sunday message by Bro C M Jacob - Doctrine of Discipleship-4</div>
+                    </div>
+                </div>
+
+                <!-- Latest Video by Bro Johnson John - Nov 15 2025 -->
+                <div class="video-card" data-category="sunday" data-video-id="n9W-_TiVkTY">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/n9W-_TiVkTY/hqdefault.jpg" alt="Bro Johnson John 11/15/2025">
+                        <div class="video-duration">Live</div>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-category">Sunday</span>
+                        <h3 class="video-title">Bro Johnson John</h3>
+                        <div class="video-meta">
+                            <span><i class="fas fa-user"></i> Bro Johnson John</span>
+                            <span><i class="fas fa-calendar"></i> Nov 15, 2025</span>
+                        </div>
+                        <div class="video-description">Sunday message by Bro Johnson John</div>
+                    </div>
+                </div>
+
                 <!-- Latest Video by Bro Anil Pagadala - Nov 09 2025 -->
                 <div class="video-card" data-category="sunday" data-video-id="FWqkPIkoI-E">
                     <div class="video-thumbnail">
@@ -3022,7 +3062,7 @@
                 const title = card.querySelector('.video-title').textContent.toLowerCase();
                 const speaker = card.querySelector('.video-meta span:first-child').textContent.toLowerCase();
                 
-                const matchesFilter = activeFilter === 'all' || category === activeFilter;
+                const matchesFilter = activeFilter === 'all' || category === activeFilter || category.split(' ').includes(activeFilter);
                 const matchesSearch = title.includes(searchTerm) || speaker.includes(searchTerm);
                 
                 return matchesFilter && matchesSearch;
