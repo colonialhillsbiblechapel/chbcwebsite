@@ -385,6 +385,15 @@
             padding: 1.5rem;
         }
 
+        .video-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
         .video-category {
             display: inline-block;
             background: var(--warm-gold);
@@ -392,7 +401,46 @@
             padding: 0.2rem 0.8rem;
             border-radius: 20px;
             font-size: 0.85rem;
-            margin-bottom: 0.5rem;
+        }
+
+        .download-slides-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: linear-gradient(135deg, var(--warm-gold) 0%, #d4af37 100%);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(201, 169, 97, 0.3);
+            cursor: pointer;
+        }
+
+        .download-slides-btn:hover {
+            background: linear-gradient(135deg, #d4af37 0%, var(--warm-gold) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(201, 169, 97, 0.5);
+        }
+
+        .download-slides-btn:active {
+            transform: translateY(0);
+        }
+
+        .download-slides-btn i {
+            font-size: 0.85rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
         }
 
         .video-title {
@@ -1092,7 +1140,16 @@
                         </div>
                     </div>
                     <div class="video-info">
-                        <span class="video-category">Sunday</span>
+                        <div class="video-header">
+                            <span class="video-category">Sunday</span>
+                            <a href="https://docs.google.com/presentation/d/1Cd4BzhNnEhGk8GMl7dv5C7Fn6ccz-iXq/export/pptx" 
+                               class="download-slides-btn" 
+                               download="New_Heaven_and_New_Earth_Slides.pptx"
+                               onclick="event.stopPropagation();">
+                                <i class="fas fa-download"></i>
+                                <span>Download Slides</span>
+                            </a>
+                        </div>
                         <h3 class="video-title">New Heaven and New Earth</h3>
                         <div class="video-meta">
                             <span><i class="fas fa-user"></i> Bro K M Daniel</span>
@@ -3065,7 +3122,12 @@
         const videoPlayer = document.getElementById('videoPlayer');
 
         videoCards.forEach(card => {
-            card.addEventListener('click', function() {
+            card.addEventListener('click', function(e) {
+                // Don't open modal if download button was clicked
+                if (e.target.closest('.download-slides-btn')) {
+                    return;
+                }
+                
                 const videoId = this.dataset.videoId;
                 const title = this.querySelector('.video-title').textContent;
                 const speaker = this.querySelector('.video-meta span:first-child').textContent;
@@ -3086,6 +3148,43 @@
                 document.body.style.overflow = 'hidden';
             });
         });
+
+        // Handle download slides button
+        const downloadBtn = document.querySelector('.download-slides-btn');
+        if (downloadBtn) {
+            downloadBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                // The download attribute should handle the download automatically
+                // If direct download doesn't work, we can use a fallback method
+                const downloadUrl = this.href;
+                const fileName = this.getAttribute('download') || 'presentation.pptx';
+                
+                // Try to trigger download
+                fetch(downloadUrl)
+                    .then(response => {
+                        if (response.ok) {
+                            return response.blob();
+                        }
+                        // If fetch fails, open in new tab as fallback
+                        window.open(downloadUrl, '_blank');
+                        throw new Error('Direct download failed, opening in new tab');
+                    })
+                    .then(blob => {
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = fileName;
+                        document.body.appendChild(a);
+                        a.click();
+                        window.URL.revokeObjectURL(url);
+                        document.body.removeChild(a);
+                    })
+                    .catch(() => {
+                        // Fallback: open in new tab if direct download fails
+                        window.open(downloadUrl, '_blank');
+                    });
+            });
+        }
 
         modalClose.addEventListener('click', function() {
             modal.classList.remove('active');
