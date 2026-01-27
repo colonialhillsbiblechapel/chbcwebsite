@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Colonial Hills Bible Chapel - Sacred Hymns</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Cinzel:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --gold: #8B7355;
+      --gold-dark: #6B5344;
+      --burgundy: #5C3D3D;
+      --cream: #FDF8F3;
+      --warm-white: #FFFEF9;
+      --text-dark: #2C2416;
+      --text-muted: #5C5347;
+    }
+    
+    html, body {
+      height: auto;
+      min-height: 100%;
+      overflow-x: hidden;
+    }
+    
+    body {
+      font-family: 'EB Garamond', serif;
+      background: var(--warm-white);
+      color: var(--text-dark);
+      min-height: 100vh;
+      width: 100%;
+      overflow-x: hidden;
+    }
+    
+    /* INDEX PAGE */
+    .index-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    /* Background Image - Properly Fitted */
+    .bg-image {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      background: 
+        linear-gradient(180deg, 
+          rgba(255,254,249,0.92) 0%, 
+          rgba(253,248,243,0.88) 30%,
+          rgba(253,248,243,0.85) 70%,
+          rgba(245,237,228,0.92) 100%
+        ),
+        url('images/index.jpeg');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+    
+    .index-content {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      width: 100%;
+    }
+    
+    /* Chapel Header */
+    .chapel-header {
+      text-align: center;
+      padding: 30px 30px 20px;
+    }
+    
+    .chapel-cross {
+      width: 40px;
+      height: 50px;
+      margin: 0 auto 15px;
+      position: relative;
+    }
+    
+    .chapel-cross::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--gold), var(--gold-dark));
+    }
+    
+    .chapel-cross::after {
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-dark), var(--gold));
+    }
+    
+    .chapel-name {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      font-weight: 600;
+      letter-spacing: 4px;
+      color: var(--text-dark);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+    
+    .chapel-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin: 0 auto 15px;
+      max-width: 400px;
+    }
+    
+    .chapel-divider .line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    
+    .chapel-divider .ornament {
+      width: 10px;
+      height: 10px;
+      border: 1px solid var(--gold);
+      transform: rotate(45deg);
+      background: var(--warm-white);
+    }
+    
+    /* Header Scripture */
+    .header-scripture {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .header-scripture .verse {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+      font-style: italic;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 5px;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+    
+    .header-scripture .ref {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      color: var(--gold-dark);
+      letter-spacing: 3px;
+    }
+    
+    /* Hymn Books Section */
+    .hymn-books-section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 30px;
+      min-height: 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    
+    .section-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      letter-spacing: 5px;
+      color: var(--gold-dark);
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    
+    .hymn-books-container {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 900px;
+    }
+    
+    .hymn-book-card {
+      width: 320px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(253,248,243,0.9) 100%);
+      border: 1px solid rgba(139, 115, 85, 0.25);
+      border-radius: 6px;
+      padding: 35px 35px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: visible;
+      box-shadow: 
+        0 15px 50px rgba(44, 36, 22, 0.08),
+        0 5px 15px rgba(44, 36, 22, 0.04),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+      box-sizing: border-box;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+    
+    .hymn-book-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--gold-dark), var(--gold), transparent);
+    }
+    
+    .hymn-book-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(139, 115, 85, 0.06), transparent);
+      transition: left 0.8s ease;
+    }
+    
+    .hymn-book-card:hover::after { left: 100%; }
+    
+    .hymn-book-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 
+        0 30px 70px rgba(44, 36, 22, 0.12),
+        0 15px 35px rgba(44, 36, 22, 0.08),
+        inset 0 1px 0 rgba(255,255,255,0.9);
+      border-color: var(--gold);
+    }
+    
+    .book-icon {
+      width: 65px;
+      height: 75px;
+      margin: 0 auto 20px;
+      position: relative;
+    }
+    
+    .book-icon svg {
+      width: 100%;
+      height: 100%;
+      stroke: var(--gold-dark);
+      fill: none;
+      stroke-width: 1.2;
+    }
+    
+    .book-number {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 4px;
+      color: var(--gold);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+    
+    .book-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--text-dark);
+      line-height: 1.35;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+    
+    .book-verse {
+      margin-top: 18px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(139, 115, 85, 0.15);
+    }
+    
+    .book-verse .text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 4px;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+    
+    .book-verse .ref {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      color: var(--gold);
+      letter-spacing: 2px;
+    }
+    
+    /* Footer */
+    .chapel-footer {
+      text-align: center;
+      padding: 20px 30px 25px;
+      position: relative;
+    }
+    
+    .footer-scripture {
+      max-width: 680px;
+      margin: 0 auto 12px;
+    }
+    
+    .footer-scripture .verse {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.9rem, 1.8vw, 1rem);
+      font-style: italic;
+      color: var(--text-dark);
+      line-height: 1.6;
+      margin-bottom: 6px;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+    
+    .footer-scripture .ref {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      color: var(--gold-dark);
+      letter-spacing: 2px;
+    }
+    
+    .footer-divider {
+      width: 50px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 12px auto;
+    }
+    
+    .footer-credit {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+      letter-spacing: 1px;
+    }
+    
+    /* Responsive Design - Comprehensive Breakpoints */
+    
+    /* Large Tablets and Small Desktops (1025px - 1280px) */
+    @media (max-width: 1280px) {
+      .hymn-books-container {
+        max-width: 850px;
+      }
+    }
+    
+    /* Tablets (769px - 1024px) */
+    @media (max-width: 1024px) {
+      .chapel-header {
+        padding: 28px 25px 18px;
+      }
+      
+      .hymn-books-container {
+        gap: 25px;
+        max-width: 750px;
+      }
+      
+      .hymn-book-card {
+        width: 300px;
+        padding: 32px 28px;
+      }
+      
+      .hymn-books-section {
+        padding: 18px 25px;
+      }
+      
+      .chapel-footer {
+        padding: 18px 25px 22px;
+      }
+    }
+    
+    /* Small Tablets and Large Phones (481px - 768px) */
+    @media (max-width: 768px) {
+      .index-page {
+        min-height: 100vh;
+        height: auto;
+      }
+      
+      .index-content {
+        min-height: 100vh;
+        height: auto;
+      }
+      
+      .bg-image {
+        background-attachment: scroll;
+      }
+      
+      .chapel-header {
+        padding: 25px 20px 15px;
+        flex-shrink: 0;
+      }
+      
+      .chapel-name {
+        font-size: clamp(1.2rem, 5vw, 1.8rem);
+        letter-spacing: 3px;
+      }
+      
+      .header-scripture .verse {
+        font-size: clamp(0.9rem, 2vw, 1rem);
+      }
+      
+      .hymn-books-container {
+        gap: 20px;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+      
+      .hymn-book-card {
+        width: 100%;
+        max-width: 400px;
+        padding: 30px 25px;
+        box-sizing: border-box;
+      }
+      
+      .book-icon {
+        width: 60px;
+        height: 70px;
+        margin: 0 auto 18px;
+      }
+      
+      .book-title {
+        font-size: 1.15rem;
+        line-height: 1.4;
+      }
+      
+      .section-label {
+        margin-bottom: 18px;
+        font-size: 0.75rem;
+      }
+      
+      .hymn-books-section {
+        padding: 20px 20px;
+        justify-content: flex-start;
+        padding-top: 30px;
+        flex: 0 1 auto;
+        min-height: auto;
+      }
+      
+      .chapel-footer {
+        padding: 18px 20px 20px;
+        flex-shrink: 0;
+      }
+      
+      .footer-scripture .verse {
+        font-size: clamp(0.85rem, 2vw, 0.95rem);
+      }
+      
+      .modal-content {
+        padding: 40px 30px;
+        max-width: 90%;
+      }
+    }
+    
+    /* Mobile Phones (320px - 480px) */
+    @media (max-width: 480px) {
+      .index-page {
+        min-height: 100vh;
+        height: auto;
+      }
+      
+      .index-content {
+        min-height: 100vh;
+        height: auto;
+      }
+      
+      .bg-image {
+        background-attachment: scroll;
+      }
+      
+      .chapel-header {
+        padding: 20px 15px 12px;
+        flex-shrink: 0;
+      }
+      
+      .chapel-cross {
+        width: 35px;
+        height: 45px;
+        margin: 0 auto 12px;
+      }
+      
+      .chapel-name {
+        font-size: clamp(1.1rem, 6vw, 1.5rem);
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+      }
+      
+      .chapel-divider {
+        gap: 12px;
+        margin: 0 auto 12px;
+      }
+      
+      .chapel-divider .ornament {
+        width: 8px;
+        height: 8px;
+      }
+      
+      .header-scripture {
+        max-width: 100%;
+        padding: 0 5px;
+        box-sizing: border-box;
+      }
+      
+      .header-scripture .verse {
+        font-size: clamp(0.85rem, 3.5vw, 0.95rem);
+        line-height: 1.5;
+        margin-bottom: 4px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+      
+      .header-scripture .ref {
+        font-size: 0.7rem;
+        letter-spacing: 2px;
+      }
+      
+      .hymn-books-section {
+        padding: 15px 15px;
+        padding-top: 25px;
+        flex: 0 1 auto;
+        min-height: auto;
+        justify-content: flex-start;
+      }
+      
+      .section-label {
+        font-size: 0.7rem;
+        letter-spacing: 4px;
+        margin-bottom: 15px;
+      }
+      
+      .hymn-books-container {
+        gap: 18px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      
+      .hymn-book-card {
+        width: 100%;
+        max-width: 100%;
+        padding: 25px 18px;
+        margin: 0;
+        box-sizing: border-box;
+        min-height: auto;
+      }
+      
+      .book-icon {
+        width: 55px;
+        height: 65px;
+        margin: 0 auto 15px;
+      }
+      
+      .book-number {
+        font-size: 0.7rem;
+        letter-spacing: 3px;
+        margin-bottom: 10px;
+      }
+      
+      .book-title {
+        font-size: 1.1rem;
+        line-height: 1.4;
+        margin-bottom: 8px;
+      }
+      
+      .book-verse {
+        margin-top: 15px;
+        padding-top: 12px;
+      }
+      
+      .book-verse .text {
+        font-size: 0.8rem;
+        line-height: 1.5;
+        margin-bottom: 6px;
+      }
+      
+      .book-verse .ref {
+        font-size: 0.65rem;
+        letter-spacing: 1.5px;
+      }
+      
+      .chapel-footer {
+        padding: 20px 15px 25px;
+        flex-shrink: 0;
+        margin-top: 20px;
+      }
+      
+      .footer-scripture {
+        margin-bottom: 12px;
+        padding: 0 5px;
+        box-sizing: border-box;
+      }
+      
+      .footer-scripture .verse {
+        font-size: clamp(0.8rem, 3.5vw, 0.9rem);
+        line-height: 1.6;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+      
+      .footer-scripture .ref {
+        font-size: 0.7rem;
+        letter-spacing: 1.5px;
+      }
+      
+      .footer-divider {
+        width: 40px;
+        margin: 12px auto;
+      }
+      
+      .footer-credit {
+        font-size: 0.8rem;
+        padding: 0 5px;
+      }
+      
+      .modal-content {
+        padding: 35px 25px;
+        max-width: 95%;
+        margin: 20px;
+      }
+      
+      .modal-close {
+        top: 10px;
+        right: 10px;
+        width: 28px;
+        height: 28px;
+        font-size: 20px;
+      }
+      
+      .modal-icon {
+        width: 50px;
+        height: 50px;
+        margin: 0 auto 20px;
+      }
+      
+      .modal-title {
+        font-size: 1.3rem;
+        margin-bottom: 12px;
+      }
+      
+      .modal-message {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+      
+      .modal-subtitle {
+        font-size: 0.75rem;
+        margin-top: 15px;
+        padding-top: 15px;
+      }
+    }
+    
+    /* Extra Small Phones (max-width: 360px) */
+    @media (max-width: 360px) {
+      .chapel-header {
+        padding: 18px 12px 10px;
+      }
+      
+      .hymn-book-card {
+        padding: 22px 18px;
+      }
+      
+      .book-title {
+        font-size: 1rem;
+      }
+      
+      .modal-content {
+        padding: 30px 20px;
+      }
+    }
+    
+    /* Landscape Orientation for Mobile */
+    @media (max-width: 768px) and (orientation: landscape) {
+      .index-page {
+        min-height: 100vh;
+        height: auto;
+      }
+      
+      .index-content {
+        min-height: 100vh;
+        height: auto;
+      }
+      
+      .hymn-books-section {
+        padding-top: 20px;
+        flex: 0 1 auto;
+        min-height: auto;
+      }
+      
+      .hymn-books-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .hymn-book-card {
+        width: calc(50% - 10px);
+        max-width: 300px;
+      }
+    }
+    
+    /* Touch Device Optimizations */
+    @media (hover: none) and (pointer: coarse) {
+      .hymn-book-card {
+        min-height: 200px;
+      }
+      
+      .hymn-book-card:active {
+        transform: translateY(-5px);
+      }
+      
+      .modal-close {
+        min-width: 44px;
+        min-height: 44px;
+      }
+    }
+    
+    /* Coming Soon Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(44, 36, 22, 0.75);
+      z-index: 1000;
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .modal-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+    
+    .modal-content {
+      background: linear-gradient(145deg, rgba(255,255,255,0.98) 0%, rgba(253,248,243,0.95) 100%);
+      border: 1px solid rgba(139, 115, 85, 0.3);
+      border-radius: 8px;
+      padding: 50px 45px;
+      max-width: 480px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+      box-shadow: 
+        0 25px 80px rgba(44, 36, 22, 0.2),
+        0 10px 30px rgba(44, 36, 22, 0.15),
+        inset 0 1px 0 rgba(255,255,255,0.9);
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+    }
+    
+    .modal-overlay.active .modal-content {
+      transform: scale(1);
+    }
+    
+    .modal-content::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--gold-dark), var(--gold), transparent);
+      border-radius: 8px 8px 0 0;
+    }
+    
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-dark);
+      font-size: 24px;
+      line-height: 1;
+      transition: color 0.3s ease, transform 0.2s ease;
+      border-radius: 50%;
+    }
+    
+    .modal-close:hover {
+      color: var(--text-dark);
+      transform: rotate(90deg);
+    }
+    
+    .modal-icon {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 25px;
+      position: relative;
+    }
+    
+    .modal-icon svg {
+      width: 100%;
+      height: 100%;
+      stroke: var(--gold);
+      fill: none;
+      stroke-width: 1.5;
+    }
+    
+    .modal-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: var(--text-dark);
+      margin-bottom: 15px;
+      line-height: 1.3;
+    }
+    
+    .modal-message {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 25px;
+    }
+    
+    .modal-subtitle {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      color: var(--gold-dark);
+      text-transform: uppercase;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(139, 115, 85, 0.2);
+    }
+    
+    @media (max-width: 600px) {
+      .modal-content {
+        padding: 40px 30px;
+        max-width: 90%;
+      }
+      .modal-title {
+        font-size: 1.4rem;
+      }
+      .modal-message {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="index-page">
+    <div class="bg-image"></div>
+    
+    <div class="index-content">
+      <header class="chapel-header">
+        <div class="chapel-cross"></div>
+        <h1 class="chapel-name">Colonial Hills Bible Chapel</h1>
+        <div class="chapel-divider">
+          <span class="line"></span>
+          <span class="ornament"></span>
+          <span class="line"></span>
+        </div>
+        <div class="header-scripture">
+          <p class="verse">"Speaking to one another in psalms and hymns and spiritual songs, singing and making melody in your heart to the Lord."</p>
+          <p class="ref">Ephesians 5:19</p>
+        </div>
+      </header>
+      
+      <section class="hymn-books-section">
+        <p class="section-label">Select a Hymnal</p>
+        <div class="hymn-books-container">
+          
+          <div class="hymn-book-card" onclick="location.href='hymns-worship-remembrance-index.html'">
+            <div class="book-icon">
+              <svg viewBox="0 0 75 90">
+                <rect x="8" y="5" width="55" height="80" rx="3"/>
+                <path d="M8 15 Q20 12 35 15 Q50 12 63 15" />
+                <line x1="14" y1="5" x2="14" y2="85"/>
+                <line x1="25" y1="35" x2="53" y2="35"/>
+                <line x1="25" y1="45" x2="53" y2="45"/>
+                <line x1="25" y1="55" x2="45" y2="55"/>
+                <path d="M39 20 L39 28 M35 24 L43 24"/>
+              </svg>
+            </div>
+            <p class="book-number">Book One</p>
+            <h2 class="book-title">Hymns of Worship and Remembrance</h2>
+            <div class="book-verse">
+              <p class="text">"O come, let us worship and bow down; let us kneel before the Lord our Maker."</p>
+              <p class="ref">Psalm 95:6</p>
+            </div>
+          </div>
+          
+          <div class="hymn-book-card" onclick="showComingSoonModal()">
+            <div class="book-icon">
+              <svg viewBox="0 0 75 90">
+                <rect x="8" y="5" width="55" height="80" rx="3"/>
+                <path d="M8 15 Q20 12 35 15 Q50 12 63 15" />
+                <line x1="14" y1="5" x2="14" y2="85"/>
+                <line x1="25" y1="35" x2="53" y2="35"/>
+                <line x1="25" y1="45" x2="53" y2="45"/>
+                <line x1="25" y1="55" x2="45" y2="55"/>
+                <circle cx="39" cy="22" r="6"/>
+              </svg>
+            </div>
+            <p class="book-number">Book Two</p>
+            <h2 class="book-title">Hymns of Truth and Praise</h2>
+            <div class="book-verse">
+              <p class="text">"I will praise Thee, O Lord, with my whole heart; I will shew forth all Thy marvellous works."</p>
+              <p class="ref">Psalm 9:1</p>
+            </div>
+          </div>
+          
+        </div>
+      </section>
+      
+      <footer class="chapel-footer">
+        <div class="footer-scripture">
+          <p class="verse">"For God so loved the world that He gave His only begotten Son, that whoever believes in Him should not perish but have everlasting life."</p>
+          <p class="ref">John 3:16</p>
+        </div>
+        <div class="footer-divider"></div>
+        <p class="footer-credit">Website designed with love for His glory.</p>
+      </footer>
+    </div>
+  </div>
+  
+  <!-- Coming Soon Modal -->
+  <div class="modal-overlay" id="comingSoonModal" onclick="closeModalOnOverlay(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeComingSoonModal()" aria-label="Close">&times;</button>
+      <div class="modal-icon">
+        <svg viewBox="0 0 75 90">
+          <rect x="8" y="5" width="55" height="80" rx="3"/>
+          <path d="M8 15 Q20 12 35 15 Q50 12 63 15" />
+          <line x1="14" y1="5" x2="14" y2="85"/>
+          <line x1="25" y1="35" x2="53" y2="35"/>
+          <line x1="25" y1="45" x2="53" y2="45"/>
+          <line x1="25" y1="55" x2="45" y2="55"/>
+          <circle cx="39" cy="22" r="6"/>
+        </svg>
+      </div>
+      <h2 class="modal-title">Book Two</h2>
+      <h3 class="modal-title" style="font-size: 1.3rem; margin-bottom: 20px;">Hymns of Truth and Praise</h3>
+      <p class="modal-message">This hymnal is not yet fully developed. Please check back soon for updates.</p>
+      <p class="modal-subtitle">Coming Soon</p>
+    </div>
+  </div>
+  
+  <script>
+    function showComingSoonModal() {
+      const modal = document.getElementById('comingSoonModal');
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeComingSoonModal() {
+      const modal = document.getElementById('comingSoonModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    
+    function closeModalOnOverlay(event) {
+      if (event.target.id === 'comingSoonModal') {
+        closeComingSoonModal();
+      }
+    }
+    
+    // Close modal on Escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeComingSoonModal();
+      }
+    });
+  </script>
+</body>
+</html>

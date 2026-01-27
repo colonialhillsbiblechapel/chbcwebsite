@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hymns of Truth and Praise - Colonial Hills Bible Chapel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Cinzel:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --gold: #8B7355;
+      --gold-dark: #6B5344;
+      --gold-light: #A89070;
+      --burgundy: #6B3A3A;
+      --cream: #FDF8F3;
+      --warm-white: #FFFEF9;
+      --text-dark: #2C2416;
+      --text-muted: #5C5347;
+      --border-light: rgba(139, 115, 85, 0.2);
+    }
+    
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'EB Garamond', serif;
+      background: var(--warm-white);
+      color: var(--text-dark);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    
+    /* Background */
+    .bg-image {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      background: 
+        linear-gradient(180deg, 
+          rgba(255,254,249,0.94) 0%, 
+          rgba(253,248,243,0.92) 50%,
+          rgba(245,237,228,0.94) 100%
+        ),
+        url('https://images.unsplash.com/photo-1438032005730-c779502df39b?w=1920&q=80');
+      background-size: cover;
+      background-position: center center;
+      background-attachment: fixed;
+    }
+    
+    .page-content { position: relative; z-index: 1; }
+    
+    /* Header */
+    .page-header {
+      text-align: center;
+      padding: 25px 30px 20px;
+      border-bottom: 1px solid var(--border-light);
+      background: linear-gradient(180deg, rgba(255,254,249,0.98) 0%, rgba(255,254,249,0.9) 100%);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 140px;
+      box-sizing: border-box;
+    }
+    
+    .back-link {
+      position: absolute;
+      left: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      color: var(--gold-dark);
+      text-decoration: none;
+      padding: 8px 15px;
+      border: 1px solid var(--border-light);
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+    
+    .back-link:hover {
+      border-color: var(--gold);
+      background: rgba(139, 115, 85, 0.05);
+    }
+    
+    .back-link svg {
+      width: 12px;
+      height: 12px;
+      stroke: var(--gold-dark);
+      fill: none;
+      stroke-width: 2;
+    }
+    
+    .header-cross {
+      width: 25px;
+      height: 32px;
+      margin: 0 auto 10px;
+      position: relative;
+    }
+    
+    .header-cross::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 100%;
+      background: var(--gold);
+    }
+    
+    .header-cross::after {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--gold);
+    }
+    
+    .book-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 4px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    
+    .book-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.3rem, 3.5vw, 1.9rem);
+      font-weight: 500;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+      line-height: 1.25;
+    }
+    
+    .book-scripture {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem;
+      font-style: italic;
+      color: var(--text-muted);
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+    
+    .book-scripture .ref {
+      display: block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      font-style: normal;
+      color: var(--gold-dark);
+      letter-spacing: 2px;
+      margin-top: 5px;
+    }
+
+    /* Search Bar */
+    .search-container {
+      padding: 15px 30px;
+      background: rgba(253, 248, 243, 0.98);
+      border-bottom: 1px solid var(--border-light);
+      backdrop-filter: blur(10px);
+      position: relative;
+      z-index: 1;
+    }
+
+    .search-wrapper {
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .search-input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 18px;
+      width: 18px;
+      height: 18px;
+      stroke: var(--gold-dark);
+      fill: none;
+      stroke-width: 1.8;
+      pointer-events: none;
+      z-index: 2;
+      transition: stroke 0.3s ease;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 18px 12px 48px;
+      font-family: 'EB Garamond', serif;
+      font-size: 1rem;
+      color: var(--text-dark);
+      background: rgba(255, 255, 255, 0.9);
+      border: 1.5px solid var(--border-light);
+      border-radius: 6px;
+      outline: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(44, 36, 22, 0.04);
+    }
+
+    .search-input:focus {
+      border-color: var(--gold);
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 4px 16px rgba(139, 115, 85, 0.12);
+    }
+
+    .search-input:focus + .search-icon,
+    .search-input:not(:placeholder-shown) + .search-icon {
+      stroke: var(--gold);
+    }
+
+    .search-clear {
+      position: absolute;
+      right: 12px;
+      width: 24px;
+      height: 24px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-muted);
+      font-size: 18px;
+      line-height: 1;
+      border-radius: 50%;
+      transition: all 0.2s ease;
+      z-index: 2;
+    }
+
+    .search-clear:hover {
+      color: var(--gold-dark);
+      background: rgba(139, 115, 85, 0.1);
+    }
+
+    .search-clear.visible {
+      display: flex;
+    }
+
+    .search-results-info {
+      margin-top: 10px;
+      text-align: center;
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      color: var(--gold-dark);
+      min-height: 18px;
+    }
+
+    .search-shortcut {
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .search-shortcut kbd {
+      padding: 2px 6px;
+      background: rgba(139, 115, 85, 0.1);
+      border: 1px solid var(--border-light);
+      border-radius: 3px;
+      font-size: 0.7rem;
+      color: var(--gold-dark);
+    }
+
+    .search-input:focus ~ .search-shortcut {
+      opacity: 0;
+    }
+    
+    /* Quick Navigation */
+    .quick-nav {
+      padding: 20px 30px;
+      background: rgba(253, 248, 243, 0.95);
+      border-bottom: 1px solid var(--border-light);
+      text-align: center;
+      backdrop-filter: blur(5px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 90px;
+      box-sizing: border-box;
+    }
+    
+    .quick-nav-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 4px;
+      color: var(--gold-dark);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    
+    .quick-nav-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    
+    .quick-nav-links a {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 6px 14px;
+      border: 1px solid var(--border-light);
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+    
+    .quick-nav-links a:hover {
+      color: var(--gold-dark);
+      border-color: var(--gold);
+      background: rgba(139, 115, 85, 0.05);
+    }
+    
+    .quick-nav-links a.special {
+      background: rgba(139, 115, 85, 0.08);
+      border-color: var(--gold);
+      color: var(--gold-dark);
+    }
+    
+    /* Hymn Sections */
+    .hymn-section {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 30px;
+    }
+    
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--border-light);
+    }
+    
+    .section-range {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      letter-spacing: 4px;
+      color: var(--gold-dark);
+      white-space: nowrap;
+    }
+    
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border-light), transparent);
+    }
+    
+    /* Special Section for Front Cover Hymns */
+    .special-section {
+      background: rgba(139, 115, 85, 0.04);
+      border-radius: 8px;
+      padding: 30px;
+      margin-bottom: 10px;
+    }
+    
+    .special-section .section-header {
+      border-bottom-color: var(--gold);
+    }
+    
+    .special-section .section-range {
+      color: var(--burgundy);
+    }
+    
+    /* Hymn List */
+    .hymn-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    
+    .hymn-item {
+      display: grid;
+      grid-template-columns: 60px 1fr auto;
+      align-items: center;
+      gap: 20px;
+      padding: 16px 20px;
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid transparent;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .hymn-item:hover {
+      background: rgba(255, 255, 255, 0.95);
+      border-color: var(--border-light);
+      box-shadow: 0 4px 20px rgba(44, 36, 22, 0.06);
+      transform: translateX(5px);
+    }
+    
+    .hymn-item.featured {
+      background: rgba(255, 255, 255, 0.85);
+      border-color: rgba(139, 115, 85, 0.15);
+    }
+
+    .hymn-item.hidden {
+      display: none;
+    }
+
+    .hymn-item.highlight {
+      background: rgba(139, 115, 85, 0.08);
+      border-color: var(--gold);
+    }
+
+    .hymn-section.hidden-section {
+      display: none;
+    }
+
+    .search-highlight {
+      background: rgba(139, 115, 85, 0.2);
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-weight: 500;
+    }
+    
+    .hymn-number {
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--gold-dark);
+      text-align: center;
+    }
+    
+    .hymn-number.special-num {
+      font-size: 0.9rem;
+      color: var(--burgundy);
+    }
+    
+    .hymn-info { min-width: 0; }
+    
+    .hymn-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--text-dark);
+      margin-bottom: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .hymn-tune {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem;
+      font-style: italic;
+      color: var(--text-muted);
+    }
+    
+    .hymn-arrow {
+      width: 20px; height: 20px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .hymn-item:hover .hymn-arrow { opacity: 1; }
+    
+    .hymn-arrow svg {
+      width: 100%; height: 100%;
+      stroke: var(--gold);
+      fill: none;
+      stroke-width: 2;
+    }
+    
+    /* Footer */
+    .page-footer {
+      text-align: center;
+      padding: 50px 30px 60px;
+      border-top: 1px solid var(--border-light);
+      margin-top: 20px;
+    }
+    
+    .footer-ornament {
+      width: 60px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto 20px;
+    }
+    
+    .hymn-count {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      color: var(--gold-dark);
+      margin-bottom: 15px;
+    }
+    
+    .footer-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text-muted);
+    }
+    
+    /* Responsive Design - Comprehensive Breakpoints */
+    
+    /* Large Tablets and Small Desktops (1025px - 1280px) */
+    @media (max-width: 1280px) {
+      .hymn-section {
+        max-width: 950px;
+        padding: 35px 25px;
+      }
+    }
+    
+    /* Tablets (769px - 1024px) */
+    @media (max-width: 1024px) {
+      .page-header {
+        padding: 22px 25px 18px;
+        min-height: 130px;
+      }
+      
+      .back-link {
+        left: 25px;
+        font-size: 0.65rem;
+        padding: 7px 12px;
+      }
+      
+      .book-title {
+        font-size: clamp(1.2rem, 3vw, 1.7rem);
+      }
+      
+      .search-container {
+        padding: 14px 25px;
+      }
+      
+      .quick-nav {
+        padding: 18px 25px;
+        min-height: 85px;
+      }
+      
+      .hymn-section {
+        padding: 35px 25px;
+      }
+      
+      .hymn-item {
+        padding: 15px 18px;
+        gap: 18px;
+      }
+      
+      .hymn-number {
+        font-size: 1rem;
+      }
+      
+      .hymn-title {
+        font-size: 1.1rem;
+      }
+      
+      .hymn-tune {
+        font-size: 0.85rem;
+      }
+    }
+    
+    /* Small Tablets and Large Phones (481px - 768px) */
+    @media (max-width: 768px) {
+      .bg-image {
+        background-attachment: scroll;
+      }
+      
+      .back-link {
+        position: static;
+        transform: none;
+        margin-bottom: 15px;
+        display: inline-flex;
+        left: auto;
+        top: auto;
+      }
+      
+      .page-header {
+        padding: 25px 20px 18px;
+        min-height: auto;
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .back-link {
+        align-self: flex-start;
+        margin-bottom: 15px;
+      }
+      
+      .header-cross {
+        width: 22px;
+        height: 28px;
+        margin: 0 auto 8px;
+      }
+      
+      .book-label {
+        font-size: 0.6rem;
+        margin-bottom: 5px;
+      }
+      
+      .book-title {
+        font-size: clamp(1.1rem, 4vw, 1.5rem);
+        margin-bottom: 8px;
+      }
+      
+      .book-scripture {
+        font-size: 0.85rem;
+        max-width: 100%;
+      }
+      
+      .book-scripture .ref {
+        font-size: 0.6rem;
+        margin-top: 4px;
+      }
+      
+      .search-container {
+        padding: 12px 20px;
+      }
+      
+      .search-input {
+        padding: 11px 16px 11px 45px;
+        font-size: 0.95rem;
+      }
+      
+      .search-icon {
+        left: 16px;
+        width: 16px;
+        height: 16px;
+      }
+      
+      .search-shortcut {
+        display: none;
+      }
+      
+      .search-results-info {
+        font-size: 0.65rem;
+        margin-top: 8px;
+      }
+      
+      .quick-nav {
+        padding: 15px 20px;
+        min-height: auto;
+      }
+      
+      .quick-nav-label {
+        font-size: 0.6rem;
+        margin-bottom: 10px;
+      }
+      
+      .quick-nav-links {
+        gap: 6px;
+      }
+      
+      .quick-nav-links a {
+        font-size: 0.7rem;
+        padding: 5px 12px;
+      }
+      
+      .hymn-section {
+        padding: 30px 20px;
+      }
+      
+      .section-header {
+        gap: 15px;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+      }
+      
+      .section-range {
+        font-size: 0.75rem;
+        letter-spacing: 3px;
+      }
+      
+      .special-section {
+        padding: 25px 20px;
+      }
+      
+      .hymn-item {
+        grid-template-columns: 50px 1fr;
+        padding: 14px 15px;
+        gap: 15px;
+      }
+      
+      .hymn-arrow {
+        display: none;
+      }
+      
+      .hymn-number {
+        font-size: 0.95rem;
+      }
+      
+      .hymn-title {
+        font-size: 1.05rem;
+        white-space: normal;
+        line-height: 1.4;
+        margin-bottom: 4px;
+      }
+      
+      .hymn-tune {
+        font-size: 0.85rem;
+      }
+      
+      .page-footer {
+        padding: 40px 20px 50px;
+      }
+      
+      .hymn-count {
+        font-size: 0.7rem;
+      }
+      
+      .footer-text {
+        font-size: 0.95rem;
+      }
+    }
+    
+    /* Mobile Phones (320px - 480px) */
+    @media (max-width: 480px) {
+      .bg-image {
+        background-attachment: scroll;
+      }
+      
+      .page-header {
+        padding: 20px 15px 15px;
+      }
+      
+      .back-link {
+        font-size: 0.6rem;
+        padding: 6px 10px;
+        margin-bottom: 12px;
+      }
+      
+      .back-link svg {
+        width: 10px;
+        height: 10px;
+      }
+      
+      .header-cross {
+        width: 20px;
+        height: 26px;
+        margin: 0 auto 6px;
+      }
+      
+      .book-label {
+        font-size: 0.55rem;
+        letter-spacing: 3px;
+      }
+      
+      .book-title {
+        font-size: clamp(1rem, 5vw, 1.3rem);
+        margin-bottom: 6px;
+      }
+      
+      .book-scripture {
+        font-size: 0.8rem;
+        line-height: 1.4;
+      }
+      
+      .book-scripture .ref {
+        font-size: 0.55rem;
+        letter-spacing: 1.5px;
+      }
+      
+      .search-container {
+        padding: 10px 15px;
+      }
+      
+      .search-wrapper {
+        max-width: 100%;
+      }
+      
+      .search-input {
+        padding: 10px 14px 10px 42px;
+        font-size: 0.9rem;
+        border-radius: 5px;
+      }
+      
+      .search-icon {
+        left: 14px;
+        width: 15px;
+        height: 15px;
+      }
+      
+      .search-clear {
+        right: 10px;
+        width: 22px;
+        height: 22px;
+        font-size: 16px;
+      }
+      
+      .search-results-info {
+        font-size: 0.6rem;
+        margin-top: 6px;
+      }
+      
+      .quick-nav {
+        padding: 12px 15px;
+      }
+      
+      .quick-nav-label {
+        font-size: 0.55rem;
+        letter-spacing: 3px;
+        margin-bottom: 8px;
+      }
+      
+      .quick-nav-links {
+        gap: 5px;
+        justify-content: flex-start;
+      }
+      
+      .quick-nav-links a {
+        font-size: 0.65rem;
+        padding: 4px 10px;
+        letter-spacing: 0.5px;
+      }
+      
+      .hymn-section {
+        padding: 25px 15px;
+      }
+      
+      .section-header {
+        gap: 12px;
+        margin-bottom: 18px;
+        padding-bottom: 10px;
+        flex-wrap: wrap;
+      }
+      
+      .section-range {
+        font-size: 0.7rem;
+        letter-spacing: 2px;
+        white-space: normal;
+      }
+      
+      .section-line {
+        min-width: 30px;
+      }
+      
+      .special-section {
+        padding: 20px 15px;
+        border-radius: 6px;
+      }
+      
+      .hymn-list {
+        gap: 3px;
+      }
+      
+      .hymn-item {
+        grid-template-columns: 45px 1fr;
+        padding: 12px 12px;
+        gap: 12px;
+        border-radius: 3px;
+      }
+      
+      .hymn-item:hover {
+        transform: translateX(3px);
+      }
+      
+      .hymn-number {
+        font-size: 0.9rem;
+      }
+      
+      .hymn-title {
+        font-size: 1rem;
+        line-height: 1.35;
+      }
+      
+      .hymn-tune {
+        font-size: 0.8rem;
+        line-height: 1.3;
+      }
+      
+      .page-footer {
+        padding: 35px 15px 40px;
+        margin-top: 15px;
+      }
+      
+      .footer-ornament {
+        width: 50px;
+        margin: 0 auto 15px;
+      }
+      
+      .hymn-count {
+        font-size: 0.65rem;
+        letter-spacing: 2px;
+        margin-bottom: 12px;
+      }
+      
+      .footer-text {
+        font-size: 0.9rem;
+      }
+    }
+    
+    /* Extra Small Phones (max-width: 360px) */
+    @media (max-width: 360px) {
+      .page-header {
+        padding: 18px 12px 12px;
+      }
+      
+      .back-link {
+        font-size: 0.55rem;
+        padding: 5px 8px;
+      }
+      
+      .book-title {
+        font-size: 0.95rem;
+      }
+      
+      .search-container {
+        padding: 8px 12px;
+      }
+      
+      .search-input {
+        padding: 9px 12px 9px 38px;
+        font-size: 0.85rem;
+      }
+      
+      .quick-nav-links a {
+        font-size: 0.6rem;
+        padding: 3px 8px;
+      }
+      
+      .hymn-item {
+        padding: 10px 10px;
+      }
+      
+      .hymn-title {
+        font-size: 0.95rem;
+      }
+    }
+    
+    /* Landscape Orientation for Mobile */
+    @media (max-width: 768px) and (orientation: landscape) {
+      .page-header {
+        min-height: 120px;
+        padding: 20px 20px 15px;
+      }
+      
+      .quick-nav {
+        padding: 12px 20px;
+      }
+      
+      .hymn-section {
+        padding: 25px 20px;
+      }
+    }
+    
+    /* Touch Device Optimizations */
+    @media (hover: none) and (pointer: coarse) {
+      .hymn-item {
+        min-height: 60px;
+      }
+      
+      .hymn-item:active {
+        transform: translateX(3px);
+        background: rgba(255, 255, 255, 0.98);
+      }
+      
+      .back-link {
+        min-width: 80px;
+        min-height: 36px;
+      }
+      
+      .quick-nav-links a {
+        min-height: 32px;
+      }
+      
+      .search-clear {
+        min-width: 32px;
+        min-height: 32px;
+      }
+    }
+    
+    /* High DPI Displays */
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      .hymn-item {
+        border-width: 0.5px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-image"></div>
+  
+  <div class="page-content">
+    <header class="page-header">
+      <a href="index.html" class="back-link">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        HOME
+      </a>
+      <div class="header-cross"></div>
+      <p class="book-label">Book Two</p>
+      <h1 class="book-title">Hymns of Truth and Praise</h1>
+      <p class="book-scripture">
+        "I will praise Thee, O Lord, with my whole heart; I will shew forth all Thy marvellous works."
+        <span class="ref">Psalm 9:1</span>
+      </p>
+    </header>
+    
+    <div class="search-container">
+      <div class="search-wrapper">
+        <div class="search-input-wrapper">
+          <input 
+            type="text" 
+            class="search-input" 
+            id="hymnSearch" 
+            placeholder="Search by number, title, or tune..."
+            autocomplete="off"
+          />
+          <svg class="search-icon" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+          </svg>
+          <div class="search-shortcut">
+            <kbd>Ctrl</kbd><span>+</span><kbd>K</kbd>
+          </div>
+          <div class="search-clear" id="searchClear">×</div>
+        </div>
+        <div class="search-results-info" id="searchResultsInfo"></div>
+      </div>
+    </div>
+    
+    <nav class="quick-nav">
+      <p class="quick-nav-label">Quick Navigation</p>
+      <div class="quick-nav-links">
+        <a href="#front-cover" class="special">Front Cover</a>
+        <a href="#h1-25">1 - 25</a>
+        <a href="#h26-50">26 - 50</a>
+        <a href="#h51-75">51 - 75</a>
+        <a href="#h76-97">76 - 97</a>
+        <a href="#h98-122">98 - 122</a>
+        <a href="#h123-147">123 - 147</a>
+        <a href="#h148-172">148 - 172</a>
+        <a href="#h173-197">173 - 197</a>
+        <a href="#h198-222">198 - 222</a>
+        <a href="#h223-247">223 - 247</a>
+        <a href="#h248-272">248 - 272</a>
+        <a href="#h273-297">273 - 297</a>
+        <a href="#h298-322">298 - 322</a>
+        <a href="#h323-347">323 - 347</a>
+        <a href="#h348-351">348 - 351</a>
+      </div>
+    </nav>
+    
+    <main>
+      <!-- Front Cover Hymns -->
+      <section class="hymn-section" id="front-cover">
+        <div class="special-section">
+          <div class="section-header">
+            <span class="section-range">FRONT COVER HYMNS</span>
+            <span class="section-line"></span>
+          </div>
+          <div class="hymn-list" id="listFC"></div>
+        </div>
+      </section>
+      
+      <!-- Hymns 1-25 -->
+      <section class="hymn-section" id="h1-25">
+        <div class="section-header">
+          <span class="section-range">HYMNS 1 - 25</span>
+          <span class="section-line"></span>
+        </div>
+        <div class="hymn-list" id="list1"></div>
+      </section>
+      
+      <!-- Hymns 26-50 -->
+      <section class="hymn-section" id="h26-50">
+        <div class="section-header">
+          <span class="section-range">HYMNS 26 - 50</span>
+          <span class="section-line"></span>
+        </div>
+        <div class="hymn-list" id="list2"></div>
+      </section>
+      
+      <!-- Hymns 51-75 -->
+      <section class="hymn-section" id="h51-75">
+        <div class="section-header">
+          <span class="section-range">HYMNS 51 - 75</span>
+          <span class="section-line"></span>
+        </div>
+        <div class="hymn-list" id="list3"></div>
+      </section>
+      
+      <!-- Hymns 76-97 -->
+      <section class="hymn-section" id="h76-97">
+        <div class="section-header">
+          <span class="section-range">HYMNS 76 - 97</span>
+          <span class="section-line"></span>
+        </div>
+        <div class="hymn-list" id="list4"></div>
+      </section>
+      
+      <!-- Hymns 98-122 -->
+      <section class="hymn-section" id="h98-122">
+        <div class="section-header">
+          <span class="section-range">HYMNS 98 - 122</span>
+          <span class="section-line"></span>
+        </div>
+        <div class="hymn-list" id="list5"></div>
+      </section>
+      
+      <!-- Hymns 123-147 -->
+      <section class="hymn-section" id="h123-147">
+        <div class="section-header">
+          <span class="section-range">HYMNS 123 - 147</span>
+          <span class="section-line"></span>
+        </div>
+        <div class="hymn-list" id="list6"></div>
+      </section>
+      
+      <!-- Hymns 148-172 -->
+      <section class="hymn-section" id="h148-172">
+        <div class="section-header">
+          <span class="section-range">HYMNS 148 - 172</span>
+          <span class="section-line"></span>
+        </div>
+        <div class="hymn-list" id="list7"></div>
+      </section>
+      
+      <!-- Hymns 173-197 -->
+      <section class="hymn-section" id="h173-197">
+        <div class="section-header">
+          <span class="section-range">HYMNS 173 - 197</span>
+          <span class="section-line"></span>
+        </div>
+        <div class="hymn-list" id="list8"></div>
+      </section>
+      
+      <!-- Hymns 198-222 -->
+      <section class="hymn-section" id="h198-222">
+        <div class="section-header">
+          <span class="section-range">HYMNS 198 - 222</span>
+          <span class="section-line"></span>
+        </div>
+        <div class="hymn-list" id="list9"></div>
+      </section>
+      
+      <!-- Hymns 223-247 -->
+      <section class="hymn-section" id="h223-247">
+        <div class="section-header">
+          <span class="section-range">HYMNS 223 - 247</span>
+          <span class="section-line"></span>
+        </div>
+        <div class="hymn-list" id="list10"></div>
+      </section>
+      
+      <!-- Hymns 248-272 -->
+      <section class="hymn-section" id="h248-272">
+        <div class="section-header">
+          <span class="section-range">HYMNS 248 - 272</span>
+          <span class="section-line"></span>
+        </div>
+        <div class="hymn-list" id="list11"></div>
+      </section>
+      
+      <!-- Hymns 273-297 -->
+      <section class="hymn-section" id="h273-297">
+        <div class="section-header">
+          <span class="section-range">HYMNS 273 - 297</span>
+          <span class="section-line"></span>
+        </div>
+        <div class="hymn-list" id="list12"></div>
+      </section>
+      
+      <!-- Hymns 298-322 -->
+      <section class="hymn-section" id="h298-322">
+        <div class="section-header">
+          <span class="section-range">HYMNS 298 - 322</span>
+          <span class="section-line"></span>
+        </div>
+        <div class="hymn-list" id="list13"></div>
+      </section>
+      
+      <!-- Hymns 323-347 -->
+      <section class="hymn-section" id="h323-347">
+        <div class="section-header">
+          <span class="section-range">HYMNS 323 - 347</span>
+          <span class="section-line"></span>
+        </div>
+        <div class="hymn-list" id="list14"></div>
+      </section>
+      
+      <!-- Hymns 348-351 -->
+      <section class="hymn-section" id="h348-351">
+        <div class="section-header">
+          <span class="section-range">HYMNS 348 - 351</span>
+          <span class="section-line"></span>
+        </div>
+        <div class="hymn-list" id="list15"></div>
+      </section>
+    </main>
+    
+    <footer class="page-footer">
+      <div class="footer-ornament"></div>
+      <p class="hymn-count">351 HYMNS</p>
+      <p class="footer-text">Colonial Hills Bible Chapel</p>
+    </footer>
+  </div>
+
+  <script>
+    const frontCoverHymns = [
+      { num: "FC 1", title: "Glory to God on high!", tune: "OLIVET" },
+      { num: "FC 2", title: "Praise God, from whom all blessings flow", tune: "OLD HUNDRED" },
+      { num: "FC 3", title: "Praise the Saviour, ye who know Him!", tune: "ACCLAIM" }
+    ];
+    
+    const hymns = [
+      { num: 1, title: "O Lord my God! When I in awesome wonder", tune: "O STORE GUD" },
+      { num: 2, title: "Great is Thy faithfulness, O God my Father", tune: "FAITHFULNESS" },
+      { num: 3, title: "To God be the glory, great things He hath done", tune: "TO GOD BE THE GLORY" },
+      { num: 4, title: "Immortal, invisible, God only wise", tune: "ST. DENNIS (Joanna)" },
+      { num: 5, title: "O God, our help in ages past", tune: "ST. ANNE" },
+      { num: 6, title: "Holy, Holy, Holy! Lord God Almighty!", tune: "NICAEA" },
+      { num: 7, title: "Give to our God immortal praise!", tune: "LASST UNS ERFREUEN" },
+      { num: 8, title: "Praise, my soul, the King of heaven", tune: "LAUDA ANIMA" },
+      { num: 9, title: "I sing the mighty pow'r of God", tune: "ELLACOMBE" },
+      { num: 10, title: "Hosanna, loud hosanna, The little children sang", tune: "ELLACOMBE" },
+      { num: 11, title: "The spacious firmament on high", tune: "CREATION" },
+      { num: 12, title: "When all Thy mercies, O my God", tune: "WINCHESTER OLD" },
+      { num: 13, title: "From all that dwell below the skies", tune: "DUKE STREET" },
+      { num: 14, title: "The God of Abraham praise, Who reigns enthroned above", tune: "LEONI (Yigdal)" },
+      { num: 15, title: "God of our fathers, whose almighty hand", tune: "NATIONAL HYMN" },
+      { num: 16, title: "My God, how wonderful Thou art", tune: "WESTMINSTER" },
+      { num: 17, title: "Eternal Love! Oh, mighty sea", tune: "REST (Whittier)" },
+      { num: 18, title: "Crown Him with many crowns, The Lamb upon His throne", tune: "DIADEMATA" },
+      { num: 19, title: "Praise Him! praise Him! Jesus, our blessed Redeemer!", tune: "PRAISE HIM" },
+      { num: 20, title: "Fairest Lord Jesus! Ruler of all nature!", tune: "CRUSADERS' HYMN" },
+      { num: 21, title: "Name of Jesus! highest Name!", tune: "INNOCENTS" },
+      { num: 22, title: "O worship the King, all-glorious above", tune: "LYONS" },
+      { num: 23, title: "Rejoice, the Lord is King! Your Lord and King adore", tune: "ST. JOHN (Trumpet)" },
+      { num: 24, title: "Now in a song of grateful praise", tune: "ERNAN" },
+      { num: 25, title: "Come, Thou Almighty King", tune: "ITALIAN HYMN (Trinity)" },
+      { num: 26, title: "Great God of wonders! all Thy ways", tune: "SOVEREIGNTY" },
+      { num: 27, title: "Oh, for a thousand tongues to sing", tune: "LYNGHAM" },
+      { num: 28, title: "O for a thousand tongues to sing", tune: "AZMON" },
+      { num: 29, title: "Jesus, Thy blood and righteousness", tune: "GERMANY" },
+      { num: 30, title: "Behold, what love, what boundless love", tune: "BOUNDLESS LOVE" },
+      { num: 31, title: "Praise ye the Lord, again, again", tune: "ARLINGTON" },
+      { num: 32, title: "All praise to Him who reigns above", tune: "BLESSED BE THE NAME" },
+      { num: 33, title: "O the deep, deep love of Jesus", tune: "EBENEZER (Ton-Y-Botel)" },
+      { num: 34, title: "All hail the power of Jesus' name!", tune: "CORONATION" },
+      { num: 35, title: "All hail the power of Jesus' name!", tune: "MILES LANE" },
+      { num: 36, title: "All hail the pow'r of Jesus' name!", tune: "DIADEM" },
+      { num: 37, title: "And can it be that I should gain", tune: "SAGINA" },
+      { num: 38, title: "Awake, my soul to joyful lays", tune: "LOVING KINDNESS" },
+      { num: 39, title: "The love of God is greater far", tune: "THE LOVE OF GOD" },
+      { num: 40, title: "Praise to the Lord, the Almighty, the King of creation", tune: "LOBE DEN HERREN" },
+      { num: 41, title: "We praise Thee, O God, for the Son of Thy love", tune: "REVIVE US AGAIN" },
+      { num: 42, title: "Rejoice and be glad! The Redeemer has come!", tune: "REVIVE US AGAIN" },
+      { num: 43, title: "The cross it standeth fast, Hallelujah! Hallelujah!", tune: "THE CROSS" },
+      { num: 44, title: "Everlasting glory Unto Jesus be!", tune: "ST. GERTRUDE" },
+      { num: 45, title: "Break forth and sing the song Of Glory to the Lamb!", tune: "ST. THOMAS" },
+      { num: 46, title: "Everlasting glory be, God and Father, unto Thee", tune: "HENDON" },
+      { num: 47, title: "Come, Thou Fount of ev'ry blessing", tune: "NETTLETON" },
+      { num: 48, title: "O Blessed, living Lord Engage our hearts with Thee", tune: "BOYLSTON" },
+      { num: 49, title: "With harps and with viols, there stands a great throng", tune: "THE NEW SONG" },
+      { num: 50, title: "The person of the Christ, Enfolding ev'ry grace", tune: "DENNIS" },
+      { num: 51, title: "Rise, my soul! behold 'tis Jesus", tune: "GOTHA" },
+      { num: 52, title: "Come, let us join our cheerful songs", tune: "WARWICK" },
+      { num: 53, title: "Lord! accept our joyful song", tune: "INNOCENTS" },
+      { num: 54, title: "How sweet the name of Jesus sounds", tune: "ST. PETER" },
+      { num: 55, title: "There is a name I love to hear", tune: "BELMONT" },
+      { num: 56, title: "Come, let us sing the matchless worth", tune: "ARIEL" },
+      { num: 57, title: "Gracious God, we worship Thee", tune: "WORSHIP" },
+      { num: 58, title: "Oh, the peace forever flowing", tune: "OVIO" },
+      { num: 59, title: "Lord Jesus Christ, we seek Thy face", tune: "RETREAT" },
+      { num: 60, title: "Gathered in Thy name, Lord Jesus", tune: "EVENING PRAYER" },
+      { num: 61, title: "Worthy, worthy is the Lamb", tune: "WORTHY" },
+      { num: 62, title: "We sing the praise of Him who died", tune: "MAINZER" },
+      { num: 63, title: "What rich eternal bursts of praise", tune: "PIETY" },
+      { num: 64, title: "Thou alone, Lord Jesus, canst true peace impart", tune: "TRUE PEACE" },
+      { num: 65, title: "Majestic sweetness sits enthroned", tune: "ORTONVILLE" },
+      { num: 66, title: "O lead me to the Man that died", tune: "MARYTON" },
+      { num: 67, title: "O God our Father, we would come to Thee", tune: "A LITTLE WHILE" },
+      { num: 68, title: "Father, we worship Thee", tune: "TRENTHAM" },
+      { num: 69, title: "What was it, blessed God", tune: "LENOX" },
+      { num: 70, title: "The countless multitude on high", tune: "REDEMPTION GROUND" },
+      { num: 71, title: "Thro' Thy precious body broken", tune: "EVENSONG" },
+      { num: 72, title: "O blessed God! how kind", tune: "ST. JOHN (Trumpet)" },
+      { num: 73, title: "Blessed be God, our God", tune: "HEREFORD (New)" },
+      { num: 74, title: "God, our Father, we adore Thee!", tune: "BEECHER" },
+      { num: 75, title: "My Redeemer, oh, what beauties", tune: "REGENT SQUARE" },
+      { num: 76, title: "Jesus, Thou alone art worthy", tune: "STUTTGART" },
+      { num: 77, title: "Hark! ten thousand voices crying", tune: "HARWELL" },
+      { num: 78, title: "Look, ye saints! The sight is glorious", tune: "UNLEY" },
+      { num: 79, title: "His be the Victor's name, Who fought the fight alone", tune: "TORRENS PARK" },
+      { num: 80, title: "Look, ye saints! The sight is glorious", tune: "CWM RHONDDA" },
+      { num: 81, title: "Brightness of eternal glory", tune: "DIJON (German Evening Hymn)" },
+      { num: 82, title: "The veil is rent: Lo! Jesus stands", tune: "ST. PETER" },
+      { num: 83, title: "Jesus, wondrous Saviour! Christ, of kings the King", tune: "McMASTER" },
+      { num: 84, title: "O Lord, how much Thy name unfolds", tune: "LYNNWOOD" },
+      { num: 85, title: "O Christ, He is the fountain", tune: "RUTHERFORD" },
+      { num: 86, title: "Lord Jesus, I love Thee, I know Thou art mine", tune: "GORDON" },
+      { num: 87, title: "Jesus! the very tho't of Thee", tune: "ST. AGNES" },
+      { num: 88, title: "Jesus! That name is Love, Jesus, our Lord!", tune: "BETHANY" },
+      { num: 89, title: "Lord of glory, we adore Thee", tune: "OTTOWA (Evening Prayer)" },
+      { num: 90, title: "Behold the Lamb, with glory crowned", tune: "ST. MAGNUS" },
+      { num: 91, title: "Join all the glorious names Of wisdom, love, and pow'r", tune: "DARWALL" },
+      { num: 92, title: "We bless Thee, God and Father", tune: "EWING" },
+      { num: 93, title: "The Lamb of God to slaughter led", tune: "EVAN" },
+      { num: 94, title: "Holy Saviour, we adore Thee", tune: "REGENT SQUARE" },
+      { num: 95, title: "Behold the glories of the Lamb", tune: "PARACLETE" },
+      { num: 96, title: "Worthy of homage and of praise", tune: "CANONBURY" },
+      { num: 97, title: "Thou Life of my life, blessed Jesus", tune: "BENDELOW" },
+      { num: 98, title: "No blood, no altar now", tune: "KELSO" },
+      { num: 99, title: "I hear the words of love", tune: "ST. MICHAEL" },
+      { num: 100, title: "We'll sing of the Shepherd that died", tune: "EBENEZER (Celeste)" },
+      { num: 101, title: "Thou art the everlasting Word", tune: "ARABIA" },
+      { num: 102, title: "O my Saviour, glorified!", tune: "MOZART" },
+      { num: 103, title: "Thou Son of God, eternal Word, Who heav'n and earth's foundations laid", tune: "COMPLETE IN THEE" },
+      { num: 104, title: "Thy name we love, Lord Jesus", tune: "CYPRUS" },
+      { num: 105, title: "Son of God, 'twas love that made Thee", tune: "ROOM FOR JESUS" },
+      { num: 106, title: "Hail, Thou once despised Jesus!", tune: "HYFRYDOL" },
+      { num: 107, title: "Ride on! ride on in majesty!", tune: "ST. DROSTANE" },
+      { num: 108, title: "In the cross of Christ I glory", tune: "RATHBUN" },
+      { num: 109, title: "Jesus, in His heav'nly glory", tune: "STUTTGART" },
+      { num: 110, title: "We'll praise Thee, glorious Lord", tune: "WELCOME VOICE" },
+      { num: 111, title: "\"Man of Sorrows,\" what a name", tune: "MARAH" },
+      { num: 112, title: "Down to the depths of woe", tune: "FERGUSON" },
+      { num: 113, title: "Gazing on the Lord in glory", tune: "RHINELAND" },
+      { num: 114, title: "Lord, e'en to death Thy love could go", tune: "DUBLIN (Howards)" },
+      { num: 115, title: "Alas! and did my Saviour bleed?", tune: "SACRA (Remember Me)" },
+      { num: 116, title: "Thy sorrows, Saviour, we retrace", tune: "WAREHAM" },
+      { num: 117, title: "O Lord, when we the path retrace", tune: "LYNNWOOD" },
+      { num: 118, title: "What grace, O Lord, and beauty shone", tune: "SAWLEY" },
+      { num: 119, title: "Lamb of God! our souls adore Thee", tune: "ERIE" },
+      { num: 120, title: "Crowned with thorns upon the tree", tune: "DUNSTAN" },
+      { num: 121, title: "When I survey the wondrous cross", tune: "HAMBURG" },
+      { num: 122, title: "Behold! behold the Lamb of God", tune: "MERCY'S FREE" },
+      { num: 123, title: "He was wounded for our transgressions", tune: "[He was wounded for our transgressions]" },
+      { num: 124, title: "Jesus, Thy head, once crowned with thorns", tune: "ST. MAGNUS" },
+      { num: 125, title: "Behold! a spotless Victim dies", tune: "DUNDEE (French)" },
+      { num: 126, title: "O Christ, what burdens bowed Thy head!", tune: "SUBSTITUTION" },
+      { num: 127, title: "I saw one hanging on a tree", tune: "ARLINGTON" },
+      { num: 128, title: "Hark! the voice of love and mercy", tune: "REGENT SQUARE" },
+      { num: 129, title: "Lord Jesus! we remember The travail of Thy soul", tune: "WEBB" },
+      { num: 130, title: "Life, life of love pour'd out fragrant and holy", tune: "CONSOLATION (Webbe)" },
+      { num: 131, title: "O Head, once filled with bruises", tune: "PASSION CHORALE" },
+      { num: 132, title: "O spotless Lamb of God, in Thee", tune: "QUEBEC (Hesperus)" },
+      { num: 133, title: "From His bright throne eternal", tune: "SACRIFICE" },
+      { num: 134, title: "Lord, we would ne'er forget Thy love", tune: "ROCKINGHAM" },
+      { num: 135, title: "According to Thy gracious word", tune: "ST. AGNES" },
+      { num: 136, title: "To Calv'ry, Lord, in spirit now", tune: "MARTYRDOM (Avon)" },
+      { num: 137, title: "For the bread and for the wine", tune: "EVELYN" },
+      { num: 138, title: "Amidst us our Beloved stands", tune: "AUSTIN" },
+      { num: 139, title: "Saviour, we remember Thee!", tune: "ZACHER" },
+      { num: 140, title: "Here, O our Lord, we see Thee face to face", tune: "EVENTIDE" },
+      { num: 141, title: "Sweet feast of love divine!", tune: "ZURICH" },
+      { num: 142, title: "O come, all ye faithful", tune: "ADESTE FIDELES" },
+      { num: 143, title: "Hark! the herald angels sing", tune: "MENDELSSOHN" },
+      { num: 144, title: "Joy to the world! the Lord is come", tune: "ANTIOCH" },
+      { num: 145, title: "O little town of Bethlehem", tune: "ST. LOUIS" },
+      { num: 146, title: "Away in a manger, No crib for a bed", tune: "CRADLE SONG" },
+      { num: 147, title: "Silent night holy night All is calm, all is bright", tune: "STILLE NACHT" },
+      { num: 148, title: "There's a song in the air!", tune: "[There's a song in the air!]" },
+      { num: 149, title: "To us a child of royal birth", tune: "WALTHAM (Doane)" },
+      { num: 150, title: "What Child is this, who, laid to rest", tune: "GREENSLEEVES" },
+      { num: 151, title: "From Jesse's stock up-springing", tune: "ES IST EIN' ROS' ENTSPRUNGEN" },
+      { num: 152, title: "While shepherds watched their flocks by night", tune: "CHRISTMAS" },
+      { num: 153, title: "Angels we have heard on high", tune: "GLORIA" },
+      { num: 154, title: "The first Noel, the angel did say", tune: "[The first Noel, the angel did say]" },
+      { num: 155, title: "It came upon the midnight clear", tune: "[It came upon the midnight clear]" },
+      { num: 156, title: "Angels, from the realms of glory", tune: "REGENT SQUARE" },
+      { num: 157, title: "As with gladness men of old", tune: "DIX" },
+      { num: 158, title: "Who is He in yonder stall", tune: "LOWLINESS" },
+      { num: 159, title: "Born among cattle in poverty sore", tune: "[Born among cattle in poverty sore]" },
+      { num: 160, title: "Thou didst leave Thy throne and Thy kingly crown", tune: "MARGARET" },
+      { num: 161, title: "I cannot tell why He whom angels worship", tune: "LONDONDERRY AIR" },
+      { num: 162, title: "My song is love unknown", tune: "ST. JOHN (Calkin)" },
+      { num: 163, title: "One day when heaven was filled with His praises", tune: "[One day when heaven was filled with His praises]" },
+      { num: 164, title: "Tell me the story of Jesus", tune: "[Tell me the story of Jesus]" },
+      { num: 165, title: "Jesus my Saviour to Bethlehem came", tune: "[Jesus my Saviour to Bethlehem came]" },
+      { num: 166, title: "I know that my Redeemer liveth", tune: "[I know that my Redeemer liveth]" },
+      { num: 167, title: "Low in the grave He lay", tune: "[Low in the grave He lay]" },
+      { num: 168, title: "Christ the Lord is risen today", tune: "EASTER HYMN (Worgan)" },
+      { num: 169, title: "He died! He died! the lowly Man of Sorrows", tune: "[He died! He died! the lowly Man of Sorrows]" },
+      { num: 170, title: "The strife is o'er, the battle done", tune: "VICTORY" },
+      { num: 171, title: "Jesus lives, and so shall I", tune: "ZUVERSICHT" },
+      { num: 172, title: "The Saviour lives, no more to die", tune: "MAINZER" },
+      { num: 173, title: "The Lord is ris'n; and death's dark judgment flood", tune: "EVENTIDE" },
+      { num: 174, title: "Thine be the glory, risen, conqu'ring Son", tune: "MACCABAEUS" },
+      { num: 175, title: "Christ the Lord is ris'n on high!", tune: "HENDON" },
+      { num: 176, title: "Go, and search the tomb of Jesus", tune: "KENSINGTON NEW" },
+      { num: 177, title: "Our great High Priest is sitting", tune: "AURELIA" },
+      { num: 178, title: "With joy we meditate the grace", tune: "EMMANUEL (Sympathy)" },
+      { num: 179, title: "By faith I look where Christ has gone", tune: "PIETY" },
+      { num: 180, title: "Before the throne of God above", tune: "FESTUS" },
+      { num: 181, title: "In hope we lift our wishful, longing eyes", tune: "ELLERS" },
+      { num: 182, title: "There'll be no dark valley when Jesus comes", tune: "[There'll be no dark valley when Jesus comes]" },
+      { num: 183, title: "It may be at morn, when the day is awaking", tune: "[It may be at morn, when the day is awaking]" },
+      { num: 184, title: "Lo! He comes, from heav'n descending", tune: "CWM RHONDDA" },
+      { num: 185, title: "O child of God, there is for thee", tune: "MURMUR NOT" },
+      { num: 186, title: "When Jesus comes to reward His servants", tune: "[When Jesus comes to reward His servants]" },
+      { num: 187, title: "Marvelous message we bring", tune: "[Marvelous message we bring]" },
+      { num: 188, title: "Saviour, come, Thy saints are waiting", tune: "REGENT SQUARE" },
+      { num: 189, title: "When the trumpet of the Lord shall sound", tune: "[When the trumpet of the Lord shall sound]" },
+      { num: 190, title: "I am waiting for the dawning", tune: "AUSTRIAN HYMN" },
+      { num: 191, title: "When He cometh, when He cometh", tune: "[When He cometh, when He cometh]" },
+      { num: 192, title: "I'm waiting for Thee, Lord", tune: "[When He cometh, when He cometh]" },
+      { num: 193, title: "Christ the Lord will come again", tune: "TRUSTING" },
+      { num: 194, title: "Lord Jesus, I am waiting, Waiting Thy dear face to see", tune: "[Lord Jesus, I am waiting, Waiting Thy dear face to see]" },
+      { num: 195, title: "He comes, Emmanuel comes!", tune: "DARWALL" },
+      { num: 196, title: "Jesus shall reign where'er the sun", tune: "DUKE STREET" },
+      { num: 197, title: "Saviour! we love Thee, long for Thy return", tune: "ELLERS" },
+      { num: 198, title: "Thou art coming, O my Saviour", tune: "BEVERLEY" },
+      { num: 199, title: "'Midst the darkness, storm, and sorrow", tune: "THE PLEADING VOICE" },
+      { num: 200, title: "The Lord is now rejected, And by the world disowned", tune: "REWARDS" },
+      { num: 201, title: "He is coming! He is coming!", tune: "ALL THE WAY" },
+      { num: 202, title: "\"Till He come!\" O let the words", tune: "WELLS" },
+      { num: 203, title: "Our blest Redeemer, ere He breathed", tune: "ST. CUTHBERT" },
+      { num: 204, title: "Open my eyes, that I may see", tune: "[Open my eyes, that I may see]" },
+      { num: 205, title: "The Holy Ghost to earth has come", tune: "ST. AGNES" },
+      { num: 206, title: "For the blessed Holy Spirit", tune: "EVENING PRAYER" },
+      { num: 207, title: "Holy Ghost with light divine", tune: "MERCY" },
+      { num: 208, title: "We praise Thee for Thy Spirit, Lord", tune: "BELMONT" },
+      { num: 209, title: "Thrice blessed Spirit! Giver of salvation", tune: "[Thrice blessed Spirit! Giver of salvation]" },
+      { num: 210, title: "For Thy Gift of God the Spirit", tune: "SHARON" },
+      { num: 211, title: "The Holy Ghost is here", tune: "TRENTHAM" },
+      { num: 212, title: "Joys are flowing like a river", tune: "[Joys are flowing like a river]" },
+      { num: 213, title: "O Word of God incarnate", tune: "MUNICH" },
+      { num: 214, title: "Sing them over again to me", tune: "[Sing them over again to me]" },
+      { num: 215, title: "The Word of God, a river of pleasure", tune: "[The Word of God, a river of pleasure]" },
+      { num: 216, title: "Break Thou the bread of life, Dear Lord, to me", tune: "BREAD OF LIFE" },
+      { num: 217, title: "O God of Light, Thy Word, a lamp unfailing", tune: "ANCIENT OF DAYS" },
+      { num: 218, title: "Holy Bible, Book divine", tune: "ALETTA" },
+      { num: 219, title: "Open Thou mine eyes, Lord, That I may behold", tune: "[Open Thou mine eyes, Lord, That I may behold]" },
+      { num: 220, title: "Standing on the promises of Christ my King", tune: "[Standing on the promises of Christ my King]" },
+      { num: 221, title: "Precious holy Bible, Treasure rich and rare", tune: "[Precious holy Bible, Treasure rich and rare]" },
+      { num: 222, title: "The B-I-B-L-E, Yes, that's the Book for me", tune: "[The B-I-B-L-E, Yes, that's the Book for me]" },
+      { num: 223, title: "Master, speak! Thy servant heareth", tune: "AMEN, JESUS HAN SKAL RAADE" },
+      { num: 224, title: "Lamp of our feet, whereby we trace", tune: "LAMBETH" },
+      { num: 225, title: "Thy Word is like a garden, Lord", tune: "SERAPH (Bethlehem)" },
+      { num: 226, title: "The Church's one Foundation Is Jesus Christ her Lord", tune: "AURELIA" },
+      { num: 227, title: "On Christ, salvation rests secure", tune: "DUKE STREET" },
+      { num: 228, title: "Blest be the tie that binds", tune: "DENNIS" },
+      { num: 229, title: "Tell me the old, old story", tune: "[Tell me the old, old story]" },
+      { num: 230, title: "Sinners Jesus will receive", tune: "[Sinners Jesus will receive]" },
+      { num: 231, title: "Beautiful words of Jesus, Spoken so long ago", tune: "[Beautiful words of Jesus, Spoken so long ago]" },
+      { num: 232, title: "Down at the cross where my Saviour died", tune: "[Down at the cross where my Saviour died]" },
+      { num: 233, title: "Down from the splendor of His everlasting home", tune: "[Down from the splendor of His everlasting home]" },
+      { num: 234, title: "There is never a day so dreary", tune: "[There is never a day so dreary]" },
+      { num: 235, title: "Wonderful grace of Jesus, Greater than all my sin", tune: "[Wonderful grace of Jesus, Greater than all my sin]" },
+      { num: 236, title: "Free from the law, O happy condition", tune: "[Free from the law, O happy condition]" },
+      { num: 237, title: "Marvelous grace of our loving Lord", tune: "[Marvelous grace of our loving Lord]" },
+      { num: 238, title: "Oh, what a Saviour, that He died for me!", tune: "[Oh, what a Saviour, that He died for me!]" },
+      { num: 239, title: "\"Whosoever heareth,\" shout, shout the sound!", tune: "[\"Whosoever heareth,\" shout, shout the sound!]" },
+      { num: 240, title: "A ruler once came to Jesus by night", tune: "[A ruler once came to Jesus by night]" },
+      { num: 241, title: "Listen to the blessed invitation", tune: "[Listen to the blessed invitation]" },
+      { num: 242, title: "The whole world was lost in the darkness of sin", tune: "[The whole world was lost in the darkness of sin]" },
+      { num: 243, title: "'Tis the grandest theme through the ages rung", tune: "['Tis the grandest theme through the ages rung]" },
+      { num: 244, title: "We love to sing of the Lord who died", tune: "[We love to sing of the Lord who died]" },
+      { num: 245, title: "There's a wideness in God's mercy", tune: "WELLESLEY" },
+      { num: 246, title: "If you from sin are longing to be free", tune: "[If you from sin are longing to be free]" },
+      { num: 247, title: "I've a message from the Lord, Hallelujah!", tune: "[I've a message from the Lord, Hallelujah!]" },
+      { num: 248, title: "How vast, how full, how free", tune: "PLEROMA" },
+      { num: 249, title: "God in mercy sent His Son", tune: "FAITHFUL GUIDE" },
+      { num: 250, title: "In times like these you need a Saviour", tune: "[In times like these you need a Saviour]" },
+      { num: 251, title: "Would you be free from the burden of sin?", tune: "[Would you be free from the burden of sin?]" },
+      { num: 252, title: "Christ our Redeemer died on the cross", tune: "[Christ our Redeemer died on the cross]" },
+      { num: 253, title: "Have you been to Jesus for the cleansing power?", tune: "[Have you been to Jesus for the cleansing power?]" },
+      { num: 254, title: "When I survey the wondrous cross", tune: "[When I survey the wondrous cross]" },
+      { num: 255, title: "Precious, precious blood of Jesus", tune: "STEPHANOS" },
+      { num: 256, title: "What can wash away my sin?", tune: "[What can wash away my sin?]" },
+      { num: 257, title: "There is forgiveness, God doth say", tune: "[There is forgiveness, God doth say]" },
+      { num: 258, title: "Redemption! oh, wonderful story", tune: "[Redemption! oh, wonderful story]" },
+      { num: 259, title: "Stricken, smitten, and afflicted", tune: "JAMES" },
+      { num: 260, title: "Come, sinner, behold what Jesus hath done", tune: "[Come, sinner, behold what Jesus hath done]" },
+      { num: 261, title: "God loved the world of sinners lost", tune: "[God loved the world of sinners lost]" },
+      { num: 262, title: "The perfect righteousness of God", tune: "MENDON" },
+      { num: 263, title: "There is a green hill far away", tune: "[There is a green hill far away]" },
+      { num: 264, title: "It was alone that Jesus suffered in Gethsemane", tune: "[It was alone that Jesus suffered in Gethsemane]" },
+      { num: 265, title: "Nothing, either great or small", tune: "[Nothing, either great or small]" },
+      { num: 266, title: "I serve a risen Saviour, He's in the world today", tune: "[I serve a risen Saviour, He's in the world today]" },
+      { num: 267, title: "O listen to our wondrous story!", tune: "[O listen to our wondrous story!]" },
+      { num: 268, title: "Sweet is the story of the Saviour's wondrous love", tune: "[Sweet is the story of the Saviour's wondrous love]" },
+      { num: 269, title: "There is a fountain filled with blood", tune: "[There is a fountain filled with blood]" },
+      { num: 270, title: "There is no name so sweet on earth", tune: "[There is no name so sweet on earth]" },
+      { num: 271, title: "O what a Saviour is Jesus the Lord!", tune: "HEILAND" },
+      { num: 272, title: "Infinite Saviour and wonderful Friend", tune: "[Infinite Saviour and wonderful Friend]" },
+      { num: 273, title: "Christ is the Saviour of sinners", tune: "[Christ is the Saviour of sinners]" },
+      { num: 274, title: "Jesus came to earth by a lowly birth", tune: "[Jesus came to earth by a lowly birth]" },
+      { num: 275, title: "Wonderful story of love; Tell it to me again", tune: "[Wonderful story of love; Tell it to me again]" },
+      { num: 276, title: "That grand word \"whosoever\" is ringing thro' my soul", tune: "[That grand word \"whosoever\" is ringing thro' my soul]" },
+      { num: 277, title: "Hark! sinner, hark! we have tidings so true", tune: "[Hark! sinner, hark! we have tidings so true]" },
+      { num: 278, title: "Will your anchor hold in the storms of life", tune: "[Will your anchor hold in the storms of life]" },
+      { num: 279, title: "I have a song I love to sing", tune: "[I have a song I love to sing]" },
+      { num: 280, title: "I will sing of the mercies of the Lord forever", tune: "[I will sing of the mercies of the Lord forever]" },
+      { num: 281, title: "I will sing the wondrous story", tune: "[I will sing the wondrous story]" },
+      { num: 282, title: "I love to tell the story", tune: "[I love to tell the story]" },
+      { num: 283, title: "Alas, and did my Saviour bleed?", tune: "[Alas, and did my Saviour bleed?]" },
+      { num: 284, title: "To Jesus ev'ry day I find my heart is closer drawn", tune: "[To Jesus ev'ry day I find my heart is closer drawn]" },
+      { num: 285, title: "Fairest of all the earth beside", tune: "[Fairest of all the earth beside]" },
+      { num: 286, title: "There was One who was willing to die in my stead", tune: "[There was One who was willing to die in my stead]" },
+      { num: 287, title: "Wounded for me, wounded for me", tune: "[Wounded for me, wounded for me]" },
+      { num: 288, title: "Jesus will never fail, never fail, never fail", tune: "[Jesus will never fail, never fail, never fail]" },
+      { num: 289, title: "God loved the world so that He gave", tune: "[God loved the world so that He gave]" },
+      { num: 290, title: "I hear the Saviour say", tune: "[I hear the Saviour say]" },
+      { num: 291, title: "They nailed my Lord upon the tree", tune: "[They nailed my Lord upon the tree]" },
+      { num: 292, title: "A wonderful Saviour is Jesus my Lord", tune: "[A wonderful Saviour is Jesus my Lord]" },
+      { num: 293, title: "My soul in sad exile was out on life's sea", tune: "[My soul in sad exile was out on life's sea]" },
+      { num: 294, title: "I know of a Name, A beautiful Name", tune: "[I know of a Name, A beautiful Name]" },
+      { num: 295, title: "There have been names that I have loved to hear", tune: "[There have been names that I have loved to hear]" },
+      { num: 296, title: "The name of Jesus is so sweet", tune: "[The name of Jesus is so sweet]" },
+      { num: 297, title: "How sweet and holy is the place", tune: "RAPHAEL" },
+      { num: 298, title: "In lovingkindness Jesus came", tune: "[In lovingkindness Jesus came]" },
+      { num: 299, title: "Grace! 'tis a charming sound", tune: "[Grace! 'tis a charming sound]" },
+      { num: 300, title: "I was once far away from the Saviour", tune: "[I was once far away from the Saviour]" },
+      { num: 301, title: "I heard the voice of Jesus say", tune: "VOX DILECTI" },
+      { num: 302, title: "O how sweet the glorious message", tune: "[O how sweet the glorious message]" },
+      { num: 303, title: "Jesus has loved me– wonderful Saviour!", tune: "[Jesus has loved me– wonderful Saviour]" },
+      { num: 304, title: "Christ has for sin atonement made", tune: "[Christ has for sin atonement made]" },
+      { num: 305, title: "As I was, the Father lov'd me", tune: "[As I was, the Father lov'd me]" },
+      { num: 306, title: "O Christ, in Thee my soul hath found", tune: "[O Christ, in Thee my soul hath found]" },
+      { num: 307, title: "What a wonderful change in my life has been wrought", tune: "[What a wonderful change in my life has been wrought]" },
+      { num: 308, title: "Naught have I gotten but what I received", tune: "[Naught have I gotten but what I received]" },
+      { num: 309, title: "I am so glad that our Father in heaven", tune: "[I am so glad that our Father in heaven]" },
+      { num: 310, title: "In tenderness He sought me", tune: "[In tenderness He sought me]" },
+      { num: 311, title: "Saved by the blood of the Crucified One!", tune: "[Saved by the blood of the Crucified One!]" },
+      { num: 312, title: "I've found a friend who is all to me", tune: "[I've found a friend who is all to me]" },
+      { num: 313, title: "The blessed peace of Christ my bosom fills", tune: "[The blessed peace of Christ my bosom fills]" },
+      { num: 314, title: "When I saw the cleansing fountain", tune: "[When I saw the cleansing fountain]" },
+      { num: 315, title: "I've seen the face of Jesus", tune: "[I've seen the face of Jesus]" },
+      { num: 316, title: "Up Calv'ry's mountain, one dreadful morn", tune: "[Up Calv'ry's mountain, one dreadful morn]" },
+      { num: 317, title: "I will sing of my Redeemer, And His wondrous love to me", tune: "[I will sing of my Redeemer, And His wondrous love to me]" },
+      { num: 318, title: "I stand amazed in the presence", tune: "[I stand amazed in the presence]" },
+      { num: 319, title: "There's a sweet and blessed story", tune: "[There's a sweet and blessed story]" },
+      { num: 320, title: "Love divine! Oh, sing the wondrous story", tune: "[Love divine! Oh, sing the wondrous story]" },
+      { num: 321, title: "Wonderful love that rescued me", tune: "[Wonderful love that rescued me]" },
+      { num: 322, title: "Years I spent in vanity and pride", tune: "[Years I spent in vanity and pride]" },
+      { num: 323, title: "Of Jesus' love that sought me", tune: "[Of Jesus' love that sought me]" },
+      { num: 324, title: "Who can cheer the heart like Jesus", tune: "[Who can cheer the heart like Jesus]" },
+      { num: 325, title: "O what a wonderful, wonderful day", tune: "[O what a wonderful, wonderful day]" },
+      { num: 326, title: "Heavenly sunshine, heavenly sunshine!", tune: "[Heavenly sunshine, heavenly sunshine!]" },
+      { num: 327, title: "Far away in the depths of my spirit tonight", tune: "[Far away in the depths of my spirit tonight]" },
+      { num: 328, title: "There comes to my heart one sweet strain", tune: "[There comes to my heart one sweet strain]" },
+      { num: 329, title: "If I gained the world, but lost the Saviour", tune: "[If I gained the world but lost the Saviour]" },
+      { num: 330, title: "Take the world, but give me Jesus", tune: "[Take the world, but give me Jesus]" },
+      { num: 331, title: "How wondrous a Saviour is God's blessed Son", tune: "[How wondrous a Saviour is God's blessed Son]" },
+      { num: 332, title: "Amazing grace! how sweet the sound", tune: "AMAZING GRACE" },
+      { num: 333, title: "There's within my heart a melody", tune: "[There's within my heart a melody]" },
+      { num: 334, title: "So precious is Jesus, my Saviour, my King", tune: "[So precious is Jesus, my Saviour, my King]" },
+      { num: 335, title: "I have found a friend in Jesus", tune: "[I have found a friend in Jesus]" },
+      { num: 336, title: "Down from His splendor in glory he came", tune: "[Down from His splendor in glory he came]" },
+      { num: 337, title: "I've tried in vain a thousand ways", tune: "[I've tried in vain a thousand ways]" },
+      { num: 338, title: "Love divine, so great and wondrous", tune: "[Love divine, so great and wondrous]" },
+      { num: 339, title: "I was sinking deep in sin", tune: "[I was sinking deep in sin]" },
+      { num: 340, title: "\"Tho' your sins be as scarlet", tune: "CRIMSON" },
+      { num: 341, title: "Once again the Gospel message", tune: "[Once again the Gospel message]" },
+      { num: 342, title: "Jesus is tenderly calling thee home", tune: "[Jesus is tenderly calling thee home]" },
+      { num: 343, title: "God is calling the prodigal, come without delay", tune: "[God is calling the prodigal, come without delay]" },
+      { num: 344, title: "Come to the Saviour now!", tune: "[Come to the Saviour now!]" },
+      { num: 345, title: "Oh, what will you do with Jesus?", tune: "[Oh, what will you do with Jesus?]" },
+      { num: 346, title: "Would you lose your load of sin?", tune: "[Would you lose your load of sin?]" },
+      { num: 347, title: "Life at best is very brief", tune: "[Life at best is very brief]" },
+      { num: 348, title: "Jesus is standing in Pilate's hall", tune: "[Jesus is standing in Pilate's hall]" },
+      { num: 349, title: "\"Come unto Me.\" It is the Saviour's voice", tune: "[\"Come unto Me.\" It is the Saviour's voice]" },
+      { num: 350, title: "\"Almost persuaded\" now to believe", tune: "[\"Almost persuaded\" now to believe]" },
+      { num: 351, title: "Behold the Saviour at the door!", tune: "" }
+    ];
+
+    function renderHymn(hymn, isSpecial = false) {
+      const numClass = isSpecial ? 'hymn-number special-num' : 'hymn-number';
+      const itemClass = isSpecial ? 'hymn-item featured' : 'hymn-item';
+      const linkNum = isSpecial ? hymn.num.toLowerCase().replace(' ', '') : hymn.num;
+      return `
+        <div class="${itemClass}" onclick="location.href='hymn-${linkNum}.html'">
+          <span class="${numClass}">${hymn.num}</span>
+          <div class="hymn-info">
+            <div class="hymn-title">${hymn.title}</div>
+            <div class="hymn-tune">${hymn.tune}</div>
+          </div>
+          <div class="hymn-arrow">
+            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+      `;
+    }
+
+    document.getElementById('listFC').innerHTML = frontCoverHymns.map(h => renderHymn(h, true)).join('');
+    document.getElementById('list1').innerHTML = hymns.slice(0, 25).map(h => renderHymn(h)).join('');
+    document.getElementById('list2').innerHTML = hymns.slice(25, 50).map(h => renderHymn(h)).join('');
+    document.getElementById('list3').innerHTML = hymns.slice(50, 75).map(h => renderHymn(h)).join('');
+    document.getElementById('list4').innerHTML = hymns.slice(75, 97).map(h => renderHymn(h)).join('');
+    document.getElementById('list5').innerHTML = hymns.slice(97, 122).map(h => renderHymn(h)).join('');
+    document.getElementById('list6').innerHTML = hymns.slice(122, 147).map(h => renderHymn(h)).join('');
+    document.getElementById('list7').innerHTML = hymns.slice(147, 172).map(h => renderHymn(h)).join('');
+    document.getElementById('list8').innerHTML = hymns.slice(172, 197).map(h => renderHymn(h)).join('');
+    document.getElementById('list9').innerHTML = hymns.slice(197, 222).map(h => renderHymn(h)).join('');
+    document.getElementById('list10').innerHTML = hymns.slice(222, 247).map(h => renderHymn(h)).join('');
+    document.getElementById('list11').innerHTML = hymns.slice(247, 272).map(h => renderHymn(h)).join('');
+    document.getElementById('list12').innerHTML = hymns.slice(272, 297).map(h => renderHymn(h)).join('');
+    document.getElementById('list13').innerHTML = hymns.slice(297, 322).map(h => renderHymn(h)).join('');
+    document.getElementById('list14').innerHTML = hymns.slice(322, 347).map(h => renderHymn(h)).join('');
+    document.getElementById('list15').innerHTML = hymns.slice(347, 351).map(h => renderHymn(h)).join('');
+
+    // Advanced Search Functionality
+    const searchInput = document.getElementById('hymnSearch');
+    const searchClear = document.getElementById('searchClear');
+    const searchResultsInfo = document.getElementById('searchResultsInfo');
+    const allHymnItems = document.querySelectorAll('.hymn-item');
+    const allSections = document.querySelectorAll('.hymn-section');
+    
+    // Combine front cover hymns and regular hymns for search
+    const allHymnsForSearch = [
+      ...frontCoverHymns.map(h => ({ ...h, isSpecial: true })),
+      ...hymns.map(h => ({ ...h, isSpecial: false }))
+    ];
+
+    // Debounce function for performance
+    function debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+    }
+
+    // Highlight text in search results
+    function highlightText(text, query) {
+      if (!query) return text;
+      const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+      return text.replace(regex, '<span class="search-highlight">$1</span>');
+    }
+
+    // Normalize search query for better matching
+    function normalizeQuery(query) {
+      return query.toLowerCase().trim().replace(/[^\w\s]/g, '');
+    }
+
+    // Advanced search function
+    function performSearch(query) {
+      const normalizedQuery = normalizeQuery(query);
+      let matchCount = 0;
+
+      if (!normalizedQuery) {
+        // Show all hymns
+        allHymnItems.forEach(item => {
+          item.classList.remove('hidden', 'highlight');
+          const titleEl = item.querySelector('.hymn-title');
+          const tuneEl = item.querySelector('.hymn-tune');
+          if (titleEl) titleEl.innerHTML = titleEl.textContent;
+          if (tuneEl) tuneEl.innerHTML = tuneEl.textContent;
+        });
+        allSections.forEach(section => {
+          section.classList.remove('hidden-section');
+        });
+        searchResultsInfo.textContent = '';
+        searchClear.classList.remove('visible');
+        return;
+      }
+
+      // Split query into words for multi-word search
+      const queryWords = normalizedQuery.split(/\s+/).filter(w => w.length > 0);
+
+      allHymnItems.forEach(item => {
+        const hymnNumText = item.querySelector('.hymn-number').textContent.trim();
+        let hymn;
+        
+        // Check if it's a front cover hymn
+        if (hymnNumText.startsWith('FC')) {
+          const fcNum = hymnNumText.replace('FC ', '').trim();
+          hymn = frontCoverHymns.find(h => h.num === `FC ${fcNum}`);
+        } else {
+          const num = parseInt(hymnNumText);
+          hymn = hymns.find(h => h.num === num);
+        }
+        
+        if (!hymn) {
+          item.classList.add('hidden');
+          return;
+        }
+
+        // Search in number, title, and tune
+        const searchText = `${hymn.num} ${hymn.title.toLowerCase()} ${(hymn.tune || '').toLowerCase()}`;
+        
+        // Check if all query words match (AND logic)
+        const matches = queryWords.every(word => searchText.includes(word));
+        
+        if (matches) {
+          item.classList.remove('hidden');
+          item.classList.add('highlight');
+          matchCount++;
+
+          // Highlight matches in title and tune
+          const titleEl = item.querySelector('.hymn-title');
+          const tuneEl = item.querySelector('.hymn-tune');
+          
+          if (titleEl) {
+            titleEl.innerHTML = highlightText(hymn.title, query);
+          }
+          if (tuneEl && hymn.tune) {
+            tuneEl.innerHTML = highlightText(hymn.tune, query);
+          }
+        } else {
+          item.classList.add('hidden');
+          item.classList.remove('highlight');
+        }
+      });
+
+      // Hide/show sections based on visible hymns
+      allSections.forEach(section => {
+        const visibleHymns = section.querySelectorAll('.hymn-item:not(.hidden)');
+        if (visibleHymns.length === 0) {
+          section.classList.add('hidden-section');
+        } else {
+          section.classList.remove('hidden-section');
+          // Scroll to first visible section
+          if (matchCount > 0 && visibleHymns.length > 0) {
+            setTimeout(() => {
+              section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+          }
+        }
+      });
+
+      // Update results info
+      if (matchCount > 0) {
+        searchResultsInfo.textContent = `Found ${matchCount} ${matchCount === 1 ? 'hymn' : 'hymns'}`;
+      } else {
+        searchResultsInfo.textContent = 'No hymns found';
+      }
+
+      searchClear.classList.toggle('visible', normalizedQuery.length > 0);
+    }
+
+    // Debounced search function
+    const debouncedSearch = debounce(performSearch, 200);
+
+    // Event listeners
+    searchInput.addEventListener('input', (e) => {
+      debouncedSearch(e.target.value);
+    });
+
+    searchClear.addEventListener('click', () => {
+      searchInput.value = '';
+      searchInput.focus();
+      performSearch('');
+    });
+
+    // Keyboard shortcut (Ctrl/Cmd + K)
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        searchInput.focus();
+        searchInput.select();
+      }
+      
+      // Escape to clear search
+      if (e.key === 'Escape' && document.activeElement === searchInput) {
+        searchInput.value = '';
+        performSearch('');
+        searchInput.blur();
+      }
+    });
+
+    // Focus search on forward slash
+    document.addEventListener('keydown', (e) => {
+      if (e.key === '/' && document.activeElement !== searchInput && 
+          document.activeElement.tagName !== 'INPUT' && 
+          document.activeElement.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+        searchInput.focus();
+      }
+    });
+  </script>
+</body>
+</html>
