@@ -1576,9 +1576,10 @@
     function renderHymn(hymn, isSpecial = false) {
       const numClass = isSpecial ? 'hymn-number special-num' : 'hymn-number';
       const itemClass = isSpecial ? 'hymn-item featured' : 'hymn-item';
-      const linkNum = isSpecial ? hymn.num.toLowerCase().replace(' ', '') : hymn.num;
+      const linkNum = isSpecial ? hymn.num.replace(/\s+/g, '') : hymn.num;
+      const href = `Hymns%20of%20Truth%20and%20Praise.html?hymn=${linkNum}`;
       return `
-        <div class="${itemClass}" onclick="location.href='hymn-${linkNum}.html'">
+        <div class="${itemClass}" onclick="location.href='${href}'">
           <span class="${numClass}">${hymn.num}</span>
           <div class="hymn-info">
             <div class="hymn-title">${hymn.title}</div>

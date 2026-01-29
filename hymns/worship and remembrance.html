@@ -19062,27 +19062,77 @@
 
     function toggleFullscreen() {
       const container = document.getElementById('presentationContainer');
+      const isNativeFs =
+        document.fullscreenElement ||
+        document.webkitFullscreenElement ||
+        document.msFullscreenElement;
 
-      if (!document.fullscreenElement) {
-        container.requestFullscreen().then(() => {
+      if (!isNativeFs) {
+        // Try native Fullscreen API first (where supported)
+        const requestFn =
+          container.requestFullscreen ||
+          container.webkitRequestFullscreen ||
+          container.msRequestFullscreen;
+
+        let requested = false;
+        if (requestFn) {
+          try {
+            const result = requestFn.call(container);
+            requested = true;
+            // Some browsers return a Promise, others don't
+            if (result && typeof result.then === 'function') {
+              result
+                .then(() => container.classList.add('fullscreen'))
+                .catch(() => container.classList.add('fullscreen'));
+            } else {
+              container.classList.add('fullscreen');
+            }
+          } catch (e) {
+            // If native fullscreen fails, fall back to CSS-only fullscreen
+            container.classList.add('fullscreen');
+          }
+        }
+
+        // If no native API at all, just use CSS fullscreen mode
+        if (!requested) {
           container.classList.add('fullscreen');
-        }).catch(err => {
-          container.classList.add('fullscreen');
-        });
+        }
       } else {
-        document.exitFullscreen().then(() => {
+        const exitFn =
+          document.exitFullscreen ||
+          document.webkitExitFullscreen ||
+          document.msExitFullscreen;
+
+        if (exitFn) {
+          try {
+            const result = exitFn.call(document);
+            if (result && typeof result.then === 'function') {
+              result
+                .then(() => container.classList.remove('fullscreen'))
+                .catch(() => container.classList.remove('fullscreen'));
+            } else {
+              container.classList.remove('fullscreen');
+            }
+          } catch (e) {
+            container.classList.remove('fullscreen');
+          }
+        } else {
           container.classList.remove('fullscreen');
-        }).catch(err => {
-          container.classList.remove('fullscreen');
-        });
+        }
       }
     }
 
-    document.addEventListener('fullscreenchange', () => {
-      const container = document.getElementById('presentationContainer');
-      if (!document.fullscreenElement) {
-        container.classList.remove('fullscreen');
-      }
+    ['fullscreenchange', 'webkitfullscreenchange', 'msfullscreenchange'].forEach(evt => {
+      document.addEventListener(evt, () => {
+        const container = document.getElementById('presentationContainer');
+        const isFs =
+          document.fullscreenElement ||
+          document.webkitFullscreenElement ||
+          document.msFullscreenElement;
+        if (!isFs) {
+          container.classList.remove('fullscreen');
+        }
+      });
     });
 
     document.addEventListener('keydown', (e) => {
