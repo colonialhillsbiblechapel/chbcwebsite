@@ -19066,44 +19066,16 @@
         document.fullscreenElement ||
         document.webkitFullscreenElement ||
         document.msFullscreenElement;
+      const isCssFullscreen = container.classList.contains('fullscreen');
 
-      if (!isNativeFs) {
-        // Try native Fullscreen API first (where supported)
-        const requestFn =
-          container.requestFullscreen ||
-          container.webkitRequestFullscreen ||
-          container.msRequestFullscreen;
-
-        let requested = false;
-        if (requestFn) {
-          try {
-            const result = requestFn.call(container);
-            requested = true;
-            // Some browsers return a Promise, others don't
-            if (result && typeof result.then === 'function') {
-              result
-                .then(() => container.classList.add('fullscreen'))
-                .catch(() => container.classList.add('fullscreen'));
-            } else {
-              container.classList.add('fullscreen');
-            }
-          } catch (e) {
-            // If native fullscreen fails, fall back to CSS-only fullscreen
-            container.classList.add('fullscreen');
-          }
-        }
-
-        // If no native API at all, just use CSS fullscreen mode
-        if (!requested) {
-          container.classList.add('fullscreen');
-        }
-      } else {
+      if (isNativeFs || isCssFullscreen) {
+        // Exit: either native fullscreen or CSS-only (e.g. mobile)
         const exitFn =
           document.exitFullscreen ||
           document.webkitExitFullscreen ||
           document.msExitFullscreen;
 
-        if (exitFn) {
+        if (exitFn && isNativeFs) {
           try {
             const result = exitFn.call(document);
             if (result && typeof result.then === 'function') {
@@ -19118,6 +19090,32 @@
           }
         } else {
           container.classList.remove('fullscreen');
+        }
+      } else {
+        // Enter fullscreen
+        const requestFn =
+          container.requestFullscreen ||
+          container.webkitRequestFullscreen ||
+          container.msRequestFullscreen;
+
+        let requested = false;
+        if (requestFn) {
+          try {
+            const result = requestFn.call(container);
+            requested = true;
+            if (result && typeof result.then === 'function') {
+              result
+                .then(() => container.classList.add('fullscreen'))
+                .catch(() => container.classList.add('fullscreen'));
+            } else {
+              container.classList.add('fullscreen');
+            }
+          } catch (e) {
+            container.classList.add('fullscreen');
+          }
+        }
+        if (!requested) {
+          container.classList.add('fullscreen');
         }
       }
     }
@@ -19138,7 +19136,7 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
       else if (e.key === 'ArrowLeft') prevSlide();
-      else if (e.key === 'Escape' && document.fullscreenElement) toggleFullscreen();
+      else if (e.key === 'Escape' && (document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement || document.getElementById('presentationContainer').classList.contains('fullscreen'))) toggleFullscreen();
       else if (e.key === 'Escape' && document.getElementById('mobileSidebar').classList.contains('active')) {
         closeMobileSidebar();
       }
