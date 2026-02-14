@@ -311,10 +311,10 @@
       box-sizing: border-box;
     }
 
-    /* Title Slide */
+    /* Title Slide - Desktop/Projector (mobile overrides in media queries) */
     .slide.title-slide .hymn-number {
       font-family: 'Cinzel', serif;
-      font-size: 0.85rem;
+      font-size: 1rem;
       letter-spacing: 6px;
       color: var(--gold-dark);
       margin-bottom: 15px;
@@ -322,7 +322,7 @@
 
     .slide.title-slide .hymn-title {
       font-family: 'Pinyon Script', cursive;
-      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      font-size: clamp(2.5rem, 5.5vw, 4.5rem);
       color: var(--text-dark);
       margin-bottom: 25px;
       line-height: 1.2;
@@ -330,7 +330,7 @@
 
     .slide.title-slide .hymn-meta {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1rem;
+      font-size: 1.2rem;
       font-style: italic;
       color: var(--text-muted);
       line-height: 1.8;
@@ -343,10 +343,10 @@
       margin: 20px auto;
     }
 
-    /* Verse Slide */
+    /* Verse Slide - Desktop/Projector (mobile overrides in media queries) */
     .slide.verse-slide .verse-label {
       font-family: 'Cinzel', serif;
-      font-size: 0.7rem;
+      font-size: 0.85rem;
       letter-spacing: 5px;
       color: var(--gold-dark);
       margin-bottom: 20px;
@@ -354,7 +354,7 @@
 
     .slide.verse-slide .verse-title {
       font-family: 'Pinyon Script', cursive;
-      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
       color: var(--text-dark);
       margin-bottom: 25px;
       opacity: 0.7;
@@ -362,7 +362,7 @@
 
     .slide.verse-slide .verse-text {
       font-family: 'EB Garamond', serif;
-      font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+      font-size: clamp(1.5rem, 2.8vw, 2.2rem);
       color: var(--text-dark);
       line-height: 2;
       word-wrap: break-word;
@@ -383,7 +383,14 @@
       color: var(--burgundy);
     }
 
-    /* Slide Footer */
+    /* Refrain-only slide: chorus as main content, no separator */
+    .slide.verse-slide.refrain-slide .chorus {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: none;
+    }
+
+    /* Slide Footer - Desktop/Projector */
     .slide-footer {
       position: absolute;
       bottom: 20px;
@@ -391,7 +398,7 @@
       right: 0;
       text-align: center;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 0.85rem;
+      font-size: 1rem;
       font-style: italic;
       color: var(--text-muted);
       opacity: 0.6;
@@ -480,15 +487,27 @@
     }
 
     .fullscreen .slide.verse-slide .verse-text {
-      font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+      font-size: clamp(2.5rem, 4.5vw, 3.6rem);
     }
 
     .fullscreen .slide.verse-slide .verse-title {
-      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-size: clamp(2.8rem, 5.2vw, 4.2rem);
     }
 
     .fullscreen .slide.title-slide .hymn-title {
-      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-size: clamp(4rem, 8vw, 7rem);
+    }
+
+    .fullscreen .slide.title-slide .hymn-number {
+      font-size: 1.2rem;
+    }
+
+    .fullscreen .slide.title-slide .hymn-meta {
+      font-size: 1.4rem;
+    }
+
+    .fullscreen .slide.verse-slide .verse-label {
+      font-size: 1rem;
     }
 
     /* Fullscreen Navigation */
@@ -964,6 +983,11 @@
         margin-top: 15px;
         padding-top: 12px;
         font-size: clamp(1rem, 4.5vw, 1.3rem);
+      }
+
+      .slide.verse-slide.refrain-slide .chorus {
+        margin-top: 0;
+        padding-top: 0;
       }
 
       .slide-footer {
@@ -18978,29 +19002,93 @@
         </div>
       `;
 
+      const useRefrainOnSeparateSlide = true;
+      const useVerseSplitForLongVerses = true;
       let verseCount = 0;
-      hymn.verses.forEach((verse) => {
-        const isChorusSlide = verse.type === 'chorus';
-        if (!isChorusSlide) verseCount += 1;
+      const slideList = [];
 
-        slidesHTML += `
-          <div class="slide verse-slide">
+      function splitLongVerse(lines) {
+        if (!lines || lines.length <= 5) return [lines];
+        const n = lines.length;
+        let splitAt = n;
+        for (let i = 3; i <= Math.min(n - 2, 6); i++) {
+          const line = (lines[i] || '').trim();
+          if (/[.!?]["']?$/.test(line)) {
+            splitAt = i + 1;
+            break;
+          }
+        }
+        if (splitAt === n) {
+          if (n === 6) splitAt = 3;
+          else if (n === 8) splitAt = 4;
+          else if (n === 7) splitAt = 4;
+          else if (n === 9) splitAt = 5;
+          else if (n === 10) splitAt = 5;
+          else splitAt = Math.min(5, Math.ceil(n / 2));
+        }
+        return [lines.slice(0, splitAt), lines.slice(splitAt)];
+      }
+
+      hymn.verses.forEach((verse) => {
+        const isChorusOnly = verse.type === 'chorus';
+
+        if (isChorusOnly) {
+          slideList.push({ type: 'refrain', chorus: verse.chorus });
+        } else {
+          verseCount += 1;
+          const lineGroups = useVerseSplitForLongVerses ? splitLongVerse(verse.lines) : [verse.lines];
+          lineGroups.forEach((lines, partIndex) => {
+            if (!lines || lines.length === 0) return;
+            const verseLabel = lineGroups.length > 1 ? `VERSE ${verseCount} (${partIndex + 1}/${lineGroups.length})` : `VERSE ${verseCount}`;
+            const isLastPart = partIndex === lineGroups.length - 1;
+            const hasChorus = isLastPart && verse.chorus;
+            if (useRefrainOnSeparateSlide && hasChorus) {
+              slideList.push({ type: 'verse', verseCount, lines, verseLabel });
+              slideList.push({ type: 'refrain', chorus: verse.chorus });
+            } else if (hasChorus) {
+              slideList.push({ type: 'verse', verseCount, lines, chorus: verse.chorus, verseLabel });
+            } else {
+              slideList.push({ type: 'verse', verseCount, lines, verseLabel });
+            }
+          });
+        }
+      });
+
+      slideList.forEach((item) => {
+        if (item.type === 'refrain') {
+          slidesHTML += `
+          <div class="slide verse-slide refrain-slide">
             <div class="slide-bg"></div>
             <div class="slide-content">
-              <p class="verse-label">${isChorusSlide ? 'REFRAIN' : `VERSE ${verseCount}`}</p>
+              <p class="verse-label">REFRAIN</p>
               <h2 class="verse-title">${hymn.title}</h2>
               <div class="verse-text">
-                ${(verse.lines || []).map(line => `<span class="line">${line}</span>`).join('')}
-                ${verse.chorus ? `<div class="chorus">${verse.chorus.map(line => `<span class="line">${line}</span>`).join('')}</div>` : ''}
+                <div class="chorus">${(item.chorus || []).map(line => `<span class="line">${line}</span>`).join('')}</div>
               </div>
             </div>
             <p class="slide-footer">${hymn.book} || Colonial Hills Bible Chapel</p>
           </div>
         `;
+        } else {
+          slidesHTML += `
+          <div class="slide verse-slide">
+            <div class="slide-bg"></div>
+            <div class="slide-content">
+              <p class="verse-label">${item.verseLabel || `VERSE ${item.verseCount}`}</p>
+              <h2 class="verse-title">${hymn.title}</h2>
+              <div class="verse-text">
+                ${(item.lines || []).map(line => `<span class="line">${line}</span>`).join('')}
+                ${item.chorus ? `<div class="chorus">${item.chorus.map(line => `<span class="line">${line}</span>`).join('')}</div>` : ''}
+              </div>
+            </div>
+            <p class="slide-footer">${hymn.book} || Colonial Hills Bible Chapel</p>
+          </div>
+        `;
+        }
       });
 
       document.getElementById('slideFrame').innerHTML = slidesHTML;
-      totalSlides = hymn.verses.length + 1;
+      totalSlides = slideList.length + 1;
 
       let thumbsHTML = `
         <div class="slide-thumb active" onclick="goToSlide(0)">
@@ -19009,15 +19097,15 @@
         </div>
       `;
 
-      verseCount = 0;
-      hymn.verses.forEach((verse, i) => {
-        const isChorusSlide = verse.type === 'chorus';
-        if (!isChorusSlide) verseCount += 1;
-        const preview = (verse.lines && verse.lines[0]) || (verse.chorus && verse.chorus[0]) || '';
+      slideList.forEach((item, i) => {
+        const preview = item.type === 'refrain'
+          ? (item.chorus && item.chorus[0]) || ''
+          : (item.lines && item.lines[0]) || '';
+        const label = item.type === 'refrain' ? 'REFRAIN' : (item.verseLabel || `VERSE ${item.verseCount}`);
 
         thumbsHTML += `
           <div class="slide-thumb" onclick="goToSlide(${i + 1})">
-            <p class="thumb-label">${isChorusSlide ? 'REFRAIN' : `VERSE ${verseCount}`}</p>
+            <p class="thumb-label">${label}</p>
             <p class="thumb-preview">${preview}</p>
           </div>
         `;
