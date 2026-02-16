@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <title>Colonial Hills Bible Chapel - Sacred Hymns</title>
+  <title>Colonial Hills Bible Chapel - Hymns</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Cinzel:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -226,6 +226,43 @@
       height: 3px;
       background: linear-gradient(90deg, transparent, var(--gold), var(--gold-dark), var(--gold), transparent);
     }
+
+    .hymn-book-card.black-hymnal {
+      background: linear-gradient(145deg,
+        rgba(255,255,255,0.97) 0%,
+        rgba(248,248,250,0.95) 40%,
+        rgba(240,240,245,0.92) 100%
+      );
+      border-color: rgba(45, 45, 55, 0.2);
+    }
+    .hymn-book-card.black-hymnal::before {
+      background: linear-gradient(90deg, transparent, #4a4a5a, #2d2d3d, #1a1a28, #2d2d3d, #4a4a5a, transparent);
+      height: 4px;
+    }
+    .hymn-book-card.black-hymnal .book-number { color: #3d3d4d; }
+    .hymn-book-card.black-hymnal .book-icon svg { stroke: #2d2d3d; }
+    .hymn-book-card.black-hymnal .book-verse { border-top-color: rgba(45, 45, 55, 0.2); }
+    .hymn-book-card.black-hymnal .book-verse .ref { color: #3d3d4d; }
+    .hymn-book-card.black-hymnal:hover { border-color: #3d3d4d; }
+
+    .hymn-book-card.red-hymnal {
+      background: linear-gradient(145deg,
+        rgba(255,248,246,0.98) 0%,
+        rgba(255,235,230,0.95) 35%,
+        rgba(253,220,215,0.92) 70%,
+        rgba(250,205,200,0.9) 100%
+      );
+      border-color: rgba(180, 80, 70, 0.35);
+    }
+    .hymn-book-card.red-hymnal::before {
+      background: linear-gradient(90deg, #e8c4bc, #d4a098, #c07870, #a85a52, #8B4538, #a85a52, #c07870, #d4a098, #e8c4bc);
+      height: 5px;
+    }
+    .hymn-book-card.red-hymnal .book-number { color: #8B4538; }
+    .hymn-book-card.red-hymnal .book-icon svg { stroke: #8B4538; }
+    .hymn-book-card.red-hymnal .book-verse { border-top-color: rgba(139, 69, 69, 0.2); }
+    .hymn-book-card.red-hymnal .book-verse .ref { color: #8B4538; }
+    .hymn-book-card.red-hymnal:hover { border-color: #8B4538; }
     
     .hymn-book-card::after {
       content: '';
@@ -770,7 +807,7 @@
         <p class="section-label">Select a Hymnal</p>
         <div class="hymn-books-container">
           
-          <div class="hymn-book-card" onclick="location.href='hymns-worship-remembrance-index.html'">
+          <div class="hymn-book-card black-hymnal" onclick="location.href='hymns-worship-remembrance-index.html'">
             <div class="book-icon">
               <svg viewBox="0 0 75 90">
                 <rect x="8" y="5" width="55" height="80" rx="3"/>
@@ -782,7 +819,7 @@
                 <path d="M39 20 L39 28 M35 24 L43 24"/>
               </svg>
             </div>
-            <p class="book-number">Book One</p>
+            <p class="book-number">Black Hymnal</p>
             <h2 class="book-title">Hymns of Worship and Remembrance</h2>
             <div class="book-verse">
               <p class="text">"O come, let us worship and bow down; let us kneel before the Lord our Maker."</p>
@@ -790,7 +827,7 @@
             </div>
           </div>
           
-          <div class="hymn-book-card" onclick="location.href='hymns-truth-praise-index.html'">
+          <div class="hymn-book-card red-hymnal" onclick="location.href='hymns-truth-praise-index.html'">
             <div class="book-icon">
               <svg viewBox="0 0 75 90">
                 <rect x="8" y="5" width="55" height="80" rx="3"/>
@@ -802,7 +839,7 @@
                 <circle cx="39" cy="22" r="6"/>
               </svg>
             </div>
-            <p class="book-number">Book Two</p>
+            <p class="book-number">Red Hymnal</p>
             <h2 class="book-title">Hymns of Truth and Praise</h2>
             <div class="book-verse">
               <p class="text">"I will praise Thee, O Lord, with my whole heart; I will shew forth all Thy marvellous works."</p>
