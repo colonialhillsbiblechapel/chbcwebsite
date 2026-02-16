@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>Hymns of Truth and Praise - Colonial Hills Bible Chapel</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Cinzel:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Cinzel:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&family=Dancing+Script:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     :root{--gold:#8B7355;--gold-dark:#6B5344;--burgundy:#5C3D3D;--cream:#FDF8F3;--warm-white:#FFFEF9;--text-dark:#2C2416;--text-muted:#5C5347}
@@ -42,11 +42,11 @@
     .slide-bg{position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(180deg,rgba(253,248,243,.95) 0%,rgba(250,245,238,.92) 100%),url('images/1.jpg');background-size:cover;background-position:center;z-index:0}
     .slide-content{position:relative;z-index:1;text-align:center;max-width:850px;width:100%;padding:0 10px;box-sizing:border-box}
     .slide.title-slide .hymn-number{font-family:'Cinzel',serif;font-size:1rem;letter-spacing:6px;color:var(--gold-dark);margin-bottom:15px}
-    .slide.title-slide .hymn-title{font-family:'Pinyon Script',cursive;font-size:clamp(2.5rem,5.5vw,4.5rem);color:var(--text-dark);margin-bottom:25px;line-height:1.2}
+    .slide.title-slide .hymn-title{font-family:'Dancing Script',cursive;font-size:clamp(2.5rem,5.5vw,4.5rem);font-weight:500;color:var(--text-dark);margin-bottom:25px;line-height:1.2}
     .slide.title-slide .hymn-meta{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;color:var(--text-muted);line-height:1.8}
     .slide.title-slide .ornament{width:50px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:20px auto}
     .slide.verse-slide .verse-label{font-family:'Cinzel',serif;font-size:.85rem;letter-spacing:5px;color:var(--gold-dark);margin-bottom:20px}
-    .slide.verse-slide .verse-title{font-family:'Pinyon Script',cursive;font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--text-dark);margin-bottom:25px;opacity:.7}
+    .slide.verse-slide .verse-title{font-family:'Dancing Script',cursive;font-size:clamp(1.35rem,2.6vw,2rem);font-weight:500;color:var(--text-dark);margin-bottom:20px}
     .slide.verse-slide .verse-text{font-family:'EB Garamond',serif;font-size:clamp(1.5rem,2.8vw,2.2rem);color:var(--text-dark);line-height:2;word-wrap:break-word;overflow-wrap:break-word;hyphens:auto}
     .slide.verse-slide .verse-text .line{display:block;margin-bottom:4px}
     .slide.verse-slide .chorus{margin-top:20px;padding-top:15px;border-top:1px solid rgba(139,115,85,.2);font-style:italic;color:var(--burgundy)}
@@ -64,11 +64,12 @@
     .fullscreen .slide{padding:80px 100px 140px}
     .fullscreen .slide-footer{bottom:100px}
     .fullscreen .slide.verse-slide .verse-text{font-size:clamp(2.5rem,4.5vw,3.6rem)}
-    .fullscreen .slide.verse-slide .verse-title{font-size:clamp(2.8rem,5.2vw,4.2rem)}
+    .fullscreen .slide.verse-slide .verse-title{font-size:clamp(2rem,4vw,2.8rem)}
     .fullscreen .slide.title-slide .hymn-title{font-size:clamp(4rem,8vw,7rem)}
     .fullscreen .slide.title-slide .hymn-number{font-size:1.2rem}
     .fullscreen .slide.title-slide .hymn-meta{font-size:1.4rem}
     .fullscreen .slide.verse-slide .verse-label{font-size:1rem}
+    @media(min-width:769px){.slide.verse-slide .slide-content{max-width:1050px;padding:0 20px}.fullscreen .slide.verse-slide .slide-content{max-width:min(1600px,92vw);padding:0 30px}}
     .fs-nav{display:none;position:fixed;bottom:30px;left:50%;transform:translateX(-50%);z-index:1000;background:rgba(40,40,40,.9);padding:12px 30px;border-radius:50px;border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(10px);align-items:center;gap:20px}
     .fullscreen .fs-nav{display:flex}
     .fs-nav .nav-btn{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);width:40px;height:40px}
@@ -92,8 +93,8 @@
     .mobile-sidebar-close{width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:#333;border:1px solid #444;border-radius:4px;cursor:pointer;transition:all .3s ease}
     .mobile-sidebar-close:hover{border-color:var(--gold);background:#3a3a3a}
     .mobile-sidebar-close svg{width:18px;height:18px;stroke:#aaa;fill:none;stroke-width:2}
-    @media(max-width:768px){.presentation-container{flex-direction:column;height:100vh;min-height:100vh}.sidebar{display:none}.mobile-menu-toggle{display:flex}.mobile-sidebar,.mobile-sidebar-overlay{display:block}.toolbar{padding:10px 15px;flex-wrap:wrap;gap:10px}.toolbar-left{gap:10px}.back-btn{font-size:.65rem;padding:6px 12px}.hymn-info{font-size:.9rem}.toolbar-right{gap:8px}.tool-btn{width:32px;height:32px}.tool-btn svg{width:16px;height:16px}.slide-stage{padding:15px}.slide{padding:30px 25px 70px}.slide-content{max-width:100%;padding:0 5px}.slide.title-slide .hymn-title{font-size:clamp(1.8rem,6vw,2.8rem);margin-bottom:20px}.slide.title-slide .hymn-meta{font-size:.9rem}.slide.verse-slide .verse-title{font-size:clamp(1.3rem,4vw,1.8rem);margin-bottom:20px}.slide.verse-slide .verse-text{font-size:clamp(1.1rem,3.5vw,1.5rem);line-height:1.9}.slide.verse-slide .verse-label{font-size:.65rem;margin-bottom:15px}.slide-footer{bottom:70px;font-size:.75rem}.slide-nav{padding:10px;gap:15px}.nav-btn{width:38px;height:38px}.nav-btn svg{width:16px;height:16px}.slide-counter{font-size:.75rem;min-width:60px}.fullscreen .slide{padding:50px 30px 120px}.fullscreen .slide-footer{bottom:100px}.fs-nav{bottom:20px;padding:10px 20px;gap:15px}.fs-nav .nav-btn{width:36px;height:36px}.fs-close{top:15px;right:15px;width:40px;height:40px}}
-    @media(max-width:480px){.toolbar{padding:8px 12px;gap:8px}.toolbar-left{gap:8px;flex:1;min-width:0}.mobile-menu-toggle{width:36px;height:36px;flex-shrink:0}.back-btn{font-size:.6rem;padding:5px 10px;white-space:nowrap}.back-btn svg{width:10px;height:10px}.hymn-info{font-size:.8rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0}.toolbar-right{gap:6px;flex-shrink:0}.tool-btn{width:30px;height:30px}.tool-btn svg{width:14px;height:14px}.slide-stage{padding:10px}.slide{padding:20px 15px 80px}.slide-content{padding:0;max-width:100%}.slide.title-slide .hymn-number{font-size:.75rem;letter-spacing:4px;margin-bottom:12px}.slide.title-slide .hymn-title{font-size:clamp(1.5rem,7vw,2.2rem);margin-bottom:15px;line-height:1.3}.slide.title-slide .hymn-meta{font-size:.85rem;line-height:1.6}.slide.title-slide .ornament{width:40px;margin:15px auto}.slide.verse-slide .verse-label{font-size:.6rem;letter-spacing:3px;margin-bottom:12px}.slide.verse-slide .verse-title{font-size:clamp(1.1rem,5vw,1.5rem);margin-bottom:15px}.slide.verse-slide .verse-text{font-size:clamp(1rem,4.5vw,1.3rem);line-height:1.8}.slide.verse-slide .verse-text .line{margin-bottom:6px}.slide.verse-slide .chorus{margin-top:15px;padding-top:12px;font-size:clamp(1rem,4.5vw,1.3rem)}.slide-footer{bottom:75px;font-size:.7rem;padding:0 10px}.slide-nav{padding:8px;gap:12px}.nav-btn{width:36px;height:36px}.nav-btn svg{width:14px;height:14px}.slide-counter{font-size:.7rem;letter-spacing:2px;min-width:55px}.fullscreen .slide{padding:40px 20px 110px}.fullscreen .slide.verse-slide .verse-text{font-size:clamp(1.2rem,5vw,1.6rem);line-height:1.9}.fullscreen .slide.verse-slide .verse-title{font-size:clamp(1.4rem,6vw,2rem)}.fullscreen .slide.title-slide .hymn-title{font-size:clamp(1.8rem,8vw,2.8rem)}.fullscreen .slide-footer{bottom:90px;font-size:.75rem}.fs-nav{bottom:15px;padding:8px 15px;gap:12px;border-radius:40px}.fs-nav .nav-btn{width:34px;height:34px}.fs-nav .nav-btn svg{width:14px;height:14px}.fs-nav .slide-counter{font-size:.7rem}.fs-close{top:10px;right:10px;width:36px;height:36px}.fs-close svg{width:16px;height:16px}.fs-footer{bottom:70px;font-size:.8rem;padding:0 15px}.mobile-sidebar{width:260px;max-width:80vw}}
+    @media(max-width:768px){.presentation-container{flex-direction:column;height:100vh;min-height:100vh}.sidebar{display:none}.mobile-menu-toggle{display:flex}.mobile-sidebar,.mobile-sidebar-overlay{display:block}.toolbar{padding:10px 15px;flex-wrap:wrap;gap:10px}.toolbar-left{gap:10px}.back-btn{font-size:.65rem;padding:6px 12px}.hymn-info{font-size:.9rem}.toolbar-right{gap:8px}.tool-btn{width:32px;height:32px}.tool-btn svg{width:16px;height:16px}.slide-stage{padding:15px}.slide{padding:30px 25px 70px}.slide-content{max-width:100%;padding:0 5px}.slide.title-slide .hymn-title{font-size:clamp(1.8rem,6vw,2.8rem);margin-bottom:20px}.slide.title-slide .hymn-meta{font-size:.7rem;line-height:1.4}.slide.verse-slide .verse-title{font-size:clamp(1.1rem,3.2vw,1.5rem);margin-bottom:18px}.slide.verse-slide .verse-text{font-size:clamp(1.1rem,3.5vw,1.5rem);line-height:1.9}.slide.verse-slide .verse-label{font-size:.65rem;margin-bottom:15px}.slide-footer{bottom:70px;font-size:.75rem}.slide-nav{padding:10px;gap:15px}.nav-btn{width:38px;height:38px}.nav-btn svg{width:16px;height:16px}.slide-counter{font-size:.75rem;min-width:60px}.fullscreen .slide{padding:50px 30px 120px}.fullscreen .slide-footer{bottom:100px}.fullscreen .slide.title-slide .hymn-meta{font-size:.72rem;line-height:1.4}.fs-nav{bottom:20px;padding:10px 20px;gap:15px}.fs-nav .nav-btn{width:36px;height:36px}.fs-close{top:15px;right:15px;width:40px;height:40px}}
+    @media(max-width:480px){.toolbar{padding:8px 12px;gap:8px}.toolbar-left{gap:8px;flex:1;min-width:0}.mobile-menu-toggle{width:36px;height:36px;flex-shrink:0}.back-btn{font-size:.6rem;padding:5px 10px;white-space:nowrap}.back-btn svg{width:10px;height:10px}.hymn-info{font-size:.8rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0}.toolbar-right{gap:6px;flex-shrink:0}.tool-btn{width:30px;height:30px}.tool-btn svg{width:14px;height:14px}.slide-stage{padding:10px}.slide{padding:20px 15px 80px}.slide-content{padding:0;max-width:100%}.slide.title-slide .hymn-number{font-size:.75rem;letter-spacing:4px;margin-bottom:12px}.slide.title-slide .hymn-title{font-size:clamp(1.5rem,7vw,2.2rem);margin-bottom:15px;line-height:1.3}.slide.title-slide .hymn-meta{font-size:.65rem;line-height:1.35}.slide.title-slide .ornament{width:40px;margin:15px auto}.slide.verse-slide .verse-label{font-size:.6rem;letter-spacing:3px;margin-bottom:12px}.slide.verse-slide .verse-title{font-size:clamp(0.95rem,4vw,1.25rem);margin-bottom:14px}.slide.verse-slide .verse-text{font-size:clamp(1rem,4.5vw,1.3rem);line-height:1.8}.slide.verse-slide .verse-text .line{margin-bottom:6px}.slide.verse-slide .chorus{margin-top:15px;padding-top:12px;font-size:clamp(1rem,4.5vw,1.3rem)}.slide-footer{bottom:75px;font-size:.7rem;padding:0 10px}.slide-nav{padding:8px;gap:12px}.nav-btn{width:36px;height:36px}.nav-btn svg{width:14px;height:14px}.slide-counter{font-size:.7rem;letter-spacing:2px;min-width:55px}.fullscreen .slide{padding:40px 20px 110px}.fullscreen .slide.verse-slide .verse-text{font-size:clamp(1.2rem,5vw,1.6rem);line-height:1.9}.fullscreen .slide.verse-slide .verse-title{font-size:clamp(1.25rem,5vw,1.7rem)}.fullscreen .slide.title-slide .hymn-title{font-size:clamp(1.8rem,8vw,2.8rem)}.fullscreen .slide.title-slide .hymn-meta{font-size:.75rem;line-height:1.4}.fullscreen .slide-footer{bottom:90px;font-size:.75rem}.fs-nav{bottom:15px;padding:8px 15px;gap:12px;border-radius:40px}.fs-nav .nav-btn{width:34px;height:34px}.fs-nav .nav-btn svg{width:14px;height:14px}.fs-nav .slide-counter{font-size:.7rem}.fs-close{top:10px;right:10px;width:36px;height:36px}.fs-close svg{width:16px;height:16px}.fs-footer{bottom:70px;font-size:.8rem;padding:0 15px}.mobile-sidebar{width:260px;max-width:80vw}}
     @media(hover:none) and (pointer:coarse){.nav-btn,.tool-btn,.back-btn{min-width:44px;min-height:44px}.mobile-menu-toggle{min-width:44px;min-height:44px}.slide-thumb{min-height:60px}.nav-btn:active,.tool-btn:active,.back-btn:active{transform:scale(.95)}}
   </style>
 </head>
@@ -143,7 +144,7 @@
           </button>
         </div>
       </div>
-      <div class="slide-stage">
+      <div class="slide-stage" id="slideStage">
         <div class="slide-frame" id="slideFrame"></div>
       </div>
       <nav class="slide-nav">
@@ -38525,7 +38526,6 @@
             <div class="slide-bg"></div>
             <div class="slide-content">
               <p class="verse-label">REFRAIN</p>
-              <h2 class="verse-title">${hymn.title}</h2>
               <div class="verse-text">
                 <div class="chorus">${(item.chorus || []).map(line => `<span class="line">${line}</span>`).join('')}</div>
               </div>
@@ -38539,7 +38539,6 @@
             <div class="slide-bg"></div>
             <div class="slide-content">
               <p class="verse-label">${item.verseLabel || `VERSE ${item.verseCount}`}</p>
-              <h2 class="verse-title">${hymn.title}</h2>
               <div class="verse-text">
                 ${(item.lines || []).map(line => `<span class="line">${line}</span>`).join('')}
                 ${item.chorus ? `<div class="chorus">${item.chorus.map(line => `<span class="line">${line}</span>`).join('')}</div>` : ''}
@@ -38593,7 +38592,10 @@
       updateCounter();
     }
 
-    function nextSlide() { if (currentSlide < totalSlides - 1) goToSlide(currentSlide + 1); }
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) goToSlide(currentSlide + 1);
+      else if (document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement || document.getElementById('presentationContainer').classList.contains('fullscreen')) toggleFullscreen();
+    }
     function prevSlide() { if (currentSlide > 0) goToSlide(currentSlide - 1); }
 
     function updateCounter() {
@@ -38675,6 +38677,14 @@
           container.classList.remove('fullscreen');
         }
       });
+    });
+
+    document.getElementById('slideStage').addEventListener('click', (e) => {
+      if (e.target.closest('button')) return;
+      const rect = e.currentTarget.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      if (x < rect.width / 2) prevSlide();
+      else nextSlide();
     });
 
     document.addEventListener('keydown', (e) => {

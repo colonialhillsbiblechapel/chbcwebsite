@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>Hymns of Worship and Remembrance - Colonial Hills Bible Chapel</title>
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Cinzel:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Cinzel:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&family=Dancing+Script:wght@400;500;600&display=swap"
     rel="stylesheet">
   <style>
     * {
@@ -321,8 +321,9 @@
     }
 
     .slide.title-slide .hymn-title {
-      font-family: 'Pinyon Script', cursive;
+      font-family: 'Dancing Script', cursive;
       font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+      font-weight: 500;
       color: var(--text-dark);
       margin-bottom: 25px;
       line-height: 1.2;
@@ -508,6 +509,17 @@
 
     .fullscreen .slide.verse-slide .verse-label {
       font-size: 1rem;
+    }
+
+    @media (min-width: 769px) {
+      .slide.verse-slide .slide-content {
+        max-width: 1050px;
+        padding: 0 20px;
+      }
+      .fullscreen .slide.verse-slide .slide-content {
+        max-width: min(1600px, 92vw);
+        padding: 0 30px;
+      }
     }
 
     /* Fullscreen Navigation */
@@ -795,7 +807,8 @@
       }
 
       .slide.title-slide .hymn-meta {
-        font-size: 0.9rem;
+        font-size: 0.7rem;
+        line-height: 1.4;
       }
 
       .slide.verse-slide .verse-title {
@@ -840,6 +853,11 @@
 
       .fullscreen .slide {
         padding: 50px 30px 120px;
+      }
+
+      .fullscreen .slide.title-slide .hymn-meta {
+        font-size: 0.72rem;
+        line-height: 1.4;
       }
 
       .fullscreen .slide-footer {
@@ -950,10 +968,9 @@
       }
 
       .slide.title-slide .hymn-meta {
-        font-size: 0.85rem;
-        line-height: 1.6;
+        font-size: 0.65rem;
+        line-height: 1.35;
       }
-
       .slide.title-slide .ornament {
         width: 40px;
         margin: 15px auto;
@@ -1032,6 +1049,11 @@
 
       .fullscreen .slide.title-slide .hymn-title {
         font-size: clamp(1.8rem, 8vw, 2.8rem);
+      }
+
+      .fullscreen .slide.title-slide .hymn-meta {
+        font-size: 0.75rem;
+        line-height: 1.4;
       }
 
       .fullscreen .slide-footer {
@@ -1672,7 +1694,7 @@
         </div>
       </div>
 
-      <div class="slide-stage">
+      <div class="slide-stage" id="slideStage">
         <div class="slide-frame" id="slideFrame"></div>
       </div>
 
@@ -19061,7 +19083,6 @@
             <div class="slide-bg"></div>
             <div class="slide-content">
               <p class="verse-label">REFRAIN</p>
-              <h2 class="verse-title">${hymn.title}</h2>
               <div class="verse-text">
                 <div class="chorus">${(item.chorus || []).map(line => `<span class="line">${line}</span>`).join('')}</div>
               </div>
@@ -19075,7 +19096,6 @@
             <div class="slide-bg"></div>
             <div class="slide-content">
               <p class="verse-label">${item.verseLabel || `VERSE ${item.verseCount}`}</p>
-              <h2 class="verse-title">${hymn.title}</h2>
               <div class="verse-text">
                 ${(item.lines || []).map(line => `<span class="line">${line}</span>`).join('')}
                 ${item.chorus ? `<div class="chorus">${item.chorus.map(line => `<span class="line">${line}</span>`).join('')}</div>` : ''}
@@ -19133,6 +19153,7 @@
 
     function nextSlide() {
       if (currentSlide < totalSlides - 1) goToSlide(currentSlide + 1);
+      else if (document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement || document.getElementById('presentationContainer').classList.contains('fullscreen')) toggleFullscreen();
     }
 
     function prevSlide() {
@@ -19219,6 +19240,14 @@
           container.classList.remove('fullscreen');
         }
       });
+    });
+
+    document.getElementById('slideStage').addEventListener('click', (e) => {
+      if (e.target.closest('button')) return;
+      const rect = e.currentTarget.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      if (x < rect.width / 2) prevSlide();
+      else nextSlide();
     });
 
     document.addEventListener('keydown', (e) => {
