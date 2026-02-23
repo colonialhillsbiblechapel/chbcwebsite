@@ -399,6 +399,8 @@
       border-radius: 4px;
       cursor: pointer;
       transition: all 0.3s ease;
+      text-decoration: none;
+      color: inherit;
     }
 
     .hymn-item:hover {
@@ -456,6 +458,182 @@
       font-size: 0.9rem;
       font-style: italic;
       color: var(--text-muted);
+    }
+
+    .hymn-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .add-to-queue-btn {
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--border-light);
+      border-radius: 50%;
+      background: rgba(255,255,255,0.9);
+      color: var(--gold-dark);
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .add-to-queue-btn:hover {
+      background: var(--gold);
+      color: white;
+      border-color: var(--gold);
+    }
+
+    .add-to-queue-btn.added {
+      background: var(--gold-dark);
+      color: white;
+      border-color: var(--gold-dark);
+    }
+
+    .queue-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(180deg, rgba(44,36,22,0.97), rgba(44,36,22,0.98));
+      padding: 12px 24px;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      z-index: 1000;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+    }
+
+    .queue-bar.visible {
+      display: flex;
+    }
+
+    .queue-info {
+      color: var(--cream);
+      font-size: 0.95rem;
+    }
+
+    .queue-info strong {
+      color: var(--gold-light);
+    }
+
+    .queue-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .queue-btn {
+      padding: 8px 18px;
+      border-radius: 4px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid var(--gold);
+      background: transparent;
+      color: var(--gold-light);
+    }
+
+    .queue-btn:hover {
+      background: var(--gold);
+      color: white;
+    }
+
+    .queue-btn.primary {
+      background: var(--gold);
+      color: white;
+    }
+
+    .queue-btn.primary:hover {
+      background: var(--gold-light);
+      border-color: var(--gold-light);
+    }
+
+    .queue-list-wrap {
+      flex: 1;
+      max-width: 400px;
+      overflow: hidden;
+    }
+
+    .queue-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .queue-list.open {
+      max-height: 120px;
+      overflow-y: auto;
+    }
+
+    .queue-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 4px;
+      font-size: 0.8rem;
+    }
+
+    .queue-item span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 180px;
+    }
+
+    .queue-remove {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      border: none;
+      background: rgba(255,255,255,0.2);
+      color: var(--cream);
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .queue-remove:hover {
+      background: rgba(200,80,80,0.8);
+    }
+
+    .queue-list-toggle {
+      padding: 6px 12px;
+      font-size: 0.75rem;
+    }
+
+    .present-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100vw; height: 100vh;
+      background: #000;
+      z-index: 99999;
+    }
+    .present-overlay.active {
+      display: block;
+    }
+    .present-overlay iframe {
+      width: 100%; height: 100%;
+      border: none;
     }
 
     .hymn-arrow {
@@ -840,7 +1018,7 @@
       }
       
       .hymn-item {
-        grid-template-columns: 45px 1fr;
+        grid-template-columns: 45px 1fr auto;
         padding: 12px 12px;
         gap: 12px;
         border-radius: 3px;
@@ -1170,6 +1348,24 @@
       <p class="hymn-count">350 HYMNS</p>
       <p class="footer-text">Colonial Hills Bible Chapel</p>
     </footer>
+
+    <div id="presentOverlay" class="present-overlay">
+      <iframe id="presentFrame" title="Hymn presentation"></iframe>
+    </div>
+
+    <div id="queueBar" class="queue-bar">
+      <div class="queue-info">
+        <strong id="queueCount">0</strong> hymn(s) in queue
+      </div>
+      <div class="queue-list-wrap">
+        <div id="queueList" class="queue-list"></div>
+      </div>
+      <div class="queue-actions">
+        <button type="button" class="queue-btn queue-list-toggle" onclick="document.getElementById('queueList').classList.toggle('open')">View list</button>
+        <button type="button" class="queue-btn" onclick="clearQueue()">Clear</button>
+        <button type="button" class="queue-btn primary" onclick="presentQueue()">Present</button>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -1530,22 +1726,115 @@
     // To link more hymns there later, just add their numbers here.
     const worshipPresentationHymns = new Set([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 335, 336, 337, 338, 339, 340, 341, 342, 343, 344, 345, 346, 347, 348, 349, 350]);
 
+    const QUEUE_KEY = 'hymnPresentationQueue';
+    const BOOK = 'worship';
+
+    function getQueue() {
+      try {
+        const q = localStorage.getItem(QUEUE_KEY);
+        return q ? JSON.parse(q) : [];
+      } catch (e) { return []; }
+    }
+
+    function saveQueue(queue) {
+      localStorage.setItem(QUEUE_KEY, JSON.stringify(queue));
+      updateQueueUI();
+    }
+
+    function addToQueue(book, num, title, e) {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      const queue = getQueue();
+      const linkNum = String(num).replace(/\s+/g, '');
+      if (queue.some(i => i.book === book && String(i.num) === linkNum)) return;
+      queue.push({ book, num: linkNum, title });
+      saveQueue(queue);
+    }
+
+    function removeFromQueue(index, e) {
+      if (e) e.stopPropagation();
+      const queue = getQueue();
+      queue.splice(index, 1);
+      saveQueue(queue);
+    }
+
+    function clearQueue() {
+      saveQueue([]);
+    }
+
+    function presentQueue() {
+      const queue = getQueue();
+      if (queue.length === 0) return;
+      const first = queue[0];
+      sessionStorage.setItem(QUEUE_KEY, JSON.stringify(queue));
+      sessionStorage.setItem(QUEUE_KEY + '_index', '0');
+      const url = first.book === 'truth-praise'
+        ? `Hymns%20of%20Truth%20and%20Praise.html?hymn=${first.num}`
+        : `worship%20and%20remembrance.html?hymn=${first.num}`;
+      const overlay = document.getElementById('presentOverlay');
+      const frame = document.getElementById('presentFrame');
+      if (overlay && frame) {
+        overlay.classList.add('active');
+        frame.src = url;
+        const req = overlay.requestFullscreen || overlay.webkitRequestFullscreen || overlay.msRequestFullscreen;
+        if (req) { try { req.call(overlay); } catch (e) {} }
+      } else {
+        window.location.href = url;
+      }
+    }
+
+    function closePresentOverlay() {
+      const overlay = document.getElementById('presentOverlay');
+      const frame = document.getElementById('presentFrame');
+      if (overlay) overlay.classList.remove('active');
+      if (frame) frame.src = 'about:blank';
+      const exitFn = document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
+      if (exitFn && (document.fullscreenElement || document.webkitFullscreenElement)) {
+        try { exitFn.call(document); } catch (e) {}
+      }
+    }
+
+    function updateQueueUI() {
+      const queue = getQueue();
+      const bar = document.getElementById('queueBar');
+      const countEl = document.getElementById('queueCount');
+      const listEl = document.getElementById('queueList');
+      if (!bar) return;
+      if (queue.length) {
+        bar.classList.add('visible');
+        countEl.textContent = queue.length;
+        const escHtml = (s) => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        listEl.innerHTML = queue.map((item, i) =>
+          `<div class="queue-item"><span>${escHtml(item.num)} - ${escHtml(item.title)}</span><button type="button" class="queue-remove" onclick="removeFromQueue(${i}, event)" title="Remove">×</button></div>`
+        ).join('');
+      } else {
+        bar.classList.remove('visible');
+      }
+    }
+
     function renderHymn(hymn) {
       const link = worshipPresentationHymns.has(hymn.num)
         ? `worship and remembrance.html?hymn=${hymn.num}`
         : `hymn-${hymn.num}.html`;
+      const esc = (s) => String(s).replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"');
+      const showQueueBtn = worshipPresentationHymns.has(hymn.num);
+      const queueBtnHtml = showQueueBtn
+        ? `<button type="button" class="add-to-queue-btn" onclick="addToQueue('${BOOK}', '${esc(String(hymn.num))}', '${esc(hymn.title)}', event)" title="Add to presentation queue">+</button>`
+        : '';
 
       return `
-        <div class="hymn-item" onclick="location.href='${link}'">
+        <a class="hymn-item" href="${link}">
           <span class="hymn-number">${hymn.num}</span>
           <div class="hymn-info">
             <div class="hymn-title">${hymn.title}</div>
             <div class="hymn-tune">${hymn.tune}</div>
           </div>
-          <div class="hymn-arrow">
-            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+          <div class="hymn-actions">
+            ${queueBtnHtml}
+            <div class="hymn-arrow">
+              <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
           </div>
-        </div>
+        </a>
       `;
     }
 
@@ -1563,6 +1852,32 @@
     document.getElementById('list12').innerHTML = hymns.slice(275, 300).map(renderHymn).join('');
     document.getElementById('list13').innerHTML = hymns.slice(300, 325).map(renderHymn).join('');
     document.getElementById('list14').innerHTML = hymns.slice(325, 350).map(renderHymn).join('');
+
+    updateQueueUI();
+
+    const presentFrame = document.getElementById('presentFrame');
+    if (presentFrame) {
+      presentFrame.addEventListener('load', () => {
+        const focusIframe = () => {
+          try {
+            presentFrame.contentWindow.focus();
+            const doc = presentFrame.contentDocument;
+            if (doc && doc.body) doc.body.focus();
+          } catch (e) {}
+        };
+        focusIframe();
+        setTimeout(focusIframe, 100);
+      });
+    }
+
+    window.addEventListener('message', (e) => {
+      if (e.data && e.data.type === 'hymnExitFullscreen') closePresentOverlay();
+    });
+    ['fullscreenchange', 'webkitfullscreenchange', 'msfullscreenchange'].forEach(evt => {
+      document.addEventListener(evt, () => {
+        if (!document.fullscreenElement && !document.webkitFullscreenElement) closePresentOverlay();
+      });
+    });
 
     // Advanced Search Functionality
     const searchInput = document.getElementById('hymnSearch');
