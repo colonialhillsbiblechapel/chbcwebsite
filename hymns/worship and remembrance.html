@@ -1233,6 +1233,120 @@
       }
     }
   </style>
+  <!-- High-visibility projector theme (kids-presentation style) -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <style id="present-hv-theme">
+    :root {
+      --hv-blue: #3b63c4;
+      --hv-blue-deep: #2f51a8;
+      --hv-chip-text: #2f55b8;
+    }
+
+    /* Stage behind slides */
+    .slide-stage { background: #243a73; }
+    .fullscreen .slide-stage { background: var(--hv-blue-deep); }
+
+    /* Solid blue background, no image, with very subtle decorative glow */
+    .slide-bg {
+      background: var(--hv-blue) !important;
+      background-image:
+        radial-gradient(70vmin 70vmin at 6% 96%, rgba(255,255,255,.06), transparent 70%),
+        radial-gradient(34vmin 34vmin at 95% 7%, rgba(255,255,255,.05), transparent 70%) !important;
+      overflow: hidden;
+    }
+    .slide-bg::after {
+      content: "";
+      position: absolute;
+      right: -4%;
+      bottom: -10%;
+      width: 26vmin;
+      height: 26vmin;
+      border-radius: 22%;
+      background: rgba(255,255,255,.05);
+    }
+
+    /* Pill chip header: SONG INFO · x/y */
+    .slide-chip {
+      position: absolute;
+      top: 4.5%;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 86%;
+      background: #fff;
+      color: var(--hv-chip-text);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.2;
+      border-radius: 999px;
+      padding: 0.6em 1.5em;
+      font-size: clamp(0.72rem, 1.5vw, 1.05rem);
+      box-shadow: 0 10px 28px rgba(0,0,0,.18);
+      z-index: 3;
+    }
+    .fullscreen .slide-chip { top: 4%; font-size: clamp(1rem, 1.9vw, 1.55rem); }
+
+    /* Verse / refrain text — bold white, maximum projector legibility */
+    .slide.verse-slide .verse-text {
+      font-family: 'Nunito', sans-serif !important;
+      font-weight: 800 !important;
+      color: #fff !important;
+      line-height: 1.32 !important;
+      text-shadow: 0 3px 14px rgba(0,0,0,.18);
+      font-size: clamp(1.8rem, 3.4vw, 2.9rem) !important;
+    }
+    .fullscreen .slide.verse-slide .verse-text {
+      font-size: clamp(2.6rem, 4.6vw, 4.5rem) !important;
+    }
+    .slide.verse-slide .verse-text .line { margin-bottom: 0.12em !important; }
+    /* During auto-fit measurement, keep each line on one row so the
+       fitter can find the largest size that never wraps. */
+    .verse-text.fitting .line { white-space: nowrap !important; }
+    .slide.verse-slide .chorus {
+      border-top: none !important;
+      margin-top: 0.7em !important;
+      padding-top: 0 !important;
+      font-style: normal !important;
+      color: #fff !important;
+    }
+
+    /* Title slide on blue */
+    .slide.title-slide .hymn-number,
+    .fullscreen .slide.title-slide .hymn-number {
+      font-family: 'Nunito', sans-serif !important;
+      font-weight: 800 !important;
+      letter-spacing: 5px !important;
+      color: rgba(255,255,255,.85) !important;
+    }
+    .slide.title-slide .hymn-title,
+    .fullscreen .slide.title-slide .hymn-title {
+      font-family: 'Nunito', sans-serif !important;
+      font-weight: 900 !important;
+      color: #fff !important;
+      text-shadow: 0 3px 16px rgba(0,0,0,.2);
+    }
+    .slide.title-slide .hymn-meta,
+    .fullscreen .slide.title-slide .hymn-meta {
+      font-family: 'Nunito', sans-serif !important;
+      font-style: normal !important;
+      font-weight: 600 !important;
+      color: rgba(255,255,255,.82) !important;
+    }
+    .slide.title-slide .ornament { background: rgba(255,255,255,.5) !important; }
+
+    /* Replaced by chip / not needed in clean theme */
+    .slide-footer, .fs-footer { display: none !important; }
+    .slide.verse-slide .verse-label { display: none !important; }
+
+    @media (max-width: 768px) {
+      .slide.verse-slide .verse-text { font-size: clamp(1.5rem, 5vw, 2.1rem) !important; }
+      .fullscreen .slide.verse-slide .verse-text { font-size: clamp(1.7rem, 6vw, 2.6rem) !important; }
+      .slide-chip { font-size: clamp(0.62rem, 2.6vw, 0.85rem); top: 3%; }
+      .fullscreen .slide-chip { font-size: clamp(0.7rem, 3vw, 1rem); }
+    }
+  </style>
 </head>
 
 <body>
@@ -19076,11 +19190,13 @@
         }
       });
 
-      slideList.forEach((item) => {
+      slideList.forEach((item, i) => {
+        const chip = `HYMN ${hymn.number} &middot; ${hymn.title} &middot; ${i + 1}/${slideList.length}`;
         if (item.type === 'refrain') {
           slidesHTML += `
           <div class="slide verse-slide refrain-slide">
             <div class="slide-bg"></div>
+            <div class="slide-chip">${chip}</div>
             <div class="slide-content">
               <p class="verse-label">REFRAIN</p>
               <div class="verse-text">
@@ -19094,6 +19210,7 @@
           slidesHTML += `
           <div class="slide verse-slide">
             <div class="slide-bg"></div>
+            <div class="slide-chip">${chip}</div>
             <div class="slide-content">
               <p class="verse-label">${item.verseLabel || `VERSE ${item.verseCount}`}</p>
               <div class="verse-text">
@@ -19149,7 +19266,60 @@
 
       currentSlide = index;
       updateCounter();
+      requestAnimationFrame(fitActiveText);
     }
+
+    // Auto-fit lyric text: push the font as large as possible while
+    // guaranteeing every line stays on one row (no wrapping/breaks).
+    function fitActiveText() {
+      const slide = document.querySelector('.slide.verse-slide.active');
+      if (!slide) return;
+      const text = slide.querySelector('.verse-text');
+      if (!text) return;
+      const container = document.getElementById('presentationContainer');
+      const isFs = container && container.classList.contains('fullscreen');
+
+      text.classList.add('fitting');
+
+      const cs = getComputedStyle(slide);
+      const padTop = parseFloat(cs.paddingTop) || 0;
+      const padBottom = parseFloat(cs.paddingBottom) || 0;
+      const chip = slide.querySelector('.slide-chip');
+      const chipH = chip ? chip.offsetHeight : 0;
+      const availW = text.clientWidth;
+      const availH = slide.clientHeight - padTop - padBottom - chipH - 28;
+      if (availW <= 0 || availH <= 0) { text.classList.remove('fitting'); return; }
+
+      const fits = (px) => {
+        text.style.setProperty('font-size', px + 'px', 'important');
+        return text.scrollWidth <= availW + 1 && text.scrollHeight <= availH + 1;
+      };
+
+      let lo = isFs ? 26 : 16;
+      let hi = isFs ? 140 : 80;
+      let best = lo;
+      while (lo <= hi) {
+        const mid = (lo + hi) >> 1;
+        if (fits(mid)) { best = mid; lo = mid + 1; }
+        else { hi = mid - 1; }
+      }
+      text.style.setProperty('font-size', best + 'px', 'important');
+
+      // Only if a single line is physically too wide even at the minimum size,
+      // allow it to wrap rather than overflow off-screen.
+      if (text.scrollWidth > availW + 2) text.classList.remove('fitting');
+
+      // Leave a little breathing room so lyrics aren't crammed edge-to-edge
+      // (still large, just not fully occupying the slide). Keep in sync with devslides.
+      text.style.setProperty('font-size', (best * 0.9) + 'px', 'important');
+    }
+
+    let _fitTimer = null;
+    function scheduleFit() {
+      clearTimeout(_fitTimer);
+      _fitTimer = setTimeout(fitActiveText, 90);
+    }
+    window.addEventListener('resize', scheduleFit);
 
     function nextSlide() {
       if (currentSlide < totalSlides - 1) goToSlide(currentSlide + 1);
@@ -19251,6 +19421,7 @@
           container.classList.add('fullscreen');
         }
       }
+      scheduleFit();
     }
 
     ['fullscreenchange', 'webkitfullscreenchange', 'msfullscreenchange'].forEach(evt => {
@@ -19263,6 +19434,7 @@
         if (!isFs) {
           container.classList.remove('fullscreen');
         }
+        scheduleFit();
       });
     });
 

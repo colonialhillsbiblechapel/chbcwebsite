@@ -24,4 +24,7 @@ ehthumbs.db
 Thumbs.db
 
 # Auto commit script
-auto-commit-push.bat 
+auto-commit-push.bat
+
+# Local-only developer tools (not for the public site)
+hymns/devslides.html 

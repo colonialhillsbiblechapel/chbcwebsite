@@ -97,6 +97,120 @@
     @media(max-width:480px){.toolbar{padding:8px 12px;gap:8px}.toolbar-left{gap:8px;flex:1;min-width:0}.mobile-menu-toggle{width:36px;height:36px;flex-shrink:0}.back-btn{font-size:.6rem;padding:5px 10px;white-space:nowrap}.back-btn svg{width:10px;height:10px}.hymn-info{font-size:.8rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0}.toolbar-right{gap:6px;flex-shrink:0}.tool-btn{width:30px;height:30px}.tool-btn svg{width:14px;height:14px}.slide-stage{padding:10px}.slide{padding:20px 15px 80px}.slide-content{padding:0;max-width:100%}.slide.title-slide .hymn-number{font-size:.75rem;letter-spacing:4px;margin-bottom:12px}.slide.title-slide .hymn-title{font-size:clamp(1.5rem,7vw,2.2rem);margin-bottom:15px;line-height:1.3}.slide.title-slide .hymn-meta{font-size:.65rem;line-height:1.35}.slide.title-slide .ornament{width:40px;margin:15px auto}.slide.verse-slide .verse-label{font-size:.6rem;letter-spacing:3px;margin-bottom:12px}.slide.verse-slide .verse-title{font-size:clamp(0.95rem,4vw,1.25rem);margin-bottom:14px}.slide.verse-slide .verse-text{font-size:clamp(1rem,4.5vw,1.3rem);line-height:1.8}.slide.verse-slide .verse-text .line{margin-bottom:6px}.slide.verse-slide .chorus{margin-top:15px;padding-top:12px;font-size:clamp(1rem,4.5vw,1.3rem)}.slide-footer{bottom:75px;font-size:.7rem;padding:0 10px}.slide-nav{padding:8px;gap:12px}.nav-btn{width:36px;height:36px}.nav-btn svg{width:14px;height:14px}.slide-counter{font-size:.7rem;letter-spacing:2px;min-width:55px}.fullscreen .slide{padding:40px 20px 110px}.fullscreen .slide.verse-slide .verse-text{font-size:clamp(1.2rem,5vw,1.6rem);line-height:1.9}.fullscreen .slide.verse-slide .verse-title{font-size:clamp(1.25rem,5vw,1.7rem)}.fullscreen .slide.title-slide .hymn-title{font-size:clamp(1.8rem,8vw,2.8rem)}.fullscreen .slide.title-slide .hymn-meta{font-size:.75rem;line-height:1.4}.fullscreen .slide-footer{bottom:90px;font-size:.75rem}.fs-nav{bottom:15px;padding:8px 15px;gap:12px;border-radius:40px}.fs-nav .nav-btn{width:34px;height:34px}.fs-nav .nav-btn svg{width:14px;height:14px}.fs-nav .slide-counter{font-size:.7rem}.fs-close{top:10px;right:10px;width:36px;height:36px}.fs-close svg{width:16px;height:16px}.fs-footer{bottom:70px;font-size:.8rem;padding:0 15px}.mobile-sidebar{width:260px;max-width:80vw}}
     @media(hover:none) and (pointer:coarse){.nav-btn,.tool-btn,.back-btn{min-width:44px;min-height:44px}.mobile-menu-toggle{min-width:44px;min-height:44px}.slide-thumb{min-height:60px}.nav-btn:active,.tool-btn:active,.back-btn:active{transform:scale(.95)}}
   </style>
+  <!-- High-visibility projector theme (kids-presentation style) -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <style id="present-hv-theme">
+    :root {
+      --hv-blue: #3b63c4;
+      --hv-blue-deep: #2f51a8;
+      --hv-chip-text: #2f55b8;
+    }
+
+    /* Stage behind slides */
+    .slide-stage { background: #243a73; }
+    .fullscreen .slide-stage { background: var(--hv-blue-deep); }
+
+    /* Solid blue background, no image, with very subtle decorative glow */
+    .slide-bg {
+      background: var(--hv-blue) !important;
+      background-image:
+        radial-gradient(70vmin 70vmin at 6% 96%, rgba(255,255,255,.06), transparent 70%),
+        radial-gradient(34vmin 34vmin at 95% 7%, rgba(255,255,255,.05), transparent 70%) !important;
+      overflow: hidden;
+    }
+    .slide-bg::after {
+      content: "";
+      position: absolute;
+      right: -4%;
+      bottom: -10%;
+      width: 26vmin;
+      height: 26vmin;
+      border-radius: 22%;
+      background: rgba(255,255,255,.05);
+    }
+
+    /* Pill chip header: SONG INFO · x/y */
+    .slide-chip {
+      position: absolute;
+      top: 4.5%;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 86%;
+      background: #fff;
+      color: var(--hv-chip-text);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.2;
+      border-radius: 999px;
+      padding: 0.6em 1.5em;
+      font-size: clamp(0.72rem, 1.5vw, 1.05rem);
+      box-shadow: 0 10px 28px rgba(0,0,0,.18);
+      z-index: 3;
+    }
+    .fullscreen .slide-chip { top: 4%; font-size: clamp(1rem, 1.9vw, 1.55rem); }
+
+    /* Verse / refrain text — bold white, maximum projector legibility */
+    .slide.verse-slide .verse-text {
+      font-family: 'Nunito', sans-serif !important;
+      font-weight: 800 !important;
+      color: #fff !important;
+      line-height: 1.32 !important;
+      text-shadow: 0 3px 14px rgba(0,0,0,.18);
+      font-size: clamp(1.8rem, 3.4vw, 2.9rem) !important;
+    }
+    .fullscreen .slide.verse-slide .verse-text {
+      font-size: clamp(2.6rem, 4.6vw, 4.5rem) !important;
+    }
+    .slide.verse-slide .verse-text .line { margin-bottom: 0.12em !important; }
+    /* During auto-fit measurement, keep each line on one row so the
+       fitter can find the largest size that never wraps. */
+    .verse-text.fitting .line { white-space: nowrap !important; }
+    .slide.verse-slide .chorus {
+      border-top: none !important;
+      margin-top: 0.7em !important;
+      padding-top: 0 !important;
+      font-style: normal !important;
+      color: #fff !important;
+    }
+
+    /* Title slide on blue */
+    .slide.title-slide .hymn-number,
+    .fullscreen .slide.title-slide .hymn-number {
+      font-family: 'Nunito', sans-serif !important;
+      font-weight: 800 !important;
+      letter-spacing: 5px !important;
+      color: rgba(255,255,255,.85) !important;
+    }
+    .slide.title-slide .hymn-title,
+    .fullscreen .slide.title-slide .hymn-title {
+      font-family: 'Nunito', sans-serif !important;
+      font-weight: 900 !important;
+      color: #fff !important;
+      text-shadow: 0 3px 16px rgba(0,0,0,.2);
+    }
+    .slide.title-slide .hymn-meta,
+    .fullscreen .slide.title-slide .hymn-meta {
+      font-family: 'Nunito', sans-serif !important;
+      font-style: normal !important;
+      font-weight: 600 !important;
+      color: rgba(255,255,255,.82) !important;
+    }
+    .slide.title-slide .ornament { background: rgba(255,255,255,.5) !important; }
+
+    /* Replaced by chip / not needed in clean theme */
+    .slide-footer, .fs-footer { display: none !important; }
+    .slide.verse-slide .verse-label { display: none !important; }
+
+    @media (max-width: 768px) {
+      .slide.verse-slide .verse-text { font-size: clamp(1.5rem, 5vw, 2.1rem) !important; }
+      .fullscreen .slide.verse-slide .verse-text { font-size: clamp(1.7rem, 6vw, 2.6rem) !important; }
+      .slide-chip { font-size: clamp(0.62rem, 2.6vw, 0.85rem); top: 3%; }
+      .fullscreen .slide-chip { font-size: clamp(0.7rem, 3vw, 1rem); }
+    }
+  </style>
 </head>
 <body>
   <div class="presentation-container" id="presentationContainer">
@@ -12872,30 +12986,42 @@
         verses: [
           {
             lines: [
-              "Master, speak! Thy servant heareth, Waiting for Thy gracious Word;",
-              "Longing for Thy voice that cheereth, Master, let it now be heard.",
-              "I am list'ning, Lord, for Thee; What hast Thou to say to me?"
+              "Master, speak! Thy servant heareth,",
+              "Waiting for Thy gracious Word;",
+              "Longing for Thy voice that cheereth,",
+              "Master, let it now be heard.",
+              "I am list'ning, Lord, for Thee;",
+              "What hast Thou to say to me?"
             ]
           },
           {
             lines: [
-              "Speak to me by name, O Master, Let me know it is to me;",
-              "Speak, that I may follow faster, With a step more firm and free,",
-              "Where the Shepherd leads the flock In the shadow of the Rock."
+              "Speak to me by name, O Master,",
+              "Let me know it is to me;",
+              "Speak, that I may follow faster,",
+              "With a step more firm and free,",
+              "Where the Shepherd leads the flock",
+              "In the shadow of the Rock."
             ]
           },
           {
             lines: [
-              "Master, speak! though least and lowest, Let me not unheard depart;",
-              "Master, speak! for oh, Thou knowest All the yearning of my heart.",
-              "Knowest all its truest need; Speak! and make me blest indeed."
+              "Master, speak! though least and lowest,",
+              "Let me not unheard depart;",
+              "Master, speak! for oh, Thou knowest",
+              "All the yearning of my heart.",
+              "Knowest all its truest need;",
+              "Speak! and make me blest indeed."
             ]
           },
           {
             lines: [
-              "Master, speak! and make me ready, When Thy voice is truly heard,",
-              "With obedience glad and steady Still to follow every word.",
-              "I am list'ning, Lord, for Thee; Master, speak, oh, speak to me!"
+              "Master, speak! and make me ready,",
+              "When Thy voice is truly heard,",
+              "With obedience glad and steady",
+              "Still to follow every word.",
+              "I am list'ning, Lord, for Thee;",
+              "Master, speak, oh, speak to me!"
             ]
           }
         ]
@@ -13028,32 +13154,42 @@
         verses: [
           {
             lines: [
-              "On Christ, salvation rests secure; The Rock of Ages must endure;",
-              "Nor can that faith be overthrown Which rests upon the \"Living Stone.\""
+              "On Christ, salvation rests secure;",
+              "The Rock of Ages must endure;",
+              "Nor can that faith be overthrown",
+              "Which rests upon the \"Living Stone.\""
             ]
           },
           {
             lines: [
-              "No other hope shall intervene; To Him we look, on Him we lean;",
-              "Other foundations we disown, And build on Christ, the \"Living Stone.\""
+              "No other hope shall intervene;",
+              "To Him we look, on Him we lean;",
+              "Other foundations we disown,",
+              "And build on Christ, the \"Living Stone.\""
             ]
           },
           {
             lines: [
-              "In Him it is ordained to raise A temple to Jehovah's praise,",
-              "Composed of all His saints, who own No Saviour but the \"Living Stone.\""
+              "In Him it is ordained to raise",
+              "A temple to Jehovah's praise,",
+              "Composed of all His saints, who own",
+              "No Saviour but the \"Living Stone.\""
             ]
           },
           {
             lines: [
-              "View the vast building, see it rise: The work how great! the plan how wise!",
-              "O wondrous fabric! pow'r unknown: That rests it on the \"Living Stone.\""
+              "View the vast building, see it rise:",
+              "The work how great! the plan how wise!",
+              "O wondrous fabric! pow'r unknown:",
+              "That rests it on the \"Living Stone.\""
             ]
           },
           {
             lines: [
-              "But most adore His precious name: His glory and His grace proclaim!",
-              "For us, the lost, condemned, undone, He gave Himself, the \"Living Stone.\""
+              "But most adore His precious name:",
+              "His glory and His grace proclaim!",
+              "For us, the lost, condemned, undone,",
+              "He gave Himself, the \"Living Stone.\""
             ]
           }
         ]
@@ -13067,26 +13203,34 @@
         verses: [
           {
             lines: [
-              "Blest be the tie that binds Our hearts in Christian love;",
-              "The fellowship of kindred minds Is like to that above."
+              "Blest be the tie that binds",
+              "Our hearts in Christian love;",
+              "The fellowship of kindred minds",
+              "Is like to that above."
             ]
           },
           {
             lines: [
-              "Before our Father's throne We pour our ardent prayers;",
-              "Our fears, our hopes, our aims are one, Our comforts and our cares."
+              "Before our Father's throne",
+              "We pour our ardent prayers;",
+              "Our fears, our hopes, our aims are one,",
+              "Our comforts and our cares."
             ]
           },
           {
             lines: [
-              "We share our mutual woes, Our mutual burdens bear;",
-              "And often for each other flows The sympathizing tear."
+              "We share our mutual woes,",
+              "Our mutual burdens bear;",
+              "And often for each other flows",
+              "The sympathizing tear."
             ]
           },
           {
             lines: [
-              "When we asunder part, It gives us inward pain;",
-              "But we shall still be joined in heart, And hope to meet again."
+              "When we asunder part,",
+              "It gives us inward pain;",
+              "But we shall still be joined in heart,",
+              "And hope to meet again."
             ]
           }
         ]
@@ -13169,54 +13313,70 @@
         verses: [
           {
             lines: [
-              "Sinners Jesus will receive; Sound this word of grace to all",
-              "Who the heav'nly pathway leave, All who linger, all who fall."
+              "Sinners Jesus will receive;",
+              "Sound this word of grace to all",
+              "Who the heav'nly pathway leave,",
+              "All who linger, all who fall."
             ]
           },
           {
             type: "chorus",
             lines: [
-              "Sing it o'er and o'er again; Christ receiveth sinful men;",
-              "Make the message clear and plain: Christ receiveth sinful men."
+              "Sing it o'er and o'er again;",
+              "Christ receiveth sinful men;",
+              "Make the message clear and plain:",
+              "Christ receiveth sinful men."
             ]
           },
           {
             lines: [
-              "Come, and He will give you rest; Trust Him, for His word is plain;",
-              "He will take the sinfulest; Christ receiveth sinful men."
-            ]
-          },
-          {
-            type: "chorus",
-            lines: [
-              "Sing it o'er and o'er again; Christ receiveth sinful men;",
-              "Make the message clear and plain: Christ receiveth sinful men."
-            ]
-          },
-          {
-            lines: [
-              "Now my heart condemns me not, Pure before the law I stand;",
-              "He who cleansed me from all spot, Satisfied its last demand."
+              "Come, and He will give you rest;",
+              "Trust Him, for His word is plain;",
+              "He will take the sinfulest;",
+              "Christ receiveth sinful men."
             ]
           },
           {
             type: "chorus",
             lines: [
-              "Sing it o'er and o'er again; Christ receiveth sinful men;",
-              "Make the message clear and plain: Christ receiveth sinful men."
+              "Sing it o'er and o'er again;",
+              "Christ receiveth sinful men;",
+              "Make the message clear and plain:",
+              "Christ receiveth sinful men."
             ]
           },
           {
             lines: [
-              "Christ receiveth sinful men, Even me with all my sin;",
-              "Purged from ev'ry spot and stain, Heav'n with Him I enter in."
+              "Now my heart condemns me not,",
+              "Pure before the law I stand;",
+              "He who cleansed me from all spot,",
+              "Satisfied its last demand."
             ]
           },
           {
             type: "chorus",
             lines: [
-              "Sing it o'er and o'er again; Christ receiveth sinful men;",
-              "Make the message clear and plain: Christ receiveth sinful men."
+              "Sing it o'er and o'er again;",
+              "Christ receiveth sinful men;",
+              "Make the message clear and plain:",
+              "Christ receiveth sinful men."
+            ]
+          },
+          {
+            lines: [
+              "Christ receiveth sinful men,",
+              "Even me with all my sin;",
+              "Purged from ev'ry spot and stain,",
+              "Heav'n with Him I enter in."
+            ]
+          },
+          {
+            type: "chorus",
+            lines: [
+              "Sing it o'er and o'er again;",
+              "Christ receiveth sinful men;",
+              "Make the message clear and plain:",
+              "Christ receiveth sinful men."
             ]
           }
         ]
@@ -20852,29 +21012,44 @@
         verses: [
           {
             lines: [
-              "\"Though your sins be as scarlet, They shall be as white as snow;",
-              "Though your sins be as scarlet, They shall be as white as snow;",
-              "Though they be red like crimson, They shall be as wool;\"",
-              "\"Though your sins be as scarlet, Though your sins be as scarlet,",
-              "They shall be as white as snow, They shall be as white as snow.\""
+              "\"Though your sins be as scarlet,",
+              "They shall be as white as snow;",
+              "Though your sins be as scarlet,",
+              "They shall be as white as snow;",
+              "Though they be red like crimson,",
+              "They shall be as wool;\"",
+              "\"Though your sins be as scarlet,",
+              "Though your sins be as scarlet,",
+              "They shall be as white as snow,",
+              "They shall be as white as snow.\""
             ]
           },
           {
             lines: [
-              "Hear the voice that entreats you, Oh, return ye unto God!",
-              "Hear the voice that entreats you, Oh, return ye unto God!",
-              "He is of great compassion, And of wondrous love;",
-              "Hear the voice that entreats you, Hear the voice that entreats you,",
-              "Oh, return ye unto God! Oh, return ye unto God!"
+              "Hear the voice that entreats you,",
+              "Oh, return ye unto God!",
+              "Hear the voice that entreats you,",
+              "Oh, return ye unto God!",
+              "He is of great compassion,",
+              "And of wondrous love;",
+              "Hear the voice that entreats you,",
+              "Hear the voice that entreats you,",
+              "Oh, return ye unto God!",
+              "Oh, return ye unto God!"
             ]
           },
           {
             lines: [
-              "He'll forgive your transgressions, And remember them no more;",
-              "He'll forgive your transgressions, And remember them no more;",
-              "\"Look unto Me, ye people,\" Saith the Lord your God;",
-              "He'll forgive your transgressions, He'll forgive your transgressions,",
-              "And remember them no more, And remember them no more."
+              "He'll forgive your transgressions,",
+              "And remember them no more;",
+              "He'll forgive your transgressions,",
+              "And remember them no more;",
+              "\"Look unto Me, ye people,\"",
+              "Saith the Lord your God;",
+              "He'll forgive your transgressions,",
+              "He'll forgive your transgressions,",
+              "And remember them no more,",
+              "And remember them no more."
             ]
           }
         ]
@@ -22213,26 +22388,34 @@
         verses: [
           {
             lines: [
-              "Look unto Jesus and be saved; See Him uplifted on the tree;",
-              "There all thy guilt has been displayed; See how He suffered there for thee."
+              "Look unto Jesus and be saved;",
+              "See Him uplifted on the tree;",
+              "There all thy guilt has been displayed;",
+              "See how He suffered there for thee."
             ]
           },
           {
             lines: [
-              "Look to the cross and see thy sin Laid upon God's beloved Son;",
-              "He shed His blood thy soul to win; He paid the debt—the work is done."
+              "Look to the cross and see thy sin",
+              "Laid upon God's beloved Son;",
+              "He shed His blood thy soul to win;",
+              "He paid the debt—the work is done."
             ]
           },
           {
             lines: [
-              "Look there to see God's judgment poured Upon the One who loved you so;",
-              "That One who died is Christ the Lord; He came from heav'n to bear thy woe."
+              "Look there to see God's judgment poured",
+              "Upon the One who loved you so;",
+              "That One who died is Christ the Lord;",
+              "He came from heav'n to bear thy woe."
             ]
           },
           {
             lines: [
-              "Look unto Jesus He now lives, God has received His blood in heav'n;",
-              "Look and receive the life He gives; Trust Jesus now and be forgiv'n."
+              "Look unto Jesus He now lives,",
+              "God has received His blood in heav'n;",
+              "Look and receive the life He gives;",
+              "Trust Jesus now and be forgiv'n."
             ]
           }
         ]
@@ -22586,50 +22769,71 @@
         verses: [
           {
             lines: [
-              "Jesus, I will trust Thee, trust Thee with my soul;",
-              "Guilty, lost, and helpless, Thou canst make me whole.",
-              "There is none in heaven or on earth like Thee:",
-              "Thou hast died for sinners—therefore, Lord, for me."
+              "Jesus, I will trust Thee,",
+              "trust Thee with my soul;",
+              "Guilty, lost, and helpless,",
+              "Thou canst make me whole.",
+              "There is none in heaven",
+              "or on earth like Thee:",
+              "Thou hast died for sinners—",
+              "therefore, Lord, for me."
             ]
           },
           {
             type: "chorus",
             lines: [
-              "I will seek Thy face, Worship and adore Thee, for Thy wondrous grace,",
-              "Jesus, I will trust Thee, trust Thee with my soul;",
-              "Guilty, lost, and helpless, Thou canst make me whole."
+              "I will seek Thy face,",
+              "Worship and adore Thee, for Thy wondrous grace,",
+              "Jesus, I will trust Thee,",
+              "trust Thee with my soul;",
+              "Guilty, lost, and helpless,",
+              "Thou canst make me whole."
             ]
           },
           {
             lines: [
-              "Jesus, I can trust Thee, trust Thy written Word,",
-              "Since Thy voice of mercy I have often heard;",
-              "When Thy Spirit teacheth, to my taste how sweet—",
-              "Only may I harken, sitting at Thy feet."
-            ]
-          },
-          {
-            type: "chorus",
-            lines: [
-              "I will seek Thy face, Worship and adore Thee, for Thy wondrous grace,",
-              "Jesus, I will trust Thee, trust Thee with my soul;",
-              "Guilty, lost, and helpless, Thou canst make me whole."
-            ]
-          },
-          {
-            lines: [
-              "Jesus, I do trust Thee, trust Thee without doubt:",
-              "\"Whosoever cometh, Thou wilt not cast out;\"",
-              "Faithful is Thy promise, precious is Thy blood—",
-              "These my soul's salvation, Thou my Saviour God!"
+              "Jesus, I can trust Thee,",
+              "trust Thy written Word,",
+              "Since Thy voice of mercy",
+              "I have often heard;",
+              "When Thy Spirit teacheth,",
+              "to my taste how sweet—",
+              "Only may I harken,",
+              "sitting at Thy feet."
             ]
           },
           {
             type: "chorus",
             lines: [
-              "I will seek Thy face, Worship and adore Thee, for Thy wondrous grace,",
-              "Jesus, I will trust Thee, trust Thee with my soul;",
-              "Guilty, lost, and helpless, Thou canst make me whole."
+              "I will seek Thy face,",
+              "Worship and adore Thee, for Thy wondrous grace,",
+              "Jesus, I will trust Thee,",
+              "trust Thee with my soul;",
+              "Guilty, lost, and helpless,",
+              "Thou canst make me whole."
+            ]
+          },
+          {
+            lines: [
+              "Jesus, I do trust Thee,",
+              "trust Thee without doubt:",
+              "\"Whosoever cometh,",
+              "Thou wilt not cast out;\"",
+              "Faithful is Thy promise,",
+              "precious is Thy blood—",
+              "These my soul's salvation,",
+              "Thou my Saviour God!"
+            ]
+          },
+          {
+            type: "chorus",
+            lines: [
+              "I will seek Thy face,",
+              "Worship and adore Thee, for Thy wondrous grace,",
+              "Jesus, I will trust Thee,",
+              "trust Thee with my soul;",
+              "Guilty, lost, and helpless,",
+              "Thou canst make me whole."
             ]
           }
         ]
@@ -23444,41 +23648,53 @@
         verses: [
           {
             lines: [
-              "What a fellowship, what a joy divine, Leaning on the everlasting arms;",
-              "What a blessedness, what a peace is mine, Leaning on the everlasting arms."
+              "What a fellowship, what a joy divine,",
+              "Leaning on the everlasting arms;",
+              "What a blessedness, what a peace is mine,",
+              "Leaning on the everlasting arms."
             ]
           },
           {
             type: "chorus",
             lines: [
-              "Leaning, leaning, Safe and secure from all alarms;",
-              "Leaning, leaning, Leaning on the everlasting arms."
+              "Leaning, leaning,",
+              "Safe and secure from all alarms;",
+              "Leaning, leaning,",
+              "Leaning on the everlasting arms."
             ]
           },
           {
             lines: [
-              "Oh, how sweet to walk in this pilgrim way, Leaning on the everlasting arms;",
-              "Oh, how bright the path grows from day to day, Leaning on the everlasting arms."
-            ]
-          },
-          {
-            type: "chorus",
-            lines: [
-              "Leaning, leaning, Safe and secure from all alarms;",
-              "Leaning, leaning, Leaning on the everlasting arms."
-            ]
-          },
-          {
-            lines: [
-              "What have I to dread, what have I to fear, Leaning on the everlasting arms;",
-              "I have blessed peace with my Lord so near, Leaning on the everlasting arms."
+              "Oh, how sweet to walk in this pilgrim way,",
+              "Leaning on the everlasting arms;",
+              "Oh, how bright the path grows from day to day,",
+              "Leaning on the everlasting arms."
             ]
           },
           {
             type: "chorus",
             lines: [
-              "Leaning, leaning, Safe and secure from all alarms;",
-              "Leaning, leaning, Leaning on the everlasting arms."
+              "Leaning, leaning,",
+              "Safe and secure from all alarms;",
+              "Leaning, leaning,",
+              "Leaning on the everlasting arms."
+            ]
+          },
+          {
+            lines: [
+              "What have I to dread, what have I to fear,",
+              "Leaning on the everlasting arms;",
+              "I have blessed peace with my Lord so near,",
+              "Leaning on the everlasting arms."
+            ]
+          },
+          {
+            type: "chorus",
+            lines: [
+              "Leaning, leaning,",
+              "Safe and secure from all alarms;",
+              "Leaning, leaning,",
+              "Leaning on the everlasting arms."
             ]
           }
         ]
@@ -23509,54 +23725,70 @@
         verses: [
           {
             lines: [
-              "I know not why God's wondrous grace To me He hath made known,",
-              "Nor why, unworthy, Christ in love Redeemed me for His own."
+              "I know not why God's wondrous grace",
+              "To me He hath made known,",
+              "Nor why, unworthy, Christ in love",
+              "Redeemed me for His own."
             ]
           },
           {
             type: "chorus",
             lines: [
-              "But \"I know whom I have believed, and am persuaded that He is able",
-              "To keep that which I've committed Unto Him against that day.\""
+              "But \"I know whom I have believed,",
+              "and am persuaded that He is able",
+              "To keep that which I've committed",
+              "Unto Him against that day.\""
             ]
           },
           {
             lines: [
-              "I know not how this saving faith To me He did impart,",
-              "Nor how believing in His Word Wrought peace within my heart."
-            ]
-          },
-          {
-            type: "chorus",
-            lines: [
-              "But \"I know whom I have believed, and am persuaded that He is able",
-              "To keep that which I've committed Unto Him against that day.\""
-            ]
-          },
-          {
-            lines: [
-              "I know not how the Spirit moves, Convincing men of sin,",
-              "Revealing Jesus through the Word, Creating faith in Him."
+              "I know not how this saving faith",
+              "To me He did impart,",
+              "Nor how believing in His Word",
+              "Wrought peace within my heart."
             ]
           },
           {
             type: "chorus",
             lines: [
-              "But \"I know whom I have believed, and am persuaded that He is able",
-              "To keep that which I've committed Unto Him against that day.\""
+              "But \"I know whom I have believed,",
+              "and am persuaded that He is able",
+              "To keep that which I've committed",
+              "Unto Him against that day.\""
             ]
           },
           {
             lines: [
-              "I know not when my Lord may come, At night or noonday fair,",
-              "Nor if I'll walk the vale with Him, Or \"meet Him in the air.\""
+              "I know not how the Spirit moves,",
+              "Convincing men of sin,",
+              "Revealing Jesus through the Word,",
+              "Creating faith in Him."
             ]
           },
           {
             type: "chorus",
             lines: [
-              "But \"I know whom I have believed, and am persuaded that He is able",
-              "To keep that which I've committed Unto Him against that day.\""
+              "But \"I know whom I have believed,",
+              "and am persuaded that He is able",
+              "To keep that which I've committed",
+              "Unto Him against that day.\""
+            ]
+          },
+          {
+            lines: [
+              "I know not when my Lord may come,",
+              "At night or noonday fair,",
+              "Nor if I'll walk the vale with Him,",
+              "Or \"meet Him in the air.\""
+            ]
+          },
+          {
+            type: "chorus",
+            lines: [
+              "But \"I know whom I have believed,",
+              "and am persuaded that He is able",
+              "To keep that which I've committed",
+              "Unto Him against that day.\""
             ]
           }
         ]
@@ -23732,34 +23964,50 @@
         verses: [
           {
             lines: [
-              "God's almighty arms are round me; Peace, peace is mine!",
-              "Judgment scenes need not confound me; Peace, peace is mine!",
-              "Jesus came Himself and sought me; Sold to death, He found and bo't me;",
-              "Then my blessed freedom taught me— Peace, peace is mine!"
+              "God's almighty arms are round me;",
+              "Peace, peace is mine!",
+              "Judgment scenes need not confound me;",
+              "Peace, peace is mine!",
+              "Jesus came Himself and sought me;",
+              "Sold to death, He found and bo't me;",
+              "Then my blessed freedom taught me—",
+              "Peace, peace is mine!"
             ]
           },
           {
             lines: [
-              "While I hear life's rugged billows, Peace, peace is mine!",
-              "Why suspend my harp on willows? Peace, peace is mine!",
-              "I may sing, with Christ beside me, Tho' a thousand ills betide me;",
-              "Safely He hath sworn to guide me: Peace, peace is mine!"
+              "While I hear life's rugged billows,",
+              "Peace, peace is mine!",
+              "Why suspend my harp on willows?",
+              "Peace, peace is mine!",
+              "I may sing, with Christ beside me,",
+              "Tho' a thousand ills betide me;",
+              "Safely He hath sworn to guide me:",
+              "Peace, peace is mine!"
             ]
           },
           {
             lines: [
-              "Ev'ry trial draws Him nearer; Peace, peace is mine!",
-              "All His strokes but make Him dearer; Peace, peace is mine!",
-              "Bless I, then, the hand that smiteth Gently, and to heal delighteth;",
-              "'Tis against my sins He fighteth: Peace, peace is mine!"
+              "Ev'ry trial draws Him nearer;",
+              "Peace, peace is mine!",
+              "All His strokes but make Him dearer;",
+              "Peace, peace is mine!",
+              "Bless I, then, the hand that smiteth",
+              "Gently, and to heal delighteth;",
+              "'Tis against my sins He fighteth:",
+              "Peace, peace is mine!"
             ]
           },
           {
             lines: [
-              "Welcome, ev'ry rising sunlight, Peace, peace is mine!",
-              "Nearer home each rolling midnight; Peace, peace is mine!",
-              "Death and hell cannot appall me, Safe in Christ what-e'er befall me;",
-              "Calmly wait I till He call me: Peace, peace is mine!"
+              "Welcome, ev'ry rising sunlight,",
+              "Peace, peace is mine!",
+              "Nearer home each rolling midnight;",
+              "Peace, peace is mine!",
+              "Death and hell cannot appall me,",
+              "Safe in Christ what-e'er befall me;",
+              "Calmly wait I till He call me:",
+              "Peace, peace is mine!"
             ]
           }
         ]
@@ -23773,47 +24021,65 @@
         verses: [
           {
             lines: [
-              "Safe in the arms of Jesus, Safe on His gentle breast,",
-              "There, by His love o'ershaded, Sweetly my soul shall rest.",
-              "Hark! 'Tis the voice of angels Borne in a song to me",
-              "Over the fields of glory, Over the jasper sea."
+              "Safe in the arms of Jesus,",
+              "Safe on His gentle breast,",
+              "There, by His love o'ershaded,",
+              "Sweetly my soul shall rest.",
+              "Hark! 'Tis the voice of angels",
+              "Borne in a song to me",
+              "Over the fields of glory,",
+              "Over the jasper sea."
             ]
           },
           {
             type: "chorus",
             lines: [
-              "Safe in the arms of Jesus, Safe on His gentle breast,",
-              "There, by His love o'ershaded, Sweetly my soul shall rest."
+              "Safe in the arms of Jesus,",
+              "Safe on His gentle breast,",
+              "There, by His love o'ershaded,",
+              "Sweetly my soul shall rest."
             ]
           },
           {
             lines: [
-              "Safe in the arms of Jesus, Safe from corroding care,",
-              "Safe from the world's temptations— Sin cannot harm me there.",
-              "Free from the blight of sorrow, Free from my doubts and fears;",
-              "Only a few more trials, Only a few more tears!"
-            ]
-          },
-          {
-            type: "chorus",
-            lines: [
-              "Safe in the arms of Jesus, Safe on His gentle breast,",
-              "There, by His love o'ershaded, Sweetly my soul shall rest."
-            ]
-          },
-          {
-            lines: [
-              "Jesus, my heart's dear refuge, Jesus has died for me;",
-              "Firm on the Rock of Ages Ever my trust shall be.",
-              "Here let me wait with patience, Wait till the night is o'er,",
-              "Wait till I see the morning Break on the golden shore."
+              "Safe in the arms of Jesus,",
+              "Safe from corroding care,",
+              "Safe from the world's temptations—",
+              "Sin cannot harm me there.",
+              "Free from the blight of sorrow,",
+              "Free from my doubts and fears;",
+              "Only a few more trials,",
+              "Only a few more tears!"
             ]
           },
           {
             type: "chorus",
             lines: [
-              "Safe in the arms of Jesus, Safe on His gentle breast,",
-              "There, by His love o'ershaded, Sweetly my soul shall rest."
+              "Safe in the arms of Jesus,",
+              "Safe on His gentle breast,",
+              "There, by His love o'ershaded,",
+              "Sweetly my soul shall rest."
+            ]
+          },
+          {
+            lines: [
+              "Jesus, my heart's dear refuge,",
+              "Jesus has died for me;",
+              "Firm on the Rock of Ages",
+              "Ever my trust shall be.",
+              "Here let me wait with patience,",
+              "Wait till the night is o'er,",
+              "Wait till I see the morning",
+              "Break on the golden shore."
+            ]
+          },
+          {
+            type: "chorus",
+            lines: [
+              "Safe in the arms of Jesus,",
+              "Safe on His gentle breast,",
+              "There, by His love o'ershaded,",
+              "Sweetly my soul shall rest."
             ]
           }
         ]
@@ -25247,32 +25513,42 @@
         verses: [
           {
             lines: [
-              "A mind at perfect peace with God, Oh! what a word is this!",
-              "A sinner reconciled thro' blood; This, this indeed is peace!"
+              "A mind at perfect peace with God,",
+              "Oh! what a word is this!",
+              "A sinner reconciled thro' blood;",
+              "This, this indeed is peace!"
             ]
           },
           {
             lines: [
-              "By nature and by practice far, How very far from God!",
-              "Yet now by grace bro't nigh to Him, Thro' faith in Jesus' blood."
+              "By nature and by practice far,",
+              "How very far from God!",
+              "Yet now by grace bro't nigh to Him,",
+              "Thro' faith in Jesus' blood."
             ]
           },
           {
             lines: [
-              "So near, so very near to God, I cannot nearer be;",
-              "For in the person of His Son I am as near as He."
+              "So near, so very near to God,",
+              "I cannot nearer be;",
+              "For in the person of His Son",
+              "I am as near as He."
             ]
           },
           {
             lines: [
-              "So dear, so very dear to God, More dear I cannot be;",
-              "The love wherewith He loves the Son: Such is His love to me!"
+              "So dear, so very dear to God,",
+              "More dear I cannot be;",
+              "The love wherewith He loves the Son:",
+              "Such is His love to me!"
             ]
           },
           {
             lines: [
-              "Why should I ever careful be, Since such a God is mine?",
-              "He watches o'er me night and day, And tells me \"Mine is thine.\""
+              "Why should I ever careful be,",
+              "Since such a God is mine?",
+              "He watches o'er me night and day,",
+              "And tells me \"Mine is thine.\""
             ]
           }
         ]
@@ -26709,8 +26985,10 @@
         verses: [
           {
             lines: [
-              "O tell me more of Christ my Saviour; On this glad theme dwell o'er and o'er,",
-              "His boundless grace, His saving favor, His precious name, O tell me more!"
+              "O tell me more of Christ my Saviour;",
+              "On this glad theme dwell o'er and o'er,",
+              "His boundless grace, His saving favor,",
+              "His precious name, O tell me more!"
             ]
           },
           {
@@ -26724,8 +27002,10 @@
           },
           {
             lines: [
-              "O tell me more of love's sweet story, If you would cheer and comfort me;",
-              "How Jesus wept, the King of glory, Those tender tears of sympathy."
+              "O tell me more of love's sweet story,",
+              "If you would cheer and comfort me;",
+              "How Jesus wept, the King of glory,",
+              "Those tender tears of sympathy."
             ]
           },
           {
@@ -26739,8 +27019,10 @@
           },
           {
             lines: [
-              "O tell me more! How waves of sorrow Shall hear His voice say, \"Peace, be still;\"",
-              "How after night, bright dawns the morrow, To those who trust His blessed will."
+              "O tell me more! How waves of sorrow",
+              "Shall hear His voice say, \"Peace, be still;\"",
+              "How after night, bright dawns the morrow,",
+              "To those who trust His blessed will."
             ]
           },
           {
@@ -26754,8 +27036,10 @@
           },
           {
             lines: [
-              "O tell me more! And I repeating The happy news shall spread the joy;",
-              "Come, blessed Lord, Thy work completing, Till songs of praise our lips employ."
+              "O tell me more! And I repeating",
+              "The happy news shall spread the joy;",
+              "Come, blessed Lord, Thy work completing,",
+              "Till songs of praise our lips employ."
             ]
           },
           {
@@ -26827,8 +27111,10 @@
         verses: [
           {
             lines: [
-              "I am Thine, O Lord, I have heard Thy voice, And it told Thy love to me;",
-              "But I long to rise in the arms of faith, And be closer drawn to Thee."
+              "I am Thine, O Lord, I have heard Thy voice,",
+              "And it told Thy love to me;",
+              "But I long to rise in the arms of faith,",
+              "And be closer drawn to Thee."
             ]
           },
           {
@@ -26842,8 +27128,10 @@
           },
           {
             lines: [
-              "Consecrate me now to Thy service, Lord, By the power of grace divine;",
-              "Let my soul look up with a steadfast hope, And my will be lost in Thine."
+              "Consecrate me now to Thy service, Lord,",
+              "By the power of grace divine;",
+              "Let my soul look up with a steadfast hope,",
+              "And my will be lost in Thine."
             ]
           },
           {
@@ -26857,8 +27145,10 @@
           },
           {
             lines: [
-              "Oh, the pure delight of a single hour That before Thy throne I spend,",
-              "When I kneel in prayer, and with Thee, my God, I commune as friend with friend!"
+              "Oh, the pure delight of a single hour",
+              "That before Thy throne I spend,",
+              "When I kneel in prayer, and with Thee, my God,",
+              "I commune as friend with friend!"
             ]
           },
           {
@@ -26872,8 +27162,10 @@
           },
           {
             lines: [
-              "There are depths of love that I cannot know Till I cross the narrow sea;",
-              "There are heights of joy that I may not reach Till I rest in peace with Thee."
+              "There are depths of love that I cannot know",
+              "Till I cross the narrow sea;",
+              "There are heights of joy that I may not reach",
+              "Till I rest in peace with Thee."
             ]
           },
           {
@@ -26896,26 +27188,34 @@
         verses: [
           {
             lines: [
-              "Oh, teach us more of Thy blest ways, Thou holy Lamb of God!",
-              "And fix and root us in Thy grace, As those redeemed by blood."
+              "Oh, teach us more of Thy blest ways,",
+              "Thou holy Lamb of God!",
+              "And fix and root us in Thy grace,",
+              "As those redeemed by blood."
             ]
           },
           {
             lines: [
-              "Oh, tell us often of Thy love, Of all Thy grief and pain,",
-              "And let our hearts with joy confess That thence comes all our gain."
+              "Oh, tell us often of Thy love,",
+              "Of all Thy grief and pain,",
+              "And let our hearts with joy confess",
+              "That thence comes all our gain."
             ]
           },
           {
             lines: [
-              "For this, oh, may we freely count, What-e'er we have but loss,",
-              "The dearest object of our love, Compared with Thee, but dross."
+              "For this, oh, may we freely count,",
+              "What-e'er we have but loss,",
+              "The dearest object of our love,",
+              "Compared with Thee, but dross."
             ]
           },
           {
             lines: [
-              "Engrave this deeply on our hearts With an eternal pen,",
-              "That we may, in some small degree, Return Thy love again."
+              "Engrave this deeply on our hearts",
+              "With an eternal pen,",
+              "That we may, in some small degree,",
+              "Return Thy love again."
             ]
           }
         ]
@@ -26929,38 +27229,50 @@
         verses: [
           {
             lines: [
-              "May the mind of Christ, my Saviour, Live in me from day to day,",
-              "By His love and pow'r controlling All I do and say."
+              "May the mind of Christ, my Saviour,",
+              "Live in me from day to day,",
+              "By His love and pow'r controlling",
+              "All I do and say."
             ]
           },
           {
             lines: [
-              "May the Word of God dwell richly In my heart from hour to hour,",
-              "So that all may see I triumph Only through His pow'r."
+              "May the Word of God dwell richly",
+              "In my heart from hour to hour,",
+              "So that all may see I triumph",
+              "Only through His pow'r."
             ]
           },
           {
             lines: [
-              "May the peace of God, my Father, Rule my life in ev'rything,",
-              "That I may be calm to comfort Sick and sorrowing."
+              "May the peace of God, my Father,",
+              "Rule my life in ev'rything,",
+              "That I may be calm to comfort",
+              "Sick and sorrowing."
             ]
           },
           {
             lines: [
-              "May the love of Jesus fill me, As the waters fill the sea;",
-              "Him exalting, self abasing, This is victory."
+              "May the love of Jesus fill me,",
+              "As the waters fill the sea;",
+              "Him exalting, self abasing,",
+              "This is victory."
             ]
           },
           {
             lines: [
-              "May I run the race before me, Strong and brave to face the foe,",
-              "Looking only unto Jesus As I onward go."
+              "May I run the race before me,",
+              "Strong and brave to face the foe,",
+              "Looking only unto Jesus",
+              "As I onward go."
             ]
           },
           {
             lines: [
-              "May His beauty rest upon me As I seek the lost to win,",
-              "And may they forget the channel, Seeing only Him."
+              "May His beauty rest upon me",
+              "As I seek the lost to win,",
+              "And may they forget the channel,",
+              "Seeing only Him."
             ]
           }
         ]
@@ -27001,32 +27313,42 @@
         verses: [
           {
             lines: [
-              "\"Revive Thy work, O Lord!\" Thy mighty arm make bare:",
-              "Speak with the voice which wakes the dead, And make Thy people hear."
+              "\"Revive Thy work, O Lord!\"",
+              "Thy mighty arm make bare:",
+              "Speak with the voice which wakes the dead,",
+              "And make Thy people hear."
             ]
           },
           {
             lines: [
-              "\"Revive Thy work, O Lord!\" Disturb this sleep of death:",
-              "Quicken the smould'ring embers, Lord, By Thine almighty breath."
+              "\"Revive Thy work, O Lord!\"",
+              "Disturb this sleep of death:",
+              "Quicken the smould'ring embers, Lord,",
+              "By Thine almighty breath."
             ]
           },
           {
             lines: [
-              "\"Revive Thy work, O Lord!\" Create soul-thirst for Thee:",
-              "And hung'ring for the Bread of Life O may our spirits be!"
+              "\"Revive Thy work, O Lord!\"",
+              "Create soul-thirst for Thee:",
+              "And hung'ring for the Bread of Life",
+              "O may our spirits be!"
             ]
           },
           {
             lines: [
-              "\"Revive Thy work, O Lord!\" Give pow'r unto Thy Word,",
-              "Grant that Thy blessed gospel may In living faith be heard."
+              "\"Revive Thy work, O Lord!\"",
+              "Give pow'r unto Thy Word,",
+              "Grant that Thy blessed gospel may",
+              "In living faith be heard."
             ]
           },
           {
             lines: [
-              "\"Revive Thy work, O Lord!\" And give refreshing show'rs:",
-              "The glory shall be all Thine own, The blessing, Lord, be ours!"
+              "\"Revive Thy work, O Lord!\"",
+              "And give refreshing show'rs:",
+              "The glory shall be all Thine own,",
+              "The blessing, Lord, be ours!"
             ]
           }
         ]
@@ -27646,26 +27968,34 @@
       verses: [
         {
           lines: [
-            "Saviour, breathe an evening blessing, Ere repose our spirits seal;",
-            "Sin and want we come confessing, Thou canst save, and Thou canst heal."
+            "Saviour, breathe an evening blessing,",
+            "Ere repose our spirits seal;",
+            "Sin and want we come confessing,",
+            "Thou canst save, and Thou canst heal."
           ]
         },
         {
           lines: [
-            "Tho' destruction walk around us, Tho' the arrows past us fly;",
-            "Angel-guards from Thee surround us, We are safe if Thou art nigh."
+            "Tho' destruction walk around us,",
+            "Tho' the arrows past us fly;",
+            "Angel-guards from Thee surround us,",
+            "We are safe if Thou art nigh."
           ]
         },
         {
           lines: [
-            "Tho' the night be dark and dreary, Darkness cannot hide from Thee;",
-            "Thou art He who, never weary, Watchest where Thy people be."
+            "Tho' the night be dark and dreary,",
+            "Darkness cannot hide from Thee;",
+            "Thou art He who, never weary,",
+            "Watchest where Thy people be."
           ]
         },
         {
           lines: [
-            "Blessed Spirit, brooding o'er us, Chase the darkness of our night,",
-            "Till the perfect day before us Breaks in everlasting light."
+            "Blessed Spirit, brooding o'er us,",
+            "Chase the darkness of our night,",
+            "Till the perfect day before us",
+            "Breaks in everlasting light."
           ]
         }
       ]
@@ -27679,32 +28009,42 @@
       verses: [
         {
           lines: [
-            "The day Thou gavest, Lord, is ended, The darkness falls at Thy behest;",
-            "To Thee our morning hymns ascended, Thy praise shall hallow now our rest."
+            "The day Thou gavest, Lord, is ended,",
+            "The darkness falls at Thy behest;",
+            "To Thee our morning hymns ascended,",
+            "Thy praise shall hallow now our rest."
           ]
         },
         {
           lines: [
-            "We thank Thee that Thy Church unsleeping, While earth rolls onward into light,",
-            "Thro' all the world her watch is keeping, And rests not now by day or night."
+            "We thank Thee that Thy Church unsleeping,",
+            "While earth rolls onward into light,",
+            "Thro' all the world her watch is keeping,",
+            "And rests not now by day or night."
           ]
         },
         {
           lines: [
-            "As o'er each continent and island The dawn leads on another day,",
-            "The voice of prayer is never silent, Nor die the strains of praise away."
+            "As o'er each continent and island",
+            "The dawn leads on another day,",
+            "The voice of prayer is never silent,",
+            "Nor die the strains of praise away."
           ]
         },
         {
           lines: [
-            "The sun that bids us rest is waking Our brethren 'neath the western sky,",
-            "And hour by hour fresh lips are making Thy wondrous doings heard on high."
+            "The sun that bids us rest is waking",
+            "Our brethren 'neath the western sky,",
+            "And hour by hour fresh lips are making",
+            "Thy wondrous doings heard on high."
           ]
         },
         {
           lines: [
-            "So be it, Lord; Thy throne shall never, Like earth's proud empires, pass away;",
-            "Thy kingdom stands, and grows forever, Till all Thy creatures own Thy sway."
+            "So be it, Lord; Thy throne shall never,",
+            "Like earth's proud empires, pass away;",
+            "Thy kingdom stands, and grows forever,",
+            "Till all Thy creatures own Thy sway."
           ]
         }
       ]
@@ -27718,26 +28058,34 @@
       verses: [
         {
           lines: [
-            "Sun of my soul, Thou Saviour dear, It is not night if Thou be near;",
-            "O may no earth-born cloud arise To hide Thee from Thy servant's eyes."
+            "Sun of my soul, Thou Saviour dear,",
+            "It is not night if Thou be near;",
+            "O may no earth-born cloud arise",
+            "To hide Thee from Thy servant's eyes."
           ]
         },
         {
           lines: [
-            "When the soft dews of kindly sleep My weary eyelids gently steep,",
-            "Be my last thought, how sweet to rest Forever on my Saviour's breast."
+            "When the soft dews of kindly sleep",
+            "My weary eyelids gently steep,",
+            "Be my last thought, how sweet to rest",
+            "Forever on my Saviour's breast."
           ]
         },
         {
           lines: [
-            "Abide with me from morn till eve, For without Thee I cannot live;",
-            "Abide with me when night is nigh, For without Thee I dare not die."
+            "Abide with me from morn till eve,",
+            "For without Thee I cannot live;",
+            "Abide with me when night is nigh,",
+            "For without Thee I dare not die."
           ]
         },
         {
           lines: [
-            "Come near and bless us when we wake, Ere through the world our way we take;",
-            "Till, in the ocean of Thy love, We lose ourselves in heaven above."
+            "Come near and bless us when we wake,",
+            "Ere through the world our way we take;",
+            "Till, in the ocean of Thy love,",
+            "We lose ourselves in heaven above."
           ]
         }
       ]
@@ -27751,38 +28099,50 @@
       verses: [
         {
           lines: [
-            "Prayer is the soul's sincere desire, Uttered or unexpressed,",
-            "The motion of a hidden fire That trembles in the breast."
+            "Prayer is the soul's sincere desire,",
+            "Uttered or unexpressed,",
+            "The motion of a hidden fire",
+            "That trembles in the breast."
           ]
         },
         {
           lines: [
-            "Prayer is the burden of a sigh, The falling of a tear,",
-            "The upward glancing of an eye When none but God is near."
+            "Prayer is the burden of a sigh,",
+            "The falling of a tear,",
+            "The upward glancing of an eye",
+            "When none but God is near."
           ]
         },
         {
           lines: [
-            "Prayer is the simplest form of speech That infant lips can try;",
-            "Prayer, the sublimest strains that reach The Majesty on high."
+            "Prayer is the simplest form of speech",
+            "That infant lips can try;",
+            "Prayer, the sublimest strains that reach",
+            "The Majesty on high."
           ]
         },
         {
           lines: [
-            "Prayer is the Christian's vital breath, The Christian's native air;",
-            "His watchword at the gates of death: He enters heav'n with prayer."
+            "Prayer is the Christian's vital breath,",
+            "The Christian's native air;",
+            "His watchword at the gates of death:",
+            "He enters heav'n with prayer."
           ]
         },
         {
           lines: [
-            "The saints, in prayer, appear as one In word, and deed, and mind,",
-            "While with the Father and the Son Sweet fellowship they find."
+            "The saints, in prayer, appear as one",
+            "In word, and deed, and mind,",
+            "While with the Father and the Son",
+            "Sweet fellowship they find."
           ]
         },
         {
           lines: [
-            "O Thou by whom we come to God, The Life, the Truth, the Way!",
-            "The path of prayer Thyself hast trod: Lord, teach us how to pray!"
+            "O Thou by whom we come to God,",
+            "The Life, the Truth, the Way!",
+            "The path of prayer Thyself hast trod:",
+            "Lord, teach us how to pray!"
           ]
         }
       ]
@@ -27796,26 +28156,50 @@
       verses: [
         {
           lines: [
-            "Saviour, Thy dying love Thou gavest me, Nor should I aught withhold, Dear Lord, from Thee:",
-            "In love my soul would bow, My heart fulfill its vow, Some off'ring bring Thee now, Something for Thee."
+            "Saviour, Thy dying love",
+            "Thou gavest me,",
+            "Nor should I aught withhold,",
+            "Dear Lord, from Thee:",
+            "In love my soul would bow,",
+            "My heart fulfill its vow,",
+            "Some off'ring bring Thee now,",
+            "Something for Thee."
           ]
         },
         {
           lines: [
-            "At the blest mercy-seat, Pleading for me, My feeble faith looks up, Jesus, to Thee:",
-            "Help me the cross to bear, Thy wondrous love declare, Some song to raise, or prayer, Something for Thee."
+            "At the blest mercy-seat,",
+            "Pleading for me,",
+            "My feeble faith looks up,",
+            "Jesus, to Thee:",
+            "Help me the cross to bear,",
+            "Thy wondrous love declare,",
+            "Some song to raise, or prayer,",
+            "Something for Thee."
           ]
         },
         {
           lines: [
-            "Give me a faithful heart, Likeness to Thee, That each departing day Henceforth may see",
-            "Some deed of kindness done, Some wand'rer sought and won, Some work of love begun, Something for Thee."
+            "Give me a faithful heart,",
+            "Likeness to Thee,",
+            "That each departing day",
+            "Henceforth may see",
+            "Some deed of kindness done,",
+            "Some wand'rer sought and won,",
+            "Some work of love begun,",
+            "Something for Thee."
           ]
         },
         {
           lines: [
-            "All that I am and have—Thy gifts so free—In joy, in grief, thro' life, Dear Lord, for Thee!",
-            "And when Thy face I see, My ransomed soul shall be, Thro' all eternity, Something for Thee."
+            "All that I am and have—",
+            "Thy gifts so free—",
+            "In joy, in grief, thro' life,",
+            "Dear Lord, for Thee!",
+            "And when Thy face I see,",
+            "My ransomed soul shall be,",
+            "Thro' all eternity,",
+            "Something for Thee."
           ]
         }
       ]
@@ -31811,32 +32195,40 @@
       verses: [
         {
           lines: [
-            "I gave My life for thee, My precious blood I shed,",
-            "That thou might'st ransomed be, And quickened from the dead;",
+            "I gave My life for thee,",
+            "My precious blood I shed,",
+            "That thou might'st ransomed be,",
+            "And quickened from the dead;",
             "I gave, I gave My life for thee,",
             "What hast thou given for Me?"
           ]
         },
         {
           lines: [
-            "My Father's house of light, My glory-circled throne",
-            "I left for earthly night, For wanderings sad and lone;",
+            "My Father's house of light,",
+            "My glory-circled throne",
+            "I left for earthly night,",
+            "For wanderings sad and lone;",
             "I left, I left it all for thee,",
             "Hast thou left aught for Me?"
           ]
         },
         {
           lines: [
-            "I suffered much for thee, More than thy tongue can tell,",
-            "Of bitterest agony, To rescue thee from hell;",
+            "I suffered much for thee,",
+            "More than thy tongue can tell,",
+            "Of bitterest agony,",
+            "To rescue thee from hell;",
             "I've borne, I've borne it all for thee,",
             "What hast thou borne for Me?"
           ]
         },
         {
           lines: [
-            "And I have brought to thee, Down from My home above,",
-            "Salvation full and free, My pardon and My love;",
+            "And I have brought to thee,",
+            "Down from My home above,",
+            "Salvation full and free,",
+            "My pardon and My love;",
             "I bring, I bring rich gifts to thee,",
             "What hast thou brought to Me?"
           ]
@@ -35234,10 +35626,14 @@
       verses: [
         {
           lines: [
-            "How many times discouraged, we sink beside the way;",
-            "About us all is darkness, we hardly dare to pray;",
-            "Then from the mists and shadows, the sweetest voice e'er known,",
-            "Says, \"Child, am I not with thee, never to leave thee alone?\""
+            "How many times discouraged,",
+            "we sink beside the way;",
+            "About us all is darkness,",
+            "we hardly dare to pray;",
+            "Then from the mists and shadows,",
+            "the sweetest voice e'er known,",
+            "Says, \"Child, am I not with thee,",
+            "never to leave thee alone?\""
           ],
           chorus: [
             "No, never alone! No, never alone!",
@@ -35248,10 +35644,14 @@
         },
         {
           lines: [
-            "O soul, hast thou forgotten, the tender word and sweet,",
-            "Of Him who left behind Him the print of bleeding feet?",
-            "\"I never will forsake thee, O child so weary grown;",
-            "Remember, I have promised, never to leave thee alone.\""
+            "O soul, hast thou forgotten,",
+            "the tender word and sweet,",
+            "Of Him who left behind Him",
+            "the print of bleeding feet?",
+            "\"I never will forsake thee,",
+            "O child so weary grown;",
+            "Remember, I have promised,",
+            "never to leave thee alone.\""
           ],
           chorus: [
             "No, never alone! No, never alone!",
@@ -35262,10 +35662,14 @@
         },
         {
           lines: [
-            "Take courage, way-worn pilgrim, tho' mists and shadows hide",
-            "The face of Him thou lovest, He's ever at thy side;",
-            "Reach out thy hand and find Him, and lo, the clouds have flown;",
-            "He smiles on thee who promised, never to leave thee alone."
+            "Take courage, way-worn pilgrim,",
+            "tho' mists and shadows hide",
+            "The face of Him thou lovest,",
+            "He's ever at thy side;",
+            "Reach out thy hand and find Him,",
+            "and lo, the clouds have flown;",
+            "He smiles on thee who promised,",
+            "never to leave thee alone."
           ],
           chorus: [
             "No, never alone! No, never alone!",
@@ -38519,11 +38923,13 @@
         }
       });
 
-      slideList.forEach((item) => {
+      slideList.forEach((item, i) => {
+        const chip = `HYMN ${hymn.number} &middot; ${hymn.title} &middot; ${i + 1}/${slideList.length}`;
         if (item.type === 'refrain') {
           slidesHTML += `
           <div class="slide verse-slide refrain-slide">
             <div class="slide-bg"></div>
+            <div class="slide-chip">${chip}</div>
             <div class="slide-content">
               <p class="verse-label">REFRAIN</p>
               <div class="verse-text">
@@ -38537,6 +38943,7 @@
           slidesHTML += `
           <div class="slide verse-slide">
             <div class="slide-bg"></div>
+            <div class="slide-chip">${chip}</div>
             <div class="slide-content">
               <p class="verse-label">${item.verseLabel || `VERSE ${item.verseCount}`}</p>
               <div class="verse-text">
@@ -38590,7 +38997,60 @@
       mobileThumbs.forEach((t, i) => t.classList.toggle('active', i === index));
       currentSlide = index;
       updateCounter();
+      requestAnimationFrame(fitActiveText);
     }
+
+    // Auto-fit lyric text: push the font as large as possible while
+    // guaranteeing every line stays on one row (no wrapping/breaks).
+    function fitActiveText() {
+      const slide = document.querySelector('.slide.verse-slide.active');
+      if (!slide) return;
+      const text = slide.querySelector('.verse-text');
+      if (!text) return;
+      const container = document.getElementById('presentationContainer');
+      const isFs = container && container.classList.contains('fullscreen');
+
+      text.classList.add('fitting');
+
+      const cs = getComputedStyle(slide);
+      const padTop = parseFloat(cs.paddingTop) || 0;
+      const padBottom = parseFloat(cs.paddingBottom) || 0;
+      const chip = slide.querySelector('.slide-chip');
+      const chipH = chip ? chip.offsetHeight : 0;
+      const availW = text.clientWidth;
+      const availH = slide.clientHeight - padTop - padBottom - chipH - 28;
+      if (availW <= 0 || availH <= 0) { text.classList.remove('fitting'); return; }
+
+      const fits = (px) => {
+        text.style.setProperty('font-size', px + 'px', 'important');
+        return text.scrollWidth <= availW + 1 && text.scrollHeight <= availH + 1;
+      };
+
+      let lo = isFs ? 26 : 16;
+      let hi = isFs ? 140 : 80;
+      let best = lo;
+      while (lo <= hi) {
+        const mid = (lo + hi) >> 1;
+        if (fits(mid)) { best = mid; lo = mid + 1; }
+        else { hi = mid - 1; }
+      }
+      text.style.setProperty('font-size', best + 'px', 'important');
+
+      // Only if a single line is physically too wide even at the minimum size,
+      // allow it to wrap rather than overflow off-screen.
+      if (text.scrollWidth > availW + 2) text.classList.remove('fitting');
+
+      // Leave a little breathing room so lyrics aren't crammed edge-to-edge
+      // (still large, just not fully occupying the slide). Keep in sync with devslides.
+      text.style.setProperty('font-size', (best * 0.9) + 'px', 'important');
+    }
+
+    let _fitTimer = null;
+    function scheduleFit() {
+      clearTimeout(_fitTimer);
+      _fitTimer = setTimeout(fitActiveText, 90);
+    }
+    window.addEventListener('resize', scheduleFit);
 
     function nextSlide() {
       if (currentSlide < totalSlides - 1) goToSlide(currentSlide + 1);
@@ -38688,6 +39148,7 @@
           container.classList.add('fullscreen');
         }
       }
+      scheduleFit();
     }
 
     ['fullscreenchange', 'webkitfullscreenchange', 'msfullscreenchange'].forEach(evt => {
@@ -38700,6 +39161,7 @@
         if (!isFs) {
           container.classList.remove('fullscreen');
         }
+        scheduleFit();
       });
     });
 
