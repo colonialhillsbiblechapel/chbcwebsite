@@ -1171,6 +1171,25 @@
       }
     }
   </style>
+  <style id="select-feature">
+    .select-toolbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;max-width:760px;margin:0 auto 10px;padding:0 20px;}
+    .select-mode-btn{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1.5px solid #c9b79a;color:#6B5344;font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;font-weight:600;padding:9px 18px;border-radius:30px;cursor:pointer;transition:all .2s ease;}
+    .select-mode-btn:hover{border-color:#8B7355;background:#fdf8f3;}
+    .select-mode-btn svg{width:15px;height:15px;}
+    .select-toolbar.on .select-mode-btn{background:#8B7355;border-color:#8B7355;color:#fff;}
+    .select-hint{font-family:'Cormorant Garamond',serif;font-style:italic;color:#8a7a63;font-size:.95rem;display:none;}
+    .select-toolbar.on .select-hint{display:inline;}
+    .hymn-check{flex:0 0 auto;width:22px;height:22px;border:2px solid #c9b79a;border-radius:6px;margin-right:14px;display:none;align-items:center;justify-content:center;transition:all .15s ease;}
+    .hymn-check svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:3;opacity:0;}
+    body.select-mode .hymn-check{display:inline-flex;}
+    body.select-mode .hymn-item .add-to-queue-btn{display:none;}
+    body.select-mode .hymn-item .hymn-arrow{opacity:.25;}
+    body.select-mode .hymn-item{cursor:pointer;}
+    .hymn-item.selected .hymn-check{background:#8B7355;border-color:#8B7355;}
+    .hymn-item.selected .hymn-check svg{opacity:1;}
+    body.select-mode .hymn-item.selected{background:linear-gradient(90deg,rgba(139,115,85,.10),transparent);}
+    @media (max-width:600px){.select-hint{font-size:.85rem;} .select-toolbar{padding:0 14px;}}
+  </style>
 </head>
 <body>
   <div class="bg-image"></div>
@@ -1213,6 +1232,14 @@
       </div>
     </div>
     
+    <div class="select-toolbar" id="selectToolbar">
+      <button type="button" id="selectModeBtn" class="select-mode-btn" onclick="toggleSelectMode()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        <span id="selectModeLabel">Select hymns</span>
+      </button>
+      <span class="select-hint">Tap hymns to add them, then tap Present.</span>
+    </div>
+
     <nav class="quick-nav">
       <p class="quick-nav-label">Quick Navigation</p>
       <div class="quick-nav-links">
@@ -2210,18 +2237,19 @@
       { num: 675, title: "Mine Eyes Have Seen the Glory", tune: "BATTLE HYMN" }
     ];
 
-    const QUEUE_KEY = 'hymnPresentationQueue';
+    const QUEUE_KEY = 'hymnPresentationQueue';   // sessionStorage key the presentation reads
     const BOOK = 'truth-praise';
+    const SEL_KEY = 'hymnSel_' + BOOK;           // per-book selection (kept separate per book)
 
     function getQueue() {
       try {
-        const q = localStorage.getItem(QUEUE_KEY);
+        const q = localStorage.getItem(SEL_KEY);
         return q ? JSON.parse(q) : [];
       } catch (e) { return []; }
     }
 
     function saveQueue(queue) {
-      localStorage.setItem(QUEUE_KEY, JSON.stringify(queue));
+      localStorage.setItem(SEL_KEY, JSON.stringify(queue));
       updateQueueUI();
     }
 
@@ -2293,7 +2321,46 @@
       } else {
         bar.classList.remove('visible');
       }
+      reflectSelection();
     }
+
+    // ---- Select mode: tap multiple hymns, then Present ----
+    let selectMode = false;
+    function toggleSelectMode() {
+      selectMode = !selectMode;
+      document.body.classList.toggle('select-mode', selectMode);
+      const tb = document.getElementById('selectToolbar');
+      if (tb) tb.classList.toggle('on', selectMode);
+      const lbl = document.getElementById('selectModeLabel');
+      if (lbl) lbl.textContent = selectMode ? 'Done selecting' : 'Select hymns';
+      reflectSelection();
+    }
+
+    function reflectSelection() {
+      const sel = new Set(getQueue().map(i => i.book + ':' + String(i.num)));
+      document.querySelectorAll('.hymn-item').forEach(it => {
+        const key = (it.dataset.book || '') + ':' + (it.dataset.num || '');
+        it.classList.toggle('selected', sel.has(key));
+      });
+    }
+
+    function toggleSelection(item) {
+      if (!item || item.dataset.noselect) return;
+      const book = item.dataset.book, num = String(item.dataset.num).replace(/\s+/g, ''), title = item.dataset.title || '';
+      const queue = getQueue();
+      const idx = queue.findIndex(i => i.book === book && String(i.num) === num);
+      if (idx >= 0) queue.splice(idx, 1); else queue.push({ book, num, title });
+      saveQueue(queue);
+    }
+
+    document.addEventListener('click', (e) => {
+      if (!selectMode) return;
+      if (e.target.closest('.add-to-queue-btn') || e.target.closest('.queue-remove')) return;
+      const item = e.target.closest('.hymn-item');
+      if (!item) return;
+      e.preventDefault();
+      toggleSelection(item);
+    }, true);
 
     function renderHymn(hymn, isSpecial = false) {
       const numClass = isSpecial ? 'hymn-number special-num' : 'hymn-number';
@@ -2302,7 +2369,8 @@
       const href = `Hymns%20of%20Truth%20and%20Praise.html?hymn=${linkNum}`;
       const esc = (s) => String(s).replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"');
       return `
-        <a class="${itemClass}" href="${href}">
+        <a class="${itemClass}" href="${href}" data-book="${BOOK}" data-num="${esc(linkNum)}" data-title="${esc(hymn.title)}">
+          <span class="hymn-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
           <span class="${numClass}">${hymn.num}</span>
           <div class="hymn-info">
             <div class="hymn-title">${hymn.title}</div>
