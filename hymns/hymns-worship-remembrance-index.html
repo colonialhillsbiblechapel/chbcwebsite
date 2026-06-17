@@ -500,27 +500,40 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: linear-gradient(180deg, rgba(44,36,22,0.97), rgba(44,36,22,0.98));
-      padding: 12px 24px;
+      background: linear-gradient(180deg, rgba(44,36,22,0.98), rgba(34,28,17,0.99));
+      padding: 14px 20px calc(14px + env(safe-area-inset-bottom, 0px));
       display: none;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
+      flex-direction: column;
+      gap: 12px;
       z-index: 1000;
-      box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+      box-shadow: 0 -6px 24px rgba(0,0,0,0.35);
     }
 
     .queue-bar.visible {
       display: flex;
     }
 
+    .queue-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
     .queue-info {
       color: var(--cream);
-      font-size: 0.95rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
     .queue-info strong {
       color: var(--gold-light);
+      font-size: 1.05rem;
     }
 
     .queue-actions {
@@ -530,16 +543,17 @@
     }
 
     .queue-btn {
-      padding: 8px 18px;
-      border-radius: 4px;
+      padding: 9px 18px;
+      border-radius: 6px;
       font-family: 'Cinzel', serif;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       letter-spacing: 1px;
       cursor: pointer;
       transition: all 0.2s ease;
       border: 1px solid var(--gold);
       background: transparent;
       color: var(--gold-light);
+      white-space: nowrap;
     }
 
     .queue-btn:hover {
@@ -557,67 +571,105 @@
       border-color: var(--gold-light);
     }
 
-    .queue-list-wrap {
-      flex: 1;
-      max-width: 400px;
-      overflow: hidden;
-    }
-
+    /* Always-visible, manageable selected list */
     .queue-list {
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+      max-height: 38vh;
+      overflow-y: auto;
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       gap: 6px;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
+      padding-right: 2px;
     }
 
-    .queue-list.open {
-      max-height: 120px;
-      overflow-y: auto;
-    }
+    .queue-list:empty { display: none; }
+    .queue-list::-webkit-scrollbar { width: 8px; }
+    .queue-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.18); border-radius: 4px; }
 
     .queue-item {
       display: flex;
       align-items: center;
-      gap: 6px;
-      padding: 4px 8px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 4px;
-      font-size: 0.8rem;
+      gap: 10px;
+      padding: 8px 10px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
     }
 
-    .queue-item span {
+    .qi-pos {
+      flex: 0 0 auto;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--gold);
+      color: #fff;
+      border-radius: 50%;
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    .qi-title {
+      flex: 1;
+      min-width: 0;
+      color: var(--cream);
+      font-size: 0.95rem;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 180px;
     }
 
-    .queue-remove {
-      flex-shrink: 0;
-      width: 20px;
-      height: 20px;
-      border: none;
-      background: rgba(255,255,255,0.2);
+    .qi-controls {
+      flex: 0 0 auto;
+      display: flex;
+      gap: 5px;
+    }
+
+    .qi-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.06);
       color: var(--cream);
-      border-radius: 3px;
       cursor: pointer;
-      font-size: 14px;
+      font-size: 15px;
       line-height: 1;
       padding: 0;
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: all 0.15s ease;
     }
 
-    .queue-remove:hover {
-      background: rgba(200,80,80,0.8);
-    }
+    .qi-btn:hover { background: rgba(255,255,255,0.18); }
+    .qi-remove:hover { background: rgba(200,70,70,0.85); border-color: rgba(200,70,70,0.85); }
 
-    .queue-list-toggle {
-      padding: 6px 12px;
-      font-size: 0.75rem;
+    /* Drag-to-reorder */
+    .queue-item { cursor: default; }
+    .qi-grip {
+      flex: 0 0 auto;
+      color: rgba(255,255,255,0.45);
+      cursor: grab;
+      font-size: 17px;
+      line-height: 1;
+      padding: 2px 3px;
+      user-select: none;
+      letter-spacing: -2px;
+    }
+    .qi-grip:active { cursor: grabbing; }
+    .queue-item.dragging { opacity: 0.45; }
+    .queue-item.drop-above { box-shadow: 0 -3px 0 -1px var(--gold-light); }
+    .queue-item.drop-below { box-shadow: 0 3px 0 -1px var(--gold-light); }
+
+    @media (max-width: 600px) {
+      .queue-head { flex-wrap: wrap; }
+      .qi-title { font-size: 0.9rem; }
+      .queue-list { max-height: 46vh; }
     }
 
     .present-overlay {
@@ -1385,17 +1437,14 @@
     </div>
 
     <div id="queueBar" class="queue-bar">
-      <div class="queue-info">
-        <strong id="queueCount">0</strong> hymn(s) in queue
+      <div class="queue-head">
+        <div class="queue-info"><strong id="queueCount">0</strong> hymns selected</div>
+        <div class="queue-actions">
+          <button type="button" class="queue-btn" onclick="clearQueue()">Clear all</button>
+          <button type="button" class="queue-btn primary" onclick="presentQueue()">▶ Present</button>
+        </div>
       </div>
-      <div class="queue-list-wrap">
-        <div id="queueList" class="queue-list"></div>
-      </div>
-      <div class="queue-actions">
-        <button type="button" class="queue-btn queue-list-toggle" onclick="document.getElementById('queueList').classList.toggle('open')">View list</button>
-        <button type="button" class="queue-btn" onclick="clearQueue()">Clear</button>
-        <button type="button" class="queue-btn primary" onclick="presentQueue()">Present</button>
-      </div>
+      <div id="queueList" class="queue-list"></div>
     </div>
   </div>
 
@@ -1783,10 +1832,51 @@
     }
 
     function removeFromQueue(index, e) {
-      if (e) e.stopPropagation();
+      if (e) { e.preventDefault(); e.stopPropagation(); }
       const queue = getQueue();
       queue.splice(index, 1);
       saveQueue(queue);
+    }
+
+    // Drag-to-reorder the selected list with the mouse (organise presentation order).
+    let _dragIdx = null;
+    function initQueueDnd() {
+      const list = document.getElementById('queueList');
+      if (!list || list._dndReady) return;
+      list._dndReady = true;
+      const clearMarks = () => list.querySelectorAll('.queue-item').forEach(el => el.classList.remove('drop-above', 'drop-below', 'dragging'));
+      list.addEventListener('dragstart', (e) => {
+        const it = e.target.closest('.queue-item'); if (!it) return;
+        _dragIdx = parseInt(it.dataset.idx, 10);
+        it.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+        try { e.dataTransfer.setData('text/plain', String(_dragIdx)); } catch (_) {}
+      });
+      list.addEventListener('dragend', () => { clearMarks(); _dragIdx = null; });
+      list.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        const it = e.target.closest('.queue-item'); if (!it) return;
+        const r = it.getBoundingClientRect();
+        const below = (e.clientY - r.top) > r.height / 2;
+        list.querySelectorAll('.queue-item').forEach(el => el.classList.remove('drop-above', 'drop-below'));
+        it.classList.add(below ? 'drop-below' : 'drop-above');
+      });
+      list.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const it = e.target.closest('.queue-item');
+        if (it == null || _dragIdx == null) { clearMarks(); return; }
+        const r = it.getBoundingClientRect();
+        const below = (e.clientY - r.top) > r.height / 2;
+        let dropIdx = parseInt(it.dataset.idx, 10) + (below ? 1 : 0);
+        const queue = getQueue();
+        if (_dragIdx < dropIdx) dropIdx -= 1;
+        clearMarks();
+        if (dropIdx === _dragIdx || dropIdx < 0) { _dragIdx = null; return; }
+        const [moved] = queue.splice(_dragIdx, 1);
+        queue.splice(dropIdx, 0, moved);
+        _dragIdx = null;
+        saveQueue(queue);
+      });
     }
 
     function clearQueue() {
@@ -1836,8 +1926,14 @@
         countEl.textContent = queue.length;
         const escHtml = (s) => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
         listEl.innerHTML = queue.map((item, i) =>
-          `<div class="queue-item"><span>${escHtml(item.num)} - ${escHtml(item.title)}</span><button type="button" class="queue-remove" onclick="removeFromQueue(${i}, event)" title="Remove">×</button></div>`
+          `<div class="queue-item" draggable="true" data-idx="${i}">`
+          + `<span class="qi-grip" aria-hidden="true" title="Drag to reorder">&#x2630;</span>`
+          + `<span class="qi-pos">${i + 1}</span>`
+          + `<span class="qi-title">${escHtml(item.num)} &mdash; ${escHtml(item.title)}</span>`
+          + `<button type="button" class="qi-btn qi-remove" onclick="removeFromQueue(${i}, event)" title="Remove">&times;</button>`
+          + `</div>`
         ).join('');
+        initQueueDnd();
       } else {
         bar.classList.remove('visible');
       }
