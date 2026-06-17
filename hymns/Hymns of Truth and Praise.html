@@ -97,8 +97,8 @@
     @media(max-width:480px){.toolbar{padding:8px 12px;gap:8px}.toolbar-left{gap:8px;flex:1;min-width:0}.mobile-menu-toggle{width:36px;height:36px;flex-shrink:0}.back-btn{font-size:.6rem;padding:5px 10px;white-space:nowrap}.back-btn svg{width:10px;height:10px}.hymn-info{font-size:.8rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0}.toolbar-right{gap:6px;flex-shrink:0}.tool-btn{width:30px;height:30px}.tool-btn svg{width:14px;height:14px}.slide-stage{padding:10px}.slide{padding:20px 15px 80px}.slide-content{padding:0;max-width:100%}.slide.title-slide .hymn-number{font-size:.75rem;letter-spacing:4px;margin-bottom:12px}.slide.title-slide .hymn-title{font-size:clamp(1.5rem,7vw,2.2rem);margin-bottom:15px;line-height:1.3}.slide.title-slide .hymn-meta{font-size:.65rem;line-height:1.35}.slide.title-slide .ornament{width:40px;margin:15px auto}.slide.verse-slide .verse-label{font-size:.6rem;letter-spacing:3px;margin-bottom:12px}.slide.verse-slide .verse-title{font-size:clamp(0.95rem,4vw,1.25rem);margin-bottom:14px}.slide.verse-slide .verse-text{font-size:clamp(1rem,4.5vw,1.3rem);line-height:1.8}.slide.verse-slide .verse-text .line{margin-bottom:6px}.slide.verse-slide .chorus{margin-top:15px;padding-top:12px;font-size:clamp(1rem,4.5vw,1.3rem)}.slide-footer{bottom:75px;font-size:.7rem;padding:0 10px}.slide-nav{padding:8px;gap:12px}.nav-btn{width:36px;height:36px}.nav-btn svg{width:14px;height:14px}.slide-counter{font-size:.7rem;letter-spacing:2px;min-width:55px}.fullscreen .slide{padding:40px 20px 110px}.fullscreen .slide.verse-slide .verse-text{font-size:clamp(1.2rem,5vw,1.6rem);line-height:1.9}.fullscreen .slide.verse-slide .verse-title{font-size:clamp(1.25rem,5vw,1.7rem)}.fullscreen .slide.title-slide .hymn-title{font-size:clamp(1.8rem,8vw,2.8rem)}.fullscreen .slide.title-slide .hymn-meta{font-size:.75rem;line-height:1.4}.fullscreen .slide-footer{bottom:90px;font-size:.75rem}.fs-nav{bottom:15px;padding:8px 15px;gap:12px;border-radius:40px}.fs-nav .nav-btn{width:34px;height:34px}.fs-nav .nav-btn svg{width:14px;height:14px}.fs-nav .slide-counter{font-size:.7rem}.fs-close{top:10px;right:10px;width:36px;height:36px}.fs-close svg{width:16px;height:16px}.fs-footer{bottom:70px;font-size:.8rem;padding:0 15px}.mobile-sidebar{width:260px;max-width:80vw}}
     @media(hover:none) and (pointer:coarse){.nav-btn,.tool-btn,.back-btn{min-width:44px;min-height:44px}.mobile-menu-toggle{min-width:44px;min-height:44px}.slide-thumb{min-height:60px}.nav-btn:active,.tool-btn:active,.back-btn:active{transform:scale(.95)}}
   </style>
-  <!-- High-visibility projector theme (kids-presentation style) -->
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <!-- High-visibility projector theme -->
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@600;700;800;900&display=swap" rel="stylesheet">
   <style id="present-hv-theme">
     :root {
       --hv-blue: #33509c;
@@ -138,9 +138,9 @@
       max-width: 86%;
       background: #fff;
       color: var(--hv-chip-text);
-      font-family: 'Nunito', sans-serif;
-      font-weight: 800;
-      letter-spacing: 1.5px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 700;
+      letter-spacing: 2px;
       text-transform: uppercase;
       text-align: center;
       line-height: 1.2;
@@ -149,22 +149,26 @@
       font-size: clamp(0.72rem, 1.5vw, 1.05rem);
       box-shadow: 0 10px 28px rgba(0,0,0,.18);
       z-index: 3;
+      -webkit-font-smoothing: antialiased;
     }
     .fullscreen .slide-chip { top: 4%; font-size: clamp(1rem, 1.9vw, 1.55rem); }
 
-    /* Verse / refrain text — bold white, maximum projector legibility */
+    /* Verse / refrain text — precise, high-contrast projector legibility */
     .slide.verse-slide .verse-text {
-      font-family: 'Nunito', sans-serif !important;
-      font-weight: 800 !important;
+      font-family: 'Source Sans 3', sans-serif !important;
+      font-weight: 700 !important;
       color: #fff !important;
-      line-height: 1.32 !important;
-      text-shadow: 0 2px 3px rgba(0,0,0,.5), 0 1px 0 rgba(0,0,0,.4);
+      letter-spacing: 0.02em !important;
+      line-height: 1.42 !important;
+      text-shadow: 0 1px 2px rgba(0,0,0,.38) !important;
       font-size: clamp(1.8rem, 3.4vw, 2.9rem) !important;
+      font-feature-settings: 'kern' 1, 'liga' 1 !important;
+      -webkit-font-smoothing: antialiased !important;
     }
     .fullscreen .slide.verse-slide .verse-text {
       font-size: clamp(2.6rem, 4.6vw, 4.5rem) !important;
     }
-    .slide.verse-slide .verse-text .line { margin-bottom: 0.12em !important; }
+    .slide.verse-slide .verse-text .line { margin-bottom: 0.16em !important; }
     /* During auto-fit measurement, keep each line on one row so the
        fitter can find the largest size that never wraps. */
     .verse-text.fitting .line { white-space: nowrap !important; }
@@ -179,24 +183,27 @@
     /* Title slide on blue */
     .slide.title-slide .hymn-number,
     .fullscreen .slide.title-slide .hymn-number {
-      font-family: 'Nunito', sans-serif !important;
-      font-weight: 800 !important;
-      letter-spacing: 5px !important;
-      color: rgba(255,255,255,.85) !important;
+      font-family: 'Source Sans 3', sans-serif !important;
+      font-weight: 700 !important;
+      letter-spacing: 4px !important;
+      color: rgba(255,255,255,.88) !important;
     }
     .slide.title-slide .hymn-title,
     .fullscreen .slide.title-slide .hymn-title {
-      font-family: 'Nunito', sans-serif !important;
-      font-weight: 900 !important;
+      font-family: 'Source Sans 3', sans-serif !important;
+      font-weight: 800 !important;
       color: #fff !important;
-      text-shadow: 0 2px 4px rgba(0,0,0,.5), 0 1px 0 rgba(0,0,0,.4);
+      letter-spacing: -0.01em !important;
+      text-shadow: 0 1px 3px rgba(0,0,0,.4) !important;
+      -webkit-font-smoothing: antialiased !important;
     }
     .slide.title-slide .hymn-meta,
     .fullscreen .slide.title-slide .hymn-meta {
-      font-family: 'Nunito', sans-serif !important;
+      font-family: 'Source Sans 3', sans-serif !important;
       font-style: normal !important;
       font-weight: 600 !important;
-      color: rgba(255,255,255,.82) !important;
+      letter-spacing: 0.01em !important;
+      color: rgba(255,255,255,.85) !important;
     }
     .slide.title-slide .ornament { background: rgba(255,255,255,.5) !important; }
 
