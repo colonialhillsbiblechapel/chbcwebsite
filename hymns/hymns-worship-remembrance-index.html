@@ -1204,7 +1204,7 @@
   </style>
   <style id="select-feature">
     /* Multi-select ("Select hymns") mode */
-    .select-toolbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;max-width:760px;margin:0 auto 10px;padding:0 20px;}
+    .select-toolbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;max-width:900px;margin:0 auto 10px;padding:0 20px;}
     .select-mode-btn{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1.5px solid #c9b79a;color:#6B5344;font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;font-weight:600;padding:9px 18px;border-radius:30px;cursor:pointer;transition:all .2s ease;}
     .select-mode-btn:hover{border-color:#8B7355;background:#fdf8f3;}
     .select-mode-btn svg{width:15px;height:15px;}
@@ -1224,6 +1224,17 @@
     body.select-mode .hymn-item.selected{background:linear-gradient(90deg,rgba(139,115,85,.10),transparent);}
 
     @media (max-width:600px){.select-hint{font-size:.85rem;} .select-toolbar{padding:0 14px;}}
+    .theme-toggle-wrap{display:inline-flex;align-items:center;gap:10px;margin-left:auto;}
+    .theme-toggle-label{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:#8a7a63;}
+    .theme-toggle{display:inline-flex;align-items:center;gap:10px;cursor:pointer;user-select:none;}
+    .theme-toggle input{position:absolute;opacity:0;width:0;height:0;}
+    .theme-toggle-track{width:44px;height:24px;background:#d8cfc0;border-radius:999px;position:relative;transition:background .2s ease;border:1px solid #c9b79a;}
+    .theme-toggle-thumb{position:absolute;top:2px;left:2px;width:18px;height:18px;background:#fff;border-radius:50%;box-shadow:0 1px 3px rgba(0,0,0,.15);transition:transform .2s ease;}
+    .theme-toggle input:checked + .theme-toggle-track{background:#8B7355;border-color:#6B5344;}
+    .theme-toggle input:checked + .theme-toggle-track .theme-toggle-thumb{transform:translateX(20px);}
+    .theme-toggle-text{font-family:'Cormorant Garamond',serif;font-size:.92rem;color:#5C5347;font-style:italic;}
+    .theme-toggle input:checked ~ .theme-toggle-text{color:#6B5344;}
+    @media (max-width:600px){.theme-toggle-wrap{margin-left:0;width:100%;justify-content:space-between;}}
   </style>
 </head>
 
@@ -1276,6 +1287,14 @@
         <span id="selectModeLabel">Select hymns</span>
       </button>
       <span class="select-hint">Tap hymns to add them, then tap Present.</span>
+      <div class="theme-toggle-wrap">
+        <span class="theme-toggle-label">Slides</span>
+        <label class="theme-toggle" title="Cream background with black lyrics">
+          <input type="checkbox" id="creamThemeToggle" aria-label="Cream slide theme">
+          <span class="theme-toggle-track"><span class="theme-toggle-thumb"></span></span>
+          <span class="theme-toggle-text" id="creamThemeLabel">Blue (default)</span>
+        </label>
+      </div>
     </div>
 
     <nav class="quick-nav">
@@ -1809,6 +1828,40 @@
     const QUEUE_KEY = 'hymnPresentationQueue';   // sessionStorage key the presentation reads
     const BOOK = 'worship';
     const SEL_KEY = 'hymnSel_' + BOOK;           // per-book selection (kept separate per book)
+    const SLIDE_THEME_KEY = 'hymnSlideTheme';
+
+    function getSlideTheme() {
+      try { return localStorage.getItem(SLIDE_THEME_KEY) === 'cream' ? 'cream' : 'blue'; }
+      catch (e) { return 'blue'; }
+    }
+
+    function withSlideTheme(href) {
+      if (getSlideTheme() !== 'cream') return href.replace(/([?&])theme=cream(&|$)/, '$1').replace(/[?&]$/, '');
+      if (/[?&]theme=cream(?:&|$)/.test(href)) return href;
+      return href + (href.includes('?') ? '&' : '?') + 'theme=cream';
+    }
+
+    function updateSlideThemeUI() {
+      const toggle = document.getElementById('creamThemeToggle');
+      const label = document.getElementById('creamThemeLabel');
+      const cream = getSlideTheme() === 'cream';
+      if (toggle) toggle.checked = cream;
+      if (label) label.textContent = cream ? 'Cream + black' : 'Blue (default)';
+    }
+
+    function setSlideTheme(cream) {
+      try { localStorage.setItem(SLIDE_THEME_KEY, cream ? 'cream' : 'blue'); } catch (e) {}
+      updateSlideThemeUI();
+      document.querySelectorAll('.hymn-item[href]').forEach((a) => {
+        a.setAttribute('href', withSlideTheme(a.getAttribute('href')));
+      });
+    }
+
+    const creamThemeToggle = document.getElementById('creamThemeToggle');
+    if (creamThemeToggle) {
+      creamThemeToggle.addEventListener('change', () => setSlideTheme(creamThemeToggle.checked));
+      updateSlideThemeUI();
+    }
 
     function getQueue() {
       try {
@@ -1889,9 +1942,9 @@
       const first = queue[0];
       sessionStorage.setItem(QUEUE_KEY, JSON.stringify(queue));
       sessionStorage.setItem(QUEUE_KEY + '_index', '0');
-      const url = first.book === 'truth-praise'
+      const url = withSlideTheme(first.book === 'truth-praise'
         ? `Hymns%20of%20Truth%20and%20Praise.html?hymn=${first.num}`
-        : `worship%20and%20remembrance.html?hymn=${first.num}`;
+        : `worship%20and%20remembrance.html?hymn=${first.num}`);
       const overlay = document.getElementById('presentOverlay');
       const frame = document.getElementById('presentFrame');
       if (overlay && frame) {
@@ -1980,9 +2033,9 @@
     }, true);
 
     function renderHymn(hymn) {
-      const link = worshipPresentationHymns.has(hymn.num)
+      const link = withSlideTheme(worshipPresentationHymns.has(hymn.num)
         ? `worship and remembrance.html?hymn=${hymn.num}`
-        : `hymn-${hymn.num}.html`;
+        : `hymn-${hymn.num}.html`);
       const esc = (s) => String(s).replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"');
       const showQueueBtn = worshipPresentationHymns.has(hymn.num);
       const queueBtnHtml = showQueueBtn

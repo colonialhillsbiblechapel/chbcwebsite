@@ -218,6 +218,50 @@
       .fullscreen .slide-chip { font-size: clamp(0.7rem, 3vw, 1rem); }
     }
   </style>
+  <style id="present-cream-theme">
+    /* Cream slide theme — toggled from book index */
+    html.hymn-theme-cream .slide-stage,
+    html.hymn-theme-cream .fullscreen .slide-stage {
+      background: #FFF8EA !important;
+    }
+    html.hymn-theme-cream .slide-bg {
+      background: #FFF8EA !important;
+      background-image: none !important;
+    }
+    html.hymn-theme-cream .slide-bg::after {
+      display: none !important;
+    }
+    html.hymn-theme-cream .slide-chip {
+      background: #fff !important;
+      color: #111 !important;
+      border: 1px solid rgba(0, 0, 0, 0.1) !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08) !important;
+    }
+    html.hymn-theme-cream .slide.verse-slide .verse-text {
+      color: #000 !important;
+      font-weight: 800 !important;
+      text-shadow: none !important;
+    }
+    html.hymn-theme-cream .slide.verse-slide .chorus {
+      color: #000 !important;
+    }
+    html.hymn-theme-cream .slide.title-slide .hymn-number,
+    html.hymn-theme-cream .fullscreen .slide.title-slide .hymn-number {
+      color: #1a1a1a !important;
+    }
+    html.hymn-theme-cream .slide.title-slide .hymn-title,
+    html.hymn-theme-cream .fullscreen .slide.title-slide .hymn-title {
+      color: #000 !important;
+      text-shadow: none !important;
+    }
+    html.hymn-theme-cream .slide.title-slide .hymn-meta,
+    html.hymn-theme-cream .fullscreen .slide.title-slide .hymn-meta {
+      color: #222 !important;
+    }
+    html.hymn-theme-cream .slide.title-slide .ornament {
+      background: rgba(0, 0, 0, 0.2) !important;
+    }
+  </style>
 </head>
 <body>
   <div class="presentation-container" id="presentationContainer">
@@ -39071,9 +39115,13 @@
           if (queue.length > nextIdx) {
             const next = queue[nextIdx];
             sessionStorage.setItem(QUEUE_KEY + '_index', String(nextIdx));
-            const url = next.book === 'truth-praise'
-              ? `Hymns%20of%20Truth%20and%20Praise.html?hymn=${next.num}`
-              : `worship%20and%20remembrance.html?hymn=${next.num}`;
+            const url = (function () {
+              let u = next.book === 'truth-praise'
+                ? `Hymns%20of%20Truth%20and%20Praise.html?hymn=${next.num}`
+                : `worship%20and%20remembrance.html?hymn=${next.num}`;
+              try { if (localStorage.getItem('hymnSlideTheme') === 'cream') u += '&theme=cream'; } catch (e) {}
+              return u;
+            })();
             window.location.href = url;
             return;
           }
@@ -39226,6 +39274,12 @@
     const params = new URLSearchParams(window.location.search);
     const initialHymnParam = params.get('hymn');
     const initialHymn = initialHymnParam ? initialHymnParam : '1';
+    (function applySlideTheme() {
+      const theme = params.get('theme') || (function () {
+        try { return localStorage.getItem('hymnSlideTheme'); } catch (e) { return null; }
+      })() || 'blue';
+      if (theme === 'cream') document.documentElement.classList.add('hymn-theme-cream');
+    })();
     populateHymnSelects();
     loadHymn(initialHymn);
 
