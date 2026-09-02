@@ -7,7 +7,7 @@
     <title>Colonial Hills Bible Chapel - Welcome</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Lato:wght@300;400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Crimson+Text:wght@400;600;700&family=Lato:wght@300;400;700&display=swap');
 
         :root {
             --deep-navy: #1a2332;
@@ -1578,10 +1578,12 @@
         }
 
         .conference-modal-title {
-            font-size: 2.2rem;
-            font-weight: 700;
+            font-family: 'Cormorant Garamond', 'Crimson Text', serif;
+            font-size: 2.4rem;
+            font-weight: 600;
             margin-bottom: 0.5rem;
             line-height: 1.2;
+            letter-spacing: 0.5px;
         }
 
         .conference-modal-subtitle {
@@ -1776,12 +1778,11 @@
 
         /* Conference Banner Section */
         .conference-section {
-            background: linear-gradient(180deg, var(--soft-white) 0%, var(--light-gray) 100%);
+            background: #faf9f7;
             color: var(--charcoal);
-            padding: 5rem 0;
+            padding: 0 0 5rem;
             position: relative;
             overflow: hidden;
-            border-bottom: 1px solid var(--medium-gray);
         }
 
         .conference-section::before {
@@ -1790,188 +1791,300 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, var(--warm-gold), var(--accent-burgundy), var(--warm-gold), transparent);
+            height: 3px;
+            background: linear-gradient(90deg, transparent 5%, var(--warm-gold) 25%, var(--accent-burgundy) 50%, var(--warm-gold) 75%, transparent 95%);
         }
 
-        .conference-section::after {
+        .conference-hero-banner {
+            background: linear-gradient(165deg, var(--deep-navy) 0%, #243044 60%, #1e2a3d 100%);
+            color: var(--soft-white);
+            text-align: center;
+            padding: 4.5rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .conference-hero-banner::before {
             content: '';
             position: absolute;
             inset: 0;
             background:
-                radial-gradient(ellipse at 5% 10%, rgba(201, 169, 97, 0.06) 0%, transparent 45%),
-                radial-gradient(ellipse at 95% 90%, rgba(26, 35, 50, 0.03) 0%, transparent 45%);
+                radial-gradient(ellipse at 20% 0%, rgba(201, 169, 97, 0.12) 0%, transparent 55%),
+                radial-gradient(ellipse at 80% 100%, rgba(201, 169, 97, 0.08) 0%, transparent 50%);
             pointer-events: none;
+        }
+
+        .conference-hero-banner::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(to bottom, transparent, #faf9f7);
+        }
+
+        .conference-hero-inner {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .conference-ornament {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .conference-ornament::before,
+        .conference-ornament::after {
+            content: '';
+            flex: 1;
+            max-width: 120px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(201, 169, 97, 0.6));
+        }
+
+        .conference-ornament::after {
+            background: linear-gradient(90deg, rgba(201, 169, 97, 0.6), transparent);
+        }
+
+        .conference-ornament i {
+            color: var(--warm-gold);
+            font-size: 0.65rem;
+            opacity: 0.8;
+        }
+
+        .conference-badge {
+            display: inline-block;
+            font-size: 0.72rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--warm-gold);
+            margin-bottom: 1.25rem;
+            font-weight: 600;
+            font-family: 'Lato', sans-serif;
+        }
+
+        .conference-hero-inner h2 {
+            font-family: 'Cormorant Garamond', 'Crimson Text', serif;
+            font-size: 4rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            line-height: 1.1;
+            color: var(--soft-white);
+            letter-spacing: 1px;
+        }
+
+        .conference-hero-inner .conference-location {
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+            font-family: 'Lato', sans-serif;
+        }
+
+        .conference-dates-row {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .conference-date-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.25rem 2rem;
+            border: 1px solid rgba(201, 169, 97, 0.35);
+            background: rgba(255, 255, 255, 0.04);
+            min-width: 100px;
+            transition: background 0.3s ease;
+        }
+
+        .conference-date-item:first-child {
+            border-radius: 8px 0 0 8px;
+        }
+
+        .conference-date-item:last-child {
+            border-radius: 0 8px 8px 0;
+        }
+
+        .conference-date-item:not(:last-child) {
+            border-right: none;
+        }
+
+        .conference-date-item .day-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--warm-gold);
+            line-height: 1;
+        }
+
+        .conference-date-item .day-name {
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.65);
+            margin-top: 0.4rem;
+            font-weight: 600;
+        }
+
+        .conference-date-month {
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--warm-gold);
+            margin-top: 1rem;
+            font-weight: 600;
         }
 
         .conference-inner {
             position: relative;
             z-index: 1;
-        }
-
-        .conference-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(201, 169, 97, 0.12);
-            border: 1px solid rgba(201, 169, 97, 0.45);
-            padding: 0.5rem 1.25rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--accent-burgundy);
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-        }
-
-        .conference-badge i {
-            color: var(--warm-gold);
-        }
-
-        .conference-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .conference-header h2 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            line-height: 1.15;
-            color: var(--deep-navy);
-        }
-
-        .conference-header .conference-location {
-            font-size: 1rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--warm-gold);
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-        }
-
-        .conference-date-block {
-            display: inline-flex;
-            flex-direction: column;
-            align-items: center;
-            background: var(--soft-white);
-            border: 1px solid var(--medium-gray);
-            padding: 1.25rem 2.5rem;
-            border-radius: 10px;
-            box-shadow: var(--shadow-light);
-        }
-
-        .conference-date-block .date-range {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--deep-navy);
-            font-family: 'Crimson Text', serif;
-        }
-
-        .conference-date-block .date-year {
-            font-size: 0.9rem;
-            color: var(--warm-gold);
-            letter-spacing: 2px;
-            margin-top: 0.25rem;
-            font-weight: 600;
+            padding-top: 3rem;
         }
 
         .conference-verse-block {
             text-align: center;
-            max-width: 700px;
-            margin: 2rem auto 2.5rem;
-            padding: 2rem 2.5rem;
-            border-left: 3px solid var(--warm-gold);
-            border-right: 3px solid var(--warm-gold);
-            background: var(--soft-white);
-            box-shadow: var(--shadow-light);
-            border-radius: 6px;
+            max-width: 680px;
+            margin: 0 auto 3rem;
+            padding: 0 1rem;
+            position: relative;
+        }
+
+        .conference-verse-block .verse-mark {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            line-height: 0.5;
+            color: var(--warm-gold);
+            opacity: 0.25;
+            display: block;
+            margin-bottom: -0.5rem;
         }
 
         .conference-verse-block p {
+            font-family: 'Cormorant Garamond', serif;
             font-style: italic;
-            font-size: 1.2rem;
-            line-height: 1.9;
-            margin-bottom: 0.75rem;
-            color: var(--charcoal);
+            font-size: 1.45rem;
+            line-height: 1.85;
+            margin-bottom: 1rem;
+            color: var(--deep-navy);
+            font-weight: 500;
         }
 
         .conference-verse-block cite {
-            color: var(--accent-burgundy);
+            color: var(--warm-gold);
             font-style: normal;
             font-weight: 700;
-            font-size: 1rem;
-            letter-spacing: 1px;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Lato', sans-serif;
         }
 
         .conference-pillars {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            margin-bottom: 3rem;
+            gap: 1.5rem;
+            margin-bottom: 3.5rem;
             flex-wrap: wrap;
         }
 
         .conference-pillar {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 0.6rem;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
+            gap: 0.75rem;
+            padding: 1.5rem 2rem;
+            background: var(--soft-white);
+            border: 1px solid var(--medium-gray);
+            border-radius: 8px;
+            min-width: 140px;
+            box-shadow: var(--shadow-light);
+            transition: all 0.3s ease;
+        }
+
+        .conference-pillar:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+            border-color: rgba(201, 169, 97, 0.4);
+        }
+
+        .conference-pillar-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(201, 169, 97, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--warm-gold);
+            font-size: 1rem;
+        }
+
+        .conference-pillar span {
+            font-size: 0.75rem;
+            letter-spacing: 2.5px;
             text-transform: uppercase;
             color: var(--deep-navy);
             font-weight: 600;
         }
 
-        .conference-pillar i {
-            font-size: 1rem;
-            color: var(--warm-gold);
-        }
-
-        .conference-pillar:not(:last-child)::after {
-            content: '·';
-            margin-left: 2rem;
-            color: var(--warm-gold);
-            opacity: 0.6;
-            font-size: 1.2rem;
+        .conference-content-panel {
+            background: var(--soft-white);
+            border: 1px solid var(--medium-gray);
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-light);
         }
 
         .conference-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 2.5rem;
+            gap: 3rem;
             align-items: start;
         }
 
         .conference-col-title {
-            font-size: 1.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.75rem;
             color: var(--deep-navy);
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 2px solid var(--warm-gold);
+            margin-bottom: 1.75rem;
+            font-weight: 600;
+            text-align: center;
             position: relative;
+            padding-bottom: 1rem;
         }
 
         .conference-col-title::after {
             content: '';
             position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 60px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
             height: 2px;
-            background: var(--accent-burgundy);
+            background: var(--warm-gold);
         }
 
         .conference-speaker-card {
-            background: var(--soft-white);
+            background: #faf9f7;
             border: 1px solid var(--medium-gray);
-            border-radius: 10px;
+            border-radius: 8px;
             padding: 1.75rem;
             margin-bottom: 1.25rem;
             transition: all 0.3s ease;
-            box-shadow: var(--shadow-light);
-            border-top: 4px solid var(--warm-gold);
+            display: flex;
+            gap: 1.25rem;
+            align-items: flex-start;
         }
 
         .conference-speaker-card:last-child {
@@ -1979,82 +2092,99 @@
         }
 
         .conference-speaker-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-medium);
-            border-color: transparent;
+            border-color: rgba(201, 169, 97, 0.5);
+            box-shadow: var(--shadow-light);
         }
 
-        .conference-speaker-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 0.25rem;
+        .speaker-avatar {
+            flex-shrink: 0;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: var(--deep-navy);
+            color: var(--warm-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            border: 2px solid rgba(201, 169, 97, 0.4);
+        }
+
+        .speaker-info h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.2rem;
             color: var(--deep-navy);
+            font-weight: 600;
         }
 
         .conference-speaker-location {
             color: var(--warm-gold);
-            font-size: 0.8rem;
+            font-size: 0.72rem;
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.65rem;
             font-weight: 600;
         }
 
-        .conference-speaker-card p {
-            font-size: 0.95rem;
-            line-height: 1.7;
+        .speaker-info p {
+            font-size: 0.92rem;
+            line-height: 1.75;
             color: var(--charcoal);
         }
 
         .conference-schedule {
-            background: var(--soft-white);
             border: 1px solid var(--medium-gray);
-            border-radius: 10px;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: var(--shadow-light);
-            border-top: 4px solid var(--warm-gold);
+            background: #faf9f7;
         }
 
         .conference-schedule-tabs {
             display: flex;
-            background: var(--light-gray);
+            gap: 0;
+            padding: 0.75rem 0.75rem 0;
+            background: var(--soft-white);
             border-bottom: 1px solid var(--medium-gray);
         }
 
         .conference-tab {
             flex: 1;
-            padding: 1rem;
+            padding: 0.75rem 0.5rem;
             text-align: center;
             background: none;
             border: none;
             color: var(--charcoal);
             font-family: 'Lato', sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.78rem;
             font-weight: 600;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.3s ease;
-            border-bottom: 3px solid transparent;
-            opacity: 0.7;
+            border-radius: 6px 6px 0 0;
+            opacity: 0.55;
         }
 
         .conference-tab:hover {
             color: var(--deep-navy);
-            background: rgba(255, 255, 255, 0.6);
-            opacity: 1;
+            opacity: 0.85;
+            background: #faf9f7;
         }
 
         .conference-tab.active {
             color: var(--deep-navy);
-            border-bottom-color: var(--warm-gold);
-            background: var(--soft-white);
+            background: #faf9f7;
             opacity: 1;
+            box-shadow: inset 0 2px 0 var(--warm-gold);
         }
 
         .conference-tab-content {
             display: none;
-            padding: 1.75rem;
-            background: var(--soft-white);
+            padding: 1.5rem 1.75rem;
         }
 
         .conference-tab-content.active {
@@ -2062,16 +2192,18 @@
         }
 
         .conference-tab-content h4 {
-            font-size: 1.1rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
             color: var(--deep-navy);
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.2rem;
+            font-weight: 600;
         }
 
         .conference-tab-content .tab-venue {
-            font-size: 0.8rem;
+            font-size: 0.72rem;
             color: var(--warm-gold);
             margin-bottom: 1.25rem;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             text-transform: uppercase;
             font-weight: 600;
         }
@@ -2079,9 +2211,10 @@
         .schedule-item {
             display: flex;
             gap: 1rem;
-            padding: 0.65rem 0;
-            border-bottom: 1px solid var(--medium-gray);
-            font-size: 0.92rem;
+            padding: 0.7rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            font-size: 0.9rem;
+            align-items: baseline;
         }
 
         .schedule-item:last-child {
@@ -2089,38 +2222,45 @@
         }
 
         .schedule-time {
-            color: var(--warm-gold);
+            color: var(--deep-navy);
             font-weight: 700;
-            min-width: 110px;
+            min-width: 115px;
             flex-shrink: 0;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
+            font-variant-numeric: tabular-nums;
         }
 
         .schedule-event {
             color: var(--charcoal);
+            line-height: 1.5;
         }
 
         .conference-footer-info {
             margin-top: 2.5rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--medium-gray);
+            padding: 2rem 2.5rem;
+            background: #faf9f7;
+            border: 1px solid var(--medium-gray);
+            border-radius: 8px;
+            text-align: center;
         }
 
         .conference-footer-info p {
             color: var(--charcoal);
             font-size: 0.95rem;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             line-height: 1.7;
         }
 
         .conference-footer-contacts {
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             color: var(--charcoal);
             margin-bottom: 1.5rem;
+            opacity: 0.85;
         }
 
         .conference-cta-row {
             display: flex;
+            justify-content: center;
             gap: 1rem;
             flex-wrap: wrap;
         }
@@ -2163,11 +2303,15 @@
         @media (max-width: 1024px) {
             .conference-grid {
                 grid-template-columns: 1fr;
-                gap: 2rem;
+                gap: 2.5rem;
             }
 
-            .conference-header h2 {
-                font-size: 2.5rem;
+            .conference-hero-inner h2 {
+                font-size: 3rem;
+            }
+
+            .conference-content-panel {
+                padding: 2rem;
             }
         }
 
@@ -2190,45 +2334,59 @@
                 justify-content: center;
             }
 
-            .conference-section {
-                padding: 3rem 0;
+            .conference-hero-banner {
+                padding: 3rem 1.25rem 3.5rem;
             }
 
-            .conference-header h2 {
+            .conference-hero-inner h2 {
+                font-size: 2.4rem;
+            }
+
+            .conference-date-item {
+                padding: 1rem 1.25rem;
+                min-width: 80px;
+            }
+
+            .conference-date-item .day-num {
                 font-size: 2rem;
             }
 
-            .conference-date-block .date-range {
-                font-size: 1.2rem;
-            }
-
             .conference-pillars {
-                flex-direction: column;
-                align-items: center;
-                gap: 0.75rem;
+                gap: 1rem;
             }
 
-            .conference-pillar:not(:last-child)::after {
-                display: none;
-            }
-
-            .conference-verse-block {
-                padding: 1.25rem;
-                margin: 1.5rem auto 2rem;
+            .conference-pillar {
+                min-width: 100px;
+                padding: 1.25rem 1.5rem;
+                flex: 1;
             }
 
             .conference-verse-block p {
-                font-size: 1rem;
+                font-size: 1.2rem;
+            }
+
+            .conference-content-panel {
+                padding: 1.5rem;
+            }
+
+            .conference-speaker-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
             }
 
             .conference-tab {
-                font-size: 0.7rem;
-                padding: 0.75rem 0.25rem;
+                font-size: 0.68rem;
+                padding: 0.65rem 0.25rem;
             }
 
             .schedule-time {
-                min-width: 85px;
+                min-width: 90px;
                 font-size: 0.75rem;
+            }
+
+            .conference-footer-info {
+                padding: 1.5rem;
             }
 
             .event-card.featured-conference {
@@ -2406,43 +2564,71 @@
 
     <!-- Houston Bible Conference Section -->
     <section class="conference-section" id="conference">
-        <div class="container conference-inner">
-            <div class="conference-header">
-                <div class="conference-badge">
-                    <i class="fas fa-star"></i>
-                    One Hundred Sixth Annual
-                </div>
+        <div class="conference-hero-banner">
+            <div class="conference-hero-inner">
+                <div class="conference-ornament"><i class="fas fa-star"></i></div>
+                <p class="conference-badge">One Hundred Sixth Annual</p>
                 <h2>Houston Bible Conference</h2>
-                <p class="conference-location">Colonial Hills Bible Chapel &nbsp;·&nbsp; Houston, Texas</p>
-                <div class="conference-date-block">
-                    <span class="date-range">October 2 – 4, 2026</span>
-                    <span class="date-year">Friday through Sunday</span>
+                <p class="conference-location">Colonial Hills Bible Chapel &nbsp;&middot;&nbsp; Houston, Texas</p>
+                <div class="conference-dates-row">
+                    <div class="conference-date-item">
+                        <span class="day-num">2</span>
+                        <span class="day-name">Friday</span>
+                    </div>
+                    <div class="conference-date-item">
+                        <span class="day-num">3</span>
+                        <span class="day-name">Saturday</span>
+                    </div>
+                    <div class="conference-date-item">
+                        <span class="day-num">4</span>
+                        <span class="day-name">Sunday</span>
+                    </div>
                 </div>
+                <p class="conference-date-month">October 2026</p>
             </div>
+        </div>
 
+        <div class="container conference-inner">
             <div class="conference-verse-block">
-                <p>"And they continued steadfastly in the apostles' doctrine and fellowship, and in breaking of bread, and in prayers."</p>
+                <span class="verse-mark">&ldquo;</span>
+                <p>And they continued steadfastly in the apostles' doctrine and fellowship, and in breaking of bread, and in prayers.</p>
                 <cite>Acts 2:42</cite>
             </div>
 
             <div class="conference-pillars">
-                <span class="conference-pillar"><i class="fas fa-handshake"></i> Fellowship</span>
-                <span class="conference-pillar"><i class="fas fa-book-open"></i> Teaching</span>
-                <span class="conference-pillar"><i class="fas fa-hands-praying"></i> Worship</span>
+                <div class="conference-pillar">
+                    <div class="conference-pillar-icon"><i class="fas fa-handshake"></i></div>
+                    <span>Fellowship</span>
+                </div>
+                <div class="conference-pillar">
+                    <div class="conference-pillar-icon"><i class="fas fa-book-open"></i></div>
+                    <span>Teaching</span>
+                </div>
+                <div class="conference-pillar">
+                    <div class="conference-pillar-icon"><i class="fas fa-hands-praying"></i></div>
+                    <span>Worship</span>
+                </div>
             </div>
 
+            <div class="conference-content-panel">
             <div class="conference-grid">
                 <div class="conference-speakers-col">
                     <h3 class="conference-col-title">Conference Speakers</h3>
                     <div class="conference-speaker-card">
-                        <h3>Mark Kolchin</h3>
-                        <p class="conference-speaker-location">Lanoka Harbor, New Jersey</p>
-                        <p>Commended with his wife, Cindy, from Bethany Bible Chapel, Toms River, in 1993. He founded Know the Word Ministries and travels in Bible teaching and conference ministry across the United States and Canada.</p>
+                        <div class="speaker-avatar">MK</div>
+                        <div class="speaker-info">
+                            <h3>Mark Kolchin</h3>
+                            <p class="conference-speaker-location">Lanoka Harbor, New Jersey</p>
+                            <p>Commended with his wife, Cindy, from Bethany Bible Chapel, Toms River, in 1993. He founded Know the Word Ministries and travels in Bible teaching and conference ministry across the United States and Canada.</p>
+                        </div>
                     </div>
                     <div class="conference-speaker-card">
-                        <h3>Jim Fleming</h3>
-                        <p class="conference-speaker-location">Dubuque, Iowa</p>
-                        <p>Raised in South Africa, son of missionaries Ken and Helena Fleming. He and Sharon served in Peru and Colombia from 1984 to 2008, then coordinated the Emmaus schools worldwide. They now care for Assembly missionaries with CMML.</p>
+                        <div class="speaker-avatar">JF</div>
+                        <div class="speaker-info">
+                            <h3>Jim Fleming</h3>
+                            <p class="conference-speaker-location">Dubuque, Iowa</p>
+                            <p>Raised in South Africa, son of missionaries Ken and Helena Fleming. He and Sharon served in Peru and Colombia from 1984 to 2008, then coordinated the Emmaus schools worldwide. They now care for Assembly missionaries with CMML.</p>
+                        </div>
                     </div>
                 </div>
 
@@ -2487,6 +2673,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
 
             <div class="conference-footer-info">
