@@ -9,6 +9,18 @@ export const CHANNEL = 'chbc-hymns-display';
 /** The projector screen's own page (no site header or footer). */
 export const DISPLAY_URL = '/hymns/screen/';
 
+/** The screen blanked, as in PowerPoint: black (B) or white (W). */
+export type Blank = false | 'black' | 'white';
+
+/** A key press, mouse click or wheel turn in the projector window, passed to the presenter. */
+export interface ProjectorKey {
+  key: string;
+  shiftKey: boolean;
+  metaKey: boolean;
+  ctrlKey: boolean;
+  altKey: boolean;
+}
+
 export type DisplayMessage =
   /** The projector window has opened and asks what to show. */
   | { type: 'hello' }
@@ -21,8 +33,10 @@ export type DisplayMessage =
       item?: ServiceItem;
       content?: SlideData;
       slide: number;
-      blank: boolean;
+      blank: Blank;
       key?: string;
     }
+  /** The clicker (or the mouse) was used on the projector window: the presenter acts on it. */
+  | { type: 'press'; press: ProjectorKey }
   /** Presenting has finished. */
   | { type: 'end' };

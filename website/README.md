@@ -97,11 +97,16 @@ the build if any first line, tune or line of the words ever appears in the publi
 
 - **On a phone:** choose a hymnal, tap a hymn to read it (larger or smaller text with A/A).
 - **In the chapel:** tick hymns (the circle) to build the service list, put it in order, then
-  **Present**. Each hymn shows a title slide, then its verses and refrains, like the chapel's
-  PowerPoint decks. Arrow keys, Page Up/Down or a presentation clicker move slide by slide;
-  Shift + → jumps to the next hymn; **B** blanks the screen; **Second screen** opens
-  `/hymns/screen/` for the projector while this window shows what's on, what's next and every
-  slide of the hymn. Each hymn can have a background of its own, following its words: a soft
+  **Present** (or a clicker's start button, F5). Each hymn shows a title slide, then its verses and
+  refrains, like the chapel's PowerPoint decks. With a second screen connected (an extended
+  display), Chrome and Edge open the slides full screen on it by themselves — the browser asks once
+  to "manage windows on all your displays" — and this window becomes the presenter view: what's
+  on, what's next and every slide. With one screen the slides fill it, and the controls appear
+  only when the mouse moves. The keys are PowerPoint's, so every clicker works: → ↓ Page Down,
+  Space, Enter or N for the next slide; ← ↑ Page Up, Backspace or P to go back; Home and End; a
+  slide's number then Enter; Shift + → for the next hymn; **B** or **.** black, **W** or **,**
+  white; Esc ends. A click goes on, a right click or the wheel goes back or on. The clicker works
+  in either window, but (as for any web page) only while the browser is the program in front. Each hymn can have a background of its own, following its words: a soft
   watercolour scene in light colours, painted in the browser from a small recipe
   (`src/components/hymns/art/`). The title slide shows the hymn's name, a verse from the King James
   Version and who wrote it above the full scene; the words sit on clear paper above a low strip of

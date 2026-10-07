@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'preact/hooks';
-import { CHANNEL, DISPLAY_URL, type DisplayMessage } from './display';
+import { CHANNEL, type Blank, type DisplayMessage } from './display';
 import { Icon, type IconName } from './icons';
+import { actionFor, wheelStepper, type Action } from './keys';
+import { hasSecondScreen, openProjector } from './screens';
 import { Slide } from './Slide';
 import { preview, type SlideData } from './slides';
 import { rememberedKey } from './vault';
@@ -29,14 +31,18 @@ interface Props {
 const toBase64 = (bytes: Uint8Array) => btoa(String.fromCharCode(...bytes));
 
 /**
- * Presents the service list slide by slide — each hymn's title, verses and refrains — full screen
- * in this window, or with "Second screen" on a projector window while this one becomes the
- * control panel: what's showing, what's next, and every slide of the hymn.
+ * Presents the deck slide by slide, like PowerPoint's slide show. With a second screen connected,
+ * the slides open full screen on it and this window becomes the presenter view: what's showing,
+ * what's next, and every slide of the hymn. With one screen, the slides fill this one, and the
+ * controls appear only when the mouse moves.
+ *
+ * Every presentation clicker works (keys.ts), in this window or the projector's. (No web page can
+ * hear a clicker while another program is in front: keep the browser the active window.)
  */
 export function Presenter({ deck, start, onClose, listName = 'Service list' }: Props) {
   const [pos, setPos] = useState<Position>(start);
-  const [blank, setBlank] = useState(false);
-  const [controls, setControls] = useState(true);
+  const [blank, setBlank] = useState<Blank>(false);
+  const [controls, setControls] = useState(false);
   const [listOpen, setListOpen] = useState(false);
   const [projector, setProjector] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
@@ -47,6 +53,8 @@ export function Presenter({ deck, start, onClose, listName = 'Service list' }: P
   const togglingFullscreen = useRef(false);
   const channel = useRef<BroadcastChannel | null>(null);
   const displayWindow = useRef<Window | null>(null);
+  /** A slide number being typed (PowerPoint: the number, then Enter). */
+  const typed = useRef({ digits: '', at: 0 });
 
   const hymn = deck[pos.hymn];
   const slide = hymn?.slides[pos.slide];
@@ -54,6 +62,8 @@ export function Presenter({ deck, start, onClose, listName = 'Service list' }: P
   const chosen = opening && 'chosen' in opening ? opening.chosen : undefined;
   const isFirst = pos.hymn === 0 && pos.slide === 0;
   const isLast = pos.hymn === deck.length - 1 && pos.slide === (hymn?.slides.length ?? 1) - 1;
+  /** Every slide of the deck in order, for "first", "last" and going to a slide by its number. */
+  const every = deck.flatMap((h, i) => h.slides.map((_, j) => ({ hymn: i, slide: j })));
 
   const show = useCallback((next: Position) => {
     setPos(next);
@@ -86,24 +96,39 @@ export function Presenter({ deck, start, onClose, listName = 'Service list' }: P
     [deck.length, pos.hymn, show],
   );
 
-  // Controls appear on any movement and fade after a few seconds while presenting.
+  // The controls appear only when the mouse moves, and fade after a few seconds.
   const wake = useCallback(() => {
     setControls(true);
     window.clearTimeout(hideTimer.current);
     hideTimer.current = window.setTimeout(() => setControls(false), 2800);
   }, []);
 
-  // Full screen straight away, and stop the page behind from scrolling.
+  const toggleFullscreen = useCallback(() => {
+    togglingFullscreen.current = true;
+    if (document.fullscreenElement) void document.exitFullscreen().catch(() => undefined);
+    else void root.current?.requestFullscreen?.().catch(() => undefined);
+  }, []);
+
+  /** Opens the projector window: full screen on the second screen, where there is one. */
+  const openSecondScreen = useCallback(async () => {
+    displayWindow.current = await openProjector();
+    return !!displayWindow.current;
+  }, []);
+
+  // Straight away: on the second screen if one is connected, else full screen here. And stop the
+  // page behind from scrolling.
   useEffect(() => {
     document.documentElement.classList.add('overflow-hidden');
-    void root.current?.requestFullscreen?.().catch(() => undefined);
-    wake();
+    void (async () => {
+      if (hasSecondScreen() && (await openSecondScreen())) return;
+      await root.current?.requestFullscreen?.().catch(() => wake());
+    })();
     return () => {
       document.documentElement.classList.remove('overflow-hidden');
       window.clearTimeout(hideTimer.current);
       if (document.fullscreenElement) void document.exitFullscreen().catch(() => undefined);
     };
-  }, [wake]);
+  }, [openSecondScreen, wake]);
 
   // Leaving full screen with Esc ends the presentation (unless it was our own toggle).
   useEffect(() => {
@@ -117,46 +142,87 @@ export function Presenter({ deck, start, onClose, listName = 'Service list' }: P
     return () => document.removeEventListener('fullscreenchange', onChange);
   }, [onClose]);
 
-  const toggleFullscreen = useCallback(() => {
-    togglingFullscreen.current = true;
-    if (document.fullscreenElement) void document.exitFullscreen().catch(() => undefined);
-    else void root.current?.requestFullscreen?.().catch(() => undefined);
-  }, []);
-
-  // Keyboard and presentation clickers (they send Page Up / Page Down, arrows or "B" / ".").
-  // Attached as the slide appears, so the very first press is never missed.
-  useLayoutEffect(() => {
-    const onKey = (event: KeyboardEvent) => {
-      if (event.metaKey || event.ctrlKey || event.altKey) return;
-      const key = event.key;
-      if (event.shiftKey && key === 'ArrowRight') jumpHymn(1);
-      else if (event.shiftKey && key === 'ArrowLeft') jumpHymn(-1);
-      else if (['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Enter'].includes(key)) next();
-      else if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].includes(key)) previous();
-      else if (key === 'Home') show({ hymn: pos.hymn, slide: 0 });
-      else if (key === 'b' || key === 'B' || key === '.') setBlank((b) => !b);
-      else if (key === 'f' || key === 'F') toggleFullscreen();
-      else if (key === 'l' || key === 'L') setListOpen((open) => !open);
-      else if (key === 'Escape') {
+  /** What a key, clicker button, click or wheel does — here or in the projector window. */
+  const act = useCallback(
+    (action: Action) => {
+      if (action === 'next') next();
+      else if (action === 'previous') previous();
+      else if (action === 'nextPart') jumpHymn(1);
+      else if (action === 'previousPart') jumpHymn(-1);
+      else if (action === 'first' && every[0]) show(every[0]);
+      else if (action === 'last' && every.at(-1)) show(every.at(-1) as Position);
+      else if (action === 'black') setBlank((b) => (b === 'black' ? false : 'black'));
+      else if (action === 'white') setBlank((b) => (b === 'white' ? false : 'white'));
+      else if (action === 'fullscreen') toggleFullscreen();
+      else if (action === 'list') {
+        setListOpen((open) => !open);
+        wake();
+      } else if (action === 'end') {
         if (listOpen) setListOpen(false);
         else onClose();
-      } else return;
-      event.preventDefault();
-      // The controls stay hidden while presenting with the keyboard or a clicker, so nothing
-      // flashes up on the chapel screen; they appear for the mouse, or with the list (L).
-      if (key === 'l' || key === 'L') wake();
+      }
+      // "start" (F5, a clicker's start button): already presenting — and never reload the page.
+    },
+    [next, previous, jumpHymn, every, show, toggleFullscreen, wake, listOpen, onClose],
+  );
+
+  /** A key press here or in the projector window; true if it was ours. */
+  const press = useCallback(
+    (event: Parameters<typeof actionFor>[0]) => {
+      const t = typed.current;
+      if (/^[0-9]$/.test(event.key) && !event.metaKey && !event.ctrlKey && !event.altKey) {
+        t.digits = (performance.now() - t.at < 2000 ? t.digits : '') + event.key;
+        t.at = performance.now();
+        return true;
+      }
+      if (event.key === 'Enter' && t.digits && performance.now() - t.at < 4000) {
+        const target = every[Number(t.digits) - 1];
+        t.digits = '';
+        if (target) show(target);
+        return true;
+      }
+      t.digits = '';
+      const action = actionFor(event);
+      if (!action) return false;
+      act(action);
+      return true;
+    },
+    [act, every, show],
+  );
+
+  // Keyboard and clickers. The controls stay hidden while presenting with them, so nothing
+  // flashes up on the chapel screen. Attached as the slide appears, so no press is missed.
+  useLayoutEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if (press(event)) event.preventDefault();
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [jumpHymn, next, previous, show, pos.hymn, listOpen, onClose, toggleFullscreen, wake]);
+  }, [press]);
 
-  // The projector window: tell it what to show whenever something changes.
+  // Clickers that act as a mouse: the wheel (or a swipe) goes on or back a slide.
+  const wheel = useRef(wheelStepper());
+  const onWheel = (event: WheelEvent) => {
+    if (listOpen) return;
+    const by = wheel.current(event);
+    if (by === 1) next();
+    else if (by === -1) previous();
+  };
+
+  // The projector window: tell it what to show whenever something changes, and act on the
+  // clicker when that window is the one in front.
   const send = useCallback((message: DisplayMessage) => channel.current?.postMessage(message), []);
+  const pressRef = useRef(press);
+  pressRef.current = press;
   useEffect(() => {
     if (!('BroadcastChannel' in window)) return;
     const bc = new BroadcastChannel(CHANNEL);
     channel.current = bc;
     bc.onmessage = (event: MessageEvent<DisplayMessage>) => {
+      if (event.data.type === 'press') {
+        pressRef.current(event.data.press);
+        return;
+      }
       if (event.data.type !== 'hello') return;
       if (document.fullscreenElement) {
         togglingFullscreen.current = true;
@@ -164,7 +230,7 @@ export function Presenter({ deck, start, onClose, listName = 'Service list' }: P
       }
       // First the unlock key (so it can open the hymns), then — via the effect below — the slide.
       const key = rememberedKey();
-      const message: DisplayMessage = { type: 'state', slide: 0, blank: true };
+      const message: DisplayMessage = { type: 'state', slide: 0, blank: 'black' };
       bc.postMessage(key ? { ...message, key: toBase64(key) } : message);
       setProjector(true);
       setHellos((n) => n + 1);
@@ -198,14 +264,6 @@ export function Presenter({ deck, start, onClose, listName = 'Service list' }: P
     }, 1000);
     return () => window.clearInterval(timer);
   }, [projector]);
-
-  const openSecondScreen = () => {
-    displayWindow.current = window.open(
-      DISPLAY_URL,
-      'chbc-hymns-display',
-      'popup,width=1280,height=720',
-    );
-  };
 
   const count = `${pos.slide + 1}/${hymn?.slides.length ?? 1}`;
   const where = hymn?.name
@@ -326,8 +384,8 @@ export function Presenter({ deck, start, onClose, listName = 'Service list' }: P
               </button>
               <button
                 type="button"
-                onClick={() => setBlank(!blank)}
-                aria-pressed={blank}
+                onClick={() => act('black')}
+                aria-pressed={!!blank}
                 className="inline-flex min-h-12 items-center gap-2 rounded-full px-5 font-medium text-white/85 ring-1 ring-white/25 hover:bg-white/10 aria-pressed:bg-white aria-pressed:text-black"
               >
                 <Icon name="blank" className="size-4" />
@@ -395,6 +453,12 @@ export function Presenter({ deck, start, onClose, listName = 'Service list' }: P
       role="dialog"
       aria-label="Presenting hymns"
       onPointerMove={wake}
+      onWheel={onWheel}
+      onContextMenu={(event) => {
+        // A right click (or a clicker's "back" button acting as one) goes back, as in PowerPoint.
+        event.preventDefault();
+        previous();
+      }}
       // Paper behind the slide, not black: should the browser ever leave a hairline between the
       // tiles it draws a full-screen slide in, it shows paper, not a black line.
       className={`font-ui fixed inset-0 z-[70] text-white ${blank ? 'bg-black' : 'bg-[#f6f3ec]'} ${controls ? '' : 'cursor-none'}`}
@@ -442,10 +506,14 @@ export function Presenter({ deck, start, onClose, listName = 'Service list' }: P
           {button(
             blank ? 'Show the slide (B)' : 'Blank the screen (B)',
             'blank',
-            () => setBlank(!blank),
-            blank,
+            () => act('black'),
+            !!blank,
           )}
-          {button('Second screen — show on a projector window', 'monitor', openSecondScreen)}
+          {button(
+            'Second screen — show on the projector',
+            'monitor',
+            () => void openSecondScreen(),
+          )}
           {button(
             fullscreen ? 'Leave full screen (F)' : 'Full screen (F)',
             fullscreen ? 'exitFullscreen' : 'fullscreen',

@@ -17,8 +17,8 @@ import { SundaySlide } from './SundaySlide';
  */
 interface Props {
   slide?: SlideData;
-  /** Blank the screen (between hymns, or during the reading). */
-  blank?: boolean;
+  /** Blank the screen (between hymns, or during the reading): black, or white as in PowerPoint. */
+  blank?: boolean | 'black' | 'white';
   className?: string;
 }
 
@@ -57,6 +57,9 @@ function Page({ art }: { art?: { src: string; height: number } }) {
 
 export function Slide({ slide, blank, className = '' }: Props) {
   const frame = `overflow-hidden [container-type:size] ${/\b(absolute|fixed)\b/.test(className) ? '' : 'relative'} ${className}`;
+  if (blank === 'white') {
+    return <div className={`bg-white ${frame}`} role="img" aria-label="White screen" />;
+  }
   if (blank || !slide) {
     return <div className={`bg-black ${frame}`} role="img" aria-label="Blank screen" />;
   }

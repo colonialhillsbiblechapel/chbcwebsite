@@ -99,10 +99,16 @@ export function HymnApp({ data, onLock }: Props) {
     }
   };
 
-  // "/" or Ctrl/⌘+K to search; Escape clears.
+  // "/" or Ctrl/⌘+K to search; Escape clears. F5 — a clicker's start button, as in PowerPoint —
+  // presents the service list (rather than reloading the page).
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       if (presenting) return;
+      if (event.key === 'F5' && service.length > 0 && bookId !== 'welcome') {
+        event.preventDefault();
+        presentList.current();
+        return;
+      }
       const typing = (event.target as HTMLElement).closest('input, textarea, select');
       if (
         (event.key === '/' && !typing) ||
@@ -117,7 +123,7 @@ export function HymnApp({ data, onLock }: Props) {
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [presenting]);
+  }, [presenting, service.length, bookId]);
 
   const updateService = (items: ServiceItem[]) => {
     setService(items);
@@ -137,6 +143,8 @@ export function HymnApp({ data, onLock }: Props) {
     );
   };
   const chosen = useMemo(() => resolve(service, data), [service, data]);
+  const presentList = useRef(() => {});
+  presentList.current = () => void present(chosen);
   const closePresenter = useCallback(() => setPresenting(null), []);
 
   const row = (entry: Entry, showBook: boolean) => {

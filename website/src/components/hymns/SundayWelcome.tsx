@@ -65,6 +65,19 @@ export function SundayWelcome({ onBack, lockButton }: Props) {
   };
   const closePresenter = useCallback(() => setPresenting(null), []);
 
+  // F5 — a clicker's start button, as in PowerPoint — presents (rather than reloading the page).
+  const presentNow = useRef(present);
+  presentNow.current = present;
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key !== 'F5' || presenting || editing || !data) return;
+      event.preventDefault();
+      presentNow.current();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [presenting, editing, data]);
+
   const editChorus = () => {
     if (chorus)
       setEditing({ title: chorus.title, text: toText(chorus.slides), number: chorus.from?.number });

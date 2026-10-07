@@ -184,6 +184,9 @@ test('second screen: the projector window follows the controls', async ({ page, 
   const tray = page.getByRole('region', { name: 'Service list' });
   await tray.getByRole('button', { name: 'Present', exact: true }).click();
 
+  // The controls appear when the mouse moves.
+  await page.mouse.move(640, 360);
+  await page.mouse.move(660, 380);
   const popup = page.waitForEvent('popup');
   await page.getByRole('button', { name: /Second screen/ }).click();
   const screen = await popup;
@@ -194,8 +197,123 @@ test('second screen: the projector window follows the controls', async ({ page, 
   // This window is now the control panel: Next shows the first verse on the projector.
   await page.getByRole('button', { name: 'Next', exact: true }).click();
   await expect(screen.getByText('There is no shadow of turning with Thee;')).toBeVisible();
+  // The clicker works on the projector window too, when that window is in front.
+  await screen.keyboard.press('PageDown');
+  await expect(page.getByText('On the screen now · Hymn 1 of 2 · 3/')).toBeVisible();
+  await screen.keyboard.press('PageUp');
+  await expect(screen.getByText('There is no shadow of turning with Thee;')).toBeVisible();
   await page.getByRole('button', { name: 'End', exact: true }).click();
   await expect(screen.getByLabel('Blank screen')).toBeVisible();
+});
+
+test('with a second screen connected, the slides open on it and this is the presenter view', async ({
+  page,
+  isMobile,
+}) => {
+  test.skip(!PASSWORD, 'Set HYMNS_PASSWORD in website/.env to test unlocking');
+  test.skip(isMobile, 'A projector is driven from a computer');
+  // As Chrome reports an extended display (the Window Management API), with permission given.
+  await page.addInitScript(() => {
+    const projector = {
+      availLeft: 1920,
+      availTop: 0,
+      availWidth: 1920,
+      availHeight: 1080,
+      isInternal: false,
+    };
+    const laptop = {
+      availLeft: 0,
+      availTop: 0,
+      availWidth: 1920,
+      availHeight: 1080,
+      isInternal: true,
+    };
+    Object.defineProperty(window.screen, 'isExtended', { get: () => true });
+    Object.assign(window, {
+      getScreenDetails: () =>
+        Promise.resolve({ screens: [laptop, projector], currentScreen: laptop }),
+    });
+  });
+  await page.goto('/hymns/');
+  await page.getByLabel('Password', { exact: true }).fill(PASSWORD?.split(/[,\n]/)[0] ?? '');
+  await page.getByRole('button', { name: 'Unlock' }).click();
+  await page.getByRole('button', { name: /Hymns of Truth and Praise/ }).click();
+  await page.getByRole('searchbox', { name: 'Search hymns' }).fill('2');
+  await page
+    .getByRole('button', { name: /add to the service list/ })
+    .first()
+    .click();
+
+  const popup = page.waitForEvent('popup');
+  await page
+    .getByRole('region', { name: 'Service list' })
+    .getByRole('button', { name: 'Present', exact: true })
+    .click();
+  const screen = await popup;
+  await expect(screen).toHaveURL(/\/hymns\/screen\/$/);
+  await expect(page.getByText(/On the screen now/)).toBeVisible();
+  await expect(screen.getByRole('heading', { name: /Great is Thy faithfulness/i })).toBeVisible();
+  await page.keyboard.press('PageDown');
+  await expect(screen.getByText('There is no shadow of turning with Thee;')).toBeVisible();
+});
+
+test('every clicker works, as in PowerPoint', async ({ page, isMobile }) => {
+  test.skip(!PASSWORD, 'Set HYMNS_PASSWORD in website/.env to test unlocking');
+  test.skip(isMobile, 'Clickers are used with a computer');
+  await page.goto('/hymns/');
+  await page.getByLabel('Password', { exact: true }).fill(PASSWORD?.split(/[,\n]/)[0] ?? '');
+  await page.getByRole('button', { name: 'Unlock' }).click();
+  await page.getByRole('button', { name: /Hymns of Truth and Praise/ }).click();
+  for (const number of ['2', '332']) {
+    await page.getByRole('searchbox', { name: 'Search hymns' }).fill(number);
+    await page
+      .getByRole('button', { name: /add to the service list/ })
+      .first()
+      .click();
+  }
+  // F5 — a clicker's start button — presents the list instead of reloading the page.
+  await page.keyboard.press('F5');
+  const presenting = page.getByRole('dialog', { name: 'Presenting hymns' });
+  await expect(presenting).toContainText('Hymn 1 of 2 · 1/');
+  // The controls stay hidden until the mouse moves.
+  const bar = presenting.getByRole('button', { name: /Second screen/ }).locator('xpath=../..');
+  await expect(bar).toHaveCSS('opacity', '0');
+
+  const at = (text: string) => expect(presenting).toContainText(text);
+  await page.keyboard.press('PageDown');
+  await at('Hymn 1 of 2 · 2/');
+  await page.keyboard.press('n');
+  await at('Hymn 1 of 2 · 3/');
+  await page.keyboard.press('p');
+  await at('Hymn 1 of 2 · 2/');
+  await page.keyboard.press('PageUp');
+  await at('Hymn 1 of 2 · 1/');
+  await page.keyboard.press('F5'); // pressed again while presenting: nothing happens
+  await at('Hymn 1 of 2 · 1/');
+  // A slide's number, then Enter.
+  await page.keyboard.press('3');
+  await page.keyboard.press('Enter');
+  await at('Hymn 1 of 2 · 3/');
+  await page.keyboard.press('End');
+  await expect(presenting).toContainText(/Hymn 2 of 2 · (\d+)\/\1/);
+  await page.keyboard.press('Home');
+  await at('Hymn 1 of 2 · 1/');
+  // Black and white screens.
+  await page.keyboard.press('w');
+  await expect(presenting.getByLabel('White screen')).toBeVisible();
+  await page.keyboard.press('w');
+  await page.keyboard.press('.');
+  await expect(presenting.getByLabel('Blank screen')).toBeVisible();
+  await page.keyboard.press('.');
+  await expect(presenting.getByLabel('Blank screen')).toHaveCount(0);
+  // Clickers that act as a mouse: the wheel, and a right click to go back.
+  await page.mouse.move(900, 400);
+  await page.mouse.wheel(0, 120);
+  await at('Hymn 1 of 2 · 2/');
+  await page.mouse.click(900, 400, { button: 'right' });
+  await at('Hymn 1 of 2 · 1/');
+  await page.keyboard.press('Escape');
+  await expect(presenting).toHaveCount(0);
 });
 
 test('reads a hymn: its words as sung, with the refrain after each verse', async ({
