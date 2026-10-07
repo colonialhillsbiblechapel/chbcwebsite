@@ -26,7 +26,7 @@ export function DisplayScreen() {
     blank: 'black',
   });
   const [words, setWords] = useState<Map<string, Words>>();
-  const [hint, setHint] = useState(true);
+  const [filled, setFilled] = useState(false);
   const channel = useRef<BroadcastChannel | null>(null);
   const wheel = useRef(wheelStepper());
 
@@ -58,20 +58,25 @@ export function DisplayScreen() {
     bc.postMessage({ type: 'hello' } satisfies DisplayMessage);
     const pass = (press: ProjectorKey) =>
       bc.postMessage({ type: 'press', press } satisfies DisplayMessage);
+    const fill = () => void document.documentElement.requestFullscreen?.().catch(() => undefined);
+    // Full screen at once if the browser lets this site do so by itself ("Automatic full screen").
+    fill();
+    const onFullscreen = () => setFilled(!!document.fullscreenElement);
+    document.addEventListener('fullscreenchange', onFullscreen);
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'f' || event.key === 'F') return; // handled below, here
-      if (actionFor(event) || /^[0-9]$/.test(event.key) || event.key === 'Enter') {
-        event.preventDefault();
-        pass(keyOf(event));
-      }
+      const ours = actionFor(event) || /^[0-9]$/.test(event.key) || event.key === 'Enter';
+      if (!ours) return;
+      event.preventDefault();
+      // Until this screen is full, the first press of the clicker fills it (as starting a show).
+      if (!document.fullscreenElement && event.key !== 'Escape') fill();
+      else if (actionFor(event) !== 'fullscreen') pass(keyOf(event));
     };
     window.addEventListener('keydown', onKey);
-    const timer = window.setTimeout(() => setHint(false), 6000);
     return () => {
       window.removeEventListener('keydown', onKey);
+      document.removeEventListener('fullscreenchange', onFullscreen);
       bc.close();
       channel.current = null;
-      window.clearTimeout(timer);
     };
   }, []);
   const pass = (key: string) =>
@@ -94,10 +99,8 @@ export function DisplayScreen() {
     () => (chosen ? slidesFor(chosen, words?.get(chosen.hymn.number)) : []),
     [chosen, words],
   );
-  const goFullscreen = () => {
-    setHint(false);
+  const goFullscreen = () =>
     void document.documentElement.requestFullscreen?.().catch(() => undefined);
-  };
 
   return (
     <div
@@ -112,7 +115,6 @@ export function DisplayScreen() {
         const by = wheel.current(event);
         if (by) pass(by === 1 ? 'ArrowRight' : 'ArrowLeft');
       }}
-      onKeyDown={(e) => (e.key === 'f' || e.key === 'F') && goFullscreen()}
       role="presentation"
     >
       <Slide
@@ -120,9 +122,9 @@ export function DisplayScreen() {
         blank={shown.blank}
         className="absolute inset-0"
       />
-      {hint && (
-        <p className="absolute inset-x-0 top-6 mx-auto w-fit rounded-full bg-black/60 px-5 py-2.5 text-[0.95rem] text-white/90">
-          Projector screen · click here for full screen · the clicker works in either window
+      {!filled && (
+        <p className="absolute inset-x-0 top-6 mx-auto w-fit rounded-full bg-black/70 px-6 py-3 text-[1.05rem] text-white">
+          Press the clicker, or click here, to fill this screen
         </p>
       )}
     </div>

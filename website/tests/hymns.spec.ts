@@ -197,7 +197,13 @@ test('second screen: the projector window follows the controls', async ({ page, 
   // This window is now the control panel: Next shows the first verse on the projector.
   await page.getByRole('button', { name: 'Next', exact: true }).click();
   await expect(screen.getByText('There is no shadow of turning with Thee;')).toBeVisible();
-  // The clicker works on the projector window too, when that window is in front.
+  // The projector fills its screen by itself where the browser allows it; otherwise the first
+  // press (or a click) fills it. Then the clicker works on that window too, when it is in front.
+  const hint = screen.getByText('Press the clicker, or click here, to fill this screen');
+  if (await hint.isVisible()) {
+    await screen.mouse.click(400, 300);
+    await expect(hint).toHaveCount(0);
+  }
   await screen.keyboard.press('PageDown');
   await expect(page.getByText('On the screen now · Hymn 1 of 2 · 3/')).toBeVisible();
   await screen.keyboard.press('PageUp');
@@ -228,16 +234,27 @@ test('with a second screen connected, the slides open on it and this is the pres
       availHeight: 1080,
       isInternal: true,
     };
+    let allowed = false;
     Object.defineProperty(window.screen, 'isExtended', { get: () => true });
     Object.assign(window, {
-      getScreenDetails: () =>
-        Promise.resolve({ screens: [laptop, projector], currentScreen: laptop }),
+      getScreenDetails: () => {
+        allowed = true;
+        return Promise.resolve({ screens: [laptop, projector], currentScreen: laptop });
+      },
     });
+    const query = navigator.permissions.query.bind(navigator.permissions);
+    navigator.permissions.query = (d: PermissionDescriptor) =>
+      d.name === ('window-management' as PermissionName)
+        ? Promise.resolve({ state: allowed ? 'granted' : 'prompt' } as PermissionStatus)
+        : query(d);
   });
   await page.goto('/hymns/');
   await page.getByLabel('Password', { exact: true }).fill(PASSWORD?.split(/[,\n]/)[0] ?? '');
   await page.getByRole('button', { name: 'Unlock' }).click();
   await page.getByRole('button', { name: /Hymns of Truth and Praise/ }).click();
+  // Asked once, ahead of time, so Present can put the slides there in one go.
+  await page.getByRole('button', { name: 'Allow', exact: true }).click();
+  await expect(page.getByText('A second screen is connected.')).toHaveCount(0);
   await page.getByRole('searchbox', { name: 'Search hymns' }).fill('2');
   await page
     .getByRole('button', { name: /add to the service list/ })

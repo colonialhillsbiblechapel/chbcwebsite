@@ -13,6 +13,7 @@ import {
   type ServiceItem,
 } from './service';
 import { slidesFor } from './slides';
+import { SecondScreenNotice } from './SecondScreen';
 import { SundayWelcome } from './SundayWelcome';
 import { lyrics, type HymnIndexData, type Hymnal } from './vault';
 
@@ -279,6 +280,7 @@ export function HymnApp({ data, onLock }: Props) {
       ref={top}
       className={`font-ui scroll-mt-20 lg:scroll-mt-28 ${service.length ? 'pb-36' : ''}`}
     >
+      <SecondScreenNotice />
       {bookId === 'welcome' ? (
         /* ——— The Sunday welcome slides ——— */
         <SundayWelcome onBack={() => openBook('')} lockButton={lockButton} />

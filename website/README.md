@@ -99,9 +99,13 @@ the build if any first line, tune or line of the words ever appears in the publi
 - **In the chapel:** tick hymns (the circle) to build the service list, put it in order, then
   **Present** (or a clicker's start button, F5). Each hymn shows a title slide, then its verses and
   refrains, like the chapel's PowerPoint decks. With a second screen connected (an extended
-  display), Chrome and Edge open the slides full screen on it by themselves — the browser asks once
-  to "manage windows on all your displays" — and this window becomes the presenter view: what's
-  on, what's next and every slide. With one screen the slides fill it, and the controls appear
+  display), Chrome and Edge open the slides on it by themselves, and this window becomes the
+  presenter view: what's on, what's next and every slide. Set up once on the chapel computer:
+  press **Allow** on the hymns page when it says a second screen is connected (Chrome's own
+  question, "manage windows on all your displays"); and so the slides also fill that screen with no
+  click, in Chrome's settings → Privacy and security → Site settings → Automatic full screen, add
+  the site's address. Without that, the first press of the clicker (or a click) on the second
+  screen fills it. With one screen the slides fill it, and the controls appear
   only when the mouse moves. The keys are PowerPoint's, so every clicker works: → ↓ Page Down,
   Space, Enter or N for the next slide; ← ↑ Page Up, Backspace or P to go back; Home and End; a
   slide's number then Enter; Shift + → for the next hymn; **B** or **.** black, **W** or **,**

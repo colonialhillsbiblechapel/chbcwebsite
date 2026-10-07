@@ -2,7 +2,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'preac
 import { CHANNEL, type Blank, type DisplayMessage } from './display';
 import { Icon, type IconName } from './icons';
 import { actionFor, wheelStepper, type Action } from './keys';
-import { hasSecondScreen, openProjector } from './screens';
+import { allowSecondScreen, openProjector, secondScreen } from './screens';
 import { Slide } from './Slide';
 import { preview, type SlideData } from './slides';
 import { rememberedKey } from './vault';
@@ -109,18 +109,20 @@ export function Presenter({ deck, start, onClose, listName = 'Service list' }: P
     else void root.current?.requestFullscreen?.().catch(() => undefined);
   }, []);
 
-  /** Opens the projector window: full screen on the second screen, where there is one. */
+  /** Opens the projector window: on the second screen, where there is one. */
   const openSecondScreen = useCallback(async () => {
+    if ((await secondScreen()) === 'ask') await allowSecondScreen();
     displayWindow.current = await openProjector();
     return !!displayWindow.current;
   }, []);
 
-  // Straight away: on the second screen if one is connected, else full screen here. And stop the
+  // Straight away: on the second screen if one is connected and the browser already allows it
+  // (asking now would cost the click that opens the window), else full screen here. And stop the
   // page behind from scrolling.
   useEffect(() => {
     document.documentElement.classList.add('overflow-hidden');
     void (async () => {
-      if (hasSecondScreen() && (await openSecondScreen())) return;
+      if ((await secondScreen()) === 'ready' && (await openSecondScreen())) return;
       await root.current?.requestFullscreen?.().catch(() => wake());
     })();
     return () => {
