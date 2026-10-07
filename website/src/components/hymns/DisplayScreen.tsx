@@ -79,7 +79,7 @@ export function DisplayScreen() {
 
   return (
     <div
-      className="font-ui fixed inset-0 cursor-none bg-black"
+      className={`font-ui fixed inset-0 cursor-none ${shown.blank ? 'bg-black' : 'bg-[#f6f3ec]'}`}
       onClick={goFullscreen}
       onKeyDown={(e) => (e.key === 'f' || e.key === 'F') && goFullscreen()}
       role="presentation"

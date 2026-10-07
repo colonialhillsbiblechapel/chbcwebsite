@@ -5,8 +5,8 @@
  *
  * - <slide>.jpg: the deck's backgrounds (welcome, chorus, song, birthday, anniversary), 2560 × 1440.
  * - picture-<name>.jpg (3840 × 2160) and thumb-<name>.jpg: the finished welcome pictures.
- * - brush.jpg: the gold brush stroke of the welcome pictures as a multiply layer — the paper
- *   divided out, so it is white where the paper was and lays on any paper without a patch.
+ * - brush.png: the gold brush stroke of the welcome pictures, lifted off its paper (transparent),
+ *   so it lays on any of the paintings without a patch.
  *
  * Usage: node scripts/welcome-art.mjs <folder with the deck and the *_Welcome_4K.png pictures>
  */
@@ -80,7 +80,9 @@ for (const [name, file] of Object.entries(pictures)) {
     .toFile(join(OUT, `thumb-${name}.jpg`));
 }
 
-// The gold brush stroke, with the paper divided out (a multiply layer).
+// The gold brush stroke, lifted off its paper into a transparent picture: each pixel's gold and
+// how much of it covers the paper. (Laid on with a blend mode instead, it would make the browser
+// draw the whole slide in tiles at full screen, with hairline seams between them.)
 const crop = { left: 1300, top: 975, width: 1240, height: 160 };
 const { data, info } = await sharp(join(from, 'Welcome_4K.png'))
   .extract(crop)
@@ -95,11 +97,21 @@ const paper = [0, 1, 2].map((c) => {
   edge.sort((a, b) => a - b);
   return edge[Math.floor(edge.length / 2)];
 });
-const layer = Buffer.alloc(data.length);
-for (let i = 0; i < data.length; i++)
-  layer[i] = Math.min(255, Math.round((data[i] / paper[i % 3]) * 255));
-await sharp(layer, { raw: { width: info.width, height: info.height, channels: 3 } })
-  .jpeg({ ...jpeg, quality: 90 })
-  .toFile(join(OUT, 'brush.jpg'));
+const rgba = Buffer.alloc(info.width * info.height * 4);
+for (let p = 0; p < info.width * info.height; p++) {
+  // How much each channel is darkened from the paper (1 = untouched paper).
+  const m = [0, 1, 2].map((c) => Math.min(1, data[p * 3 + c] / paper[c]));
+  const cover = 1 - Math.min(...m);
+  // The paper's own grain is not part of the stroke.
+  const a = cover < 0.04 ? 0 : Math.min(1, (cover - 0.04) / 0.96 + 0.04);
+  for (let c = 0; c < 3; c++) {
+    const gold = a ? (paper[c] * (m[c] - (1 - a))) / a : 0;
+    rgba[p * 4 + c] = Math.max(0, Math.min(255, Math.round(gold)));
+  }
+  rgba[p * 4 + 3] = Math.round(a * 255);
+}
+await sharp(rgba, { raw: { width: info.width, height: info.height, channels: 4 } })
+  .png({ compressionLevel: 9, palette: false })
+  .toFile(join(OUT, 'brush.png'));
 
 console.log(`✓ Welcome pictures written to ${OUT}/`);

@@ -395,7 +395,9 @@ export function Presenter({ deck, start, onClose, listName = 'Service list' }: P
       role="dialog"
       aria-label="Presenting hymns"
       onPointerMove={wake}
-      className={`font-ui fixed inset-0 z-[70] bg-black text-white ${controls ? '' : 'cursor-none'}`}
+      // Paper behind the slide, not black: should the browser ever leave a hairline between the
+      // tiles it draws a full-screen slide in, it shows paper, not a black line.
+      className={`font-ui fixed inset-0 z-[70] text-white ${blank ? 'bg-black' : 'bg-[#f6f3ec]'} ${controls ? '' : 'cursor-none'}`}
     >
       <Slide slide={slide} blank={blank} className="absolute inset-0" />
 

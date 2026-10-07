@@ -29,12 +29,12 @@ const Paper = ({ src }: { src: string }) => (
   <img src={src} alt="" decoding="async" className="absolute inset-0 size-full object-cover" />
 );
 
-/** The gold brush stroke of the welcome pictures (white where the paper was: it multiplies). */
+/** The gold brush stroke of the welcome pictures, lifted off its paper. */
 const Brush = ({ width }: { width: number }) => (
   <img
-    src={`${ART}/brush.jpg`}
+    src={`${ART}/brush.png`}
     alt=""
-    className="mx-auto block mix-blend-multiply"
+    className="mx-auto block"
     style={{ width: `${width}cqw`, aspectRatio: '1240 / 160' }}
   />
 );

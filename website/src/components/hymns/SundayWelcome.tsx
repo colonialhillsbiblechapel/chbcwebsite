@@ -46,8 +46,9 @@ export function SundayWelcome({ onBack, lockButton }: Props) {
       .then(setData)
       .catch(() => setFailed(true));
     // Fetch the paintings ahead, so the first showing of each slide is instant.
-    for (const name of ['welcome', 'chorus', 'song', 'birthday', 'anniversary', 'brush'])
+    for (const name of ['welcome', 'chorus', 'song', 'birthday', 'anniversary'])
       new Image().src = `${ART}/${name}.jpg`;
+    new Image().src = `${ART}/brush.png`;
     const timer = window.setInterval(() => setNow(new Date()), 60_000);
     return () => window.clearInterval(timer);
   }, []);
