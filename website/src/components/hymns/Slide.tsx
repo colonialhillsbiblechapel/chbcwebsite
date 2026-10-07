@@ -1,6 +1,8 @@
 import { inkFor, sceneUrl } from './art/scene.ts';
 import { tuneName } from './service';
 import type { SlideData } from './slides';
+import { wordsSize } from './fit';
+import { SundaySlide } from './SundaySlide';
 
 /**
  * One slide for the screen in the chapel, set like the chapel's PowerPoint decks: a warm paper
@@ -25,46 +27,6 @@ const PAGE = 'bg-[radial-gradient(ellipse_at_50%_38%,#fcf9f2,#efe8da_88%)] text-
 /** Heights of the drawn pictures, as a share of the slide's height (they are 1920 × 460 and × 200). */
 const TITLE_ART = 42.6;
 const BAND_ART = 18.5;
-
-let measurer: { ctx: CanvasRenderingContext2D; font: string } | null | undefined;
-
-/** A line's width in ems, measured in the slide's own typeface (EB Garamond). */
-function ems(text: string): number {
-  if (measurer === undefined && typeof document !== 'undefined') {
-    const ctx = document.createElement('canvas').getContext('2d');
-    const probe = document.createElement('span');
-    probe.className = 'font-serif';
-    document.body.append(probe);
-    measurer = ctx && { ctx, font: getComputedStyle(probe).fontFamily };
-    probe.remove();
-  }
-  if (!measurer) return text.length * 0.44;
-  measurer.ctx.font = `100px ${measurer.font}`;
-  return measurer.ctx.measureText(text).width / 100;
-}
-
-/**
- * The largest size at which the words fill the space: each line of the hymn on one line of the
- * screen, as in the chapel's decks. Only if that would make the words too small to read from the
- * back do long lines wrap.
- */
-function wordsSize(lines: string[], space: number) {
-  const ASPECT = 16 / 9; // compare widths and heights on a widescreen television
-  const LINE = 1.3;
-  const widths = lines.map(ems);
-  const fit = (limit: number) => {
-    const rows = widths.reduce((n, w) => n + Math.max(1, Math.ceil(w / limit)), 0);
-    const widest = Math.min(limit, Math.max(...widths, 1));
-    const byWidth = 88 / widest; // in cqw
-    const byHeight = space / (rows * LINE); // in cqh
-    return { byWidth, byHeight, size: Math.min(9, byHeight, byWidth * ASPECT) };
-  };
-  const longest = Math.max(...widths, 1);
-  const whole = fit(Infinity);
-  const wrapped = fit(longest * 0.56);
-  const best = whole.size >= 6 || whole.size >= wrapped.size ? whole : wrapped;
-  return `min(9cqh, ${best.byHeight.toFixed(2)}cqh, ${best.byWidth.toFixed(2)}cqw)`;
-}
 
 /** Long titles get a smaller size so they still sit on two or three lines. */
 function titleSize(title: string, room: number) {
@@ -98,6 +60,8 @@ export function Slide({ slide, blank, className = '' }: Props) {
   if (blank || !slide) {
     return <div className={`bg-black ${frame}`} role="img" aria-label="Blank screen" />;
   }
+  if (slide.kind === 'welcome' || slide.kind === 'program')
+    return <SundaySlide slide={slide} className={frame} />;
   const background = slide.background;
   const theme = background?.scene;
   const seed = Number(slide.chosen.hymn.number.replace(/\D/g, '')) || 1;

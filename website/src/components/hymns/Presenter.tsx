@@ -5,9 +5,12 @@ import { Slide } from './Slide';
 import { preview, type SlideData } from './slides';
 import { rememberedKey } from './vault';
 
-/** One hymn of the service list, with its slides. */
+/** One hymn of the service list, with its slides — or one part of the Sunday welcome. */
 export interface DeckHymn {
   slides: SlideData[];
+  /** For a part that isn't a hymn: its name and its place, for the list and the controls. */
+  name?: string;
+  badge?: string;
 }
 
 export interface Position {
@@ -19,6 +22,8 @@ interface Props {
   deck: DeckHymn[];
   start: Position;
   onClose: () => void;
+  /** What the list of the deck is called ("Service list", "Sunday welcome"). */
+  listName?: string;
 }
 
 const toBase64 = (bytes: Uint8Array) => btoa(String.fromCharCode(...bytes));
@@ -28,7 +33,7 @@ const toBase64 = (bytes: Uint8Array) => btoa(String.fromCharCode(...bytes));
  * in this window, or with "Second screen" on a projector window while this one becomes the
  * control panel: what's showing, what's next, and every slide of the hymn.
  */
-export function Presenter({ deck, start, onClose }: Props) {
+export function Presenter({ deck, start, onClose, listName = 'Service list' }: Props) {
   const [pos, setPos] = useState<Position>(start);
   const [blank, setBlank] = useState(false);
   const [controls, setControls] = useState(true);
@@ -45,7 +50,8 @@ export function Presenter({ deck, start, onClose }: Props) {
 
   const hymn = deck[pos.hymn];
   const slide = hymn?.slides[pos.slide];
-  const chosen = hymn?.slides[0]?.chosen;
+  const opening = hymn?.slides[0];
+  const chosen = opening && 'chosen' in opening ? opening.chosen : undefined;
   const isFirst = pos.hymn === 0 && pos.slide === 0;
   const isLast = pos.hymn === deck.length - 1 && pos.slide === (hymn?.slides.length ?? 1) - 1;
 
@@ -174,10 +180,12 @@ export function Presenter({ deck, start, onClose }: Props) {
     send({
       type: 'state',
       item: chosen && { book: chosen.book.id, number: chosen.hymn.number },
+      // A slide that isn't a hymn's is sent whole (it stays on this computer).
+      content: chosen ? undefined : slide,
       slide: pos.slide,
       blank,
     });
-  }, [projector, hellos, chosen, pos.slide, blank, send]);
+  }, [projector, hellos, chosen, slide, pos.slide, blank, send]);
 
   // Notice when the projector window is closed.
   useEffect(() => {
@@ -199,18 +207,25 @@ export function Presenter({ deck, start, onClose }: Props) {
     );
   };
 
-  const where = `Hymn ${pos.hymn + 1} of ${deck.length} · ${pos.slide + 1}/${hymn?.slides.length ?? 1}`;
-  const label = (s: SlideData) => (s.kind === 'title' ? 'Title' : s.label);
+  const count = `${pos.slide + 1}/${hymn?.slides.length ?? 1}`;
+  const where = hymn?.name
+    ? `${pos.hymn + 1} of ${deck.length} · ${hymn.name} · ${count}`
+    : `Hymn ${pos.hymn + 1} of ${deck.length} · ${count}`;
+  const label = (s: SlideData) =>
+    s.kind === 'title' ? 'Title' : s.kind === 'welcome' ? 'Welcome' : s.label;
 
   /** Every hymn in the service list, with the slides of the current one. */
   const outline = (dark: 'panel' | 'overlay') => (
     <ol className="space-y-1">
       {deck.map((h, i) => {
-        const c = h.slides[0]?.chosen;
-        if (!c) return null;
+        const first = h.slides[0];
+        const c = first && 'chosen' in first ? first.chosen : undefined;
+        const name = h.name ?? c?.hymn.title;
+        const badge = h.badge ?? c?.hymn.number;
+        if (!name) return null;
         const open = i === pos.hymn;
         return (
-          <li key={`${c.book.id}-${c.hymn.number}`}>
+          <li key={`${i}-${c?.book.id ?? ''}-${badge ?? ''}`}>
             <button
               type="button"
               onClick={() => {
@@ -221,11 +236,11 @@ export function Presenter({ deck, start, onClose }: Props) {
               className="grid w-full grid-cols-[2.75rem_minmax(0,1fr)] items-center gap-3 rounded-lg px-3 py-2.5 text-left text-white/80 transition-colors hover:bg-white/10 aria-[current]:bg-white/15 aria-[current]:text-white"
             >
               <span
-                className={`inline-flex h-7 items-center justify-center rounded-full text-[0.8rem] font-semibold tabular-nums ${c.book.id === 'praise' ? 'bg-pew' : 'bg-white/15'}`}
+                className={`inline-flex h-7 items-center justify-center rounded-full text-[0.8rem] font-semibold tabular-nums ${c?.book.id === 'praise' ? 'bg-pew' : 'bg-white/15'}`}
               >
-                {c.hymn.number}
+                {badge}
               </span>
-              <span className="truncate text-[0.92rem]">{c.hymn.title}</span>
+              <span className="truncate text-[0.92rem]">{name}</span>
             </button>
             {open && (
               <ol className="mt-1 mb-2 ml-[3.25rem] space-y-0.5 border-l border-white/10 pl-2">
@@ -363,7 +378,7 @@ export function Presenter({ deck, start, onClose }: Props) {
             </div>
             <div>
               <p className="mb-3 text-[0.8rem] tracking-[0.18em] text-white/60 uppercase">
-                Service list
+                {listName}
               </p>
               {outline('panel')}
             </div>
@@ -403,7 +418,7 @@ export function Presenter({ deck, start, onClose }: Props) {
       {listOpen && (
         <div className="absolute inset-y-0 left-0 z-10 w-[min(22rem,85vw)] overflow-y-auto bg-[#0d0c0b] p-4 pt-6 shadow-[20px_0_40px_rgb(0_0_0/0.5)]">
           <p className="mb-3 px-3 text-[0.8rem] tracking-[0.18em] text-white/60 uppercase">
-            Service list
+            {listName}
           </p>
           {outline('overlay')}
         </div>
@@ -414,7 +429,7 @@ export function Presenter({ deck, start, onClose }: Props) {
       >
         <div className="flex max-w-full items-center gap-1 overflow-x-auto rounded-full bg-black/80 p-1.5 shadow-2xl ring-1 ring-white/10">
           {button('End (Esc)', 'close', onClose)}
-          {button('Service list (L)', 'list', () => setListOpen(!listOpen), listOpen)}
+          {button(`${listName} (L)`, 'list', () => setListOpen(!listOpen), listOpen)}
           <span className="mx-1 h-6 w-px bg-white/15" aria-hidden="true" />
           {button('Previous slide (←)', 'prev', previous, undefined, isFirst)}
           <span className="min-w-36 px-2 text-center text-[0.82rem] text-white/80 tabular-nums">

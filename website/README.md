@@ -109,6 +109,17 @@ the build if any first line, tune or line of the words ever appears in the publi
   verse word for word against the KJV, finds verses, and draws contact sheets for review (`check`,
   `verse`, `find`, `used`, `render`, `merge`). They are sealed with the words by `seal-hymns.mjs`,
   since the names would tell which hymns are in the book.
+- **Sunday welcome (on a computer):** on the hymnal shelf. Choose the welcome picture (by the time
+  of day, with the date, or one of the chapel's welcome pictures) and the week's chorus — find it
+  by its title or words, or present without one — then **Present**: the welcome, the chorus, our
+  welcome song, and the birthday and anniversary songs, each on its own watercolour from the
+  chapel's welcome deck. A chorus's words can be changed, or a chorus written, for this device
+  only; **Clear** forgets it. The choruses come from the chapel's chorus PowerPoints, divided by
+  hand and checked word for word against them (`private/choruses/`, see `CHORUSES.md` there);
+  `node scripts/sunday.mjs` makes their slides (`private/choruses/sunday.json`), which
+  `seal-hymns.mjs` seals into `public/hymns/lyrics-sunday.json`. The pictures in
+  `public/hymns/welcome/` are made by `node scripts/welcome-art.mjs <folder>` from the deck and the
+  4K welcome pictures.
 - **Where the words come from:** `node scripts/migrate-hymns.mjs` copies the old site's hymns into
   `website/private/source/`. Each hymn was then divided into slides **by hand**, the way it is sung
   (a refrain added only where it was really missing); `node scripts/review-hymns.mjs` checks that

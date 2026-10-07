@@ -13,6 +13,7 @@ import {
   type ServiceItem,
 } from './service';
 import { slidesFor } from './slides';
+import { SundayWelcome } from './SundayWelcome';
 import { lyrics, type HymnIndexData, type Hymnal } from './vault';
 
 interface Props {
@@ -270,7 +271,10 @@ export function HymnApp({ data, onLock }: Props) {
       ref={top}
       className={`font-ui scroll-mt-20 lg:scroll-mt-28 ${service.length ? 'pb-36' : ''}`}
     >
-      {book && hymnNumber ? (
+      {bookId === 'welcome' ? (
+        /* ——— The Sunday welcome slides ——— */
+        <SundayWelcome onBack={() => openBook('')} lockButton={lockButton} />
+      ) : book && hymnNumber ? (
         /* ——— One hymn, to read ——— */
         (() => {
           const at = book.hymns.findIndex((h) => h.number === hymnNumber);
@@ -431,12 +435,36 @@ export function HymnApp({ data, onLock }: Props) {
                   </span>
                 </button>
               ))}
+              {/* The Sunday welcome: prepared and presented from a computer, so not on phones. */}
+              <button
+                type="button"
+                onClick={() => openBook('welcome')}
+                className="group border-rule col-span-2 hidden w-full grid-cols-[1.2fr_1fr] overflow-hidden rounded-lg border bg-white/70 text-left shadow-[0_30px_50px_-34px_rgb(23_20_15/0.6)] transition-[transform,box-shadow] duration-500 hover:-translate-y-1 hover:shadow-[0_40px_60px_-34px_rgb(23_20_15/0.7)] sm:grid"
+              >
+                <img
+                  src="/hymns/welcome/thumb-classic.jpg"
+                  alt=""
+                  className="aspect-video size-full object-cover"
+                />
+                <span className="flex flex-col justify-center p-6 lg:p-8">
+                  <span className="text-ink-soft text-[0.72rem] font-semibold tracking-[0.22em] uppercase">
+                    Every Lord’s Day
+                  </span>
+                  <span className="font-display text-ink group-hover:text-gold-ink mt-2 text-[1.9rem] leading-tight transition-colors">
+                    Sunday welcome
+                  </span>
+                  <span className="text-ink-soft mt-2 text-[0.95rem] leading-relaxed">
+                    The welcome, the week’s chorus, our welcome song, and the birthday and
+                    anniversary songs, ready to present.
+                  </span>
+                </span>
+              </button>
             </div>
           )}
         </div>
       )}
 
-      {service.length > 0 && !presenting && (
+      {service.length > 0 && !presenting && bookId !== 'welcome' && (
         <ServiceTray
           chosen={chosen}
           onReorder={(items) =>

@@ -8,7 +8,7 @@ import { join } from 'node:path';
 import { expect, test } from '@playwright/test';
 import { buildEntries, search, sections } from '../src/components/hymns/hymn-index';
 import { drawScene } from '../src/components/hymns/art/scene.ts';
-import type { Hymnal, Words } from '../src/components/hymns/vault';
+import type { Hymnal, Sunday, Words } from '../src/components/hymns/vault';
 
 if (existsSync('.env')) process.loadEnvFile('.env');
 const PASSWORD = process.env.HYMNS_PASSWORD;
@@ -23,10 +23,33 @@ test('the published site never contains the hymns in readable form', ({ isMobile
     };
     return hymns.flatMap((h) => h.slides.flatMap((s) => s.lines));
   });
-  const secrets = [...books.flatMap((b) => b.hymns.flatMap((h) => [h.title, h.tune])), ...words];
+  // The choruses and the welcome deck's songs, sealed with the hymns (scripts/sunday.mjs).
+  const sunday = existsSync('private/choruses/sunday.json')
+    ? (JSON.parse(readFileSync('private/choruses/sunday.json', 'utf8')) as Sunday)
+    : undefined;
+  const choruses = sunday
+    ? [
+        ...sunday.choruses.flatMap((c) => c.slides.flatMap((s) => s.lines)),
+        ...sunday.program.songs.flatMap((s) => s.lines),
+      ]
+    : [];
+  const secrets = [
+    ...books.flatMap((b) => b.hymns.flatMap((h) => [h.title, h.tune])),
+    ...words,
+    ...choruses,
+  ];
   // Words of Scripture that a hymn quotes and the public pages quote too (John 10:27 in hymn 379
-  // and on the doctrines page) are the Bible's, not the hymn's, so they may appear.
-  const scripture = new Set(['“My sheep hear My voice,']);
+  // and on the doctrines page; Psalm 119:105 in the chorus Thy Word and on the style guide) are
+  // the Bible's, not the song's, so they may appear; so may common phrases the public pages use
+  // in their own right (the gospel page; the welcome slide's greeting).
+  const scripture = new Set([
+    '“My sheep hear My voice,',
+    'Thy word is a lamp unto my feet,',
+    'Thy word is a lamp unto my feet',
+    'and a light unto my path.',
+    'His death and resurrection',
+    'We’re so glad you’re here',
+  ]);
   // Every distinctive line: first lines and tunes, and one in five lines of the words.
   const telling = [...new Set(secrets)].filter(
     (s, i) => !scripture.has(s) && (s.length >= 24 || (s.length >= 12 && i % 5 === 0)),
@@ -205,6 +228,77 @@ test('reads a hymn: its words as sung, with the refrain after each verse', async
   await expect(page).toHaveURL(/hymn=3$/);
   await page.goBack();
   await expect(page).toHaveURL(/hymn=2$/);
+});
+
+test('the Sunday welcome: choose a chorus, present, change the words, clear', async ({
+  page,
+  isMobile,
+}) => {
+  test.skip(!PASSWORD, 'Set HYMNS_PASSWORD in website/.env to test unlocking');
+  await page.goto('/hymns/');
+  await page.getByLabel('Password', { exact: true }).fill(PASSWORD?.split(/[,\n]/)[0] ?? '');
+  await page.getByRole('button', { name: 'Unlock' }).click();
+  const card = page.getByRole('button', { name: /Sunday welcome/ });
+  await expect(page.getByRole('button', { name: /Hymns of Truth and Praise/ })).toBeVisible();
+  if (isMobile) {
+    // Prepared and presented from a computer: not offered on phones.
+    await expect(card).toBeHidden();
+    return;
+  }
+  await card.click();
+  await expect(page).toHaveURL(/#book=welcome$/);
+  await expect(page.getByText(/No chorus this week/)).toBeVisible();
+
+  // Find the week's chorus by its words, and add it.
+  await page.getByRole('combobox', { name: 'Find a chorus' }).fill('foretaste of glory');
+  await page.getByRole('option', { name: /BLESSED ASSURANCE/ }).click();
+  const order = page.getByRole('complementary', { name: 'The slides' });
+  await expect(order).toContainText('BLESSED ASSURANCE');
+  await expect(order).toContainText('6 slides');
+
+  // Present: the welcome, the chorus with its refrain after every verse, then the songs.
+  await order.getByRole('button', { name: 'Present', exact: true }).click();
+  const presenting = page.getByRole('dialog', { name: 'Presenting hymns' });
+  await expect(
+    presenting.getByRole('img', { name: 'Welcome to Colonial Hills Bible Chapel' }),
+  ).toBeVisible();
+  await page.keyboard.press('ArrowRight');
+  await expect(presenting).toContainText('Blessed assurance, Jesus is mine!');
+  await page.keyboard.press('ArrowRight');
+  await expect(presenting).toContainText('This is my story, this is my song,');
+  await page.keyboard.press('Shift+ArrowRight');
+  await expect(presenting).toContainText('Welcome to our Sunday School,');
+  await page.keyboard.press('ArrowRight');
+  await expect(presenting).toContainText('Happy Birthday to you,');
+  await page.keyboard.press('ArrowRight');
+  await expect(presenting).toContainText('Happy Anniversary to you,');
+  await page.keyboard.press('Escape');
+  await expect(presenting).toHaveCount(0);
+
+  // Change the words: kept on this device, until Clear.
+  await page.getByRole('button', { name: 'Edit the words' }).click();
+  await page
+    .getByLabel('Words', { exact: true })
+    .fill('A first line\nA second line\n\nThe next slide');
+  await page.getByRole('button', { name: 'Save', exact: true }).click();
+  await expect(page.getByText(/words changed on this device/)).toBeVisible();
+  await expect(order).toContainText('2 slides');
+  await page.reload();
+  await expect(page.getByText(/words changed on this device/)).toBeVisible();
+  await page.getByRole('button', { name: 'Use the original' }).click();
+  await expect(order).toContainText('6 slides');
+
+  // Write one, then clear everything.
+  await page.getByRole('button', { name: 'Write a chorus of your own' }).click();
+  await page.getByLabel('Title', { exact: true }).fill('Our Own Chorus');
+  await page.getByLabel('Words', { exact: true }).fill('Words written here');
+  await page.getByRole('button', { name: 'Save', exact: true }).click();
+  await expect(order).toContainText('Our Own Chorus');
+  await order.getByRole('button', { name: 'Clear', exact: true }).click();
+  await order.getByRole('button', { name: 'Clear', exact: true }).click();
+  await expect(page.getByText(/No chorus this week/)).toBeVisible();
+  await page.reload();
+  await expect(page.getByText(/No chorus this week/)).toBeVisible();
 });
 
 test.describe('search and sections', () => {

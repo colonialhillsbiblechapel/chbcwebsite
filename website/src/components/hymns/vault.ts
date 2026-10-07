@@ -47,6 +47,29 @@ export interface Background {
   scene: Scene;
 }
 
+/** A chorus for the Sunday welcome, as slides in the order it is sung (scripts/sunday.mjs). */
+export interface Chorus {
+  number: number;
+  title: string;
+  credits: string[];
+  slides: { label: string; lines: string[] }[];
+}
+
+/** A fixed song of the welcome deck: our welcome song, the birthday and the anniversary song. */
+interface ProgramSong {
+  id: 'welcome' | 'birthday' | 'anniversary';
+  eyebrow: string;
+  title: string;
+  /** Word for word from the deck; an empty line divides two stanzas. */
+  lines: string[];
+}
+
+/** The words of the Sunday welcome slides, sealed with the hymns. */
+export interface Sunday {
+  program: { chorus: { eyebrow: string }; songs: ProgramSong[] };
+  choruses: Chorus[];
+}
+
 interface Sealed {
   v: 2;
   kdf: { name: 'PBKDF2'; hash: 'SHA-256'; iterations: number; salt: string };
@@ -155,6 +178,23 @@ export function lyrics(bookId: string): Promise<Map<string, Words>> {
   return pending;
 }
 
+let sundayWords: Promise<Sunday> | undefined;
+/** The Sunday welcome's songs and the choruses, fetched and opened once. */
+export function sunday(): Promise<Sunday> {
+  if (!sundayWords) {
+    const key = openKey;
+    if (!key) return Promise.reject(new Error('The hymns are locked.'));
+    sundayWords = fetch('/hymns/lyrics-sunday.json', { cache: 'no-cache' })
+      .then((r) => {
+        if (!r.ok) throw new Error('The choruses could not be loaded.');
+        return r.json() as Promise<{ iv: string; data: string }>;
+      })
+      .then((file) => decrypt<Sunday>(key, file, 'chbc-hymns-v1:lyrics:sunday'));
+    sundayWords.catch(() => (sundayWords = undefined));
+  }
+  return sundayWords;
+}
+
 /* Keeping the page open: for this visit always, and on this device if the visitor asks. */
 
 function storage(kind: 'local' | 'session') {
@@ -186,4 +226,5 @@ export function forgetKey() {
   storage('local')?.removeItem(STORAGE_KEY);
   openKey = undefined;
   words.clear();
+  sundayWords = undefined;
 }

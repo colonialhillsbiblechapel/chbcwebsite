@@ -5,9 +5,30 @@
 import type { Chosen } from './service';
 import type { Background, Words } from './vault';
 
+/** The chapel's finished welcome pictures (public/hymns/welcome/picture-<name>.jpg). */
+export type WelcomePicture = 'morning' | 'afternoon' | 'evening' | 'lily' | 'olive' | 'classic';
+/** The Sunday welcome slides after the welcome, each with its own painted background. */
+export type ProgramTheme = 'chorus' | 'welcome' | 'birthday' | 'anniversary';
+
 export type SlideData =
   | { kind: 'title'; chosen: Chosen; words?: Words; background?: Background }
-  | { kind: 'lines'; chosen: Chosen; label: string; lines: string[]; background?: Background };
+  | { kind: 'lines'; chosen: Chosen; label: string; lines: string[]; background?: Background }
+  /** The Sunday welcome: one of the finished pictures, or the deck's welcome set with the date. */
+  | { kind: 'welcome'; picture: WelcomePicture | 'dated'; greeting: string; date: string }
+  /** A chorus, our welcome song, or the birthday or anniversary song. */
+  | {
+      kind: 'program';
+      theme: ProgramTheme;
+      eyebrow: string;
+      title: string;
+      label: string;
+      /** Word for word; an empty line divides two stanzas. */
+      lines: string[];
+      /** The first slide of its song carries the full heading; the rest a quieter one. */
+      first: boolean;
+      /** Authors and copyright, as printed in the chorus deck (shown on its first slide). */
+      credits?: string[];
+    };
 
 type Part = Words['slides'][number];
 const sameStanza = (a?: Part, b?: Part) =>
@@ -64,4 +85,6 @@ export function stanzas(words: Words) {
 export const preview = (slide: SlideData) =>
   slide.kind === 'title'
     ? (slide.background?.name ?? slide.chosen.hymn.title)
-    : (slide.lines[0] ?? '');
+    : slide.kind === 'welcome'
+      ? `${slide.greeting} · ${slide.date}`
+      : (slide.lines.find(Boolean) ?? '');

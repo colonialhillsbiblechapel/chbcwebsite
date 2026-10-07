@@ -2,7 +2,8 @@
 /**
  * Seals the hymns for the website: private/hymns.json → public/hymns/vault.json (the index) and
  * private/lyrics/<book>.json → public/hymns/lyrics-<book>.json (the words, one file per hymnal,
- * opened only when that hymnal is used). A hymnal's backgrounds — each hymn's name, verse and
+ * opened only when that hymnal is used), and private/choruses/sunday.json → lyrics-sunday.json (the
+ * Sunday welcome slides and choruses). A hymnal's backgrounds — each hymn's name, verse and
  * picture recipe, from private/scenes/<book>.json (scripts/scenes.mjs) — are sealed with its words.
  *
  * Each file is compressed and encrypted with the same fresh random 256-bit key (AES-256-GCM). That key is
@@ -117,5 +118,20 @@ for (const { id } of books) {
   );
   console.log(
     `✓ Sealed the words${scenes.size ? ` and ${scenes.size} backgrounds` : ''} (${Math.round(words.size / 1024)} KB compressed) into public/hymns/lyrics-${id}.json.`,
+  );
+}
+
+// The Sunday welcome slides: the welcome deck's songs and the choruses (scripts/sunday.mjs).
+if (existsSync('private/choruses/sunday.json')) {
+  const sunday = await encrypt(
+    readFileSync('private/choruses/sunday.json'),
+    'chbc-hymns-v1:lyrics:sunday',
+  );
+  writeFileSync(
+    'public/hymns/lyrics-sunday.json',
+    `${JSON.stringify({ v: 2, iv: sunday.iv, data: sunday.data })}\n`,
+  );
+  console.log(
+    `✓ Sealed the Sunday welcome and choruses (${Math.round(sunday.size / 1024)} KB compressed) into public/hymns/lyrics-sunday.json.`,
   );
 }
