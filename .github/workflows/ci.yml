@@ -1,14 +1,14 @@
-# Checks the new website on every push to the redesign branch and on pull requests:
+# Checks the website on every push to master and on pull requests:
 # type check, lint, dead-code check, production build (with third-party and license checks)
 # and the end-to-end test suite against the built site.
 name: CI
 
 on:
   push:
-    branches: [redesign]
-    paths: ['website/**', '.github/workflows/**']
+    branches: [master]
+    paths: ["website/**", ".github/workflows/**"]
   pull_request:
-    paths: ['website/**', '.github/workflows/**']
+    paths: ["website/**", ".github/workflows/**"]
   workflow_dispatch:
 
 permissions:
@@ -17,12 +17,15 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     defaults:
       run:
         working-directory: website
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version-file: website/.nvmrc
           cache: npm
@@ -30,7 +33,7 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npm run verify
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: failure()
         with:
           name: playwright-report
