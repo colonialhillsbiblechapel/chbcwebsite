@@ -75,20 +75,24 @@ for (const path of [...PAGES, ...PRIVATE_PAGES]) {
 
     test('never scrolls sideways, even on the smallest phones', async ({ page }) => {
       for (const width of [320, 375, 430]) {
-        await page.setViewportSize({ width, height: 800 });
-        await page.goto(path);
+        // A fresh tab for each width: the projector page fills its screen by itself where the
+        // browser allows it (as CI's Chromium does), and a full-screen window can't be resized.
+        const tab = await page.context().newPage();
+        await tab.setViewportSize({ width, height: 800 });
+        await tab.goto(path);
         // Scroll to the end so lazily loaded content (more messages, images) is measured too.
-        await page.evaluate(async () => {
+        await tab.evaluate(async () => {
           for (let y = 0; y < document.body.scrollHeight; y += 600) {
             scrollTo(0, y);
             await new Promise((resolve) => setTimeout(resolve, 20));
           }
         });
         // Phone browsers zoom out to fit overflowing content, which widens innerWidth.
-        const widest = await page.evaluate(() =>
+        const widest = await tab.evaluate(() =>
           Math.max(document.documentElement.scrollWidth, innerWidth),
         );
         expect(widest, `page width at ${width}px`).toBeLessThanOrEqual(width);
+        await tab.close();
       }
     });
   });
