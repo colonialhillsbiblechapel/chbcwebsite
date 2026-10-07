@@ -175,18 +175,25 @@ test('second screen: the projector window follows the controls', async ({ page, 
   await expect(screen.getByLabel('Blank screen')).toBeVisible();
 });
 
-test('reads a hymn: its words as sung, with the refrain after each verse', async ({ page }) => {
+test('reads a hymn: its words as sung, with the refrain after each verse', async ({
+  page,
+  isMobile,
+}) => {
   test.skip(!PASSWORD, 'Set HYMNS_PASSWORD in website/.env to test unlocking');
   await page.goto('/hymns/');
   await page.getByLabel('Password', { exact: true }).fill(PASSWORD?.split(/[,\n]/)[0] ?? '');
   await page.getByRole('button', { name: 'Unlock' }).click();
   await page.getByRole('button', { name: /Hymns of Truth and Praise/ }).click();
   await page.getByRole('searchbox', { name: 'Search hymns' }).fill('2');
+  // On a phone the list offers no Present button; a hymn is presented from inside it.
+  const presentNow = page.getByRole('button', { name: 'Present hymn 2 now' });
+  await (isMobile ? expect(presentNow).toBeHidden() : expect(presentNow).toBeVisible());
   await page.getByRole('button', { name: /^2 Great is Thy faithfulness/ }).click();
   await expect(page).toHaveURL(/#book=praise&hymn=2$/);
 
   const reader = page.getByRole('article', { name: /Great is Thy faithfulness/ });
   await expect(reader.getByText('Hymn 2', { exact: false }).first()).toBeVisible();
+  await expect(reader.getByRole('button', { name: 'Present', exact: true })).toBeVisible();
   const verses = reader.getByRole('region', { name: /^Verse \d$/ });
   const refrains = reader.getByRole('region', { name: 'Refrain' });
   await expect(verses.first()).toBeVisible(); // the words open a moment after the page

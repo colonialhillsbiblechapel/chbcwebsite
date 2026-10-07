@@ -199,7 +199,7 @@ export function HymnApp({ data, onLock }: Props) {
           onClick={() => void present([c])}
           disabled={opening}
           title={`Present hymn ${entry.hymn.number} now`}
-          className="text-ink-soft ring-rule hover:bg-ink hover:text-paper hover:ring-ink flex size-11 shrink-0 items-center justify-center rounded-full ring-1 transition-colors"
+          className="text-ink-soft ring-rule hover:bg-ink hover:text-paper hover:ring-ink hidden size-11 shrink-0 items-center justify-center rounded-full ring-1 transition-colors sm:flex"
         >
           <Icon name="play" className="size-4" />
           <span className="sr-only">Present hymn {entry.hymn.number} now</span>
