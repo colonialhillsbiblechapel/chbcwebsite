@@ -1,0 +1,284 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/ui/PageHero.astro';
+import doctrinesHero from '@/assets/images/photos/doctrines-hero.jpg';
+import DoctrineText from '@/components/doctrines/DoctrineText.astro';
+import { getDoctrines } from '@/lib/data';
+
+const { introduction, topics } = await getDoctrines();
+const number = (n: number) => String(n).padStart(2, '0');
+---
+
+<BaseLayout
+  title="Doctrines & Practices"
+  description="The Statement of Doctrines & Practices of Colonial Hills Bible Chapel, a Brethren assembly in Houston: sixteen topics, from Scripture and God to the church."
+  scripture={['NKJV', 'NASB1995']}
+>
+  <div
+    class="read-progress fixed inset-x-0 top-0 z-50 h-0.5 bg-gold print:hidden"
+    aria-hidden="true"
+  ></div>
+
+  <PageHero
+    label="Our Foundation of Faith"
+    title="Statement of"
+    emphasis="Doctrines & Practices"
+    image={doctrinesHero}
+    imageAlt="An open Bible on a wooden lectern in a bright, quiet chapel"
+  >
+    <figure class="m-0 max-w-xl">
+      <blockquote class="font-display text-[1.35rem] leading-snug text-ink-soft italic sm:text-[1.5rem]">
+        {`"And they continued steadfastly in the apostles' doctrine and fellowship, in the breaking of bread, and in prayers."`}
+      </blockquote>
+      <figcaption class="label mt-4">Acts 2:42 · NKJV</figcaption>
+    </figure>
+  </PageHero>
+
+  <div class="mx-auto max-w-[90rem] px-5 pb-28 sm:px-10 lg:pb-40">
+    <!-- Phones and tablets: a slim bar that stays under the header with the current topic -->
+    <div
+      class="sticky top-20 z-30 -mx-5 border-y border-rule bg-paper px-5 sm:-mx-10 sm:px-10 lg:hidden print:hidden"
+      data-contents-bar
+    >
+      <details class="group relative [&_*]:scroll-mt-[-12rem]" data-contents>
+        <summary class="flex min-h-13 cursor-pointer list-none items-center justify-between gap-4 [&::-webkit-details-marker]:hidden">
+          <span class="flex min-w-0 items-baseline gap-3">
+            <span class="label shrink-0">Topics</span>
+            <span class="truncate font-display text-[1.15rem] text-ink" data-current>
+              {introduction.title}
+            </span>
+          </span>
+          <svg
+            viewBox="0 0 24 24"
+            class="size-4 shrink-0 fill-none stroke-ink stroke-[1.5] transition-transform duration-300 group-open:rotate-180"
+            aria-hidden="true"
+          >
+            <path d="m6 9 6 6 6-6"></path>
+          </svg>
+        </summary>
+        <nav aria-label="Topics">
+          <ol class="absolute -inset-x-5 top-full max-h-[70svh] overflow-y-auto overscroll-contain border-b border-rule bg-paper px-5 pt-2 pb-5 shadow-[0_24px_40px_-24px_rgb(23_20_15/0.35)] sm:-inset-x-10 sm:px-10">
+            <li>
+              <a
+                href="#introduction"
+                class="flex min-h-11 items-center gap-4 font-display text-[1.15rem] text-ink-soft aria-[current]:text-gold-ink"
+                data-contents-link="introduction"
+              >
+                <span class="w-6 font-ui text-[0.8rem] text-muted tabular-nums"></span>
+                {introduction.title}
+              </a>
+            </li>
+            {topics.map((topic) => (
+              <li>
+                <a
+                  href={`#${topic.id}`}
+                  class="flex min-h-11 items-center gap-4 font-display text-[1.15rem] text-ink-soft aria-[current]:text-gold-ink"
+                  data-contents-link={topic.id}
+                >
+                  <span class="w-6 font-ui text-[0.8rem] text-muted tabular-nums">
+                    {number(topic.order)}
+                  </span>
+                  {topic.title}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      </details>
+    </div>
+
+    <div class="lg:grid lg:grid-cols-[15rem_minmax(0,42rem)] lg:justify-center lg:gap-16 xl:grid-cols-[17rem_minmax(0,43rem)] xl:gap-28">
+      <!-- Wide screens: the contents stay beside the text and follow the reader -->
+      <nav aria-label="Topics" class="hidden pt-24 lg:block print:hidden" data-toc>
+        <div class="sticky top-32 max-h-[calc(100dvh-9rem)] overflow-y-auto overscroll-contain pr-2 pb-10">
+          <p class="label">Topics</p>
+          <ol class="mt-6 border-l border-rule">
+            <li class="group" data-toc-item="introduction">
+              <a
+                href="#introduction"
+                class="-ml-px block border-l border-transparent py-1.5 pl-5 font-display text-[1.1rem] leading-snug text-ink-soft transition-colors hover:text-ink aria-[current]:border-gold aria-[current]:text-ink"
+              >
+                {introduction.title}
+              </a>
+            </li>
+            {topics.map((topic) => (
+              <li class="group" data-toc-item={topic.id}>
+                <a
+                  href={`#${topic.id}`}
+                  class="-ml-px flex gap-3 border-l border-transparent py-1.5 pl-5 font-display text-[1.1rem] leading-snug text-ink-soft transition-colors hover:text-ink aria-[current]:border-gold aria-[current]:text-ink"
+                >
+                  <span class="w-5 shrink-0 pt-0.5 font-ui text-[0.75rem] text-muted tabular-nums">
+                    {number(topic.order)}
+                  </span>
+                  {topic.title}
+                </a>
+                {topic.subsections.length > 0 && (
+                  <ol class="hidden pb-2 group-data-active:block">
+                    {topic.subsections.map((sub) => (
+                      <li>
+                        <a
+                          href={`#${sub.id}`}
+                          class="block py-1 pl-13 text-[0.9rem] leading-snug text-muted transition-colors hover:text-ink aria-[current]:text-gold-ink"
+                        >
+                          {sub.text}
+                        </a>
+                      </li>
+                    ))}
+                  </ol>
+                )}
+              </li>
+            ))}
+          </ol>
+          <button
+            type="button"
+            class="mt-8 ml-5 inline-flex min-h-11 items-center text-[0.95rem] text-ink underline decoration-rule underline-offset-[0.3em] transition-colors hover:decoration-ink"
+            data-print
+          >
+            Print or save as PDF
+          </button>
+        </div>
+      </nav>
+
+      <article class="min-w-0" aria-label="Statement of Doctrines & Practices">
+        <!-- Exactly as written on the original page -->
+        <section
+          id="introduction"
+          class="pt-16 lg:pt-24"
+          data-topic
+          aria-labelledby="introduction-title"
+        >
+          <h2 id="introduction-title" class="text-section">
+            {introduction.title}
+          </h2>
+          <DoctrineText blocks={introduction.blocks} class="first-drop-cap mt-10" />
+          <!-- "Topics Covered", as on the original page — each one a link to its section -->
+          <div class="mt-14 border-t border-rule pt-10" data-topics-covered>
+            <h3 class="font-display text-[1.65rem] leading-tight text-ink sm:text-[1.9rem]">
+              Topics Covered
+            </h3>
+            <ol class="mt-6 grid gap-x-10 sm:grid-cols-2">
+              {topics.map((topic) => (
+                <li>
+                  <a
+                    href={`#${topic.id}`}
+                    class="flex min-h-11 items-baseline gap-4 border-b border-rule/60 py-2 font-display text-[1.2rem] text-ink-soft transition-colors hover:text-gold-ink"
+                  >
+                    <span class="w-6 shrink-0 font-ui text-[0.85rem] text-gold-ink tabular-nums">
+                      {topic.order}
+                    </span>
+                    {topic.title}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        {topics.map((topic) => (
+          <section
+            id={topic.id}
+            class="mt-20 border-t border-rule pt-16 lg:mt-28 lg:pt-20"
+            data-topic
+            aria-labelledby={`${topic.id}-title`}
+          >
+            <p class="label">Section {number(topic.order)}</p>
+            <h2 id={`${topic.id}-title`} class="mt-5 text-section">
+              {topic.title}
+            </h2>
+            <DoctrineText blocks={topic.blocks} class="mt-10" />
+          </section>
+        ))}
+
+        <p class="mt-20 border-t border-rule pt-10 print:hidden">
+          <a href="#top" class="text-link text-[1rem]">
+            Back to top
+          </a>
+        </p>
+      </article>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  // Keeps the contents in step with the reading: highlights the topic (and subsection) in view,
+  // shows it in the phone bar, and closes the phone menu once a topic is chosen.
+  const topics = [...document.querySelectorAll<HTMLElement>('[data-topic]')];
+  const items = new Map(
+    [...document.querySelectorAll<HTMLElement>('[data-toc-item]')].map((li) => [
+      li.dataset.tocItem,
+      li,
+    ]),
+  );
+  const contents = document.querySelector<HTMLDetailsElement>('[data-contents]');
+  const current = document.querySelector<HTMLElement>('[data-current]');
+  let active: HTMLElement | undefined;
+  let activeSub: Element | undefined;
+
+  const above = (el: Element, line: number) => el.getBoundingClientRect().top - line <= 0;
+
+  function update() {
+    const line = innerHeight * 0.3;
+    const topic = topics.filter((t) => above(t, line)).at(-1) ?? topics[0];
+    const sub = topic
+      ? [...topic.querySelectorAll('h3[id]')].filter((h) => above(h, line)).at(-1)
+      : undefined;
+    if (topic === active && sub === activeSub) return;
+
+    if (topic !== active) {
+      if (active) {
+        const li = items.get(active.id);
+        li?.removeAttribute('data-active');
+        li?.querySelector(':scope > a')?.removeAttribute('aria-current');
+        document
+          .querySelector(`[data-contents-link="${active.id}"]`)
+          ?.removeAttribute('aria-current');
+      }
+      if (topic) {
+        const li = items.get(topic.id);
+        li?.setAttribute('data-active', '');
+        li?.querySelector(':scope > a')?.setAttribute('aria-current', 'location');
+        document
+          .querySelector(`[data-contents-link="${topic.id}"]`)
+          ?.setAttribute('aria-current', 'location');
+        if (current) current.textContent = topic.querySelector('h2')?.textContent?.trim() ?? '';
+      }
+    }
+    document
+      .querySelectorAll('[data-toc] ol ol a[aria-current]')
+      .forEach((a) => a.removeAttribute('aria-current'));
+    if (sub) {
+      document
+        .querySelector(`[data-toc] a[href="#${sub.id}"]`)
+        ?.setAttribute('aria-current', 'true');
+    }
+    active = topic;
+    activeSub = sub;
+  }
+
+  let queued = false;
+  addEventListener(
+    'scroll',
+    () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => {
+        queued = false;
+        update();
+      });
+    },
+    { passive: true },
+  );
+  addEventListener('resize', update);
+  update();
+
+  contents?.addEventListener('click', (event) => {
+    if ((event.target as Element).closest('a')) contents.open = false;
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && contents?.open) contents.open = false;
+  });
+  document.addEventListener('click', (event) => {
+    if (contents?.open && !contents.contains(event.target as Node)) contents.open = false;
+  });
+  document.querySelector('[data-print]')?.addEventListener('click', () => print());
+</script>

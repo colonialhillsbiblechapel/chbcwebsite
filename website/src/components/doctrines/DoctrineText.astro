@@ -1,0 +1,21 @@
+---
+import { withReferences, type Block } from '@/lib/doctrines';
+
+/** One topic of the Statement of Doctrines & Practices, word for word, set for long reading. */
+interface Props {
+  blocks: Block[];
+  class?: string;
+}
+
+const { blocks, class: className } = Astro.props;
+---
+
+<div class:list={['prose-doctrine', className]}>
+  {blocks.map((block) => {
+    if (block.kind === 'h3') return <h3 id={block.id}>{block.text}</h3>;
+    const words = withReferences(block.text).map((part) =>
+      part.reference ? <span class="ref">{part.text}</span> : part.text,
+    );
+    return block.kind === 'quote' ? <blockquote>{words}</blockquote> : <p>{words}</p>;
+  })}
+</div>

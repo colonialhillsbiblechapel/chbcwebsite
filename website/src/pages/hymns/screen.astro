@@ -1,0 +1,18 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { DisplayScreen } from '@/components/hymns/DisplayScreen';
+---
+
+<!--
+  The projector screen for the hymns: opened from the hymns page with "Second screen" and
+  controlled from there. It holds no hymn data and opens nothing without that window.
+-->
+<BaseLayout
+  title="Hymns — projector screen"
+  description="The projector screen for the hymn index of Colonial Hills Bible Chapel."
+  noindex
+  bare
+>
+  <h1 class="sr-only">Hymns — projector screen</h1>
+  <DisplayScreen client:load />
+</BaseLayout>

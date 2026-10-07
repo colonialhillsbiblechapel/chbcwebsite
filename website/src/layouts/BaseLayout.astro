@@ -1,0 +1,89 @@
+---
+import '@/styles/global.css';
+import { Font } from 'astro:assets';
+import SkipLink from '@/components/layout/SkipLink.astro';
+import Seo from '@/components/layout/Seo.astro';
+import JsonLd from '@/components/layout/JsonLd.astro';
+import Header from '@/components/layout/Header.astro';
+import Footer from '@/components/layout/Footer.astro';
+import { getSettings } from '@/lib/data';
+import { breadcrumbs, homeGraph } from '@/lib/jsonld';
+import type { Translation } from '@/lib/scripture';
+
+interface Props {
+  title: string;
+  /** Search-result description; the home page uses the one in settings. */
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+  noindex?: boolean;
+  /** Bible translations quoted on this page, so the footer can print the required notices. */
+  scripture?: Translation[];
+  /** Extra schema.org nodes for this page (combined with the breadcrumb trail). */
+  structuredData?: Record<string, unknown>[];
+  /** Pages set in the interface face (the media library) preload it instead of the reading serif. */
+  uiFont?: boolean;
+  /** Just the page, without the site header and footer (the hymns projector screen). */
+  bare?: boolean;
+}
+
+const {
+  title,
+  image,
+  imageAlt,
+  noindex = false,
+  uiFont = false,
+  bare = false,
+  scripture = [],
+  structuredData: extra = [],
+} = Astro.props;
+const settings = await getSettings();
+const { pathname } = Astro.url;
+const description = Astro.props.description ?? settings.seo.homeDescription;
+const structuredData =
+  pathname === '/'
+    ? homeGraph(settings)
+    : noindex
+      ? null
+      : extra.length
+        ? { '@context': 'https://schema.org', '@graph': [breadcrumbs(title, pathname), ...extra] }
+        : breadcrumbs(title, pathname);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#f7f4ee" />
+    <Font cssVariable="--font-cormorant" preload={[{ style: 'normal' }]} />
+    <Font cssVariable="--font-ebgaramond" preload={uiFont ? false : [{ style: 'normal' }]} />
+    <Font cssVariable="--font-inter" preload={uiFont} />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <Seo
+      title={title}
+      description={description}
+      siteName={settings.name}
+      homeTitle={settings.seo.homeTitle}
+      keywords={settings.seo.keywords}
+      image={image}
+      imageAlt={imageAlt}
+      noindex={noindex}
+    />
+    {structuredData && <JsonLd data={structuredData} />}
+    <slot name="head" />
+  </head>
+  <body>
+    {!bare && <SkipLink />}
+    {!bare && <Header />}
+    <main id="main" tabindex="-1" class="outline-none">
+      <slot />
+    </main>
+    {!bare && <Footer scripture={scripture} />}
+  </body>
+</html>

@@ -1,0 +1,123 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/ui/PageHero.astro';
+import { LICENSES, photoCredits } from '@/config/photo-credits';
+import { translations } from '@/lib/scripture';
+
+const typefaces = [
+  {
+    name: 'Cormorant Garamond',
+    by: 'The Cormorant Project Authors',
+    file: '/licenses/fonts/cormorant-garamond-OFL.txt',
+  },
+  {
+    name: 'Inter',
+    by: 'The Inter Project Authors',
+    file: '/licenses/fonts/inter-OFL.txt',
+  },
+  {
+    name: 'EB Garamond',
+    by: 'The EB Garamond Project Authors',
+    file: '/licenses/fonts/eb-garamond-OFL.txt',
+  },
+];
+const h2 = 'text-[2.2rem] leading-tight';
+---
+
+<BaseLayout
+  title="Credits & Licenses"
+  description="Credits and licenses for the Scripture translations, typefaces, photographs and software used on the Colonial Hills Bible Chapel website."
+>
+  <PageHero
+    label="Credits & licenses"
+    title="With"
+    emphasis="thanks."
+    lede="The Scripture, typefaces, photographs and open-source software that make this website — and the licenses under which we use them."
+  />
+
+  <div class="mx-auto max-w-[90rem] space-y-20 px-5 pb-28 sm:px-10 lg:pb-40">
+    <section
+      class="grid gap-8 border-t border-rule pt-12 lg:grid-cols-12 lg:gap-10"
+      aria-labelledby="c-scripture"
+    >
+      <h2 id="c-scripture" class:list={[h2, 'lg:col-span-4']}>
+        Scripture
+      </h2>
+      <div class="space-y-4 text-ink-soft lg:col-span-7 lg:col-start-6">
+        <p>
+          Unless noted otherwise, Scripture quotations are from the {translations.KJV.name}, which
+          is in the public domain in the United States. Where another translation is quoted, the
+          page names it and shows the publisher’s required notice.
+        </p>
+      </div>
+    </section>
+
+    <section
+      class="grid gap-8 border-t border-rule pt-12 lg:grid-cols-12 lg:gap-10"
+      aria-labelledby="c-photos"
+    >
+      <h2 id="c-photos" class:list={[h2, 'lg:col-span-4']}>
+        Photographs & images
+      </h2>
+      <ul class="border-t border-rule lg:col-span-7 lg:col-start-6">
+        {photoCredits.map((photo) => (
+          <li class="border-b border-rule py-5">
+            <p class="font-display text-[1.35rem] leading-snug text-ink">{photo.subject}</p>
+            <p class="mt-1 text-[0.98rem] text-muted">{LICENSES[photo.source]}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section
+      class="grid gap-8 border-t border-rule pt-12 lg:grid-cols-12 lg:gap-10"
+      aria-labelledby="c-type"
+    >
+      <h2 id="c-type" class:list={[h2, 'lg:col-span-4']}>
+        Typefaces
+      </h2>
+      <ul class="border-t border-rule lg:col-span-7 lg:col-start-6">
+        {typefaces.map((font) => (
+          <li class="border-b border-rule py-5">
+            <p class="font-display text-[1.35rem] text-ink">{font.name}</p>
+            <p class="mt-1 text-[0.98rem] text-muted">
+              © {font.by}. Served from this website under the SIL Open Font License 1.1 —{' '}
+              <a href={font.file} class="text-link">
+                read the license
+              </a>
+              .
+            </p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section
+      class="grid gap-8 border-t border-rule pt-12 lg:grid-cols-12 lg:gap-10"
+      aria-labelledby="c-software"
+    >
+      <h2 id="c-software" class:list={[h2, 'lg:col-span-4']}>
+        Software
+      </h2>
+      <div class="space-y-4 text-ink-soft lg:col-span-7 lg:col-start-6">
+        <p>
+          Icons from Phosphor Icons, © 2023 Phosphor Icons, served from this website under the MIT
+          License —{' '}
+          <a href="/licenses/icons/phosphor-LICENSE.txt" class="text-link">
+            read the license
+          </a>
+          .
+        </p>
+        <p>
+          Built with Astro and Tailwind CSS, both under the MIT License. The monogram and
+          illustrations are original artwork for the chapel. A full list of third-party notices is
+          published at{' '}
+          <a href="/THIRD-PARTY-NOTICES.txt" class="text-link">
+            THIRD-PARTY-NOTICES.txt
+          </a>
+          .
+        </p>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

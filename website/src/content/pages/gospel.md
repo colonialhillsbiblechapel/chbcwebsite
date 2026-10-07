@@ -1,0 +1,9 @@
+---
+title: Gospel
+---
+
+God planned the gospel, the good news of salvation, before the world was created. With man’s first act of disobedience also came the first promise of One who would provide humanity forgiveness for the penalty of disobedience (the penalty is eternal death). God continued to work in the world and gave further promises of the One who would rescue us, promising Abraham that it would be one of his descendants. He extended this promise to Isaac and Jacob and through many years gave many prophets details of the One that would come (called Messiah or Christ).
+
+God even instituted a process of animal sacrifices signifying the death penalty being paid by someone else. John the Baptist announced the coming of the Messiah, urging people to repent in preparation of His coming. John the Baptist saw Jesus approaching and told his followers, “Behold, the Lamb of God, who takes away the sin of the world!” Jesus was the promised Messiah and fulfilled all the prophecies about the Messiah. He lived a perfect life, performed miracles, and taught with astounding wisdom. God’s plan for the Messiah was different than the people expected and Jesus was put to death on a cross. Jesus’ death on the cross was the ultimate sacrifice for humanity’s disobedience.
+
+Three days after being killed Jesus rose from the dead because of Jesus’s death and resurrection, each person now has the opportunity to receive eternal life and be cleansed of all disobedience. Just as the people in Jesus’s time expected something different from the Messiah, so is mankind’s tendency to understand how to have eternal life. We, as humans, expect that we will receive eternal life on the basis of our own merit, but none of us can live up to the perfection of God. The way of eternal life is to trust Jesus the Christ and to have God accept us based on Christ’s merit and not our own.

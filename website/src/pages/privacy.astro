@@ -1,0 +1,111 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/ui/PageHero.astro';
+import TextSection from '@/components/ui/TextSection.astro';
+import { getSettings } from '@/lib/data';
+import { telHref } from '@/lib/format';
+
+const settings = await getSettings();
+const GITHUB_PRIVACY =
+  'https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement';
+---
+
+<BaseLayout
+  title="Privacy"
+  description="How the Colonial Hills Bible Chapel website respects your privacy: no tracking, no cookies, no analytics, no forms, and nothing loaded from other companies."
+>
+  <PageHero
+    label="Privacy · Last updated October 2026"
+    title="Your"
+    emphasis="privacy."
+    lede="This website does not track you. It sets no cookies, uses no analytics or advertising, has no forms, and loads nothing from other companies when you visit."
+  />
+
+  <div class="mx-auto max-w-[90rem] space-y-16 px-5 pb-28 sm:px-10 lg:pb-40">
+    <TextSection title="What we collect">
+      <p>
+        Nothing. We do not ask for, collect or store any personal information through this website.
+      </p>
+    </TextSection>
+
+    <TextSection title="Hosting">
+      <p>
+        The site is hosted by GitHub Pages. Like every web server, GitHub records technical
+        information such as your IP address in its server logs, to keep the service secure and
+        working. We do not have access to these logs. You can read{' '}
+        <a href={GITHUB_PRIVACY} target="_blank" rel="noopener noreferrer" class="text-link">
+          GitHub’s privacy statement<span class="sr-only"> (opens in a new tab)</span>
+        </a>
+        .
+      </p>
+    </TextSection>
+
+    <TextSection title="Fonts and images">
+      <p>
+        Our typefaces and photographs are served from this website itself — never from Google Fonts
+        or any other outside service — so viewing a page shares nothing with anyone else.
+      </p>
+    </TextSection>
+
+    <TextSection title="Videos, maps and links">
+      <p>
+        Some pages link to our messages on YouTube, to directions on Google Maps or Apple Maps, and
+        to other websites. Nothing from those services loads until you choose to follow a link; once
+        you do, that site’s own privacy policy applies.
+      </p>
+    </TextSection>
+
+    <TextSection title="Messages you have watched">
+      <p>
+        When you play a message in the media library, your browser remembers it on this device only,
+        so the library can mark it as watched. This list never leaves your device and is never sent
+        to us or anyone else. You can clear it with “Clear watch history” in the media library, or
+        by clearing this site’s data in your browser.
+      </p>
+    </TextSection>
+
+    <TextSection title="The hymn index">
+      <p>
+        The hymn index is for our members and opens only with a password. It is opened inside your
+        browser; the password and the index are never sent to us or anyone else. If you tick
+        “Remember on this device”, your browser keeps an unlock key on this device so you don’t need
+        the password next time. “Lock” removes it, as does clearing this site’s data in your
+        browser. The service list you build for a meeting (hymnal and number only) is also kept on
+        this device, and a projector window opened with “Second screen” talks only to this browser.
+      </p>
+    </TextSection>
+
+    <TextSection title="Email and telephone">
+      <p>
+        If you email or call us, we use your message only to reply to you. Email addresses on this
+        site are provided for personal correspondence and may not be collected for unsolicited
+        email.
+      </p>
+    </TextSection>
+
+    <TextSection title="Children">
+      <p>We do not knowingly collect information from anyone, including children.</p>
+    </TextSection>
+
+    <TextSection title="Names and photographs">
+      <p>
+        If your name or photograph appears on this site and you would like it removed, please let us
+        know and we will remove it promptly.
+      </p>
+    </TextSection>
+
+    <TextSection title="Contact">
+      <p>
+        Questions about privacy are welcome:{' '}
+        <a href={`mailto:${settings.email}`} class="text-link">
+          {settings.email}
+        </a>{' '}
+        or{' '}
+        <a href={telHref(settings.phone)} class="text-link whitespace-nowrap">
+          {settings.phone}
+        </a>
+        . If this policy changes, we will update this page and the date above.
+      </p>
+    </TextSection>
+  </div>
+</BaseLayout>

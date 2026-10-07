@@ -1,0 +1,167 @@
+---
+import Wordmark from '../ui/Wordmark.astro';
+import { footerNav, legalNav } from '@/config/site';
+import { cityLine, getMeetings, getSettings, directionsLinks } from '@/lib/data';
+import { formatTime, telHref } from '@/lib/format';
+import { noticesFor, translations, type Translation } from '@/lib/scripture';
+
+interface Props {
+  /** Bible translations quoted on the current page (their required notices are printed here). */
+  scripture?: Translation[];
+}
+
+const settings = await getSettings();
+const meetings = await getMeetings();
+const verse = settings.footerVerse;
+const used = [...new Set([...(Astro.props.scripture ?? []), verse.translation])];
+const notices = noticesFor(used);
+const directions = directionsLinks(settings.address);
+const year = new Date().getFullYear();
+
+const serviceTimes = meetings.flatMap((m) =>
+  m.groups.flatMap((g) =>
+    g.items
+      .filter((i) => i.inFooter)
+      .map((i) => ({
+        day: m.day,
+        label: i.footerLabel ?? i.title,
+        time: formatTime(i.start),
+        online: m.online,
+      })),
+  ),
+);
+const linkClass =
+  'inline-flex min-h-11 items-center font-display text-[1.3rem] text-ink transition-colors hover:text-gold-ink';
+---
+
+<footer id="contact" class="border-t border-rule bg-paper-deep print:hidden">
+  <div class="mx-auto max-w-[90rem] px-5 pt-20 pb-12 sm:px-10 lg:pt-28">
+    <div class="grid gap-14 md:grid-cols-2 md:gap-x-10 lg:grid-cols-12">
+      <div class="lg:col-span-4">
+        <a href="/" class="inline-block" aria-label={`${settings.name} — home`}>
+          <Wordmark size="lg" />
+        </a>
+        <p class="mt-7 max-w-sm text-[1.1rem] text-muted">{settings.description}</p>
+        <figure class="mt-8 max-w-sm">
+          <blockquote class="font-display text-[1.45rem] leading-snug text-ink italic">
+            “{verse.text}”
+          </blockquote>
+          <figcaption class="label mt-4">
+            {verse.reference}
+            <abbr title={translations[verse.translation].name} class="ml-1.5 no-underline">
+              {translations[verse.translation].abbr}
+            </abbr>
+          </figcaption>
+        </figure>
+      </div>
+
+      <nav aria-labelledby="footer-chapel" class="lg:col-span-3">
+        <h2 id="footer-chapel" class="label">
+          Quick Links
+        </h2>
+        <ul class="mt-6 space-y-1.5">
+          {footerNav.map((link) => (
+            <li>
+              <a href={link.href} rel={link.rel} class={linkClass}>
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <div class="lg:col-span-2">
+        <h2 class="label">Service Times</h2>
+        <ul class="mt-6 space-y-4">
+          {serviceTimes.map((s) => (
+            <li>
+              <span class="block font-display text-[1.3rem] leading-tight text-ink">{s.label}</span>
+              <span class="text-[0.98rem] text-muted">
+                {[s.day, s.time, ...(s.online ? ['online'] : [])].join(' · ')}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="lg:col-span-3">
+        <h2 class="label">Contact Information</h2>
+        <address class="mt-6 not-italic">
+          <p class="font-display text-[1.3rem] leading-snug text-ink">
+            {settings.address.street}
+            <br />
+            {cityLine(settings.address)}
+          </p>
+          <p class="mt-1 flex flex-wrap gap-x-6 text-[0.98rem]">
+            <a
+              href={directions.google}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-link inline-flex min-h-11 items-center"
+            >
+              Google Maps<span class="sr-only"> (opens in a new tab)</span>
+            </a>
+            <a
+              href={directions.apple}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-link inline-flex min-h-11 items-center"
+            >
+              Apple Maps<span class="sr-only"> (opens in a new tab)</span>
+            </a>
+          </p>
+          <p class="mt-3 text-[1.05rem]">
+            <a
+              href={telHref(settings.phone)}
+              class="flex min-h-11 items-center text-ink hover:text-gold-ink"
+            >
+              {settings.phone}
+            </a>
+            <a
+              href={`mailto:${settings.email}`}
+              class="flex min-h-11 items-center text-ink hover:text-gold-ink"
+            >
+              <span class="min-w-0 break-words">{settings.email}</span>
+            </a>
+          </p>
+        </address>
+      </div>
+    </div>
+
+    <div class="mt-20 flex flex-col gap-6 border-t border-rule pt-8 text-[0.95rem] text-muted lg:flex-row lg:items-start lg:justify-between">
+      <div class="max-w-2xl space-y-2">
+        <p>
+          Scripture quotations are from the{' '}
+          {used.map((t) => translations[t].name).join(' and the ')}.
+        </p>
+        {notices.map((n) => (
+          <p class="text-[0.85rem]">
+            {n.notice}
+            {n.link && (
+              <>
+                {' '}
+                <a href={n.link.href} target="_blank" rel="noopener noreferrer" class="text-link">
+                  {n.link.label}
+                </a>
+              </>
+            )}
+          </p>
+        ))}
+      </div>
+      <div class="flex flex-col gap-3 lg:items-end">
+        <ul class="flex flex-wrap gap-x-6">
+          {legalNav.map((link) => (
+            <li>
+              <a href={link.href} class="inline-flex min-h-11 items-center hover:text-ink">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p>
+          © {year} {settings.name}
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

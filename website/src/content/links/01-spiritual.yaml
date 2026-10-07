@@ -1,0 +1,16 @@
+order: 1
+title: Spiritual Resources
+icon: book-open-text
+links:
+  - label: Daily Devotions - Choice Gleanings
+    description: Daily devotional readings from Gospel Folio Press
+    url: https://gospelfolio.com/category/choice-gleanings/
+    icon: sun-horizon
+  - label: Narrow Path Ministries
+    description: Biblical teaching and resources from Dr. John Mathew
+    url: https://www.narrowpathministries.net/
+    icon: cross
+  - label: Mom Focus
+    description: Encouraging videos and resources for Christian mothers
+    url: https://www.youtube.com/playlist?list=PLqTEXtxAI-9UfiY5dF-EHPF19h4-IuSO7
+    icon: heart

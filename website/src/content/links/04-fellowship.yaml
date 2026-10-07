@@ -1,0 +1,8 @@
+order: 4
+title: Local Fellowship
+icon: users-three
+links:
+  - label: Other Nearby Assemblies
+    description: Find other like-minded assemblies in the Houston area and beyond
+    url: https://assemblycare.org/dl/54886d
+    icon: church

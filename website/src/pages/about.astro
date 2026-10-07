@@ -1,0 +1,99 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/ui/PageHero.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import Panorama from '@/components/ui/Panorama.astro';
+import Button from '@/components/ui/Button.astro';
+import entrance from '@/assets/images/ministries/hero.jpg';
+import henryRoad from '@/assets/images/about/henry-road.jpg';
+import { getBeliefs, getPage } from '@/lib/data';
+import { toRoman } from '@/lib/format';
+
+const [history, beliefs] = await Promise.all([getPage('history'), getBeliefs()]);
+---
+
+<BaseLayout
+  title="About Us"
+  description="The history of Colonial Hills Bible Chapel, a Brethren assembly on Henry Road in Houston since 1969, and the core beliefs that guide our worship and fellowship."
+>
+  <PageHero
+    label="About Us"
+    title="Our History &"
+    emphasis="Beliefs"
+    image={entrance}
+    imageAlt="The front entrance of Colonial Hills Bible Chapel with its green covered portico under a blue sky"
+    caption="The entrance on Henry Road"
+    imagePosition="left"
+  >
+    <Button href="#history" arrow>
+      Our History
+    </Button>
+    <Button href="#beliefs" variant="paper">
+      What We Believe
+    </Button>
+    <Button href="/#services" variant="paper">
+      Meeting times
+    </Button>
+  </PageHero>
+
+  <!-- History, exactly as written -->
+  <section
+    id="history"
+    class="mx-auto max-w-[90rem] px-5 pb-28 sm:px-10 lg:pb-40"
+    aria-labelledby="history-title"
+  >
+    <div class="grid gap-14 lg:grid-cols-12 lg:gap-10">
+      <div class="lg:sticky lg:top-32 lg:col-span-4 lg:self-start">
+        <SectionHeading id="history-title" label={history.title} title={history.subtitle ?? ''} />
+      </div>
+      <div class="prose-chapel first-drop-cap closing-statement reveal max-w-2xl text-[1.2rem] leading-[1.75] text-ink-soft lg:col-span-7 lg:col-start-6">
+        <history.Content />
+      </div>
+    </div>
+
+    <Panorama
+      class="mt-20 lg:mt-28"
+      src={henryRoad}
+      alt="Colonial Hills Bible Chapel seen from its driveway, with the sign and the lawn under a clear blue sky."
+      caption="The chapel on Henry Road, Houston"
+    />
+  </section>
+
+  <!-- Beliefs, exactly as written -->
+  <section id="beliefs" class="border-t border-rule bg-paper-deep" aria-labelledby="beliefs-title">
+    <div class="mx-auto max-w-[90rem] px-5 py-28 sm:px-10 lg:py-40">
+      <div class="grid gap-14 lg:grid-cols-12 lg:gap-10">
+        <div class="lg:sticky lg:top-32 lg:col-span-4 lg:self-start">
+          <SectionHeading id="beliefs-title" label="Our Faith" title="What We" emphasis="Believe" />
+          <p class="reveal mt-8 max-w-sm text-ink-soft">
+            Our faith is founded on the eternal truths of God’s Word. Here are the core beliefs that
+            guide our worship and fellowship:
+          </p>
+          <Button href="/doctrines/" arrow class="reveal mt-10">
+            Doctrines & Practices
+          </Button>
+        </div>
+        <ol class="border-t border-rule lg:col-span-7 lg:col-start-6">
+          {beliefs.map((belief, i) => (
+            <li class="reveal grid gap-4 border-b border-rule py-8 sm:grid-cols-[4.5rem_minmax(0,1fr)] sm:gap-6">
+              <span
+                class="gilded font-display text-[1.9rem] leading-none sm:text-[2.2rem]"
+                aria-hidden="true"
+              >
+                {toRoman(i + 1)}
+              </span>
+              <div>
+                <p class="font-display text-[1.45rem] leading-snug text-ink">{belief.statement}</p>
+                <p class="label mt-4 flex flex-wrap gap-x-3 [&>span+span]:before:mr-3 [&>span+span]:before:content-['·']">
+                  {belief.references.map((ref) => (
+                    <span class="sm:whitespace-nowrap">{ref}</span>
+                  ))}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

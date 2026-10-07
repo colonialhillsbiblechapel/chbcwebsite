@@ -1,0 +1,45 @@
+# Builds website/ and publishes it to GitHub Pages.
+# Activates at launch: merge to master, then set Settings → Pages → Source to "GitHub Actions".
+# Scheduled runs rebuild the site so past events drop off and new YouTube messages appear by
+# themselves: every night, and on Sunday afternoon after the morning's ministry is uploaded.
+name: Deploy website
+
+on:
+  push:
+    branches: [master]
+  schedule:
+    - cron: '15 6 * * *' # 06:15 UTC = shortly after midnight in Houston (CST/CDT)
+    - cron: '0 20 * * 0' # Sunday 20:00 UTC = early afternoon in Houston
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: withastro/action@v6
+        with:
+          path: ./website
+          node-version: 24
+          # `npm run build` fails (and nothing is published) if the third-party or license checks fail.
+          build-cmd: npm run build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

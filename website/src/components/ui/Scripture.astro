@@ -1,0 +1,41 @@
+---
+import { translations, type Translation } from '@/lib/scripture';
+
+/** A Scripture quotation set as a large typographic statement, with its reference. */
+interface Props {
+  text: string;
+  reference: string;
+  translation: Translation;
+  size?: 'statement' | 'display';
+  align?: 'start' | 'center';
+  class?: string;
+}
+
+const {
+  text,
+  reference,
+  translation,
+  size = 'statement',
+  align = 'start',
+  class: className,
+} = Astro.props;
+---
+
+<figure class:list={['reveal', align === 'center' && 'text-center', className]}>
+  <blockquote
+    class:list={[
+      'font-display text-ink',
+      size === 'display'
+        ? 'text-[clamp(2.3rem,1.4rem+3.6vw,4.6rem)] leading-[1.1]'
+        : 'text-statement',
+    ]}
+  >
+    <p>{text}</p>
+  </blockquote>
+  <figcaption class="label mt-8 text-[0.78rem]">
+    {reference}
+    <abbr title={translations[translation].name} class="ml-2 no-underline">
+      {translations[translation].abbr}
+    </abbr>
+  </figcaption>
+</figure>

@@ -1,0 +1,130 @@
+---
+import { cityLine, directionsLinks, getMeetings, getSettings } from '@/lib/data';
+import { formatTime, formatTimeRange } from '@/lib/format';
+import { DAYS, describeSlot, meetingSlots } from '@/lib/schedule';
+
+const [meetings, settings] = await Promise.all([getMeetings(), getSettings()]);
+const directions = directionsLinks(settings.address);
+const slots = meetingSlots(meetings);
+const first = slots[0];
+const onlineDays = meetings.filter((m) => m.online).map((m) => m.day);
+const locationLine =
+  `Meetings are held at the chapel, ${settings.address.street}, ${cityLine(settings.address)}` +
+  (onlineDays.length ? ` — except ${onlineDays.join(' and ')}, which meets online.` : '.');
+---
+
+<section id="services" class="bg-chapel text-paper" aria-labelledby="services-title">
+  <div class="mx-auto max-w-[90rem] px-5 py-24 sm:px-10 lg:py-32">
+    <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+      <header class="reveal">
+        <h2 id="services-title" class="text-section text-paper">
+          Regular Meetings
+        </h2>
+        <p class="mt-4 max-w-xl text-lede text-paper/85">
+          Join us for worship, fellowship, and growing together in God’s Word
+        </p>
+      </header>
+      {first && (
+        <p
+          class="reveal border border-gold/45 px-5 py-3 text-paper"
+          data-band-schedule={JSON.stringify(slots)}
+        >
+          <span class="label mr-3 text-gold-light">Next</span>
+          <span data-band-next>{describeSlot(first, first.day, formatTime)}</span>
+        </p>
+      )}
+    </div>
+
+    <ol class="mt-14 grid border-t border-chapel-line lg:mt-20 lg:grid-cols-3">
+      {meetings.map((meeting, i) => (
+        <li
+          class:list={[
+            'reveal relative flex flex-col border-b border-chapel-line py-10 last:border-b-0 lg:border-b-0 lg:px-10',
+            i === 0 ? 'lg:pl-0' : 'lg:border-l',
+            i === meetings.length - 1 && 'lg:pr-0',
+          ]}
+          data-dow={DAYS.indexOf(meeting.day)}
+        >
+          <span
+            class="absolute inset-x-0 -top-px h-0.5 bg-gold-light opacity-0 transition-opacity duration-700 data-on:opacity-100"
+            data-next-bar
+            aria-hidden="true"
+          />
+          <p class="h-6">
+            <span class="label bg-gold-light px-2 text-chapel" data-next-badge hidden>
+              Next
+            </span>
+          </p>
+          <h3 class="mt-2 text-[2.2rem] leading-tight text-paper">{meeting.label}</h3>
+          {meeting.online && (
+            <p class="mt-5 self-start border border-gold-light/60 px-3 py-1.5 text-[0.95rem] text-gold-light">
+              Online only, via WebEx — please ask us for the link
+            </p>
+          )}
+
+          <div class="mt-8 space-y-8">
+            {meeting.groups.map((group) => (
+              <div>
+                {group.heading && <p class="label mb-4 text-gold-light">{group.heading}</p>}
+                <ul class="space-y-5">
+                  {group.items.map((item) => (
+                    <li>
+                      <p class="text-[0.78rem] tracking-[0.12em] text-gold-light uppercase">
+                        {formatTimeRange(item.start, item.end)}
+                      </p>
+                      <p class="mt-1 font-display text-[1.45rem] leading-snug text-paper">
+                        {item.title}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          <a
+            href={`/calendar/${meeting.day.toLowerCase()}.ics`}
+            download
+            class="mt-10 inline-flex min-h-11 items-center self-start text-[0.95rem] text-gold-light underline decoration-gold/50 underline-offset-[6px] transition-colors hover:decoration-gold-light lg:mt-auto lg:pt-10"
+          >
+            Add to calendar
+          </a>
+        </li>
+      ))}
+    </ol>
+
+    <p class="reveal mt-4 flex flex-col gap-3 border-t border-chapel-line pt-8 text-paper/85 sm:flex-row sm:items-baseline sm:justify-between">
+      <span>{locationLine}</span>
+      <a
+        href={directions.google}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex min-h-11 shrink-0 items-center self-start text-gold-light underline decoration-gold/50 underline-offset-[6px] transition-colors hover:decoration-gold-light"
+      >
+        Get directions<span class="sr-only"> (opens in a new tab)</span>
+      </a>
+    </p>
+  </div>
+</section>
+
+<script>
+  import { formatTime } from '@/lib/format';
+  import { describeSlot, nextSlot, whenLabel, type Slot } from '@/lib/schedule';
+
+  // Name the next gathering (Houston time) and mark its day.
+  const holder = document.querySelector<HTMLElement>('[data-band-schedule]');
+  const next = holder && nextSlot(JSON.parse(holder.dataset.bandSchedule ?? '[]') as Slot[]);
+  if (next) {
+    const label = document.querySelector<HTMLElement>('[data-band-next]');
+    if (label) {
+      label.textContent = describeSlot(
+        next.slot,
+        whenLabel(next.daysAway, next.slot.day),
+        formatTime,
+      );
+    }
+    const day = document.querySelector(`#services li[data-dow="${next.slot.dow}"]`);
+    day?.querySelector('[data-next-badge]')?.removeAttribute('hidden');
+    day?.querySelector('[data-next-bar]')?.setAttribute('data-on', '');
+  }
+</script>

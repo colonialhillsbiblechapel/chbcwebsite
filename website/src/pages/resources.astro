@@ -1,0 +1,205 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/ui/PageHero.astro';
+import Icon from '@/components/ui/Icon.astro';
+import { getLinkCategories } from '@/lib/data';
+
+const categories = await getLinkCategories();
+const domain = (url: string) => new URL(url).hostname.replace(/^www\./, '');
+const anchor = (title: string) => title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+
+/** Each category gets its own quiet color, in order (repeating if more are added). */
+const TONES = [
+  { tint: 'bg-sage-tint', ink: 'text-chapel-mid', edge: 'hover:border-chapel-mid/40' },
+  { tint: 'bg-gold-tint', ink: 'text-gold-ink', edge: 'hover:border-gold/60' },
+  { tint: 'bg-pew-tint', ink: 'text-pew', edge: 'hover:border-pew/30' },
+  { tint: 'bg-slate-tint', ink: 'text-slate', edge: 'hover:border-slate/30' },
+];
+const sections = categories.map((category, i) => ({
+  ...category,
+  id: anchor(category.title),
+  tone: TONES[i % TONES.length] ?? TONES[0],
+}));
+---
+
+<BaseLayout
+  title="Helpful Resources"
+  description="Helpful links for spiritual growth: daily devotions, Bible teaching, Brethren history and archives, ministry partners and nearby assemblies."
+>
+  <PageHero label="Helpful Links" title="Resources for Your" emphasis="Spiritual Growth" />
+
+  <div class="mx-auto max-w-[90rem] px-5 pb-28 sm:px-10 lg:pb-40">
+    <!-- Introduction, as on the original page, with a way into each category -->
+    <section class="border-t border-rule pt-14 lg:pt-20" aria-labelledby="resources-title">
+      <div class="grid gap-8 lg:grid-cols-12 lg:gap-10">
+        <h2 id="resources-title" class="reveal text-section lg:col-span-5">
+          Christian Resources
+        </h2>
+        <p class="reveal max-w-2xl text-lede text-ink-soft lg:col-span-7">
+          We’ve compiled these helpful links to assist you in your spiritual journey. These
+          resources include devotional materials, historical information, and connections to other
+          ministries and assemblies.
+        </p>
+      </div>
+
+      <nav aria-label="Categories" class="mt-14">
+        <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5 lg:gap-4">
+          {sections.map((section) => (
+            <li>
+              <a
+                href={`#${section.id}`}
+                class:list={[
+                  'group flex h-full items-center gap-3 p-3 transition-[border-color,transform,box-shadow] duration-500 ease-gentle hover:-translate-y-0.5 sm:p-4 lg:min-h-32 lg:flex-col lg:items-start lg:justify-between lg:gap-5 lg:p-5 border border-rule bg-white/60 hover:shadow-[0_18px_36px_-28px_rgb(23_20_15/0.5)]',
+                  section.tone.edge,
+                ]}
+              >
+                <span
+                  class:list={[
+                    'flex size-10 shrink-0 items-center justify-center rounded-full lg:size-11',
+                    section.tone.tint,
+                  ]}
+                >
+                  <Icon name={section.icon} class:list={['size-5 lg:size-6', section.tone.ink]} />
+                </span>
+                <span class="font-display text-[1.08rem] leading-tight lg:text-[1.2rem] text-ink">
+                  {section.title}
+                </span>
+              </a>
+            </li>
+          ))}
+          <li class="col-span-2 sm:col-span-1">
+            <a
+              href="#hymns"
+              class="group flex h-full items-center gap-3 p-3 transition-[border-color,transform,box-shadow] duration-500 ease-gentle hover:-translate-y-0.5 sm:p-4 lg:min-h-32 lg:flex-col lg:items-start lg:justify-between lg:gap-5 lg:p-5 bg-chapel hover:shadow-[0_18px_36px_-28px_rgb(23_20_15/0.7)]"
+            >
+              <span class="flex size-10 shrink-0 items-center justify-center rounded-full bg-chapel-mid lg:size-11">
+                <Icon name="music-notes" class="size-5 text-gold-light lg:size-6" />
+              </span>
+              <span class="font-display text-[1.08rem] leading-tight lg:text-[1.2rem] text-paper">
+                Hymns
+              </span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </section>
+
+    {sections.map((section) => (
+      <section
+        id={section.id}
+        class="mt-24 grid gap-10 border-t border-rule pt-14 lg:mt-32 lg:grid-cols-12 lg:gap-10 lg:pt-20"
+        aria-labelledby={`${section.id}-title`}
+      >
+        <!-- The category: its icon and title, staying in view beside its links on wide screens -->
+        <div class="reveal lg:col-span-4">
+          <div class="flex items-center gap-5 lg:sticky lg:top-32 lg:flex-col lg:items-start lg:gap-7">
+            <span
+              class:list={[
+                'flex size-16 shrink-0 items-center justify-center rounded-full ring-1 ring-current/15 ring-inset sm:size-20',
+                section.tone.tint,
+                section.tone.ink,
+              ]}
+            >
+              <Icon name={section.icon} class="size-8 sm:size-10" />
+            </span>
+            <h2 id={`${section.id}-title`} class="text-section">
+              {section.title}
+            </h2>
+          </div>
+        </div>
+
+        <ul class="space-y-4 lg:col-span-8">
+          {section.links.map((link) => (
+            <li class="reveal">
+              <a
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class:list={[
+                  'group grid grid-cols-[auto_minmax(0,1fr)] gap-x-5 gap-y-4 border border-rule bg-white/60 p-5 transition-[border-color,transform,box-shadow] duration-500 ease-gentle hover:-translate-y-0.5 hover:shadow-[0_24px_48px_-32px_rgb(23_20_15/0.5)] sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:items-center sm:gap-x-7 sm:p-7',
+                  section.tone.edge,
+                ]}
+              >
+                <span
+                  class:list={[
+                    'flex size-12 items-center justify-center rounded-full sm:size-14',
+                    section.tone.tint,
+                    section.tone.ink,
+                  ]}
+                >
+                  <Icon name={link.icon} class="size-6 sm:size-7" />
+                </span>
+                <span class="min-w-0">
+                  <span class="block font-display text-[1.5rem] leading-tight text-ink transition-colors group-hover:text-gold-ink sm:text-[1.7rem]">
+                    {link.label}
+                  </span>
+                  <span class="mt-2 block text-ink-soft">{link.description}</span>
+                </span>
+                <span class="col-span-2 flex items-center justify-between gap-4 border-t border-rule pt-4 sm:col-span-1 sm:flex-col sm:items-end sm:border-0 sm:pt-0">
+                  <span class="label truncate sm:hidden">{domain(link.url)}</span>
+                  <span class="flex size-10 items-center justify-center rounded-full ring-1 ring-rule transition-colors duration-500 group-hover:bg-ink group-hover:ring-ink">
+                    <Icon
+                      name="arrow-up-right"
+                      class="size-5 text-gold-ink transition-colors duration-500 group-hover:text-paper"
+                    />
+                  </span>
+                </span>
+                <span class="label col-start-2 -mt-2 hidden truncate sm:block">
+                  {domain(link.url)}
+                </span>
+                <span class="sr-only">(opens in a new tab)</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+
+  <!-- Hymns (Internal Use), with the original wording: a closing band in the chapel green -->
+  <section
+    id="hymns"
+    class="border-t border-chapel-line bg-chapel text-paper"
+    aria-labelledby="hymns-title"
+  >
+    <div class="mx-auto grid max-w-[90rem] items-center gap-10 px-5 py-20 sm:px-10 lg:grid-cols-12 lg:py-28">
+      <div class="reveal flex items-center gap-5 lg:col-span-5">
+        <span class="flex size-16 shrink-0 items-center justify-center rounded-full bg-chapel-mid sm:size-[4.5rem]">
+          <Icon name="music-notes" class="size-8 text-gold-light sm:size-9" />
+        </span>
+        <h2 id="hymns-title" class="text-section text-paper">
+          Hymns (Internal Use)
+        </h2>
+      </div>
+      <div class="reveal lg:col-span-7">
+        <a
+          href="/hymns/"
+          rel="nofollow"
+          class="group flex items-center justify-between gap-6 border border-chapel-line p-6 transition-colors duration-500 hover:border-gold-light/60 sm:p-7"
+        >
+          <span>
+            <span class="flex flex-wrap items-center gap-x-4 gap-y-2">
+              <span class="font-display text-[1.6rem] leading-tight text-paper">Hymns</span>
+              <span class="inline-flex items-center gap-1.5 rounded-full bg-chapel-mid px-3 py-1 font-ui text-[0.75rem] font-medium text-gold-light">
+                <Icon name="lock-simple" class="size-3.5" />
+                Password required
+              </span>
+            </span>
+            <span class="mt-2 block text-paper/85">
+              Access our collection of hymns for worship and remembrance
+            </span>
+          </span>
+          <Icon
+            name="arrow-right"
+            class="size-6 text-gold-light transition-transform duration-500 ease-gentle group-hover:translate-x-1"
+          />
+        </a>
+        <p class="mt-5 text-[0.95rem] text-paper/75">
+          <strong class="font-medium text-paper">Notice:</strong> This resource is for internal use
+          only. All credits go to the original authors and copyright holders. Not for commercial
+          use.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

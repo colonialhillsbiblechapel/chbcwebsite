@@ -1,0 +1,16 @@
+day: Saturday
+label: Saturday
+order: 3
+groups:
+  - items:
+      - start: '09:00'
+        title: Men’s Prayer Meeting
+        inFooter: true
+        footerLabel: Saturday Prayer Meeting
+  - heading: Second Saturday
+    monthlyWeek: 2
+    items:
+      - start: '09:00'
+        title: Men’s Breakfast and Prayer Meeting
+      - start: '09:00'
+        title: Women’s Bible Study

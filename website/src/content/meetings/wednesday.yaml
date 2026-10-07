@@ -1,0 +1,11 @@
+day: Wednesday
+label: Wednesday
+order: 2
+online: true
+groups:
+  - items:
+      - start: '19:00'
+        end: '20:00'
+        title: Prayer Meeting & Bible Study
+        inFooter: true
+        footerLabel: Wednesday Bible Study

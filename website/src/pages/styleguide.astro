@@ -1,0 +1,112 @@
+---
+/**
+ * Internal design-system reference (not linked, not indexed, excluded from the sitemap).
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Button from '@/components/ui/Button.astro';
+import Scripture from '@/components/ui/Scripture.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import Wordmark from '@/components/ui/Wordmark.astro';
+
+const colors = [
+  { name: 'Paper', hex: '#F7F4EE', use: 'Page', swatch: 'bg-paper' },
+  { name: 'Paper deep', hex: '#F0EBE2', use: 'Bands, footer', swatch: 'bg-paper-deep' },
+  { name: 'Paper shade', hex: '#E8E1D5', use: 'Image wells', swatch: 'bg-paper-shade' },
+  { name: 'Rule', hex: '#DCD3C4', use: 'Hairlines', swatch: 'bg-rule' },
+  { name: 'Ink', hex: '#17140F', use: 'Headings, buttons', swatch: 'bg-ink' },
+  { name: 'Ink soft', hex: '#39332A', use: 'Body text', swatch: 'bg-ink-soft' },
+  { name: 'Muted', hex: '#5C5446', use: 'Secondary text', swatch: 'bg-muted' },
+  { name: 'Gold ink', hex: '#7A5C24', use: 'Labels', swatch: 'bg-gold-ink' },
+  { name: 'Gold', hex: '#B38F4D', use: 'Hairlines, ornament', swatch: 'bg-gold' },
+  { name: 'Wine', hex: '#7B2C2F', use: 'Rare accents', swatch: 'bg-wine' },
+];
+---
+
+<BaseLayout
+  title="Style Guide"
+  description="Design system reference for the Colonial Hills Bible Chapel website."
+  noindex
+>
+  <div class="mx-auto max-w-[90rem] space-y-28 px-5 pt-40 pb-28 sm:px-10">
+    <SectionHeading
+      as="h1"
+      label="Design system"
+      title="Sanctuary,"
+      emphasis="in paper and gold."
+    />
+
+    <section class="grid gap-10 lg:grid-cols-2" aria-label="Monogram">
+      <div class="flex items-center justify-center bg-paper-deep p-16">
+        <span
+          class="grid size-56 place-items-center rounded-[22%] bg-ink font-display text-[7rem] leading-none font-semibold tracking-[-0.03em] text-paper"
+          role="img"
+          aria-label="The Colonial Hills Bible Chapel monogram"
+        >
+          CH
+        </span>
+      </div>
+      <div class="flex flex-col justify-center gap-8">
+        <Wordmark size="lg" />
+        <p class="max-w-md text-muted">
+          The chapel's initials, CH, in Cormorant Garamond: paper on ink, with no symbol. The same
+          monogram is the favicon and the sharing image.
+        </p>
+      </div>
+    </section>
+
+    <section aria-label="Colour">
+      <p class="label">Colour</p>
+      <ul class="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
+        {colors.map((c) => (
+          <li>
+            <div class:list={['h-24 ring-1 ring-rule', c.swatch]} />
+            <p class="mt-3 font-display text-[1.25rem] text-ink">{c.name}</p>
+            <p class="text-[0.95rem] text-muted">
+              {c.hex} · {c.use}
+            </p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="space-y-14" aria-label="Typography">
+      <p class="label">Typography · Cormorant Garamond &amp; EB Garamond</p>
+      <p class="text-hero">
+        Gathered unto <em class="italic">His name.</em>
+      </p>
+      <p class="text-section">
+        When we <em class="italic">gather.</em>
+      </p>
+      <Scripture
+        text="Thy word is a lamp unto my feet, and a light unto my path."
+        reference="Psalm 119:105"
+        translation="KJV"
+      />
+      <p class="drop-cap max-w-2xl text-[1.25rem] text-ink">
+        Our desire is to honour the Lord Jesus Christ, and to follow as simply as we can the pattern
+        the New Testament gives for believers gathering together.
+      </p>
+      <p class="flex items-baseline gap-10">
+        <span class="gilded font-display text-[4rem] leading-none" aria-hidden="true">
+          I II III IV
+        </span>
+        <span class="label">Gilded numerals</span>
+      </p>
+    </section>
+
+    <section aria-label="Buttons">
+      <p class="label">Buttons</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <Button href="#" arrow>
+          Plan your visit
+        </Button>
+        <Button href="#" variant="paper">
+          The glad tidings
+        </Button>
+        <a href="#" class="text-link self-center">
+          A text link
+        </a>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

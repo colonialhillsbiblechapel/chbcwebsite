@@ -1,0 +1,22 @@
+---
+import chapel from '@/assets/images/home/hero-2.jpg';
+import Panorama from '../ui/Panorama.astro';
+import Scripture from '../ui/Scripture.astro';
+---
+
+<section class="mx-auto max-w-[90rem] px-5 pb-28 sm:px-10 lg:pb-40" aria-label="Acts 2:42">
+  <Scripture
+    class="mx-auto max-w-5xl"
+    size="display"
+    align="center"
+    text="And they continued steadfastly in the apostles’ doctrine and fellowship, and in breaking of bread, and in prayers."
+    reference="Acts 2:42"
+    translation="NKJV"
+  />
+  <Panorama
+    class="mt-20 lg:mt-28"
+    src={chapel}
+    alt="Colonial Hills Bible Chapel and its sign on Henry Road under a clear blue Texas sky."
+    caption="Colonial Hills Bible Chapel, Henry Road, Houston"
+  />
+</section>

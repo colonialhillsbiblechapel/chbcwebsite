@@ -1,0 +1,12 @@
+order: 2
+title: Historical Resources
+icon: scroll
+links:
+  - label: Brethren History
+    description: Brethren Archive and History Network (BAHN) - Promoting scholarly analysis and understanding of the Brethren movement
+    url: https://www.brethrenhistory.org/
+    icon: clock-counter-clockwise
+  - label: Brethren Archive
+    description: Comprehensive archive of Brethren historical documents and resources
+    url: https://www.brethrenarchive.org/
+    icon: archive

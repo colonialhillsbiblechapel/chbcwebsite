@@ -1,0 +1,63 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  siteName: string;
+  /** Full <title> for the home page. */
+  homeTitle: string;
+  keywords: string[];
+  /** Path or absolute URL of the 1200×630 social preview image. */
+  image?: string;
+  imageAlt?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  siteName,
+  homeTitle,
+  keywords,
+  image = '/og.png',
+  imageAlt = `${siteName}, Houston, Texas — Gathering in His Name Since 1975`,
+  noindex = false,
+} = Astro.props;
+const isHome = Astro.url.pathname === '/';
+const fullTitle = isHome ? homeTitle : `${title} · ${siteName}, Houston`;
+const socialTitle = isHome ? siteName : title;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const imageUrl = new URL(image, Astro.site);
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<meta name="keywords" content={keywords.join(', ')} />
+<meta name="geo.region" content="US-TX" />
+<meta name="geo.placename" content="Houston" />
+<link rel="canonical" href={canonical} />
+<meta
+  name="robots"
+  content={
+    noindex
+      ? 'noindex, nofollow, noarchive'
+      : 'index, follow, max-image-preview:large, max-snippet:-1'
+  }
+/>
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content={socialTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={imageAlt} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={socialTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+<meta name="twitter:image:alt" content={imageAlt} />

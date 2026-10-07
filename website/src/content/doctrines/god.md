@@ -1,0 +1,30 @@
+---
+title: 'God'
+order: 2
+---
+
+We believe God is the sole, eternal, self-existent being. “I AM WHO I AM” (Exodus 3:14), the Lord told Moses. “God is spirit” (John 4:24). He has personality, possessing mind, will, and emotions (Exodus 3:14). God is love (1 John 4:8). He is good and faithful in all things (Psalm 119:68; Lamentations 3:22–23). He is compassionate and gracious, slow to anger, and abounding in lovingkindness and truth (Exodus 34:6). Without sin, He dwells in perfect holiness and justice (Isaiah 6:3; Jeremiah 9:24). He has all knowledge, all power, and is present everywhere (Isaiah 40:28; Psalm 90:2; Jeremiah 23:24; 32:17; Psalm 147:5). He is infinite in all His attributes. Sovereign over all things, He rules the universe (1 Chronicles 29:11). He is God our Saviour, Who alone is wise, to Him be glory and majesty, dominion and power both now and forever (Jude 1:25).
+
+We believe there is one God. “Hear, O Israel! The Lord our God, the Lord is one!” (Deuteronomy 6:4). He eternally exists in three persons: Father, Son, and Holy Spirit. The Father is God (John 20:17). The Son is God (Titus 2:13). The Spirit is God (Acts 5:3–4). These three persons are co-equal, inseparable, yet distinct. We see the Father speak from heaven, the Spirit descending as a dove, and Jesus upon the Son in the baptism of Christ (Matthew 3:16–17). We also see the three persons distinguished in Christ’s instructions to His disciples to baptize “in the name of the Father and of the Son and of the Holy Spirit” (Matthew 28:19). Yet, there is one God (1 Timothy 2:5).
+
+We offer the following applications and supporting principles:
+
+### Knowing God
+
+Our ultimate purpose in the study and teaching of Scripture should be a true knowledge of God and an experience of His presence. He requires us to take careful note of what God reveals about Himself in His Word. He reveals His attributes, His various works and circumstances, what He has done for us, how He requires us to live, and His plan of salvation.
+
+### Jesus Christ
+
+Jesus Christ who is God (John 1:1–3), the Second Person of the Trinity (Matthew 28:19), co-equal (John 10:30) and co-eternal (Micah 5:2) with the Father and the Holy Spirit, is the eternally existing Son of God. At His incarnation He was conceived of the Holy Spirit and born of the virgin Mary (Matthew 1:18–25). He is both the Son of God (Romans 1:3–4) and the Son of Man (John 5:27). He is fully God (Colossians 2:9) and perfectly man (1 Timothy 2:5). He was tempted in every way as a man yet was perfectly sinless (Hebrews 4:15). He knew no sin (2 Corinthians 5:21), did no sin (1 Peter 2:22) and in Him no sin was found (1 John 3:5). He died on the cross as the perfect, once for all sacrifice for sins (Hebrews 10:10–12). He gave Himself a ransom for all (1 Timothy 2:6), reconciled the world to God (2 Corinthians 5:19). All who repent and believe in Him are justified (Romans 5:9), forgiven (Hebrews 9:22), and redeemed on the grounds of His shed blood (1 Peter 1:18–19). He died, was buried, and rose bodily from the dead on the third day (1 Corinthians 15:3–8; John 20:27). He ascended bodily into heaven with the expressed promise of coming again (Acts 1:6–11; John 14:3). He was exalted by the Father (Philippians 2:9) and now intercedes as our High Priest (Romans 8:34; Hebrews 4:14–16) and advocate (1 John 2:1).
+
+### The Holy Spirit
+
+The Holy Spirit is God (Romans 8:9), the Third Person of the Trinity (Matthew 28:19), co-equal (Matthew 10:20; Galatians 4:6) and co-eternal (Hebrews 9:14) with the Father and the Son. He works, not to bring glory to Himself, but to glorify the Lord Jesus Christ (John 16:14). He is the divine Agent in creation (Genesis 1:2), inspiration (2 Peter 1:21), revelation (1 Corinthians 2:10), and regeneration (John 3:5). He convicts the world concerning sin, righteousness and judgment (John 16:7–11). Upon repentance and faith (John 1:12) in Christ, the Holy Spirit immediately and completely regenerates (Titus 3:5), baptizes (1 Corinthians 12:13), indwells (1 Corinthians 3:16), seals (Ephesians 1:13), and positionally sanctifies (2 Thessalonians 2:13) the believer. He then continues to assure (Romans 8:16), gift (1 Corinthians 12:7), guide (Romans 8:14), teach (John 16:12–15), help (John 14:16–17), fill (Ephesians 5:18), intercede (Romans 8:26–27), and experientially sanctify (1 Thessalonians 4:3–8; 2 Corinthians 3:18) all believers.
+
+### The Holy Spirit
+
+The Holy Spirit is God (Romans 8:9), the Third Person of the Trinity (Matthew 28:19), co-equal (Matthew 10:20; Galatians 4:6) and co-eternal (Hebrews 9:14) with the Father and the Son. He works, not to bring glory to Himself, but to glorify the Lord Jesus Christ (John 16:14). He is the divine Agent in creation (Genesis 1:2), inspiration (2 Peter 1:21), revelation (1 Corinthians 2:10) and regeneration (John 3:5). He convicts the world concerning sin, righteousness and judgment (John 16:7–11). Upon repentance and faith (John 1:12) in Christ, the Holy Spirit immediately and completely regenerates (Titus 3:5), baptizes (1 Corinthians 12:13), indwells (1 Corinthians 3:16), seals (Ephesians 1:13) and positionally sanctifies (2 Thessalonians 2:13) the believer. He then continues to assure (Romans 8:16), gift (1 Corinthians 12:7), guide (Romans 8:14), teach (John 16:12–15), help (John 14:16–17), fill (Ephesians 5:18), intercede (Romans 8:26–27) and experientially sanctify (1 Thessalonians 4:3–8; 2 Corinthians 3:18) all believers.
+
+### Theological Speculation
+
+We must take great care when teaching on the person of God not to go beyond what is revealed in the Scripture (1 Corinthians 4:6; 2 John 1:9). Theological speculation seeking to explain the triune nature of God, the time when the child Jesus became conscious of His divine identity, the potential of Jesus having succumbed to Satan’s testing, and similar matters can only lead to controversy, division, and error. We should not tolerate teaching in the church that questions the biblical attributes of God, His goodness and wisdom, or the full and equal deity of the persons of the Godhead.

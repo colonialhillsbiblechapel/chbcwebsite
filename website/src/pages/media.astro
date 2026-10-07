@@ -1,0 +1,33 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import MediaLibrary from '@/components/media/MediaLibrary.tsx';
+import { getMediaLibrary } from '@/lib/media';
+import { videoList } from '@/lib/jsonld';
+
+const items = await getMediaLibrary();
+const videos = videoList(items.map((i) => ({ ...i, thumbnail: i.thumbnail?.src })));
+// The first thumbnail is the largest thing on screen: start fetching it while the page loads.
+const first = items[0]?.thumbnail;
+const firstSizes =
+  '(min-width: 1536px) 20rem, (min-width: 1024px) 26vw, (min-width: 640px) 46vw, 94vw';
+---
+
+<BaseLayout
+  title="Media Library"
+  description="Sunday messages, Houston Bible Conference ministry and Bible teaching from Colonial Hills Bible Chapel, a Brethren assembly in Houston. Free to watch."
+  structuredData={[videos]}
+  uiFont
+>
+  {first && (
+    <link
+      slot="head"
+      rel="preload"
+      as="image"
+      type="image/avif"
+      imagesrcset={first.avif}
+      imagesizes={firstSizes}
+      fetchpriority="high"
+    />
+  )}
+  <MediaLibrary client:idle items={items} />
+</BaseLayout>

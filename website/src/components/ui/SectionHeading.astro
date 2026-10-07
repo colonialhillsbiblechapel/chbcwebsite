@@ -1,0 +1,35 @@
+---
+/** Small-caps label above a large display heading; `emphasis` is set in italic at the end. */
+interface Props {
+  label: string;
+  title: string;
+  emphasis?: string;
+  as?: 'h1' | 'h2';
+  id?: string;
+  align?: 'start' | 'center';
+  class?: string;
+}
+
+const {
+  label,
+  title,
+  emphasis,
+  as: Tag = 'h2',
+  id,
+  align = 'start',
+  class: className,
+} = Astro.props;
+---
+
+<header class:list={['reveal', align === 'center' && 'text-center', className]}>
+  <p class="label">{label}</p>
+  <Tag id={id} class:list={['mt-6', Tag === 'h1' ? 'text-hero' : 'text-section']}>
+    {title}
+    {emphasis && (
+      <>
+        {' '}
+        <em class="italic">{emphasis}</em>
+      </>
+    )}
+  </Tag>
+</header>

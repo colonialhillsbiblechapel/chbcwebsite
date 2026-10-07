@@ -1,0 +1,80 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/ui/PageHero.astro';
+import Button from '@/components/ui/Button.astro';
+import MountedPhoto from '@/components/ui/MountedPhoto.astro';
+import ministriesHero from '@/assets/images/photos/ministries-hero.jpg';
+import { getMissionaries } from '@/lib/data';
+import { toRoman } from '@/lib/format';
+
+const missionaries = await Promise.all(
+  (await getMissionaries()).map(async (entry) => ({
+    ...entry.data,
+    Bio: (await render(entry)).Content,
+  })),
+);
+---
+
+<BaseLayout
+  title="Ministries"
+  description="Missionaries and workers commended and supported by Colonial Hills Bible Chapel, a Brethren assembly in Houston, serving locally and internationally."
+>
+  <PageHero
+    label="Ministries"
+    title="Serving the Lord in"
+    emphasis="Various Fields"
+    lede="Colonial Hills Bible Chapel supports and commends workers to various fields of ministry, both locally and internationally. These faithful servants are spreading the Gospel and building up believers in the faith."
+    image={ministriesHero}
+    imageAlt="A footpath through a field of ripe wheat at sunrise"
+  />
+
+  <p class="label mx-auto max-w-[90rem] px-5 pb-10 sm:px-10">Our Missionaries & Ministers</p>
+
+  <div class="mx-auto max-w-[90rem] space-y-28 px-5 pb-28 sm:px-10 lg:space-y-40 lg:pb-40">
+    {missionaries.map((worker, i) => (
+      <article
+        class="grid items-start gap-12 border-t border-rule pt-14 lg:grid-cols-12 lg:gap-10 lg:pt-20"
+        aria-labelledby={`worker-${i}`}
+      >
+        <div class:list={['lg:col-span-4', i % 2 === 1 && 'lg:order-2 lg:col-start-9']}>
+          <MountedPhoto
+            src={worker.photo}
+            alt={worker.photoAlt}
+            width={520}
+            height={650}
+            position="top"
+            sizes="(min-width: 1024px) 26rem, (min-width: 640px) 24rem, 88vw"
+            label={worker.local ? 'Local ministry' : 'Commended worker'}
+            caption={worker.name}
+            class="mx-auto max-w-xs sm:max-w-sm lg:max-w-none"
+          />
+        </div>
+        <div
+          class:list={[
+            'reveal lg:col-span-7',
+            i % 2 === 1 ? 'lg:order-1 lg:col-start-1' : 'lg:col-start-6',
+          ]}
+        >
+          <p class="flex items-baseline gap-4">
+            <span class="gilded font-display text-[2.4rem] leading-none" aria-hidden="true">
+              {toRoman(i + 1)}
+            </span>
+            <span class="label">{worker.role}</span>
+          </p>
+          <h2 id={`worker-${i}`} class="mt-6 text-section">
+            {worker.name}
+          </h2>
+          <div class="prose-chapel mt-8 max-w-2xl text-ink-soft">
+            <worker.Bio />
+          </div>
+          {worker.website && (
+            <Button href={worker.website.url} external arrow class="mt-10">
+              {worker.website.label}
+            </Button>
+          )}
+        </div>
+      </article>
+    ))}
+  </div>
+</BaseLayout>

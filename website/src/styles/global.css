@@ -1,0 +1,378 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------
+   Design tokens — "Sanctuary"
+   Warm paper, black ink, gold leaf. Quiet, editorial, reverent.
+   ------------------------------------------------------------------ */
+@theme {
+  /* Paper */
+  --color-paper: #f7f4ee;
+  --color-paper-deep: #f0ebe2;
+  --color-paper-shade: #e8e1d5;
+  --color-rule: #dcd3c4;
+
+  /* Ink */
+  --color-ink: #17140f;
+  --color-ink-soft: #39332a;
+  --color-muted: #5c5446; /* ≥5.7:1 on every paper tone */
+
+  /* Gold & heritage burgundy */
+  --color-gold: #b38f4d; /* ornament only */
+  --color-gold-ink: #7a5c24; /* gold for text: ≥4.7:1 on every paper tone */
+  --color-wine: #7b2c2f;
+
+  /* The chapel's own colours: the green front wall, the burgundy pews, the gold lettering */
+  --color-chapel: #2c3a2e;
+  --color-chapel-deep: #1f2a22;
+  --color-chapel-mid: #3d5442;
+  --color-chapel-line: #4a5a4b;
+  --color-sage-tint: #e7ede4;
+  --color-pew: #6b1f2b;
+  --color-pew-tint: #f5e6e4;
+  --color-gold-light: #e2c98f; /* text on green or burgundy: ≥7:1 */
+  --color-gold-tint: #f3e9d2;
+  --color-slate: #2f4858; /* a quiet blue accent (Resources) */
+  --color-slate-tint: #e3eaee;
+
+  /* Type — both families self-hosted via Astro's Fonts API */
+  --font-display: var(--font-cormorant), 'Times New Roman', serif;
+  --font-serif: var(--font-ebgaramond), 'Times New Roman', serif;
+  --font-ui: var(--font-inter), system-ui, sans-serif;
+
+  --text-hero: clamp(3.5rem, 1.9rem + 6.6vw, 7.75rem);
+  --text-hero--line-height: 0.94;
+  --text-section: clamp(2.7rem, 1.7rem + 3.8vw, 4.9rem);
+  --text-section--line-height: 1.02;
+  --text-statement: clamp(1.95rem, 1.35rem + 2.3vw, 3.25rem);
+  --text-statement--line-height: 1.16;
+  --text-lede: clamp(1.25rem, 1.1rem + 0.45vw, 1.5rem);
+  --text-lede--line-height: 1.55;
+
+  --ease-gentle: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-rise: rise 1.1s var(--ease-gentle) both;
+  --animate-fade: fade 1.6s var(--ease-gentle) both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(22px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------
+   Photographs that dissolve into the page (CSS masks, so they work on any background)
+   ------------------------------------------------------------------ */
+@utility fade-left {
+  /* photo on the right of a section: dissolves to the left, at the top and at the bottom */
+  mask-image:
+    linear-gradient(to right, transparent 0%, #000 45%),
+    linear-gradient(to bottom, transparent 0%, #000 22%, #000 72%, transparent 100%);
+  mask-composite: intersect;
+}
+@utility fade-right {
+  /* photo on the left of a section: dissolves to the right, at the top and at the bottom */
+  mask-image:
+    linear-gradient(to left, transparent 0%, #000 45%),
+    linear-gradient(to bottom, transparent 0%, #000 22%, #000 78%, transparent 100%);
+  mask-composite: intersect;
+}
+@utility fade-bottom {
+  /* photo across the top (phones): a soft top edge, dissolving downwards */
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 55%, transparent 100%);
+  mask-composite: add;
+}
+
+/* ------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------ */
+@layer base {
+  /* Smooth scrolling for links within a page (the clicked link has focus), but an instant jump
+     when a page opens at a shared #link, rather than a long glide from the top. */
+  html:focus-within {
+    scroll-behavior: smooth;
+  }
+  html {
+    scroll-padding-top: 6rem; /* anchored/focused content clears the sticky header (WCAG 2.4.11) */
+    -webkit-text-size-adjust: 100%;
+    background: var(--color-paper);
+  }
+
+  body {
+    @apply bg-paper text-ink-soft font-serif text-[1.1875rem] leading-[1.68] antialiased;
+    /* A whisper of paper grain: a plain tiled background (no fixed or blended overlay, so
+       scrolling stays smooth) */
+    background-image: url('../assets/textures/grain.webp');
+    background-size: 120px;
+    font-kerning: normal;
+    font-variant-ligatures: common-ligatures;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-ink font-normal;
+    letter-spacing: -0.012em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-gold) 35%, transparent);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 1.5px solid var(--color-ink);
+    outline-offset: 5px;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+
+  /* Lock page scroll while the full-screen menu is open */
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Components
+   ------------------------------------------------------------------ */
+@layer components {
+  /* Letter-spaced small capitals, used for labels and references */
+  .label {
+    @apply text-gold-ink font-serif text-[0.78rem] leading-[1.9] font-medium tracking-[0.28em] uppercase;
+  }
+
+  /* Text filled with gold leaf (falls back to plain gold ink) */
+  .gilded {
+    color: var(--color-gold-ink);
+  }
+  @supports (background-clip: text) or (-webkit-background-clip: text) {
+    .gilded {
+      background: url('../assets/textures/gold-leaf.webp') center / 360px;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+  }
+
+  /* Gilded drop cap for opening paragraphs (or the first paragraph of rendered Markdown) */
+  .first-drop-cap > p:first-of-type {
+    color: var(--color-ink);
+  }
+  .drop-cap::first-letter,
+  .first-drop-cap > p:first-of-type::first-letter {
+    float: left;
+    margin: 0.06em 0.12em 0 0;
+    font-family: var(--font-display);
+    font-size: 4.35em;
+    line-height: 0.82;
+    color: var(--color-gold-ink);
+  }
+  @supports (background-clip: text) or (-webkit-background-clip: text) {
+    .drop-cap::first-letter,
+    .first-drop-cap > p:first-of-type::first-letter {
+      background: url('../assets/textures/gold-leaf.webp') center / 260px;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+  }
+
+  /* The last paragraph of a text set apart as a closing statement */
+  .closing-statement > p:last-of-type {
+    margin-top: 3rem;
+    padding-left: 1.75rem;
+    border-left: 1px solid var(--color-gold);
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-style: italic;
+    line-height: 1.35;
+    color: var(--color-ink);
+  }
+
+  /* Long-form reading: the Statement of Doctrines & Practices */
+  .prose-doctrine {
+    @apply text-ink-soft font-serif text-[1.125rem] leading-[1.78] sm:text-[1.1875rem];
+  }
+  .prose-doctrine > * + * {
+    margin-top: 1.15em;
+  }
+  .prose-doctrine h3 {
+    @apply font-display text-ink text-[1.65rem] leading-[1.15] sm:text-[1.9rem];
+    margin-top: 2.6em;
+    scroll-margin-top: 9rem;
+  }
+  .prose-doctrine h3::before {
+    content: '';
+    display: block;
+    width: 2.5rem;
+    height: 1px;
+    margin-bottom: 1.1rem;
+    background: var(--color-gold);
+  }
+  .prose-doctrine h3 + p {
+    margin-top: 0.85em;
+  }
+  .prose-doctrine blockquote {
+    @apply font-display text-ink border-gold border-l pl-6 text-[1.45rem] leading-[1.4] italic sm:text-[1.6rem];
+    margin-block: 1.6em;
+  }
+  /* Bible references are set more quietly than the sentences they support */
+  .prose-doctrine .ref {
+    @apply text-muted text-[0.86em] tracking-[0.01em] whitespace-normal;
+  }
+  @media (min-width: 1024px) {
+    .prose-doctrine h3 {
+      scroll-margin-top: 7rem;
+    }
+  }
+
+  /* Rendered Markdown (missionary bios etc.) */
+  .prose-chapel > * + * {
+    margin-top: 1.1em;
+  }
+
+  /* Underlined text link */
+  .text-link {
+    @apply text-ink decoration-rule hover:decoration-ink underline decoration-1 underline-offset-[0.3em] transition-colors duration-300;
+  }
+
+  /* Full-bleed gold hairline */
+  .hairline-gold {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in oklab, var(--color-gold) 70%, transparent) 18%,
+      var(--color-gold) 50%,
+      color-mix(in oklab, var(--color-gold) 70%, transparent) 82%,
+      transparent
+    );
+  }
+
+  /* Scroll-driven reveal; content is always visible without support or with reduced motion */
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .reveal {
+        animation: rise linear both;
+        animation-timeline: view();
+        animation-range: entry 5% entry 60%;
+      }
+    }
+  }
+}
+
+/* ------------------------------------------------------------------
+   Long reads — a reading-progress line tied to the scroll position (no script), and room
+   under the sticky contents bar for anchored headings.
+   ------------------------------------------------------------------ */
+@keyframes read-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+.read-progress {
+  display: none;
+}
+@supports (animation-timeline: scroll()) {
+  .read-progress {
+    display: block;
+    transform-origin: left;
+    animation: read-progress linear both;
+    animation-timeline: scroll(root);
+  }
+}
+html:has([data-contents-bar]) {
+  scroll-padding-top: 9rem;
+}
+@media (min-width: 1024px) {
+  html:has([data-contents-bar]) {
+    scroll-padding-top: 7rem;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Print — just the words: no navigation, no backgrounds, black ink.
+   ------------------------------------------------------------------ */
+@media print {
+  @page {
+    margin: 2cm 2.2cm;
+  }
+  html {
+    font-size: 9.5pt; /* scales every rem-based size down to paper proportions */
+  }
+  html,
+  body {
+    background: #fff !important;
+    color: #000;
+  }
+  .read-progress {
+    display: none !important;
+  }
+  .prose-doctrine,
+  .prose-doctrine h3,
+  .prose-doctrine blockquote {
+    color: #000;
+  }
+  .prose-doctrine .ref {
+    color: #444;
+  }
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+  p,
+  blockquote {
+    orphans: 3;
+    widows: 3;
+  }
+  .reveal {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Motion — native cross-page transitions; respects reduced motion.
+   ------------------------------------------------------------------ */
+@view-transition {
+  navigation: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,44 @@
+---
+title: 'Elders'
+order: 8
+---
+
+We affirm the following doctrines:
+
+We believe that the New Testament church was marked by simplicity. The disciples preached the gospel. Some believed and were baptized (Acts 2:41). The apostles gathered these new believers into assemblies of God’s people and formed local churches. These early Christians “were continually devoting themselves to the apostles’ teaching and to fellowship, to the breaking of bread and to prayer” (Acts 2:42). Each local church, overseen by elders (Acts 14:23; Philippians 1:1), was accountable directly to Christ.
+
+We believe that it is Christ’s rightful place to rule the worldwide church directly. “He is also head of the body, the church,” (Colossians 1:18), the “Chief Shepherd” (1 Peter 5:4), and “high priest” (Hebrews 8:1). In all things, he is to be “pre-eminent” (Colossians 1:18).
+
+We believe that Christ has ordained elders, also known as bishops, to oversee the local church (Acts 14:23; Acts 20:17,28; Titus 1:5,7). The Greek word translated “elders” means older men, indicating the spiritual maturity required for the position. The qualifications for the position are found in (Titus 1:5–9) and (1 Timothy 3:1–7). “Bishops” is the translation of a Greek word meaning overseers. This word has their function in view. In the New Testament church we find a plurality of elders, several men overseeing the church together. They supervise the people and ministries of the church. We can see the nature of their calling in Paul’s exhortation to the elders of the church of Ephesus: “take heed to yourself and to all the flock, among which the Holy Spirit has made you overseers, to shepherd the church of God which He purchased with His own blood” (Acts 20:28). From this verse we also see that it is the Holy Spirit who makes an overseer. Christians are to follow the elders of the church. “Obey those who rule over you and be submissive, for they watch over your souls, as those who must give account. Let them do so with joy and not with grief, for that would be unprofitable for you” (Hebrews 13:17).
+
+We offer the following applications and supporting principles:
+
+### Recognition of Elders
+
+Since the saints are responsible to submit to their elders, formal recognition of the men whom God has called to serve as the elders is necessary. It becomes evident that the Holy Spirit has called a man when he is doing the work of an overseer and meeting the biblical qualifications of an elder. He may be formally recognized as an elder by various means. In a new church, those who planted the church can appoint the initial elders. We see an example of this in the ministry of Paul and Barnabas (Acts 14:23). In already established churches, the existing elders can recognize additional elders.
+
+In churches without recognized elders, a committee of mature men could form to discern the matter and solicit input from the congregation. Alternately, a church could ask the assistance of the elders of another church or a respected teacher to assist them in the process of recognition. Paul, for example, instructed Titus to assist the churches in Crete by appointing elders in every city (Titus 1:5).
+
+### Work of the Elders
+
+The Lord Jesus is the Chief Shepherd, who cares for His church from His heavenly throne (1 Peter 5:4). Elders serve under Christ and are accountable to Him (Colossians 1:18; Hebrews 13:17). They must take a spiritual approach to ministry, serving in true reliance upon Christ. This requires that they be men of faith and prayer. In all things they must seek Christ’s wisdom and guidance.
+
+The work of the elders is “to shepherd the church of God” (Acts 20:28). This means personally guarding and caring for the flock. They must pray for the saints. They must visit them. They must be ready to encourage, exhort, admonish, and comfort. They must be willing to have their lives disrupted by the needs of the saints. Should problems arise within the church such as grumbling or false teaching, it is the elders who are responsible to take the necessary actions to correct the problem (Titus 1:9–11; 3:10). For this reason, elders must be diligent students of the Bible, though academic degrees are not required.
+
+At the same time, elders are to be servant-leaders, never lording their position over the saints, but serving as an example to them (1 Peter 5:1–4). They should avoid establishing rules and regulations for every circumstance of life. Rather, in the gracious spirit of the New Testament, they should teach the saints biblical principles and exhort them to walk in the power of the Holy Spirit (Galatians 4:1–11; Colossians 2:20–23). The goal should not be outward conformity, but inward reality founded upon personal convictions. Paul instructed Timothy, “the purpose of the commandment is love from a pure heart and from a good conscience and from sincere faith” (1 Timothy 1:5). Elders must always remember that the Lord Jesus is the Chief Shepherd and the saints are His sheep. They should not take upon themselves titles that would obscure the unique and personal relationship of the flock to Christ (Matthew 23:8–12).
+
+Elders must also remain open to new and fresh ways of expressing the timeless principles of the New Testament. They should not tie themselves to practices that have become outdated and ineffective, lest the saints, particularly the younger generations, wrongly conclude that the principles of the New Testament church also are outdated and traditional, rather than biblical.
+
+The New Testament always refers to a group of men overseeing the local church, never to a single man. To benefit from this plurality, however, elders must seek guidance from the Holy Spirit and work as a team. They should oversee the flock together. Combining their insights, experience, and spiritual gifts, they bring balance, mutual accountability, and wisdom to the oversight. For this to be effective, however, they must listen to one another, accept counsel, and even correction if necessary. They should make their decisions in unity, acting only when there is a consensus. No individual should dominate, seeking to be first among the elders (3 John 1:9). Should one of the elders fail morally, he should confess it to his fellow elders, not waiting for the matter to be discovered by others. He should then submit to their counsel.
+
+Each elder must support the doctrinal position of the church, Though on some secondary issues an elder may personally understand some matters differently, he should not publicly express positions contrary to that of the elders as a whole. If in the course of time an elder is no longer able to support the doctrinal position of the church, he should step down from the eldership rather than cause division.
+
+### Age of Elders
+
+The church should not recognize a man as an elder who is a “new convert” (1 Timothy 3:6). Neither should it recognize a man they have known for only a short time (1 Timothy 5:22). The church should not, however, be unreasonably slow in recognizing a man’s calling. At the end of his first missionary journey, Paul appointed elders over all the churches he had planted (Acts 14:23).
+
+One need not be elderly to be an elder. The term signifies the man’s spiritual maturity, not his physical age. At the age of 30, Levites entered the full service of the Lord (Numbers 4:47). It appears that the Lord’s apostles were also young men, probably in their twenties when He called them. The apostle Paul was likely in his thirties when called. The Lord Jesus had completed His earthly ministry by the age of 33.
+
+The calling to serve as an elder is not necessarily a lifetime appointment. The work of an overseer requires good physical and mental vitality. Elders must manage busy schedules and face difficult issues with grace and poise. They must be available to shepherd the sheep. This demanding work becomes more difficult with advancing age. Though a man may continue to meet the character qualities of an elder, in his waning years he may not be able to do the work of an overseer. In such cases, he should voluntarily step down. This is best done well before the effects of aging are apparent. Recognizing that a man is not always the best judge of his own abilities, older elders should look to their fellow elders for guidance in this matter. Former elders should remain active in the ministry of the church, using their gifts and experience to encourage the body.
+
+Scripture says nothing specific about the retirement age of an elder. We should keep in mind, however, that according to the Bible a normal lifespan is “seventy years, or if due to strength, eighty years” (Psalm 90:10). We should honor men who have served well as elders and then gracefully stepped down, being replaced by spiritual sons whom they have trained to carry on the work.

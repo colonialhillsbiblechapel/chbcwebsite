@@ -1,0 +1,38 @@
+name: Colonial Hills Bible Chapel
+shortName: Colonial Hills
+tagline: Gathering in His Name Since 1975
+description: >-
+  A group of local Christians gathering solely in the name of the Lord Jesus Christ,
+  holding fast to New Testament principles of worship and fellowship.
+address:
+  street: 14643 Henry Rd
+  city: Houston
+  region: TX
+  postalCode: '77060'
+phone: +1 281 931 1120
+email: info@colonialhills-biblechapel.com
+footerVerse:
+  text: The gift of God is eternal life through Jesus Christ our Lord.
+  reference: Romans 6:23
+  translation: KJV
+geo:
+  latitude: 29.9127
+  longitude: -95.3827
+# How the church appears in Google and other search engines (not shown on the website itself).
+seo:
+  homeTitle: Colonial Hills Bible Chapel · Brethren Assembly in Houston, TX
+  homeDescription: >-
+    A Brethren assembly in Houston, Texas: believers gathered to the name of the Lord Jesus
+    Christ. Meeting times, events, messages and how to visit.
+  keywords:
+    - Bible chapel Houston
+    - Brethren assembly Houston
+    - Brethren assembly
+    - Plymouth Brethren
+    - Christian Brethren
+    - Brethren movement
+    - assemblies of Christians
+    - New Testament church
+    - breaking of bread
+    - Bible chapel
+    - Houston, Texas

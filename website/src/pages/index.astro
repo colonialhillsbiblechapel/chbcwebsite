@@ -1,0 +1,24 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/home/Hero.astro';
+import Welcome from '@/components/home/Welcome.astro';
+import Meetings from '@/components/home/Meetings.astro';
+import Events from '@/components/home/Events.astro';
+import Word from '@/components/home/Word.astro';
+import ChapelBand from '@/components/home/ChapelBand.astro';
+import MinistryFocus from '@/components/home/MinistryFocus.astro';
+import GladTidings from '@/components/home/GladTidings.astro';
+import Visit from '@/components/home/Visit.astro';
+---
+
+<BaseLayout title="Home" scripture={['NKJV', 'KJV']}>
+  <Hero />
+  <Welcome />
+  <Meetings />
+  <Events />
+  <Word />
+  <ChapelBand />
+  <MinistryFocus />
+  <GladTidings />
+  <Visit />
+</BaseLayout>

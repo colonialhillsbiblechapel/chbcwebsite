@@ -1,0 +1,28 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/ui/PageHero.astro';
+import Button from '@/components/ui/Button.astro';
+---
+
+<BaseLayout
+  title="Page Not Found"
+  description="The page you were looking for could not be found."
+  noindex
+>
+  <PageHero
+    label="Page not found"
+    title="This page has moved or"
+    emphasis="no longer exists."
+    lede="Our website has a new look, so some old addresses have changed. One of these may help."
+  >
+    <Button href="/" arrow>
+      Go to the home page
+    </Button>
+    <Button href="/media/" variant="paper">
+      Media library
+    </Button>
+    <Button href="/#visit" variant="paper">
+      Visit us
+    </Button>
+  </PageHero>
+</BaseLayout>

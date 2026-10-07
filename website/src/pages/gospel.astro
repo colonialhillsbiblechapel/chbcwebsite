@@ -1,0 +1,42 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/ui/PageHero.astro';
+import MountedPhoto from '@/components/ui/MountedPhoto.astro';
+import gospelHero from '@/assets/images/photos/gospel-hero.jpg';
+import tomb from '@/assets/images/gospel/empty-tomb.jpg';
+import { getPage } from '@/lib/data';
+
+const gospel = await getPage('gospel');
+---
+
+<BaseLayout
+  title="The Gospel"
+  description="The gospel, the good news of salvation: God’s promise, Jesus the promised Messiah, His death and resurrection, and the way of eternal life."
+  scripture={['NKJV']}
+>
+  <PageHero
+    label="The good news of salvation"
+    title={gospel.title}
+    image={gospelHero}
+    imageAlt="Sunrise over a stone path winding through an old olive garden"
+  />
+
+  <!-- The gospel, exactly as written, with the empty tomb shown whole beside it -->
+  <article class="mx-auto max-w-[90rem] px-5 pb-28 sm:px-10 lg:pb-40" aria-label="The Gospel">
+    <div class="grid gap-16 border-t border-rule pt-14 lg:grid-cols-12 lg:gap-10 lg:pt-20">
+      <div class="prose-chapel first-drop-cap reveal max-w-3xl font-display text-[1.45rem] leading-[1.6] text-ink-soft sm:text-[1.6rem] lg:col-span-7 [&>*+*]:mt-[1.4em]">
+        <gospel.Content />
+      </div>
+      <div class="lg:col-span-4 lg:col-start-9">
+        <MountedPhoto
+          src={tomb}
+          alt="Morning light shining into an empty rock-cut tomb with the stone rolled away"
+          width={400}
+          sizes="(min-width: 1024px) 22rem, (min-width: 640px) 20rem, 80vw"
+          caption="The empty tomb"
+          class="mx-auto max-w-[20rem] lg:sticky lg:top-28 lg:max-w-[22rem]"
+        />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

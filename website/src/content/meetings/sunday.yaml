@@ -1,0 +1,20 @@
+day: Sunday
+label: Sunday - Lord’s Day
+order: 1
+groups:
+  - items:
+      - start: '09:30'
+        end: '10:30'
+        title: Breaking of Bread
+        inFooter: true
+        footerLabel: Sunday Worship
+      - start: '10:30'
+        end: '11:00'
+        title: Fellowship Time
+      - start: '11:00'
+        end: '12:00'
+        title: Family Bible Hour
+        inFooter: true
+      - start: '11:00'
+        end: '12:00'
+        title: Sunday School Time

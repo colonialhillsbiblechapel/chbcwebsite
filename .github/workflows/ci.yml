@@ -1,0 +1,38 @@
+# Checks the new website on every push to the redesign branch and on pull requests:
+# type check, lint, dead-code check, production build (with third-party and license checks)
+# and the end-to-end test suite against the built site.
+name: CI
+
+on:
+  push:
+    branches: [redesign]
+    paths: ['website/**', '.github/workflows/**']
+  pull_request:
+    paths: ['website/**', '.github/workflows/**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: website
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: website/.nvmrc
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run verify
+      - uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: playwright-report
+          path: website/test-results/
+          retention-days: 7

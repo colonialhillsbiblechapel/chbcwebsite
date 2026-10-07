@@ -1,0 +1,43 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { HymnVault } from '@/components/hymns/HymnVault';
+---
+
+<!--
+  Members only. This page contains no hymn data: the index is published only as a sealed file
+  (public/hymns/vault.json, made by scripts/seal-hymns.mjs) that opens in the browser with the
+  password. It is also kept out of search engines (noindex, robots.txt and the sitemap).
+-->
+<BaseLayout
+  title="Hymns"
+  description="The hymn index of Colonial Hills Bible Chapel, for members of our fellowship."
+  noindex
+>
+  <section class="mx-auto max-w-[90rem] px-5 pt-32 pb-28 sm:px-10 lg:pt-44 lg:pb-40">
+    <header class="mx-auto max-w-3xl text-center">
+      <p class="label">Hymns (Internal Use)</p>
+      <h1 class="mt-6 text-hero">Hymns</h1>
+      <figure class="m-0 mt-8">
+        <blockquote class="font-display text-[1.3rem] leading-snug text-ink-soft italic sm:text-[1.5rem]">
+          “Speaking to one another in psalms and hymns and spiritual songs, singing and making
+          melody in your heart to the Lord.”
+        </blockquote>
+        <figcaption class="label mt-4">Ephesians 5:19 · NKJV</figcaption>
+      </figure>
+    </header>
+
+    <div class="mt-16 lg:mt-20">
+      <HymnVault client:load />
+      <noscript>
+        <p class="mx-auto max-w-md text-center text-ink-soft">
+          The hymn index needs JavaScript to open, because it is unlocked privately in your browser.
+        </p>
+      </noscript>
+    </div>
+
+    <p class="mx-auto mt-16 max-w-2xl text-center text-[0.9rem] text-muted">
+      <strong class="font-medium text-ink-soft">Notice:</strong> This resource is for internal use
+      only. All credits go to the original authors and copyright holders. Not for commercial use.
+    </p>
+  </section>
+</BaseLayout>

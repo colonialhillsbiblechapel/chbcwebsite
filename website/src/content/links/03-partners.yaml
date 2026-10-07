@@ -1,0 +1,16 @@
+order: 3
+title: Ministry Partners
+icon: handshake
+links:
+  - label: Ireland Outreach International
+    description: Supporting the Johnson family in their missionary work
+    url: https://www.irelandoutreach.org/
+    icon: globe-hemisphere-west
+  - label: Sandy Creek Bible Camp
+    description: Where the Munsterman family serves in camp ministry
+    url: https://www.sandycreek.org/
+    icon: tent
+  - label: Christian Missions in Many Lands (CMML)
+    description: Supporting missionaries worldwide
+    url: https://www.cmml.us/
+    icon: hand-heart

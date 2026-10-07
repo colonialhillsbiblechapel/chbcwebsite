@@ -1,0 +1,82 @@
+---
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+/**
+ * Opening of an inner page: label, large title (with optional italic ending) and lede, with the
+ * photograph filling the right of the section and dissolving into the page — like the homepage.
+ */
+interface Props {
+  label: string;
+  title: string;
+  emphasis?: string;
+  lede?: string;
+  image?: ImageMetadata;
+  imageAlt?: string;
+  caption?: string;
+  /** Focal point of the photograph, e.g. "center", "left", "30% center". */
+  imagePosition?: string;
+}
+
+const {
+  label,
+  title,
+  emphasis,
+  lede,
+  image,
+  imageAlt = '',
+  caption,
+  imagePosition = 'center',
+} = Astro.props;
+---
+
+<section class:list={['relative isolate', image && 'lg:min-h-[78svh] print:min-h-0']}>
+  {image && (
+    <figure class="absolute inset-x-0 top-20 -z-10 m-0 h-[44svh] fade-bottom print:hidden lg:top-24 lg:right-0 lg:bottom-0 lg:left-auto lg:h-auto lg:w-[58%] lg:fade-left">
+      <Picture
+        src={image}
+        alt={imageAlt}
+        formats={['avif', 'webp']}
+        layout="full-width"
+        sizes="(min-width: 1024px) 58vw, 100vw"
+        fit="cover"
+        position={imagePosition}
+        priority
+        pictureAttributes={{ class: 'block h-full w-full' }}
+        class="h-full w-full object-cover"
+      />
+    </figure>
+  )}
+
+  <div
+    class:list={[
+      'mx-auto max-w-[90rem] px-5 sm:px-10',
+      image
+        ? 'flex flex-col justify-end pt-[calc(44svh+3rem)] pb-16 lg:min-h-[78svh] lg:justify-center lg:pt-36 lg:pb-24 print:min-h-0 print:pt-0 print:pb-8'
+        : 'pt-36 pb-20 lg:pt-52 lg:pb-32',
+    ]}
+  >
+    <div class="max-w-2xl animate-rise">
+      <p class="label">{label}</p>
+      <h1 class="mt-8 text-hero">
+        {title}
+        {emphasis && (
+          <>
+            {' '}
+            <em class="italic">{emphasis}</em>
+          </>
+        )}
+      </h1>
+      {lede && <p class="mt-10 max-w-xl text-lede text-ink-soft">{lede}</p>}
+      <div class="mt-11 flex flex-wrap gap-3 empty:hidden">
+        <slot />
+      </div>
+    </div>
+  </div>
+
+  {image && caption && (
+    <p class="absolute right-5 bottom-6 hidden font-display text-[1.05rem] text-muted italic sm:right-10 lg:block">
+      {caption}
+    </p>
+  )}
+</section>

@@ -1,0 +1,16 @@
+# Videos on the church YouTube channel that should not appear on the website, even though
+# YouTube lists them — for example the full live-stream recordings of conference sessions, when
+# the individual messages are posted separately. Add a video's YouTube ID to hide it.
+
+- id: qUbOQErr0bw
+  note: 106th conference live stream — Sunday Afternoon (full session)
+- id: YlYTamPL0xo
+  note: 106th conference live stream — Sunday Morning
+- id: 7Arl5_XpKp0
+  note: 106th conference live stream — Saturday Afternoon (full session)
+- id: e3JOiEbEZcA
+  note: 106th conference live stream — Saturday Morning (full session)
+- id: FzAhrP12c_Y
+  note: 106th conference live stream — Friday Evening Meeting
+- id: UlstszVw0QA
+  note: 106th conference live stream — Friday Evening Meeting (second copy)
