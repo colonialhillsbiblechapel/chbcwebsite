@@ -3,12 +3,25 @@ import { file, glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import { FEED_URL, parseFeed } from './lib/youtube-feed';
 import { ICONS } from './config/icons';
+import { youtubeId } from './lib/youtube-id';
 
 const time = z
   .string()
   .regex(/^([01]\d|2[0-3]):[0-5]\d$/, 'Use 24-hour HH:MM, e.g. 09:30 or 19:00');
 const day = z.coerce.date(); // YYYY-MM-DD in the YAML; read as a calendar day (UTC midnight)
 const translation = z.enum(['KJV', 'NKJV', 'NASB1995']);
+
+/** Empty, as the admin panel saves a box left blank: '' or null, or an object of blanks. */
+const isBlank = (value: unknown): boolean =>
+  value === '' ||
+  value === null ||
+  (typeof value === 'object' &&
+    !Array.isArray(value) &&
+    !(value instanceof Date) &&
+    Object.values(value).every(isBlank));
+/** An optional field: left blank (in the admin panel) means not given. */
+const optional = <T extends z.ZodType>(schema: T) =>
+  z.preprocess((value) => (isBlank(value) ? undefined : value), schema.optional());
 
 /** Church-wide details (one file: settings/site.yaml). Editable in the admin panel. */
 const settings = defineCollection({
@@ -53,18 +66,18 @@ const meetings = defineCollection({
     groups: z
       .array(
         z.object({
-          heading: z.string().optional(),
+          heading: optional(z.string()),
           /** Held only on this week of the month (e.g. 2 = the second Saturday) instead of weekly. */
-          monthlyWeek: z.number().int().min(1).max(5).optional(),
+          monthlyWeek: optional(z.number().int().min(1).max(5)),
           items: z
             .array(
               z.object({
                 start: time,
-                end: time.optional(),
+                end: optional(time),
                 title: z.string(),
                 /** Show this meeting in the footer's short list of service times. */
                 inFooter: z.boolean().default(false),
-                footerLabel: z.string().optional(),
+                footerLabel: optional(z.string()),
               }),
             )
             .min(1),
@@ -80,11 +93,11 @@ const events = defineCollection({
   schema: z.object({
     title: z.string(),
     date: day,
-    endDate: day.optional(),
-    start: time.optional(),
-    end: time.optional(),
-    location: z.string().optional(),
-    summary: z.string().optional(),
+    endDate: optional(day),
+    start: optional(time),
+    end: optional(time),
+    location: optional(z.string()),
+    summary: optional(z.string()),
   }),
 });
 
@@ -93,31 +106,38 @@ const series = defineCollection({
   loader: glob({ pattern: '*.yaml', base: './src/content/series' }),
   schema: z.object({
     title: z.string(),
-    credit: z.object({ name: z.string(), url: z.url() }).optional(),
+    credit: optional(z.object({ name: z.string(), url: z.url() })),
   }),
 });
 
-/** Recorded messages, one file per video; the file name is the YouTube video ID. */
+/**
+ * Recorded messages, one file per video. A message's ID is its YouTube video ID: from its
+ * `youtube` link (as added in the admin panel), or else its file name (the older files).
+ */
 const sermons = defineCollection({
   loader: glob({
     pattern: '*.yaml',
     base: './src/content/sermons',
-    generateId: ({ entry }) => entry.replace(/\.yaml$/, ''),
+    generateId: ({ entry, data }) => youtubeId(data.youtube) ?? entry.replace(/\.yaml$/, ''),
   }),
   schema: z
     .object({
+      /** The video's YouTube link (or ID). */
+      youtube: optional(
+        z.string().refine((link) => youtubeId(link), 'Paste the link to the video on YouTube'),
+      ),
       title: z.string(),
       speaker: z.string(),
-      date: day.optional(),
+      date: optional(day),
       /** When only the year is known. */
-      year: z.number().int().optional(),
+      year: optional(z.number().int()),
       category: z.enum(['sunday', 'conference', 'special']),
-      series: reference('series').optional(),
-      episode: z.number().int().positive().optional(),
+      series: optional(reference('series')),
+      episode: optional(z.number().int().positive()),
       /** Houston Bible Conference edition, e.g. 105. */
-      conference: z.number().int().optional(),
-      description: z.string().optional(),
-      slides: z.url().optional(),
+      conference: optional(z.number().int()),
+      description: optional(z.string()),
+      slides: optional(z.url()),
     })
     .refine((s) => s.date || s.year || s.series, {
       message: 'Give the date of the message (or at least its year, or its series)',
@@ -210,7 +230,7 @@ const missionaries = defineCollection({
       local: z.boolean().default(false),
       photo: image(),
       photoAlt: z.string(),
-      website: z.object({ label: z.string(), url: z.url() }).optional(),
+      website: optional(z.object({ label: z.string(), url: z.url() })),
     }),
 });
 

@@ -86,6 +86,16 @@ a link for every subsection (`/doctrines/#church-reception`). A test checks that
 page matches these files. `node scripts/migrate-doctrines.mjs` re-imports the text from the old
 site’s `doctrines-practices-page.html` on `master`.
 
+## Admin panel (volunteer editors)
+
+Volunteers update events, meeting times, messages, missionaries, helpful links and the church
+details at <https://app.pagescms.org> (Pages CMS; a quiet **Website editors** link sits at the foot
+of the Resources page). The forms are defined in `.pages.yml` at the repository root and mirror
+`src/content.config.ts`; a blank box counts as "not given", and a message is known by its pasted
+YouTube link (its thumbnail is fetched at build time). Doctrines, beliefs, the gospel and history
+pages, and the hymns are deliberately not editable there. The editors' guide, with the one-time
+setup, is `EDITING.md` at the repository root.
+
 ## Hymns (members only)
 
 `/hymns/` holds both hymnals — the index and the words — behind a password. Nothing is published

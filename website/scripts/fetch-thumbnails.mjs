@@ -6,7 +6,8 @@
  *
  * Usage: node scripts/fetch-thumbnails.mjs
  */
-import { existsSync, mkdirSync, readdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { youtubeId } from '../src/lib/youtube-id.ts';
 
 const SERMONS = 'src/content/sermons';
 const OUT = 'src/assets/thumbnails';
@@ -16,7 +17,9 @@ mkdirSync(OUT, { recursive: true });
 let saved = 0;
 const missing = [];
 for (const file of readdirSync(SERMONS).filter((f) => f.endsWith('.yaml'))) {
-  const id = file.replace(/\.yaml$/, '');
+  // A message's YouTube link (added in the admin panel), or else its file name, gives its ID.
+  const link = /^youtube:\s*['"]?([^'"\n]+)/m.exec(readFileSync(`${SERMONS}/${file}`, 'utf8'))?.[1];
+  const id = (link && youtubeId(link)) ?? file.replace(/\.yaml$/, '');
   if (existsSync(`${OUT}/${id}.jpg`)) continue;
 
   let image;
