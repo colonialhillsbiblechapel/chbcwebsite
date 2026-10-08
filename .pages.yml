@@ -1,9 +1,10 @@
 # Pages CMS — the website's admin panel (https://app.pagescms.org), for volunteer editors.
-# Each save is a commit to master; the site then rebuilds and goes live in a minute or two.
-# Only the parts below are editable. The Doctrines & Practices, the beliefs, the gospel and history
-# pages, and the hymns are deliberately left out: they are kept exactly as approved.
-# The forms mirror website/src/content.config.ts; a change that doesn't fit it fails the build and
-# never reaches the live site.
+# Written so that anyone can use it: plain questions, an example under each, choices instead of
+# typing wherever possible, and nothing that can break the site. Each save is a commit to master;
+# the site then rebuilds and is live in about two minutes. A change that doesn't fit the site's
+# rules (website/src/content.config.ts) fails the build and never reaches the live site.
+# Deliberately not editable here: the Doctrines & Practices, the beliefs, the gospel and history
+# pages, and the hymns — kept exactly as approved.
 
 media:
   - name: missionaries
@@ -20,344 +21,343 @@ settings:
 components:
   time:
     type: select
-    description: Pick the time (Houston time).
     options:
       placeholder: Choose a time
       values:
-        - { name: '05:00', label: '5:00 AM' }
-        - { name: '05:15', label: '5:15 AM' }
-        - { name: '05:30', label: '5:30 AM' }
-        - { name: '05:45', label: '5:45 AM' }
-        - { name: '06:00', label: '6:00 AM' }
-        - { name: '06:15', label: '6:15 AM' }
-        - { name: '06:30', label: '6:30 AM' }
-        - { name: '06:45', label: '6:45 AM' }
-        - { name: '07:00', label: '7:00 AM' }
-        - { name: '07:15', label: '7:15 AM' }
-        - { name: '07:30', label: '7:30 AM' }
-        - { name: '07:45', label: '7:45 AM' }
-        - { name: '08:00', label: '8:00 AM' }
-        - { name: '08:15', label: '8:15 AM' }
-        - { name: '08:30', label: '8:30 AM' }
-        - { name: '08:45', label: '8:45 AM' }
-        - { name: '09:00', label: '9:00 AM' }
-        - { name: '09:15', label: '9:15 AM' }
-        - { name: '09:30', label: '9:30 AM' }
-        - { name: '09:45', label: '9:45 AM' }
-        - { name: '10:00', label: '10:00 AM' }
-        - { name: '10:15', label: '10:15 AM' }
-        - { name: '10:30', label: '10:30 AM' }
-        - { name: '10:45', label: '10:45 AM' }
-        - { name: '11:00', label: '11:00 AM' }
-        - { name: '11:15', label: '11:15 AM' }
-        - { name: '11:30', label: '11:30 AM' }
-        - { name: '11:45', label: '11:45 AM' }
-        - { name: '12:00', label: '12:00 PM' }
-        - { name: '12:15', label: '12:15 PM' }
-        - { name: '12:30', label: '12:30 PM' }
-        - { name: '12:45', label: '12:45 PM' }
-        - { name: '13:00', label: '1:00 PM' }
-        - { name: '13:15', label: '1:15 PM' }
-        - { name: '13:30', label: '1:30 PM' }
-        - { name: '13:45', label: '1:45 PM' }
-        - { name: '14:00', label: '2:00 PM' }
-        - { name: '14:15', label: '2:15 PM' }
-        - { name: '14:30', label: '2:30 PM' }
-        - { name: '14:45', label: '2:45 PM' }
-        - { name: '15:00', label: '3:00 PM' }
-        - { name: '15:15', label: '3:15 PM' }
-        - { name: '15:30', label: '3:30 PM' }
-        - { name: '15:45', label: '3:45 PM' }
-        - { name: '16:00', label: '4:00 PM' }
-        - { name: '16:15', label: '4:15 PM' }
-        - { name: '16:30', label: '4:30 PM' }
-        - { name: '16:45', label: '4:45 PM' }
-        - { name: '17:00', label: '5:00 PM' }
-        - { name: '17:15', label: '5:15 PM' }
-        - { name: '17:30', label: '5:30 PM' }
-        - { name: '17:45', label: '5:45 PM' }
-        - { name: '18:00', label: '6:00 PM' }
-        - { name: '18:15', label: '6:15 PM' }
-        - { name: '18:30', label: '6:30 PM' }
-        - { name: '18:45', label: '6:45 PM' }
-        - { name: '19:00', label: '7:00 PM' }
-        - { name: '19:15', label: '7:15 PM' }
-        - { name: '19:30', label: '7:30 PM' }
-        - { name: '19:45', label: '7:45 PM' }
-        - { name: '20:00', label: '8:00 PM' }
-        - { name: '20:15', label: '8:15 PM' }
-        - { name: '20:30', label: '8:30 PM' }
-        - { name: '20:45', label: '8:45 PM' }
-        - { name: '21:00', label: '9:00 PM' }
-        - { name: '21:15', label: '9:15 PM' }
-        - { name: '21:30', label: '9:30 PM' }
-        - { name: '21:45', label: '9:45 PM' }
-        - { name: '22:00', label: '10:00 PM' }
+        - { name: "05:00", label: "5:00 AM" }
+        - { name: "05:15", label: "5:15 AM" }
+        - { name: "05:30", label: "5:30 AM" }
+        - { name: "05:45", label: "5:45 AM" }
+        - { name: "06:00", label: "6:00 AM" }
+        - { name: "06:15", label: "6:15 AM" }
+        - { name: "06:30", label: "6:30 AM" }
+        - { name: "06:45", label: "6:45 AM" }
+        - { name: "07:00", label: "7:00 AM" }
+        - { name: "07:15", label: "7:15 AM" }
+        - { name: "07:30", label: "7:30 AM" }
+        - { name: "07:45", label: "7:45 AM" }
+        - { name: "08:00", label: "8:00 AM" }
+        - { name: "08:15", label: "8:15 AM" }
+        - { name: "08:30", label: "8:30 AM" }
+        - { name: "08:45", label: "8:45 AM" }
+        - { name: "09:00", label: "9:00 AM" }
+        - { name: "09:15", label: "9:15 AM" }
+        - { name: "09:30", label: "9:30 AM" }
+        - { name: "09:45", label: "9:45 AM" }
+        - { name: "10:00", label: "10:00 AM" }
+        - { name: "10:15", label: "10:15 AM" }
+        - { name: "10:30", label: "10:30 AM" }
+        - { name: "10:45", label: "10:45 AM" }
+        - { name: "11:00", label: "11:00 AM" }
+        - { name: "11:15", label: "11:15 AM" }
+        - { name: "11:30", label: "11:30 AM" }
+        - { name: "11:45", label: "11:45 AM" }
+        - { name: "12:00", label: "12:00 PM" }
+        - { name: "12:15", label: "12:15 PM" }
+        - { name: "12:30", label: "12:30 PM" }
+        - { name: "12:45", label: "12:45 PM" }
+        - { name: "13:00", label: "1:00 PM" }
+        - { name: "13:15", label: "1:15 PM" }
+        - { name: "13:30", label: "1:30 PM" }
+        - { name: "13:45", label: "1:45 PM" }
+        - { name: "14:00", label: "2:00 PM" }
+        - { name: "14:15", label: "2:15 PM" }
+        - { name: "14:30", label: "2:30 PM" }
+        - { name: "14:45", label: "2:45 PM" }
+        - { name: "15:00", label: "3:00 PM" }
+        - { name: "15:15", label: "3:15 PM" }
+        - { name: "15:30", label: "3:30 PM" }
+        - { name: "15:45", label: "3:45 PM" }
+        - { name: "16:00", label: "4:00 PM" }
+        - { name: "16:15", label: "4:15 PM" }
+        - { name: "16:30", label: "4:30 PM" }
+        - { name: "16:45", label: "4:45 PM" }
+        - { name: "17:00", label: "5:00 PM" }
+        - { name: "17:15", label: "5:15 PM" }
+        - { name: "17:30", label: "5:30 PM" }
+        - { name: "17:45", label: "5:45 PM" }
+        - { name: "18:00", label: "6:00 PM" }
+        - { name: "18:15", label: "6:15 PM" }
+        - { name: "18:30", label: "6:30 PM" }
+        - { name: "18:45", label: "6:45 PM" }
+        - { name: "19:00", label: "7:00 PM" }
+        - { name: "19:15", label: "7:15 PM" }
+        - { name: "19:30", label: "7:30 PM" }
+        - { name: "19:45", label: "7:45 PM" }
+        - { name: "20:00", label: "8:00 PM" }
+        - { name: "20:15", label: "8:15 PM" }
+        - { name: "20:30", label: "8:30 PM" }
+        - { name: "20:45", label: "8:45 PM" }
+        - { name: "21:00", label: "9:00 PM" }
+        - { name: "21:15", label: "9:15 PM" }
+        - { name: "21:30", label: "9:30 PM" }
+        - { name: "21:45", label: "9:45 PM" }
+        - { name: "22:00", label: "10:00 PM" }
   icon:
     type: select
     options:
-      placeholder: Choose an icon
+      placeholder: Choose a small picture
       values:
-        - { name: book-open-text, label: Book open text }
-        - { name: scroll, label: Scroll }
-        - { name: handshake, label: Handshake }
-        - { name: users-three, label: Users three }
-        - { name: music-notes, label: Music notes }
-        - { name: sun-horizon, label: Sun horizon }
-        - { name: cross, label: Cross }
-        - { name: heart, label: Heart }
-        - { name: clock-counter-clockwise, label: Clock counter clockwise }
-        - { name: archive, label: Archive }
-        - { name: globe-hemisphere-west, label: Globe hemisphere west }
-        - { name: tent, label: Tent }
-        - { name: hand-heart, label: Hand heart }
-        - { name: church, label: Church }
-        - { name: arrow-up-right, label: Arrow up right }
-        - { name: arrow-right, label: Arrow right }
-        - { name: lock-simple, label: Lock simple }
+        - { name: book-open-text, label: "Open book" }
+        - { name: scroll, label: "Scroll" }
+        - { name: handshake, label: "Handshake" }
+        - { name: users-three, label: "People" }
+        - { name: music-notes, label: "Music" }
+        - { name: sun-horizon, label: "Sunrise" }
+        - { name: cross, label: "Cross" }
+        - { name: heart, label: "Heart" }
+        - { name: clock-counter-clockwise, label: "Clock (history)" }
+        - { name: archive, label: "Archive box" }
+        - { name: globe-hemisphere-west, label: "Globe" }
+        - { name: tent, label: "Tent" }
+        - { name: hand-heart, label: "Hand with heart" }
+        - { name: church, label: "Church" }
+        - { name: arrow-up-right, label: "Arrow (outside link)" }
+        - { name: arrow-right, label: "Arrow" }
+        - { name: lock-simple, label: "Lock" }
 
 content:
-  - name: gatherings
-    label: Meetings & Events
-    type: group
-    items:
-      - name: events
-        label: Upcoming events
-        description: Special events. Each shows on the homepage until its day has passed, then disappears by itself.
-        type: collection
-        path: website/src/content/events
-        format: yaml
-        filename: '{fields.date}-{primary}.yaml'
-        view:
-          fields: [title, date, start]
-          primary: title
-          sort: [date, title]
-          default:
-            sort: date
-            order: desc
-          search: [title, summary]
-        fields:
-          - name: title
-            label: Title
-            type: string
-            required: true
-            options: { maxlength: 120 }
-          - name: date
-            label: Date
-            type: date
-            required: true
-            options: { format: yyyy-MM-dd }
-          - name: endDate
-            label: Last day (for an event over several days)
-            type: date
-            default: ''
-            options: { format: yyyy-MM-dd }
-          - name: start
-            label: Starts at
-            component: time
-          - name: end
-            label: Ends at
-            component: time
-          - name: location
-            label: Where (leave empty when it is at the chapel)
-            type: string
-          - name: summary
-            label: One or two sentences about it
-            type: text
-            options: { maxlength: 300 }
+  # ——— 1. The guide, read inside the editor ———
+  - name: start-here
+    label: Start here — how to edit
+    description: A short guide to every part of the editor. Nothing here can be changed.
+    type: file
+    path: EDITING.md
+    format: yaml-frontmatter
+    fields:
+      - name: body
+        label: Guide
+        type: rich-text
+        readonly: true
 
-      - name: meetings
-        label: Weekly meetings
-        description: The regular meetings, one per day. They feed the homepage, the About page, the footer and the "next meeting" notice.
-        type: collection
-        path: website/src/content/meetings
-        format: yaml
-        filename: '{fields.day}.yaml'
-        view:
-          fields: [label, order]
-          primary: label
-          sort: [order]
-          default:
-            sort: order
-            order: asc
+  # ——— 2. Events ———
+  - name: events
+    label: Events
+    description: Special events, shown on the homepage. When an event's day has passed it disappears from the site by itself — there is no need to delete it.
+    type: collection
+    path: website/src/content/events
+    format: yaml
+    filename: "{fields.date}-{primary}.yaml"
+    operations: { rename: false }
+    view:
+      fields: [title, date, start]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+      search: [title, summary]
+    fields:
+      - name: title
+        label: What is the event?
+        description: "For example: Men’s Breakfast & Prayer Meeting"
+        type: string
+        required: true
+        options: { maxlength: 120 }
+      - name: date
+        label: Which day?
+        description: Click to choose the day on the calendar.
+        type: date
+        required: true
+        options: { format: yyyy-MM-dd }
+      - name: start
+        label: What time does it start?
+        description: Leave empty if there is no set time.
+        component: time
+      - name: end
+        label: What time does it end?
+        description: Optional.
+        component: time
+      - name: location
+        label: Where?
+        description: Leave empty when it is at the chapel. For example, “Morgan House” or an address.
+        type: string
+      - name: endDate
+        label: Last day, for an event over several days
+        description: Leave empty for a one-day event.
+        type: date
+        default: ""
+        options: { format: yyyy-MM-dd }
+      - name: summary
+        label: Anything else to say? (optional)
+        description: One or two sentences. The day and time are already shown, so there is no need to repeat them.
+        type: text
+        options: { maxlength: 300 }
+
+  # ——— 3. Sermons & videos ———
+  - name: sermons
+    label: Sermons & videos
+    description: The media library. To add a message, copy its link on YouTube (Share, then Copy) and paste it below; the picture comes from YouTube by itself.
+    type: collection
+    path: website/src/content/sermons
+    format: yaml
+    filename: "{fields.date}-{primary}.yaml"
+    operations: { rename: false }
+    view:
+      fields: [title, speaker, date]
+      primary: title
+      sort: [date, title, speaker]
+      default:
+        sort: date
+        order: desc
+      search: [title, speaker, description]
+    fields:
+      - name: youtube
+        label: YouTube link
+        description: "Paste the link, e.g. https://youtu.be/oQCGbdaure8 — older messages have none here; that is fine."
+        type: string
+      - name: category
+        label: What kind of message is it?
+        type: select
+        required: true
+        options:
+          placeholder: Choose one
+          values:
+            - { name: sunday, label: Lord's Day message }
+            - { name: conference, label: Houston Bible Conference }
+            - { name: special, label: Special message or series }
+      - name: title
+        label: Title
+        description: "For a conference: “106th Annual Houston Bible Conference — Sunday Afternoon — Jim Fleming”. For a Sunday: the title of the message."
+        type: string
+        required: true
+      - name: speaker
+        label: Speaker
+        description: "Full name, written the same way each time, e.g. Jim Fleming."
+        type: string
+        required: true
+      - name: date
+        label: Date of the message
+        description: Click to choose the day.
+        type: date
+        options: { format: yyyy-MM-dd }
+      - name: conference
+        label: Conference number (conference messages only)
+        description: "The number of the Houston Bible Conference, e.g. 106. Leave empty for other messages."
+        type: number
+        options: { min: 1 }
+      - name: series
+        label: Part of a series? (optional)
+        type: select
+        options:
+          placeholder: Not part of a series
+          values:
+            - { name: light-from-the-word, label: Light from the Word }
+            - {
+                name: doctrine-of-discipleship,
+                label: Doctrine of Discipleship,
+              }
+      - name: episode
+        label: Episode number in the series (optional)
+        type: number
+        options: { min: 1 }
+      - name: description
+        label: A sentence about it (optional)
+        type: text
+      - name: year
+        label: Year only
+        type: number
+        hidden: true
+      - name: slides
+        label: Slides link
+        type: string
+        hidden: true
+
+  # ——— 4. Meeting times ———
+  - name: meetings
+    label: Meeting times
+    description: The regular weekly meetings, one entry per day. They appear on the homepage, the About page and at the foot of every page. Choose a day, change a time from the list, and save.
+    type: collection
+    path: website/src/content/meetings
+    format: yaml
+    filename: "{fields.day}.yaml"
+    operations: { delete: false, rename: false }
+    view:
+      fields: [label]
+      primary: label
+      sort: [order]
+      default:
+        sort: order
+        order: asc
+    fields:
+      - name: day
+        label: Day
+        type: select
+        required: true
+        options:
+          values:
+            [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
+      - name: label
+        label: Heading on the site
+        description: "For example: Sunday - Lord’s Day"
+        type: string
+        required: true
+      - name: groups
+        label: Meetings on this day
+        description: Most days have one group. A second group is only for meetings held on one week of the month (e.g. the second Saturday).
+        type: object
+        list:
+          min: 1
+          collapsible:
+            summary: "{heading}"
         fields:
-          - name: day
-            label: Day
-            type: select
-            required: true
-            options:
-              values: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
-          - name: label
-            label: Heading shown on the site
-            type: string
-            required: true
-          - name: order
-            label: Order on the page (1 comes first)
-            type: number
-            required: true
-            options: { min: 1, max: 7 }
-          - name: online
-            label: Held online (WebEx), not at the chapel
-            type: boolean
-          - name: groups
-            label: Meetings on this day
+          - name: items
+            label: Meetings
             type: object
             list:
               min: 1
               collapsible:
-                summary: '{heading}'
+                summary: "{title} — {start}"
             fields:
-              - name: heading
-                label: Heading (only for a group held on one week of the month, e.g. "Second Saturday")
+              - name: title
+                label: Name of the meeting
+                description: "For example: Breaking of Bread"
                 type: string
-              - name: monthlyWeek
-                label: Held only on this week of the month (1 to 5; leave empty when weekly)
-                type: number
-                options: { min: 1, max: 5 }
-              - name: items
-                label: Meetings
-                type: object
-                list:
-                  min: 1
-                  collapsible:
-                    summary: '{title}'
-                fields:
-                  - name: start
-                    label: Starts at
-                    component: time
-                    required: true
-                  - name: end
-                    label: Ends at
-                    component: time
-                  - name: title
-                    label: Name of the meeting
-                    type: string
-                    required: true
-                  - name: inFooter
-                    label: Show in the footer's service times
-                    type: boolean
-                  - name: footerLabel
-                    label: Name in the footer (if different)
-                    type: string
-
-  - name: messages
-    label: Messages
-    type: group
-    items:
-      - name: sermons
-        label: Recorded messages
-        description: The media library. Add a message with its YouTube link; its picture is taken from YouTube by itself.
-        type: collection
-        path: website/src/content/sermons
-        format: yaml
-        filename: '{fields.date}-{primary}.yaml'
-        view:
-          fields: [title, speaker, date, category]
-          primary: title
-          sort: [date, title, speaker]
-          default:
-            sort: date
-            order: desc
-          search: [title, speaker, description]
-        fields:
-          - name: youtube
-            label: YouTube link
-            description: Paste the video's link from YouTube (Share, then Copy). Messages added before the admin panel are known by their file name and have no link here.
-            type: string
-          - name: title
-            label: Title
-            description: 'As on the site, e.g. "106th Annual Houston Bible Conference — Sunday Afternoon — Jim Fleming".'
-            type: string
-            required: true
-          - name: speaker
-            label: Speaker
-            type: string
-            required: true
-          - name: date
-            label: Date of the message
-            type: date
-            options: { format: yyyy-MM-dd }
-          - name: category
-            label: Kind of message
-            type: select
-            required: true
-            options:
-              values:
-                - { name: sunday, label: Lord's Day message }
-                - { name: conference, label: Houston Bible Conference }
-                - { name: special, label: Special or series }
-          - name: conference
-            label: Conference number (e.g. 106) — conference messages only
-            type: number
-          - name: series
-            label: Series (only for a message in a series)
-            type: select
-            options:
-              values:
-                - { name: light-from-the-word, label: Light from the Word }
-                - { name: doctrine-of-discipleship, label: Doctrine of Discipleship }
-          - name: episode
-            label: Episode number in the series
-            type: number
-            options: { min: 1 }
-          - name: year
-            label: Year only (when the exact date isn't known)
-            type: number
-          - name: description
-            label: A sentence about it
-            type: text
-          - name: slides
-            label: Link to the slides (if any)
-            type: string
-
-      - name: series
-        label: Series
-        description: Series of messages. A new series also needs adding to the Series choices of a message (ask the web team).
-        type: collection
-        path: website/src/content/series
-        format: yaml
-        fields:
-          - name: title
-            label: Title
-            type: string
-            required: true
-          - name: credit
-            label: From another YouTube channel (credited on the site)
-            type: object
-            fields:
-              - name: name
-                label: Channel name
+                required: true
+              - name: start
+                label: Starts at
+                component: time
+                required: true
+              - name: end
+                label: Ends at (optional)
+                component: time
+              - name: inFooter
+                label: Also list it at the foot of every page
+                type: boolean
+              - name: footerLabel
+                label: Name at the foot of the page, if different (optional)
+                description: "For example: Sunday Worship"
                 type: string
-              - name: url
-                label: Channel link
-                type: string
-
-      - name: hidden-videos
-        label: Videos left off the site
-        description: Videos on the chapel's YouTube channel that shouldn't appear on the website (e.g. full live streams when each message is posted separately).
-        type: file
-        path: website/src/content/hidden-videos.yaml
-        format: yaml
-        list: true
-        fields:
-          - name: id
-            label: YouTube video ID (the 11 letters after watch?v= or youtu.be/)
+          - name: heading
+            label: Heading for a monthly group (optional)
+            description: "Only for meetings held on one week of the month, e.g. “Second Saturday”. Leave empty otherwise."
             type: string
-            required: true
-          - name: note
-            label: Why it is left off
-            type: string
-            required: true
+          - name: monthlyWeek
+            label: Which week of the month? (only with a heading above)
+            description: 1 = first, 2 = second … 5 = fifth. Leave empty for weekly meetings.
+            type: number
+            options: { min: 1, max: 5 }
+      - name: online
+        label: Held online (WebEx), not at the chapel
+        type: boolean
+      - name: order
+        label: Position on the page
+        description: 1 is shown first.
+        type: number
+        required: true
+        options: { min: 1, max: 7 }
 
-  - name: ministries
+  # ——— 5. Missionaries ———
+  - name: missionaries
     label: Missionaries
-    description: The Ministries page, one person or couple each.
+    description: The Ministries page, one entry per person or couple. Show someone only with their agreement (and their mission's).
     type: collection
     path: website/src/content/missionaries
     format: yaml-frontmatter
-    filename: '{primary}.md'
+    filename: "{primary}.md"
+    operations: { rename: false }
     view:
-      fields: [name, role, order]
+      fields: [name, role]
       primary: name
       sort: [order, name]
       default:
@@ -366,80 +366,86 @@ content:
     fields:
       - name: name
         label: Name(s)
+        description: "For example: Johnson & Valsa John"
         type: string
         required: true
       - name: role
-        label: Ministry
+        label: Their ministry, in a few words
+        description: "For example: Full-time Ministry - Teaching & Pastoral Care"
         type: string
         required: true
-      - name: order
-        label: Order on the page (1 comes first)
-        type: number
-        required: true
-      - name: local
-        label: Serving here in the Houston area
-        type: boolean
       - name: photo
         label: Photo
-        description: Only with their (and their mission's) agreement to be shown.
+        description: A clear photo, ideally wider than it is tall.
         type: image
         required: true
         options: { media: missionaries }
       - name: photoAlt
-        label: Who is in the photo (for blind visitors)
+        label: Who is in the photo?
+        description: Read aloud to blind visitors, e.g. “Johnson and Valsa John”.
         type: string
         required: true
+      - name: body
+        label: About them
+        description: A few short paragraphs.
+        type: rich-text
+      - name: local
+        label: Serving here in the Houston area
+        type: boolean
       - name: website
         label: Their website (optional)
         type: object
         fields:
           - name: label
-            label: Link text
+            label: Text of the link
+            description: "For example: Narrow Path Ministries"
             type: string
           - name: url
-            label: Link
+            label: Web address
+            description: Starting with https://
             type: string
-      - name: body
-        label: About them
-        type: rich-text
+      - name: order
+        label: Position on the page
+        description: 1 is shown first.
+        type: number
+        required: true
 
-  - name: resources
+  # ——— 6. Helpful links ———
+  - name: links
     label: Helpful links
-    description: The Resources page, one category each.
+    description: The Resources page, one entry per heading (e.g. “Spiritual Resources”), each with its links.
     type: collection
     path: website/src/content/links
     format: yaml
-    filename: '{fields.order}-{primary}.yaml'
+    filename: "{fields.order}-{primary}.yaml"
+    operations: { rename: false }
     view:
-      fields: [title, order]
+      fields: [title]
       primary: title
       sort: [order]
       default:
         sort: order
         order: asc
     fields:
-      - name: order
-        label: Order on the page (1 comes first)
-        type: number
-        required: true
       - name: title
-        label: Category
+        label: Heading
+        description: "For example: Spiritual Resources"
         type: string
         required: true
       - name: icon
-        label: Icon
+        label: Small picture beside the heading
         component: icon
         required: true
       - name: links
-        label: Links
+        label: Links under this heading
         type: object
         list:
           min: 1
           collapsible:
-            summary: '{label}'
+            summary: "{label}"
         fields:
           - name: label
-            label: Name
+            label: Name of the website
             type: string
             required: true
           - name: description
@@ -447,25 +453,28 @@ content:
             type: string
             required: true
           - name: url
-            label: Link (starting https://)
+            label: Web address
+            description: Copy it from the browser's address bar; it starts with https://
             type: string
             required: true
           - name: icon
-            label: Icon
+            label: Small picture
             component: icon
             required: true
+      - name: order
+        label: Position on the page
+        description: 1 is shown first.
+        type: number
+        required: true
 
+  # ——— 7. Church details ———
   - name: church
     label: Church details
-    description: Name, address, phone, email and the footer verse. Used on every page and by search engines.
+    description: Address, phone, email and the verse at the foot of every page. Change with care — they appear everywhere.
     type: file
     path: website/src/content/settings/site.yaml
     format: yaml
     fields:
-      - { name: name, label: Full name, type: string, required: true }
-      - { name: shortName, label: Short name, type: string, required: true }
-      - { name: tagline, label: Tagline, type: string, required: true }
-      - { name: description, label: One-sentence description, type: text, required: true }
       - name: address
         label: Address
         type: object
@@ -474,41 +483,126 @@ content:
           - { name: city, label: City, type: string, required: true }
           - { name: region, label: State, type: string, required: true }
           - { name: postalCode, label: ZIP code, type: string, required: true }
-      - { name: phone, label: Phone, type: string, required: true }
-      - { name: email, label: Email, type: string, required: true }
+      - name: phone
+        label: Phone
+        description: "Written as +1 281 931 1120"
+        type: string
+        required: true
+      - name: email
+        label: Email
+        type: string
+        required: true
       - name: footerVerse
-        label: Verse in the footer
+        label: Verse at the foot of every page
         type: object
         fields:
-          - { name: text, label: Verse, type: text, required: true }
-          - { name: reference, label: Reference, type: string, required: true }
+          - {
+              name: text,
+              label: Words of the verse,
+              type: text,
+              required: true,
+            }
+          - {
+              name: reference,
+              label: Reference,
+              description: "e.g. Romans 6:23",
+              type: string,
+              required: true,
+            }
           - name: translation
             label: Translation
             type: select
             required: true
             options:
               values: [KJV, NKJV, NASB1995]
-      - name: geo
-        label: Map position (for directions)
-        type: object
-        fields:
-          - { name: latitude, label: Latitude, type: number, required: true }
-          - { name: longitude, label: Longitude, type: number, required: true }
+      - {
+          name: name,
+          label: Full name of the chapel,
+          type: string,
+          required: true,
+        }
+      - { name: shortName, label: Short name, type: string, required: true }
+      - {
+          name: tagline,
+          label: Tagline,
+          description: "e.g. Gathering in His Name Since 1975",
+          type: string,
+          required: true,
+        }
+      - {
+          name: description,
+          label: One sentence about the chapel,
+          type: text,
+          required: true,
+        }
       - name: seo
         label: How the chapel appears in Google
+        description: Not shown on the website itself.
         type: object
         fields:
           - name: homeTitle
-            label: Title in search results (up to 65 letters)
+            label: Title in Google (up to 65 letters)
             type: string
             required: true
             options: { maxlength: 65 }
           - name: homeDescription
-            label: Description in search results (50 to 160 letters)
+            label: Description in Google (50 to 160 letters)
             type: text
             required: true
             options: { minlength: 50, maxlength: 160 }
           - name: keywords
-            label: Search words
+            label: Words people search for
             type: string
             list: { min: 1 }
+      - name: geo
+        label: Map position
+        type: object
+        hidden: true
+        fields:
+          - { name: latitude, type: number }
+          - { name: longitude, type: number }
+
+  # ——— 8. Rarely needed ———
+  - name: more
+    label: Rarely needed
+    type: group
+    items:
+      - name: series
+        label: Series of messages
+        description: A new series also has to be added to the choices on a message — ask the web team.
+        type: collection
+        path: website/src/content/series
+        format: yaml
+        operations: { delete: false, rename: false }
+        fields:
+          - name: title
+            label: Title
+            type: string
+            required: true
+          - name: credit
+            label: From another YouTube channel? (optional)
+            type: object
+            fields:
+              - name: name
+                label: Channel name
+                type: string
+              - name: url
+                label: Channel link (https://…)
+                type: string
+      - name: hidden-videos
+        label: Videos left off the site
+        description: Videos on the chapel's YouTube channel that shouldn't appear on the website, e.g. a full live stream when each message is also posted on its own.
+        type: file
+        path: website/src/content/hidden-videos.yaml
+        format: yaml
+        list: true
+        fields:
+          - name: id
+            label: YouTube video ID
+            description: The 11 letters and numbers after watch?v= or youtu.be/ in the video's link.
+            type: string
+            required: true
+          - name: note
+            label: Why it is left off
+            type: string
+            required: true

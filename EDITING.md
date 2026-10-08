@@ -1,69 +1,71 @@
-# Updating the website — a guide for volunteer editors
+# How to update the website
 
-The Colonial Hills Bible Chapel website is updated through a simple online editor, **Pages CMS**.
-You fill in forms; when you save, the website rebuilds itself and your change is live in **about
-two minutes**. You need no technical knowledge and no GitHub account.
+Anyone can do this — no technical knowledge is needed. You fill in simple forms, press **Save**,
+and about two minutes later the change is on the website. Nothing you do can break the site: if
+something isn't filled in properly, the website simply keeps showing what it showed before.
 
 ## Signing in
 
-1. On the website, open **Resources** and, at the very bottom, click **Website editors**
-   (or go straight to <https://app.pagescms.org>).
-2. Sign in with the email address you were invited with, and follow the steps in the email
+1. On the website, open **Resources**. At the very bottom, click **Website editors**.
+2. Sign in with the email address you were invited with, and follow the steps in the email that
    Pages CMS sends you.
-3. Choose **chbcwebsite**. The sections you can edit are listed on the left.
+3. Choose **chbcwebsite**. The parts of the website you can change are listed on the left.
 
-## What you can update
+Each form asks plain questions, with an example under each one. Times and many other answers are
+chosen from a list, so there is little to type.
 
-| Section                                 | What it is                                                                           |
-| --------------------------------------- | ------------------------------------------------------------------------------------ |
-| **Meetings & Events → Upcoming events** | Special events on the homepage. Each disappears by itself after its day.             |
-| **Meetings & Events → Weekly meetings** | The regular meeting times (homepage, About page, footer).                            |
-| **Messages → Recorded messages**        | The media library.                                                                   |
-| **Messages → Series**                   | Series of messages, e.g. _Light from the Word_.                                      |
-| **Messages → Videos left off the site** | YouTube videos that should not appear on the website.                                |
-| **Missionaries**                        | The Ministries page.                                                                 |
-| **Helpful links**                       | The Resources page.                                                                  |
-| **Church details**                      | Name, address, phone, email, the footer verse, and how the chapel appears in Google. |
+## The most common jobs
 
-The **Doctrines & Practices**, the beliefs, the Gospel and history pages, and the hymns are not in
-the editor: they are kept exactly as the elders approved them. Ask the web team for any change there.
+### Add an event
 
-## Everyday tasks
+1. Click **Events** on the left, then add a new entry.
+2. Answer the questions: what the event is, which day (click the calendar), and the time (choose
+   it from the list).
+3. Leave **Where?** empty if it is at the chapel.
+4. Press **Save**.
 
-**Add an event.** Upcoming events → add a new entry. Fill in the title, the date and the time
-(pick it from the list), and a sentence about it. Leave _Where_ empty when it is at the chapel.
-Save. There is no need to delete old events; they drop off the site after their day.
+When the event's day has passed, it disappears from the website by itself. You never need to delete
+old events.
 
-**Add a recorded message.** On YouTube, open the video, click **Share**, then **Copy**. In the
-editor, Recorded messages → add a new entry, paste the link into **YouTube link**, then fill in
-the title, speaker, date and kind of message (for a conference message, also its number, e.g.
-106). Save. The video's picture is taken from YouTube by itself.
+### Add a sermon or video
 
-**Change a meeting time.** Weekly meetings → the day → change the time in the list → Save.
+1. On YouTube, open the video, click **Share**, then **Copy**.
+2. In the editor, click **Sermons & videos** on the left, then add a new entry.
+3. Paste the link into **YouTube link**.
+4. Choose what kind of message it is, then type the title and the speaker, and choose the date.
+5. For a conference message, also type the conference number (for example 106).
+6. Press **Save**. The video's picture is taken from YouTube by itself.
 
-**Hide a video.** Videos left off the site → add its YouTube ID (the 11 letters after
-`watch?v=` or `youtu.be/`) and a short note.
+### Change a meeting time
+
+1. Click **Meeting times** on the left, then the day.
+2. Open the meeting, choose the new time from the list, and press **Save**.
+
+### Update a missionary or a helpful link
+
+Click **Missionaries** or **Helpful links**, open the entry, change what you need, and press
+**Save**. Show a missionary's name or photo only with their agreement (and their mission's).
 
 ## Good to know
 
-- **Checks before going live.** If something doesn't fit (a missing title, a date in the wrong
-  form, a link without `https://`), the site keeps showing the previous version and your change
-  waits. If a change hasn't appeared after five minutes, tell the web team.
-- **Every change is kept.** Earlier versions can always be brought back; nothing you do is lost.
-- **People's names and photos.** Show a missionary's name or photo only with their agreement (and
-  their mission's). If someone asks to be removed, remove them straight away.
-- **Pictures.** Use only the chapel's own photos, or photos you have permission to use.
-- **No political content** of any kind (the chapel is a 501(c)(3) church).
-- Editors must be **18 or older** (Pages CMS's terms).
+- **Every change is kept.** Earlier versions can always be brought back, so don't worry about
+  making a mistake.
+- **Not here on purpose:** the Doctrines & Practices, the beliefs, the Gospel and history pages,
+  and the hymns are kept exactly as the elders approved them. Ask the web team about any change.
+- **If a change hasn't appeared after five minutes,** something wasn't filled in properly. Tell the
+  web team; they can see exactly what happened.
+- Use only the chapel's own photos, or photos you have permission to use.
+- No political content of any kind (the chapel is a 501(c)(3) church).
+- Editors must be 18 or older (Pages CMS's terms).
 
 ## For the web team: setting up the editor (once)
 
-1. At <https://app.pagescms.org>, sign in with GitHub as the **chapel account**. When it offers
-   to install the Pages CMS GitHub App, choose **Only select repositories** and pick
-   `chbcwebsite` alone.
-2. Open **chbcwebsite**; the sections above appear on the left.
+1. At <https://app.pagescms.org>, sign in with GitHub as the **chapel account**. When it offers to
+   install the Pages CMS GitHub App, choose **Only select repositories** and pick `chbcwebsite`
+   alone.
+2. Open **chbcwebsite**; the sections above appear on the left, with **Start here** at the top.
 3. Invite each editor by their email address (Pages CMS "collaborators"). Editors can change
    content and pictures only; they can't change the editor's setup or invite others.
 
-The forms are defined in [`.pages.yml`](.pages.yml) and mirror the site's content rules in
+The forms are defined in `.pages.yml` and follow the site's content rules in
 `website/src/content.config.ts`.
