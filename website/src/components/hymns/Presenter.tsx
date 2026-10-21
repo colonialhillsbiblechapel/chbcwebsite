@@ -96,11 +96,13 @@ export function Presenter({ deck, start, onClose, listName = 'Service list' }: P
     [deck.length, pos.hymn, show],
   );
 
-  // The controls appear only when the mouse moves, and fade after a few seconds.
+  // The controls appear only when the mouse moves, and fade after a few seconds — but not while
+  // the mouse rests on them.
+  const onControls = useRef(false);
   const wake = useCallback(() => {
     setControls(true);
     window.clearTimeout(hideTimer.current);
-    hideTimer.current = window.setTimeout(() => setControls(false), 2800);
+    if (!onControls.current) hideTimer.current = window.setTimeout(() => setControls(false), 2800);
   }, []);
 
   const toggleFullscreen = useCallback(() => {
@@ -495,7 +497,17 @@ export function Presenter({ deck, start, onClose, listName = 'Service list' }: P
       <div
         className={`absolute inset-x-0 bottom-0 z-20 flex justify-center p-4 transition-opacity duration-500 sm:p-6 ${controls || listOpen ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
       >
-        <div className="flex max-w-full items-center gap-1 overflow-x-auto rounded-full bg-black/80 p-1.5 shadow-2xl ring-1 ring-white/10">
+        <div
+          onPointerEnter={() => {
+            onControls.current = true;
+            wake();
+          }}
+          onPointerLeave={() => {
+            onControls.current = false;
+            wake();
+          }}
+          className="flex max-w-full items-center gap-1 overflow-x-auto rounded-full bg-black/80 p-1.5 shadow-2xl ring-1 ring-white/10"
+        >
           {button('End (Esc)', 'close', onClose)}
           {button(`${listName} (L)`, 'list', () => setListOpen(!listOpen), listOpen)}
           <span className="mx-1 h-6 w-px bg-white/15" aria-hidden="true" />

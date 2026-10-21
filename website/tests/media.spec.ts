@@ -64,10 +64,12 @@ test('chips, search and the sidebar filter the library and the address', async (
   await expect(page.getByText(/^\d+ messages$/)).toBeVisible();
 
   if (!isMobile) {
-    await page
-      .getByRole('navigation', { name: 'Library' })
-      .getByRole('button', { name: /Mark Swaim/ })
-      .click();
+    // The sidebar lists the speakers with the most messages first; open the full list, as new
+    // messages change who is near the top.
+    const library = page.getByRole('navigation', { name: 'Library' });
+    const all = library.getByRole('button', { name: /^Show all \d+ speakers$/ });
+    if (await all.isVisible()) await all.click();
+    await library.getByRole('button', { name: /Mark Swaim/ }).click();
     await expect(page).toHaveURL(/speaker=mark\+swaim/);
     await expect(page.locator(card)).toHaveCount(4);
   }

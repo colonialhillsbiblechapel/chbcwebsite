@@ -184,11 +184,14 @@ test('second screen: the projector window follows the controls', async ({ page, 
   const tray = page.getByRole('region', { name: 'Service list' });
   await tray.getByRole('button', { name: 'Present', exact: true }).click();
 
-  // The controls appear when the mouse moves.
-  await page.mouse.move(640, 360);
-  await page.mouse.move(660, 380);
+  // The controls appear when the mouse moves, and stay while it rests on them.
+  const secondScreen = page.getByRole('button', { name: /Second screen/ });
+  const box = await secondScreen.boundingBox();
+  if (!box) throw new Error('No Second screen button');
+  await page.mouse.move(box.x - 40, box.y + box.height / 2);
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
   const popup = page.waitForEvent('popup');
-  await page.getByRole('button', { name: /Second screen/ }).click();
+  await secondScreen.click();
   const screen = await popup;
   await expect(screen).toHaveURL(/\/hymns\/screen\/$/);
   await expect(screen.locator('header, footer')).toHaveCount(0);
