@@ -29,12 +29,29 @@ async function bestThumbnailUrl(id: string): Promise<string> {
   return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
 }
 
-/** 16:9 thumbnail in AVIF and WebP, cropped from the centre (which also removes letterboxing). */
-async function thumbnail(id: string, external: boolean): Promise<Thumbnail | undefined> {
+/** A message's picture: the saved thumbnail, else YouTube's (none for another channel's video). */
+async function thumbnailSource(id: string, external: boolean) {
   const saved = savedThumbnails[`/src/assets/thumbnails/${id}.jpg`]?.default;
   // Another channel's video without a saved thumbnail gets a designed cover instead.
   if (!saved && external) return undefined;
-  const src = saved ?? (await bestThumbnailUrl(id));
+  return saved ?? (await bestThumbnailUrl(id));
+}
+
+/**
+ * The picture shown when a message's link is shared (WhatsApp, Messages, Facebook…): its
+ * thumbnail as a 1280 × 720 JPEG, the format every link preview reads.
+ */
+export async function shareImage(item: MediaItem) {
+  const src = await thumbnailSource(item.id, !!item.credit);
+  if (!src) return undefined;
+  const image = await getImage({ src, width: 1280, height: 720, fit: 'cover', format: 'jpg' });
+  return image.src;
+}
+
+/** 16:9 thumbnail in AVIF and WebP, cropped from the centre (which also removes letterboxing). */
+async function thumbnail(id: string, external: boolean): Promise<Thumbnail | undefined> {
+  const src = await thumbnailSource(id, external);
+  if (!src) return undefined;
   const widths = [320, 480, 800, 1280];
   const [avif, webp] = await Promise.all(
     (['avif', 'webp'] as const).map((format) =>

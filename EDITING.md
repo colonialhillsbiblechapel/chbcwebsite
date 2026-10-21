@@ -36,6 +36,10 @@ old events.
 5. For a conference message, also type the conference number (for example 106).
 6. Press **Save**. The video's picture is taken from YouTube by itself.
 
+To share a message, open it in the website's media library and press **Share**. The link it
+gives shows the message's picture and title in WhatsApp, Messages and other apps — for every
+message, including the ones you add.
+
 ### Change a meeting time
 
 1. Click **Meeting times** on the left, then the day.

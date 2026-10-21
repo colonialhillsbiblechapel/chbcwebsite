@@ -16,6 +16,8 @@ interface Props {
   description?: string;
   image?: string;
   imageAlt?: string;
+  /** For a preview image other than the 1200×630 PNG, and a page that isn't a plain website page. */
+  social?: { imageType: string; imageWidth: number; imageHeight: number; type: string };
   noindex?: boolean;
   /** Bible translations quoted on this page, so the footer can print the required notices. */
   scripture?: Translation[];
@@ -31,6 +33,7 @@ const {
   title,
   image,
   imageAlt,
+  social,
   noindex = false,
   uiFont = false,
   bare = false,
@@ -73,6 +76,7 @@ const structuredData =
       keywords={settings.seo.keywords}
       image={image}
       imageAlt={imageAlt}
+      {...social}
       noindex={noindex}
     />
     {structuredData && <JsonLd data={structuredData} />}

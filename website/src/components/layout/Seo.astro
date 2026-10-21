@@ -6,9 +6,14 @@ interface Props {
   /** Full <title> for the home page. */
   homeTitle: string;
   keywords: string[];
-  /** Path or absolute URL of the 1200×630 social preview image. */
+  /** Path or absolute URL of the social preview image (1200×630 PNG unless given below). */
   image?: string;
   imageAlt?: string;
+  imageType?: string;
+  imageWidth?: number;
+  imageHeight?: number;
+  /** og:type — "website", or "video.other" for a message's page. */
+  type?: string;
   noindex?: boolean;
 }
 
@@ -20,6 +25,10 @@ const {
   keywords,
   image = '/og.png',
   imageAlt = `${siteName}, Houston, Texas — Gathering in His Name Since 1975`,
+  imageType = 'image/png',
+  imageWidth = 1200,
+  imageHeight = 630,
+  type = 'website',
   noindex = false,
 } = Astro.props;
 const isHome = Astro.url.pathname === '/';
@@ -44,16 +53,16 @@ const imageUrl = new URL(image, Astro.site);
   }
 />
 
-<meta property="og:type" content="website" />
+<meta property="og:type" content={type} />
 <meta property="og:site_name" content={siteName} />
 <meta property="og:locale" content="en_US" />
 <meta property="og:title" content={socialTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
 <meta property="og:image" content={imageUrl} />
-<meta property="og:image:type" content="image/png" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
+<meta property="og:image:type" content={imageType} />
+<meta property="og:image:width" content={String(imageWidth)} />
+<meta property="og:image:height" content={String(imageHeight)} />
 <meta property="og:image:alt" content={imageAlt} />
 
 <meta name="twitter:card" content="summary_large_image" />

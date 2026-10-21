@@ -142,3 +142,34 @@ test('videos on the hidden list never appear', async ({ page }) => {
   await openLibrary(page, `/media/?v=${hidden[0]}`);
   await expect(page.locator(watch)).toHaveCount(0);
 });
+
+test('a shared message previews with its own thumbnail, then opens in the library', async ({
+  page,
+  request,
+  isMobile,
+}) => {
+  // What WhatsApp, Messages and Facebook read: the page's own tags (they run no scripts).
+  const html = await (await request.get('/media/BXLNdtytk-o/')).text();
+  const tag = (property: string) =>
+    new RegExp(`<meta property="${property}" content="([^"]+)"`).exec(html)?.[1];
+  expect(tag('og:title')).toBe('Bro Sunny Ezhumattoor · October 18, 2026');
+  expect(tag('og:url')).toBe('https://colonialhills-biblechapel.com/media/BXLNdtytk-o/');
+  expect(tag('og:image')).toMatch(/^https:\/\/colonialhills-biblechapel\.com\/_astro\/.+\.jpg$/);
+  const image = await request.get(new URL(tag('og:image') ?? '').pathname);
+  expect(image.headers()['content-type']).toBe('image/jpeg');
+  expect(html).toContain('noindex');
+
+  // A person is taken straight on to the message.
+  await page.goto('/media/BXLNdtytk-o/');
+  await expect(page).toHaveURL(/\/media\/\?v=BXLNdtytk-o$/);
+  await expect(page.locator('[data-watch]')).toContainText('Bro Sunny Ezhumattoor');
+
+  // Share copies that address (on a computer; phones open their share sheet).
+  if (!isMobile) {
+    await page.context().grantPermissions(['clipboard-read', 'clipboard-write']);
+    await page.locator('[data-watch]').getByRole('button', { name: 'Share' }).click();
+    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(
+      `${new URL(page.url()).origin}/media/BXLNdtytk-o/`,
+    );
+  }
+});

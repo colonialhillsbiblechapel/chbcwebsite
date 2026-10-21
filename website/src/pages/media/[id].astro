@@ -1,0 +1,85 @@
+---
+/**
+ * One message's own address (/media/<YouTube ID>/), for sharing. Link previews (WhatsApp,
+ * Messages, Facebook…) don't run scripts, so they read this page's title, description and
+ * thumbnail; people are taken straight on to the message in the media library. Kept out of search
+ * engines and the sitemap: the library is the page to find.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { kindLabel } from '@/components/media/library';
+import { getMediaLibrary, shareImage } from '@/lib/media';
+import type { MediaItem } from '@/lib/media-shared';
+
+export async function getStaticPaths() {
+  const items = await getMediaLibrary();
+  return items.map((item) => ({ params: { id: item.id }, props: { item } }));
+}
+
+const { item } = Astro.props as { item: MediaItem };
+const image = await shareImage(item);
+const watch = `/media/?v=${item.id}`;
+// A Sunday message is titled by its speaker: its date tells it apart, as on YouTube.
+const title =
+  item.title === item.speaker && item.dateLabel ? `${item.title} · ${item.dateLabel}` : item.title;
+const who = item.title === item.speaker ? item.title : `${item.title} — ${item.speaker}`;
+const about = item.description || `${kindLabel(item)} — ${item.speaker}`;
+const description = [about, item.dateLabel, 'Colonial Hills Bible Chapel, Houston']
+  .filter(Boolean)
+  .join(' · ');
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  image={image}
+  imageAlt={who}
+  social={
+    image
+      ? { imageType: 'image/jpeg', imageWidth: 1280, imageHeight: 720, type: 'video.other' }
+      : undefined
+  }
+  noindex
+  uiFont
+>
+  <div class="mx-auto max-w-3xl px-5 pt-36 pb-28 text-center font-ui sm:px-10 lg:pt-44">
+    {item.thumbnail && (
+      <picture>
+        <source
+          type="image/avif"
+          srcset={item.thumbnail.avif}
+          sizes="(min-width: 768px) 48rem, 94vw"
+        />
+        <source
+          type="image/webp"
+          srcset={item.thumbnail.webp}
+          sizes="(min-width: 768px) 48rem, 94vw"
+        />
+        <img
+          src={item.thumbnail.src}
+          alt=""
+          width="1280"
+          height="720"
+          class="aspect-video w-full rounded-lg object-cover shadow-[0_30px_60px_-40px_rgb(23_20_15/0.6)]"
+        />
+      </picture>
+    )}
+    <p class="label mt-8">{[item.dateLabel, kindLabel(item)].filter(Boolean).join(' · ')}</p>
+    <h1 class="mt-3 font-display text-[2rem] leading-tight text-ink sm:text-[2.6rem]">
+      {item.title}
+    </h1>
+    <p class="mt-2 text-ink-soft">{item.speaker}</p>
+    <a
+      href={watch}
+      data-watch-link
+      class="mt-8 inline-flex min-h-12 items-center rounded-full bg-ink px-7 font-semibold text-paper transition-colors hover:bg-[#2b261d]"
+    >
+      Watch this message
+    </a>
+  </div>
+</BaseLayout>
+
+<script>
+  // People go straight on to the message in the media library.
+  const link = document.querySelector<HTMLAnchorElement>('[data-watch-link]');
+  if (link) location.replace(link.href);
+</script>

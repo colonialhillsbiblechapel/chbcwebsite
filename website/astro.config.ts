@@ -36,7 +36,10 @@ export default defineConfig({
   devToolbar: { enabled: false },
   // No code blocks on this site; Shiki's inline styles would also conflict with the CSP.
   markdown: { syntaxHighlight: false },
-  integrations: [preact(), sitemap({ filter: (page) => !/\/(404|styleguide|hymns)\//.test(page) })],
+  integrations: [
+    preact(),
+    sitemap({ filter: (page) => !/\/(404|styleguide|hymns)\/|\/media\/[^/]+\//.test(page) }),
+  ],
   // Every font is a committed WOFF2 file (SIL OFL 1.1, licenses in public/licenses/fonts).
   // Nothing is ever requested from Google Fonts or any other third party.
   fonts: [

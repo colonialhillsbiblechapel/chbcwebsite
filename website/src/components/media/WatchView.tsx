@@ -65,9 +65,20 @@ export function WatchView({ item, playlist, library, now, watched, onSelect, onB
     return () => window.removeEventListener('keydown', onKey);
   }, [next, previous, onSelect, onBack]);
 
+  // The message's own address: shared, it previews with its thumbnail and title (media/[id].astro).
   const share = async () => {
+    const url = `${location.origin}/media/${item.id}/`;
+    // On a phone or tablet, the system's share sheet (WhatsApp, Messages…); elsewhere, copy.
+    if (navigator.share && matchMedia('(pointer: coarse)').matches) {
+      try {
+        await navigator.share({ title: item.title, url });
+        return;
+      } catch (error) {
+        if ((error as Error).name === 'AbortError') return;
+      }
+    }
     try {
-      await navigator.clipboard.writeText(`${location.origin}/media/?v=${item.id}`);
+      await navigator.clipboard.writeText(url);
       setCopied(true);
     } catch {
       setCopied(false);
