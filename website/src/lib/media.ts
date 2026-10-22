@@ -7,6 +7,7 @@ import { getImage } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import { longDate } from './dates';
 import type { MediaItem, Thumbnail } from './media-shared';
+import { speakerKey } from '@/components/media/library';
 
 const THUMBNAIL_SIZES = ['maxresdefault', 'sddefault', 'hqdefault'];
 
@@ -63,12 +64,18 @@ async function thumbnail(id: string, external: boolean): Promise<Thumbnail | und
 }
 
 export async function getMediaLibrary(): Promise<MediaItem[]> {
-  const [allSermons, allUploads, seriesEntries, hiddenEntries] = await Promise.all([
+  const [allSermons, allUploads, seriesEntries, hiddenEntries, names] = await Promise.all([
     getCollection('sermons'),
     getCollection('uploads'),
     getCollection('series'),
     getCollection('hiddenVideos'),
+    getCollection('speakerNames'),
   ]);
+  // A speaker written in more than one way is one speaker, under one name (speaker-names.yaml).
+  const sameSpeaker = new Map(
+    names.flatMap(({ id, data }) => data.sameAs.map((name) => [speakerKey(name), id] as const)),
+  );
+  const speakerOf = (written: string) => sameSpeaker.get(speakerKey(written)) ?? written;
   const hidden = new Set(hiddenEntries.map((h) => h.id));
   const sermons = allSermons.filter(({ id }) => !hidden.has(id));
   const uploads = allUploads.filter(({ id }) => !hidden.has(id));
@@ -81,7 +88,7 @@ export async function getMediaLibrary(): Promise<MediaItem[]> {
     return {
       id,
       title: data.title,
-      speaker: data.speaker,
+      speaker: speakerOf(data.speaker),
       date: data.date?.toISOString().slice(0, 10),
       year: data.date?.getUTCFullYear() ?? data.year,
       dateLabel: data.date ? longDate(data.date) : data.year ? String(data.year) : '',
@@ -103,7 +110,7 @@ export async function getMediaLibrary(): Promise<MediaItem[]> {
     .map(async ({ id, data }): Promise<MediaItem> => ({
       id,
       title: data.title,
-      speaker: data.speaker,
+      speaker: speakerOf(data.speaker),
       date: data.date.toISOString().slice(0, 10),
       year: data.date.getUTCFullYear(),
       dateLabel: longDate(data.date),

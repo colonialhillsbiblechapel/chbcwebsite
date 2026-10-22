@@ -589,6 +589,26 @@ content:
               - name: url
                 label: Channel link (https://…)
                 type: string
+      - name: speaker-names
+        label: One speaker, different names
+        description: When one person's name is written in more than one way (e.g. “Bro Sunny Mathew” and “Bro Sunny Ezhumattoor”), list it here so the media library shows all their messages together, under one name.
+        type: file
+        path: website/src/content/speaker-names.yaml
+        format: yaml
+        list: true
+        fields:
+          - name: id
+            label: Name to show
+            description: Written exactly as on their messages, e.g. Bro Sunny Mathew
+            type: string
+            required: true
+          - name: sameAs
+            label: Other ways the name is written
+            description: Each one exactly as typed on a message.
+            type: string
+            required: true
+            list:
+              min: 1
       - name: hidden-videos
         label: Videos left off the site
         description: Videos on the chapel's YouTube channel that shouldn't appear on the website, e.g. a full live stream when each message is also posted on its own.

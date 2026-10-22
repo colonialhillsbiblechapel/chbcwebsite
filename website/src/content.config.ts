@@ -186,6 +186,12 @@ const hiddenVideos = defineCollection({
   schema: z.object({ note: z.string() }),
 });
 
+/** One speaker written in more than one way: each `sameAs` name is shown as the `id` name. */
+const speakerNames = defineCollection({
+  loader: file('src/content/speaker-names.yaml'),
+  schema: z.object({ sameAs: z.array(z.string()).min(1) }),
+});
+
 /** Long-form page text kept exactly as approved (welcome, history, gospel). The body is Markdown. */
 const pages = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/pages' }),
@@ -258,6 +264,7 @@ export const collections = {
   sermons,
   uploads,
   hiddenVideos,
+  speakerNames,
   pages,
   doctrines,
   beliefs,

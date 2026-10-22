@@ -1,0 +1,7 @@
+# One speaker written in more than one way. Every name under "sameAs" is grouped with, and shown
+# as, the name in "id" (in the media library's speaker list, filters and "more from this speaker").
+# The titles of the videos are left as they are.
+
+- id: Bro Sunny Mathew
+  sameAs:
+    - Bro Sunny Ezhumattoor

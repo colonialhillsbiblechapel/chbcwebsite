@@ -19,9 +19,9 @@ const { item } = Astro.props as { item: MediaItem };
 const image = await shareImage(item);
 const watch = `/media/?v=${item.id}`;
 // A Sunday message is titled by its speaker: its date tells it apart, as on YouTube.
-const title =
-  item.title === item.speaker && item.dateLabel ? `${item.title} · ${item.dateLabel}` : item.title;
-const who = item.title === item.speaker ? item.title : `${item.title} — ${item.speaker}`;
+const sunday = item.category === 'sunday';
+const title = sunday && item.dateLabel ? `${item.title} · ${item.dateLabel}` : item.title;
+const who = sunday ? item.title : `${item.title} — ${item.speaker}`;
 const about = item.description || `${kindLabel(item)} — ${item.speaker}`;
 const description = [about, item.dateLabel, 'Colonial Hills Bible Chapel, Houston']
   .filter(Boolean)

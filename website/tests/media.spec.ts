@@ -173,3 +173,11 @@ test('a shared message previews with its own thumbnail, then opens in the librar
     );
   }
 });
+
+test('one speaker written two ways is one speaker (speaker-names.yaml)', async ({ page }) => {
+  await openLibrary(page, '/media/?speaker=sunny+mathew');
+  await expect(page.locator(card)).toHaveCount(4);
+  await expect(page.locator(card).first()).toContainText('Bro Sunny Ezhumattoor');
+  await openLibrary(page, '/media/?speaker=sunny+ezhumattoor');
+  await expect(page.locator(card)).toHaveCount(0);
+});
