@@ -14,8 +14,9 @@ const menuLinks = [{ label: 'Home', href: '/' }, ...primaryNav, visitLink];
   class="fixed inset-x-0 top-0 z-40 border-b print:hidden border-transparent transition-[background-color,border-color] duration-500 ease-gentle data-scrolled:border-rule/70 data-scrolled:bg-paper"
 >
   <div class="mx-auto flex h-20 max-w-[90rem] items-center justify-between gap-4 px-5 sm:px-10 lg:h-24">
-    <a href="/" class="py-2" aria-label={`${settings.name} — home`}>
+    <a href="/" class="py-2">
       <Wordmark />
+      <span class="sr-only"> — home</span>
     </a>
 
     <nav aria-label="Main" class="hidden lg:block">
@@ -64,8 +65,9 @@ const menuLinks = [{ label: 'Home', href: '/' }, ...primaryNav, visitLink];
 >
   <div class="flex min-h-full flex-col">
     <div class="flex h-20 items-center justify-between px-5 sm:px-10">
-      <a href="/" class="py-2" aria-label={`${settings.name} — home`}>
+      <a href="/" class="py-2">
         <Wordmark />
+        <span class="sr-only"> — home</span>
       </a>
       <button
         type="button"

@@ -99,6 +99,13 @@ export function DisplayScreen() {
     () => (chosen ? slidesFor(chosen, words?.get(chosen.hymn.number)) : []),
     [chosen, words],
   );
+  // The page's background matches the slide (global.css), so its edges never show black.
+  useEffect(() => {
+    const html = document.documentElement;
+    html.dataset.presenting = shown.blank || 'paper';
+    return () => delete html.dataset.presenting;
+  }, [shown.blank]);
+
   const goFullscreen = () =>
     void document.documentElement.requestFullscreen?.().catch(() => undefined);
 

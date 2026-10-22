@@ -318,9 +318,13 @@ test('every clicker works, as in PowerPoint', async ({ page, isMobile }) => {
   await expect(presenting).toContainText(/Hymn 2 of 2 · (\d+)\/\1/);
   await page.keyboard.press('Home');
   await at('Hymn 1 of 2 · 1/');
+  // The page behind the slide matches it, so the screen's edges never show a black line.
+  const behind = () => page.evaluate(() => document.documentElement.dataset.presenting);
+  await expect.poll(behind).toBe('paper');
   // Black and white screens.
   await page.keyboard.press('w');
   await expect(presenting.getByLabel('White screen')).toBeVisible();
+  await expect.poll(behind).toBe('white');
   await page.keyboard.press('w');
   await page.keyboard.press('.');
   await expect(presenting.getByLabel('Blank screen')).toBeVisible();
@@ -334,6 +338,7 @@ test('every clicker works, as in PowerPoint', async ({ page, isMobile }) => {
   await at('Hymn 1 of 2 · 1/');
   await page.keyboard.press('Escape');
   await expect(presenting).toHaveCount(0);
+  await expect.poll(behind).toBeUndefined();
 });
 
 test('reads a hymn: its words as sung, with the refrain after each verse', async ({

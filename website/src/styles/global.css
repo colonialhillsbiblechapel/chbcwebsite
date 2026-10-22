@@ -306,6 +306,25 @@
     animation-timeline: scroll(root);
   }
 }
+/* Presenting hymns or the Sunday welcome: the whole page is full screen and its background is the
+   slide's paper (black or white when the screen is blanked), as is the backdrop of anything full
+   screen. A screen that doesn't divide evenly into pixels can then never show a black line. */
+html[data-presenting] {
+  background: #f6f3ec;
+}
+html[data-presenting='black'] {
+  background: #000;
+}
+html[data-presenting='white'] {
+  background: #fff;
+}
+:fullscreen::backdrop {
+  background: #f6f3ec;
+}
+html[data-presenting='black']:fullscreen::backdrop {
+  background: #000;
+}
+
 html:has([data-contents-bar]) {
   scroll-padding-top: 9rem;
 }

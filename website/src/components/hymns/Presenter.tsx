@@ -108,7 +108,7 @@ export function Presenter({ deck, start, onClose, listName = 'Service list' }: P
   const toggleFullscreen = useCallback(() => {
     togglingFullscreen.current = true;
     if (document.fullscreenElement) void document.exitFullscreen().catch(() => undefined);
-    else void root.current?.requestFullscreen?.().catch(() => undefined);
+    else void document.documentElement.requestFullscreen?.().catch(() => undefined);
   }, []);
 
   /** Opens the projector window: on the second screen, where there is one. */
@@ -125,7 +125,7 @@ export function Presenter({ deck, start, onClose, listName = 'Service list' }: P
     document.documentElement.classList.add('overflow-hidden');
     void (async () => {
       if ((await secondScreen()) === 'ready' && (await openSecondScreen())) return;
-      await root.current?.requestFullscreen?.().catch(() => wake());
+      await document.documentElement.requestFullscreen?.().catch(() => wake());
     })();
     return () => {
       document.documentElement.classList.remove('overflow-hidden');
@@ -133,6 +133,15 @@ export function Presenter({ deck, start, onClose, listName = 'Service list' }: P
       if (document.fullscreenElement) void document.exitFullscreen().catch(() => undefined);
     };
   }, [openSecondScreen, wake]);
+
+  // The whole page is what goes full screen, its background matching the slide (global.css): a
+  // screen that doesn't divide evenly into pixels can then only ever show a sliver of paper (or
+  // black when blanked) at its edge — never the black backdrop behind a full-screen element.
+  useEffect(() => {
+    const html = document.documentElement;
+    html.dataset.presenting = blank || 'paper';
+    return () => delete html.dataset.presenting;
+  }, [blank]);
 
   // Leaving full screen with Esc ends the presentation (unless it was our own toggle).
   useEffect(() => {
