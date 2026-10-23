@@ -5,7 +5,7 @@
  * other line — but never inside a sung line that the deck wrapped onto two lines ("…than houses or"
  * / "lands,"). Groups are kept as even as the words allow. No word is changed or moved.
  */
-export const MOST = 4;
+const MOST = 4;
 
 /** How good a place it is to divide after line `i` (higher is better; -1 = never). */
 function quality(lines: string[], i: number, breaks: Set<number>) {
