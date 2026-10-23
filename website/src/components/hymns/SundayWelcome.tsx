@@ -12,10 +12,12 @@ import {
   loadPlan,
   PICTURES,
   savePlan,
+  songSlides,
   toText,
   welcomeSlide,
   type Plan,
 } from './sunday';
+import { splitLines } from './split';
 import { sunday, type Chorus, type Sunday } from './vault';
 
 interface Props {
@@ -570,6 +572,14 @@ function ChorusEditor({
   }, []);
   const slides = fromText(editing.text);
   const title = editing.title.trim() || 'Chorus';
+  const preview = songSlides(
+    'chorus',
+    eyebrow,
+    title,
+    slides
+      .flatMap((lines) => splitLines(lines))
+      .map((lines, i) => ({ label: `Slide ${i + 1}`, lines })),
+  );
   return (
     <dialog
       ref={dialog}
@@ -596,8 +606,9 @@ function ChorusEditor({
             {editing.number === undefined ? 'Write a chorus' : 'Edit the words'}
           </h2>
           <p className="text-ink-soft mt-2 text-[0.92rem]">
-            Each line here is a line on the screen. Leave an empty line to begin the next slide.
-            Kept on this device only.
+            Each line here is a line on the screen. Leave an empty line to begin the next slide; a
+            slide shows up to four lines, so the words are as large as the hymns’ (longer ones are
+            divided for you). Kept on this device only.
           </p>
           <label className="text-ink mt-5 block text-[0.88rem] font-medium" htmlFor="chorus-title">
             Title
@@ -638,22 +649,14 @@ function ChorusEditor({
         </div>
         <div>
           <p className="label">
-            {slides.length} {slides.length === 1 ? 'slide' : 'slides'}
+            {preview.length} {preview.length === 1 ? 'slide' : 'slides'}
           </p>
-          {/* A preview of the words typed beside it. */}
+          {/* A preview of the words typed beside it, divided as they will be shown. */}
           <ol className="mt-3 space-y-3" aria-hidden="true">
-            {slides.map((lines, i) => (
+            {preview.map((slide, i) => (
               <li key={i}>
                 <Slide
-                  slide={{
-                    kind: 'program',
-                    theme: 'chorus',
-                    eyebrow,
-                    title,
-                    label: `Slide ${i + 1}`,
-                    lines,
-                    first: i === 0,
-                  }}
+                  slide={slide}
                   className="pointer-events-none aspect-video w-full rounded-md"
                 />
               </li>

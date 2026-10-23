@@ -16,7 +16,11 @@
  * Keys are not case-sensitive and spaces around them are ignored, as with email addresses.
  * Every run makes a new key, so re-sealing also signs out every device that chose "Remember".
  *
- * Usage: node scripts/seal-hymns.mjs
+ * `--sunday` re-seals only the Sunday welcome (lyrics-sunday.json), with the key already in use
+ * (opened from vault.json with the first access key): nothing else changes and no one is signed
+ * out — for when the choruses or the welcome songs change.
+ *
+ * Usage: node scripts/seal-hymns.mjs [--sunday]
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { gzipSync } from 'node:zlib';
@@ -40,9 +44,40 @@ if (keys.length === 0) {
 const b64 = (bytes) => Buffer.from(bytes).toString('base64');
 const random = (n) => globalThis.crypto.getRandomValues(new Uint8Array(n));
 
-// 1. Encrypt the index and the words with a new content key. Each file is bound to its own name,
-//    so one sealed file can't be passed off as another.
-const contentKey = random(32);
+const onlySunday = process.argv.includes('--sunday');
+
+/** The content key in use: unlocked from the published vault.json with the first access key. */
+async function keyInUse() {
+  const vault = JSON.parse(readFileSync('public/hymns/vault.json', 'utf8'));
+  const base = await subtle.importKey('raw', new TextEncoder().encode(keys[0]), 'PBKDF2', false, [
+    'deriveKey',
+  ]);
+  const lockKey = await subtle.deriveKey(
+    { ...vault.kdf, salt: Buffer.from(vault.kdf.salt, 'base64') },
+    base,
+    { name: 'AES-GCM', length: 256 },
+    false,
+    ['decrypt'],
+  );
+  for (const slot of vault.slots) {
+    try {
+      return new Uint8Array(
+        await subtle.decrypt(
+          { name: 'AES-GCM', iv: Buffer.from(slot.iv, 'base64'), additionalData: CONTEXT },
+          lockKey,
+          Buffer.from(slot.key, 'base64'),
+        ),
+      );
+    } catch {
+      // Not this slot.
+    }
+  }
+  throw new Error('The first access key does not open public/hymns/vault.json.');
+}
+
+// 1. Encrypt the index and the words with a new content key (or, with --sunday, the one in use).
+//    Each file is bound to its own name, so one sealed file can't be passed off as another.
+const contentKey = onlySunday ? await keyInUse() : random(32);
 const dataKey = await subtle.importKey('raw', contentKey, 'AES-GCM', false, ['encrypt']);
 async function encrypt(content, context) {
   const iv = random(12);
@@ -54,71 +89,73 @@ async function encrypt(content, context) {
   );
   return { iv: b64(iv), data: b64(data), size: plain.length };
 }
-const index = await encrypt(readFileSync('private/hymns.json'), 'chbc-hymns-v1');
+if (!onlySunday) {
+  const index = await encrypt(readFileSync('private/hymns.json'), 'chbc-hymns-v1');
 
-// 2. Lock the content key with each access key. One salt per sealing, so the page derives a key
-//    once and then tries the slots (a fast check), however many keys there are.
-const salt = random(16);
-const slots = [];
-for (const key of keys) {
-  const base = await subtle.importKey('raw', new TextEncoder().encode(key), 'PBKDF2', false, [
-    'deriveKey',
-  ]);
-  const lockKey = await subtle.deriveKey(
-    { name: 'PBKDF2', hash: 'SHA-256', salt, iterations: ITERATIONS },
-    base,
-    { name: 'AES-GCM', length: 256 },
-    false,
-    ['encrypt'],
-  );
-  const slotIv = random(12);
-  const wrapped = await subtle.encrypt(
-    { name: 'AES-GCM', iv: slotIv, additionalData: CONTEXT },
-    lockKey,
-    contentKey,
-  );
-  slots.push({ iv: b64(slotIv), key: b64(wrapped) });
-}
-// Shuffle (Fisher–Yates) so the order of the slots says nothing about the order of the keys.
-for (let i = slots.length - 1; i > 0; i--) {
-  const j = globalThis.crypto.getRandomValues(new Uint32Array(1))[0] % (i + 1);
-  [slots[i], slots[j]] = [slots[j], slots[i]];
-}
-
-const sealed = {
-  v: 2,
-  kdf: { name: 'PBKDF2', hash: 'SHA-256', iterations: ITERATIONS, salt: b64(salt) },
-  slots,
-  iv: index.iv,
-  data: index.data,
-};
-mkdirSync('public/hymns', { recursive: true });
-writeFileSync('public/hymns/vault.json', `${JSON.stringify(sealed)}\n`);
-console.log(
-  `✓ Sealed the hymn index (${Math.round(index.size / 1024)} KB compressed) for ${keys.length} access ${keys.length === 1 ? 'key' : 'keys'} into public/hymns/vault.json.`,
-);
-
-const { books } = JSON.parse(readFileSync('private/hymns.json', 'utf8'));
-for (const { id } of books) {
-  const book = JSON.parse(readFileSync(`private/lyrics/${id}.json`, 'utf8'));
-  const scenesFile = `private/scenes/${id}.json`;
-  const scenes = existsSync(scenesFile)
-    ? new Map(JSON.parse(readFileSync(scenesFile, 'utf8')).hymns.map((s) => [s.number, s]))
-    : new Map();
-  for (const hymn of book.hymns) {
-    const found = scenes.get(hymn.number);
-    if (found) {
-      hymn.background = { ...found, number: undefined };
-    }
+  // 2. Lock the content key with each access key. One salt per sealing, so the page derives a key
+  //    once and then tries the slots (a fast check), however many keys there are.
+  const salt = random(16);
+  const slots = [];
+  for (const key of keys) {
+    const base = await subtle.importKey('raw', new TextEncoder().encode(key), 'PBKDF2', false, [
+      'deriveKey',
+    ]);
+    const lockKey = await subtle.deriveKey(
+      { name: 'PBKDF2', hash: 'SHA-256', salt, iterations: ITERATIONS },
+      base,
+      { name: 'AES-GCM', length: 256 },
+      false,
+      ['encrypt'],
+    );
+    const slotIv = random(12);
+    const wrapped = await subtle.encrypt(
+      { name: 'AES-GCM', iv: slotIv, additionalData: CONTEXT },
+      lockKey,
+      contentKey,
+    );
+    slots.push({ iv: b64(slotIv), key: b64(wrapped) });
   }
-  const words = await encrypt(JSON.stringify(book), `chbc-hymns-v1:lyrics:${id}`);
-  writeFileSync(
-    `public/hymns/lyrics-${id}.json`,
-    `${JSON.stringify({ v: 2, iv: words.iv, data: words.data })}\n`,
-  );
+  // Shuffle (Fisher–Yates) so the order of the slots says nothing about the order of the keys.
+  for (let i = slots.length - 1; i > 0; i--) {
+    const j = globalThis.crypto.getRandomValues(new Uint32Array(1))[0] % (i + 1);
+    [slots[i], slots[j]] = [slots[j], slots[i]];
+  }
+
+  const sealed = {
+    v: 2,
+    kdf: { name: 'PBKDF2', hash: 'SHA-256', iterations: ITERATIONS, salt: b64(salt) },
+    slots,
+    iv: index.iv,
+    data: index.data,
+  };
+  mkdirSync('public/hymns', { recursive: true });
+  writeFileSync('public/hymns/vault.json', `${JSON.stringify(sealed)}\n`);
   console.log(
-    `✓ Sealed the words${scenes.size ? ` and ${scenes.size} backgrounds` : ''} (${Math.round(words.size / 1024)} KB compressed) into public/hymns/lyrics-${id}.json.`,
+    `✓ Sealed the hymn index (${Math.round(index.size / 1024)} KB compressed) for ${keys.length} access ${keys.length === 1 ? 'key' : 'keys'} into public/hymns/vault.json.`,
   );
+
+  const { books } = JSON.parse(readFileSync('private/hymns.json', 'utf8'));
+  for (const { id } of books) {
+    const book = JSON.parse(readFileSync(`private/lyrics/${id}.json`, 'utf8'));
+    const scenesFile = `private/scenes/${id}.json`;
+    const scenes = existsSync(scenesFile)
+      ? new Map(JSON.parse(readFileSync(scenesFile, 'utf8')).hymns.map((s) => [s.number, s]))
+      : new Map();
+    for (const hymn of book.hymns) {
+      const found = scenes.get(hymn.number);
+      if (found) {
+        hymn.background = { ...found, number: undefined };
+      }
+    }
+    const words = await encrypt(JSON.stringify(book), `chbc-hymns-v1:lyrics:${id}`);
+    writeFileSync(
+      `public/hymns/lyrics-${id}.json`,
+      `${JSON.stringify({ v: 2, iv: words.iv, data: words.data })}\n`,
+    );
+    console.log(
+      `✓ Sealed the words${scenes.size ? ` and ${scenes.size} backgrounds` : ''} (${Math.round(words.size / 1024)} KB compressed) into public/hymns/lyrics-${id}.json.`,
+    );
+  }
 }
 
 // The Sunday welcome slides: the welcome deck's songs and the choruses (scripts/sunday.mjs).

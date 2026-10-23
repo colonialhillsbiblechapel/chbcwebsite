@@ -62,6 +62,8 @@ interface ProgramSong {
   title: string;
   /** Word for word from the deck; an empty line divides two stanzas. */
   lines: string[];
+  /** The same words as slides of at most four lines (scripts/sunday.mjs). */
+  slides: string[][];
 }
 
 /** The words of the Sunday welcome slides, sealed with the hymns. */

@@ -22,11 +22,11 @@ export type SlideData =
       eyebrow: string;
       title: string;
       label: string;
-      /** Word for word; an empty line divides two stanzas. */
+      /** The song's title slide, or a slide of its words (at most four lines, as the hymns). */
+      role: 'title' | 'words';
+      /** Word for word (none on the title slide). */
       lines: string[];
-      /** The first slide of its song carries the full heading; the rest a quieter one. */
-      first: boolean;
-      /** Authors and copyright, as printed in the chorus deck (shown on its first slide). */
+      /** Authors and copyright, as printed in the chorus deck (shown on its title slide). */
       credits?: string[];
     };
 
@@ -87,4 +87,6 @@ export const preview = (slide: SlideData) =>
     ? (slide.background?.name ?? slide.chosen.hymn.title)
     : slide.kind === 'welcome'
       ? `${slide.greeting} · ${slide.date}`
-      : (slide.lines.find(Boolean) ?? '');
+      : slide.kind === 'program' && slide.role === 'title'
+        ? slide.title
+        : (slide.lines.find(Boolean) ?? '');

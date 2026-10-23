@@ -6,14 +6,17 @@
  * - program: the fixed slides, word for word from the chapel's welcome deck (private/choruses/program.json);
  * - choruses: every chorus of private/choruses/choruses.json (hand-structured and checked against
  *   the chapel's chorus decks), as slides in the order it is sung — each verse and refrain where it
- *   comes, one slide each. A part runs over two slides only where the chapel's own deck breaks it,
- *   or, longer than eight lines, at its stanza breaks (else in even halves). No word is changed.
+ *   comes. Like the hymns, a slide holds at most four lines, so the words are as large on the screen;
+ *   longer parts are divided by src/components/hymns/split.ts (between stanzas or where the deck
+ *   began a new slide, else after a full stop or comma, never inside a wrapped line). No word is
+ *   changed, and the slides are checked to sing exactly the song's lines, in order.
+ * - the fixed songs (our welcome song, birthday, anniversary) divided the same way.
  *
  * Usage: node scripts/sunday.mjs
  */
 import { readFileSync, writeFileSync } from 'node:fs';
+import { splitLines } from '../src/components/hymns/split.ts';
 
-const MAX = 8;
 const program = JSON.parse(readFileSync('private/choruses/program.json', 'utf8'));
 const { choruses } = JSON.parse(readFileSync('private/choruses/choruses.json', 'utf8'));
 
@@ -40,26 +43,6 @@ function lyricOf(line, partLines, marks) {
     }
   }
   return null;
-}
-
-/** Splits a run of lines into even groups of at most MAX, preferring the given break points. */
-function even(lines, breaks) {
-  if (lines.length <= MAX) return [lines];
-  const groups = [];
-  let start = 0;
-  const cuts = [...breaks].filter((b) => b > 0 && b < lines.length).sort((a, b) => a - b);
-  // Stanza breaks first: the one nearest an even share, as long as the group stays within MAX.
-  while (lines.length - start > MAX) {
-    const left = lines.length - start;
-    const target = start + Math.ceil(left / Math.ceil(left / MAX));
-    const fits = cuts.filter((c) => c > start && c - start <= MAX && lines.length - c >= 1);
-    const nearest = fits.sort((a, b) => Math.abs(a - target) - Math.abs(b - target))[0];
-    const cut = nearest !== undefined && Math.abs(nearest - target) <= 2 ? nearest : target;
-    groups.push(lines.slice(start, cut));
-    start = cut;
-  }
-  groups.push(lines.slice(start));
-  return groups;
 }
 
 function slidesOf(song) {
@@ -98,21 +81,13 @@ function slidesOf(song) {
   for (const step of song.performance_sequence) {
     const lines = parts.get(step);
     const place = placeOf(lines);
-    const deckBreaks = [];
-    const stanzaBreaks = [];
+    // Where the deck began a new slide or stanza within the part: the best places to divide.
+    const breaks = [];
     if (place)
-      for (let k = 1; k < lines.length; k++) {
-        if (place[k].slide !== place[k - 1].slide) deckBreaks.push(k);
-        else if (place[k].block !== place[k - 1].block) stanzaBreaks.push(k);
-      }
-    const pieces = [];
-    let start = 0;
-    for (const cut of [...deckBreaks, lines.length]) {
-      const piece = lines.slice(start, cut);
-      const inner = stanzaBreaks.filter((b) => b > start && b < cut).map((b) => b - start);
-      pieces.push(...even(piece, inner));
-      start = cut;
-    }
+      for (let k = 1; k < lines.length; k++)
+        if (place[k].slide !== place[k - 1].slide || place[k].block !== place[k - 1].block)
+          breaks.push(k);
+    const pieces = splitLines(lines, breaks);
     pieces.forEach((piece, i) =>
       out.push({
         label: pieces.length > 1 ? `${nameOf(step)} (${i + 1}/${pieces.length})` : nameOf(step),
@@ -127,8 +102,24 @@ function slidesOf(song) {
   return out;
 }
 
+/** A fixed song (its stanzas divided by an empty line), as slides of at most four lines. */
+function songSlides(song) {
+  const lines = song.lines.filter((l) => l.trim());
+  const breaks = [];
+  song.lines.forEach((l, i) => {
+    if (!l.trim()) breaks.push(i - breaks.length);
+  });
+  const slides = splitLines(lines, breaks);
+  if (JSON.stringify(slides.flat()) !== JSON.stringify(lines))
+    throw new Error(`${song.id}: the slides do not match the song`);
+  return slides;
+}
+
 const sunday = {
-  program: { chorus: program.chorus, songs: program.songs },
+  program: {
+    chorus: program.chorus,
+    songs: program.songs.map((song) => ({ ...song, slides: songSlides(song) })),
+  },
   choruses: choruses.map((song) => ({
     number: song.number,
     title: song.title,

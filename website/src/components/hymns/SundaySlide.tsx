@@ -118,75 +118,73 @@ export function SundaySlide({ slide, className }: { slide: SundaySlideData; clas
 
   const theme = THEMES[slide.theme];
   const chorus = slide.theme === 'chorus';
-  const words = slide.lines.filter((line) => line.trim());
-  const gaps = slide.lines.length - words.length;
-  // The heading: in full on a song's first slide, quieter on the slides after it.
-  const top = slide.first ? (chorus ? 30 : 33) : 19;
-  const space = 100 - top - theme.ground - 3;
+
+  if (slide.role === 'title') {
+    // The song's own slide, as in the chapel's decks: what it is, its name and the gold stroke.
+    return (
+      <div className={`bg-[#f6f3ec] ${className}`}>
+        <Paper src={`${ART}/${theme.image}.jpg`} />
+        <div
+          className="absolute inset-x-[8cqw] top-0 flex flex-col items-center justify-center text-center"
+          style={{ bottom: `${theme.ground}cqh` }}
+        >
+          <p
+            className="font-serif text-[3.2cqh] font-semibold tracking-[0.42em] uppercase"
+            style={{ color: theme.accent }}
+          >
+            {slide.eyebrow}
+          </p>
+          {chorus ? (
+            <h2
+              className="font-display mt-[2.4cqh] leading-[1.1] font-semibold tracking-[0.1em] text-balance uppercase"
+              style={{ color: NAVY, fontSize: capsSize(slide.title, 9.5, 84) }}
+            >
+              {slide.title}
+            </h2>
+          ) : (
+            <h2
+              className="font-display mt-[1.6cqh] text-[14cqh] leading-[1.02] font-medium text-balance italic"
+              style={{ color: NAVY }}
+            >
+              {slide.title}
+            </h2>
+          )}
+          <div className="mt-[3.4cqh]">
+            <Brush width={26} />
+          </div>
+        </div>
+        {slide.credits && slide.credits.length > 0 && (
+          <p
+            className="absolute inset-x-[10cqw] bottom-[2.2cqh] text-center font-serif text-[1.9cqh] text-balance"
+            style={{ color: '#2c3550' }}
+          >
+            {slide.credits.join(' · ')}
+          </p>
+        )}
+      </div>
+    );
+  }
+
+  // The words: set exactly as the hymns' words are (Slide.tsx) — as large as the space allows,
+  // each sung line on one line of the screen, on open paper above the painting.
+  const space = 100 - theme.ground - 6;
   return (
     <div className={`bg-[#f6f3ec] ${className}`}>
       <Paper src={`${ART}/${theme.image}.jpg`} />
-      <header
-        className="absolute inset-x-[8cqw] flex flex-col items-center text-center"
-        style={{ top: slide.first ? '7cqh' : '5.5cqh' }}
-      >
-        <p
-          className={`font-serif font-semibold tracking-[0.42em] uppercase ${slide.first ? 'text-[2.5cqh]' : 'text-[2.1cqh]'}`}
-          style={{ color: theme.accent }}
-        >
-          {slide.eyebrow}
-        </p>
-        {chorus ? (
-          <h2
-            className="font-display mt-[1.4cqh] leading-[1.08] font-semibold tracking-[0.1em] text-balance uppercase"
-            style={{
-              color: NAVY,
-              fontSize: capsSize(slide.title, slide.first ? 6.4 : 3.9),
-            }}
-          >
-            {slide.title}
-          </h2>
-        ) : (
-          <h2
-            className={`font-display leading-[1.02] font-medium text-balance italic ${slide.first ? 'mt-[1cqh] text-[10cqh]' : 'mt-[0.6cqh] text-[5cqh]'}`}
-            style={{ color: NAVY }}
-          >
-            {slide.title}
-          </h2>
-        )}
-        {slide.first && (
-          <div className="mt-[1.8cqh]">
-            <Brush width={chorus ? 20 : 22} />
-          </div>
-        )}
-      </header>
       <div
-        className="absolute inset-x-[7cqw] flex flex-col items-center justify-center text-center font-serif leading-[1.3]"
+        className="absolute inset-x-0 top-0 flex flex-col items-center justify-center px-[5cqw] text-center font-serif leading-[1.3]"
         style={{
-          top: `${top}cqh`,
           bottom: `${theme.ground}cqh`,
           color: INK,
-          fontSize: wordsSize(words, (space - gaps * 3) * 0.92, { width: 84, max: 7.2 }),
+          fontSize: wordsSize(slide.lines, space * 0.8),
         }}
       >
-        {slide.lines.map((line, i) =>
-          line.trim() ? (
-            <p key={i} className="max-w-[86cqw] text-balance">
-              {line}
-            </p>
-          ) : (
-            <span key={i} className="block h-[0.6em]" aria-hidden="true" />
-          ),
-        )}
+        {slide.lines.map((line, i) => (
+          <p key={i} className="max-w-[92cqw] text-balance">
+            {line}
+          </p>
+        ))}
       </div>
-      {slide.first && slide.credits && slide.credits.length > 0 && (
-        <p
-          className="absolute inset-x-[10cqw] bottom-[2.2cqh] text-center font-serif text-[1.9cqh] text-balance"
-          style={{ color: '#2c3550' }}
-        >
-          {slide.credits.join(' · ')}
-        </p>
-      )}
     </div>
   );
 }

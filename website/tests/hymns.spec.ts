@@ -397,7 +397,7 @@ test('the Sunday welcome: choose a chorus, present, change the words, clear', as
   await page.getByRole('option', { name: /BLESSED ASSURANCE/ }).click();
   const order = page.getByRole('complementary', { name: 'The slides' });
   await expect(order).toContainText('BLESSED ASSURANCE');
-  await expect(order).toContainText('6 slides');
+  await expect(order).toContainText('7 slides'); // its title slide, then six of words
 
   // Present: the welcome, the chorus with its refrain after every verse, then the songs.
   await order.getByRole('button', { name: 'Present', exact: true }).click();
@@ -405,14 +405,27 @@ test('the Sunday welcome: choose a chorus, present, change the words, clear', as
   await expect(
     presenting.getByRole('img', { name: 'Welcome to Colonial Hills Bible Chapel' }),
   ).toBeVisible();
+  // Each song: its title slide, then its words, at most four lines a slide — as the hymns.
+  await page.keyboard.press('ArrowRight');
+  await expect(presenting).toContainText(/Let us sing/i);
+  await expect(presenting).toContainText('BLESSED ASSURANCE');
   await page.keyboard.press('ArrowRight');
   await expect(presenting).toContainText('Blessed assurance, Jesus is mine!');
+  // The words are as large as the hymns' (Slide.tsx sizes both the same way: 4 lines fill it).
+  const size = await presenting
+    .getByText('Blessed assurance, Jesus is mine!')
+    .evaluate((p) => parseFloat(getComputedStyle(p).fontSize) / innerHeight);
+  expect(size).toBeGreaterThan(0.07);
   await page.keyboard.press('ArrowRight');
   await expect(presenting).toContainText('This is my story, this is my song,');
   await page.keyboard.press('Shift+ArrowRight');
+  await expect(presenting).toContainText('Our Welcome Song', { ignoreCase: true });
+  await page.keyboard.press('ArrowRight');
   await expect(presenting).toContainText('Welcome to our Sunday School,');
+  await page.keyboard.press('Shift+ArrowRight');
   await page.keyboard.press('ArrowRight');
   await expect(presenting).toContainText('Happy Birthday to you,');
+  await page.keyboard.press('Shift+ArrowRight');
   await page.keyboard.press('ArrowRight');
   await expect(presenting).toContainText('Happy Anniversary to you,');
   await page.keyboard.press('Escape');
@@ -425,11 +438,11 @@ test('the Sunday welcome: choose a chorus, present, change the words, clear', as
     .fill('A first line\nA second line\n\nThe next slide');
   await page.getByRole('button', { name: 'Save', exact: true }).click();
   await expect(page.getByText(/words changed on this device/)).toBeVisible();
-  await expect(order).toContainText('2 slides');
+  await expect(order).toContainText('3 slides'); // title, then the two typed
   await page.reload();
   await expect(page.getByText(/words changed on this device/)).toBeVisible();
   await page.getByRole('button', { name: 'Use the original' }).click();
-  await expect(order).toContainText('6 slides');
+  await expect(order).toContainText('7 slides'); // its title slide, then six of words
 
   // Write one, then clear everything.
   await page.getByRole('button', { name: 'Write a chorus of your own' }).click();

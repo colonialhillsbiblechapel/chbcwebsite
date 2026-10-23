@@ -5,7 +5,8 @@
  * only — it is never sent anywhere.
  */
 import type { DeckHymn } from './Presenter';
-import type { SlideData, WelcomePicture } from './slides';
+import type { ProgramTheme, SlideData, WelcomePicture } from './slides';
+import { splitLines } from './split';
 import type { Chorus, Sunday } from './vault';
 
 export type PictureChoice = 'auto' | 'dated' | WelcomePicture;
@@ -131,7 +132,11 @@ export function chorusOf(choice: ChorusChoice | null, data: Sunday): ChosenChoru
   const from =
     choice.number === undefined ? undefined : data.choruses.find((c) => c.number === choice.number);
   if ('slides' in choice) {
-    const slides = choice.slides.filter((lines) => lines.some((l) => l.trim()));
+    // As typed in the editor; a slide of more than four lines is divided, as the collection's are.
+    const slides = choice.slides
+      .map((lines) => lines.filter((l) => l.trim()))
+      .filter((lines) => lines.length > 0)
+      .flatMap((lines) => splitLines(lines));
     return {
       title: choice.title.trim() || from?.title || 'Chorus',
       credits: from?.credits ?? [],
@@ -182,6 +187,24 @@ export function findChoruses(choruses: Chorus[], query: string) {
   return scored.sort((a, b) => a.score - b.score || a.c.number - b.c.number).map((s) => s.c);
 }
 
+/**
+ * A song as the hymns are shown: its title slide, then its words, at most four lines a slide, so
+ * the words are as large on the screen as the hymns'.
+ */
+export function songSlides(
+  theme: ProgramTheme,
+  eyebrow: string,
+  title: string,
+  words: { label: string; lines: string[] }[],
+  credits?: string[],
+): SlideData[] {
+  const base = { kind: 'program' as const, theme, eyebrow, title };
+  return [
+    { ...base, role: 'title', label: 'Title', lines: [], credits },
+    ...words.map((s) => ({ ...base, role: 'words' as const, label: s.label, lines: s.lines })),
+  ];
+}
+
 /** The whole Sunday welcome, in order, ready for the presenter. */
 export function deckFor(plan: Plan, data: Sunday, now = new Date()): DeckHymn[] {
   const deck: DeckHymn[] = [{ name: 'Welcome', slides: [welcomeSlide(plan.picture, now)] }];
@@ -189,32 +212,28 @@ export function deckFor(plan: Plan, data: Sunday, now = new Date()): DeckHymn[] 
   if (chorus && chorus.slides.length)
     deck.push({
       name: chorus.title,
-      slides: chorus.slides.map((s, i) => ({
-        kind: 'program',
-        theme: 'chorus',
-        eyebrow: data.program.chorus.eyebrow,
-        title: chorus.title,
-        label: s.label,
-        lines: s.lines,
-        first: i === 0,
-        credits: i === 0 ? chorus.credits : undefined,
-      })),
+      slides: songSlides(
+        'chorus',
+        data.program.chorus.eyebrow,
+        chorus.title,
+        chorus.slides,
+        chorus.credits,
+      ),
     });
   for (const song of data.program.songs)
     deck.push({
       // "Welcome" is also the first slide: the song goes by what the deck calls it.
       name: song.id === 'welcome' ? 'Our welcome song' : song.title,
-      slides: [
-        {
-          kind: 'program',
-          theme: song.id,
-          eyebrow: song.eyebrow,
-          title: song.title,
-          label: song.title,
-          lines: song.lines,
-          first: true,
-        },
-      ],
+      slides: songSlides(
+        song.id,
+        song.eyebrow,
+        song.title,
+        song.slides.map((lines, i) => ({
+          label:
+            song.slides.length > 1 ? `${song.title} (${i + 1}/${song.slides.length})` : song.title,
+          lines,
+        })),
+      ),
     });
   return deck.map((part, i) => ({ ...part, badge: String(i + 1) }));
 }
