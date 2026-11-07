@@ -21,6 +21,7 @@ export const primaryNav: NavLink[] = [
   { label: 'Ministries', href: '/ministries/' },
   { label: 'Media', href: '/media/' },
   { label: 'Resources', href: '/resources/' },
+  { label: 'Hymns', href: '/hymns/', rel: 'nofollow' },
 ];
 
 export const visitLink: NavLink = { label: 'Visit', href: '/#visit' };

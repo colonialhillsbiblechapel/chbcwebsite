@@ -25,6 +25,7 @@ const menuLinks = [{ label: 'Home', href: '/' }, ...primaryNav, visitLink];
           <li>
             <a
               href={link.href}
+              rel={link.rel}
               aria-current={isCurrent(link.href, path) && link !== visitLink ? 'page' : undefined}
               class="relative block py-3 text-[0.75rem] font-medium tracking-[0.24em] text-ink-soft uppercase transition-colors duration-300 after:absolute after:inset-x-0 after:bottom-1.5 after:h-px after:origin-left after:scale-x-0 after:bg-gold after:transition-transform after:duration-500 after:ease-gentle hover:text-ink hover:after:scale-x-100 aria-[current=page]:text-ink aria-[current=page]:after:scale-x-100"
             >
@@ -94,6 +95,7 @@ const menuLinks = [{ label: 'Home', href: '/' }, ...primaryNav, visitLink];
           <li class="border-b border-rule">
             <a
               href={link.href}
+              rel={link.rel}
               aria-current={isCurrent(link.href, path) && link !== visitLink ? 'page' : undefined}
               class="flex items-baseline gap-5 py-4 font-display text-[2.1rem] leading-tight text-ink aria-[current=page]:italic"
             >
