@@ -105,7 +105,8 @@ export function HymnVault() {
           <input
             ref={field}
             id="hymns-password"
-            type={visible ? 'text' : 'password'}
+            // Preact 11 types each input type separately; text and password differ only by this switch.
+            type={(visible ? 'text' : 'password') as 'password'}
             value={password}
             onInput={(e) => setPassword((e.target as HTMLInputElement).value)}
             autoComplete="current-password"

@@ -480,6 +480,7 @@ function ChorusSearch({
           ref={field}
           type="search"
           role="combobox"
+          list={undefined}
           aria-expanded={open}
           aria-controls="chorus-options"
           aria-activedescendant={open ? `chorus-option-${active}` : undefined}
